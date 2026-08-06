@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Licensing | ETCH Creator Studio</title>
+    <meta name="description" content="Manage your licensing deals and rights conversations on ETCH." />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/assets/logo.png" type="image/png" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="../style/style.css" />
+
+    <!-- User CSS -->
+    <link rel="stylesheet" href="style/user.css" />
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        olive: { DEFAULT: '#99A96A', dark: '#73824C', light: '#E8ECD9' },
+                        ink: '#151515', mist: '#FAFAF7', stone: '#F2F3ED',
+                        slate: '#6C6C6C', muted: '#9A9A9A', border: '#E5E7E2',
+                        success: '#3D6B4F', warning: '#C9A54C', error: '#B25555', info: '#5B8DEF',
+                        cream: '#F5F3EE',
+                        coral: '#FF6B6B',
+                        peach: '#FFB347',
+                        mint: '#4ECDC4',
+                        lavender: '#A78BFA',
+                        blush: '#FF9A9E',
+                    },
+                    fontFamily: {
+                        display: ['"Instrument Serif"', 'serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delay': 'float 6s ease-in-out 2s infinite',
+                        'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
+                        'gradient': 'gradient 8s ease-in-out infinite',
+                        'slide-up': 'slide-up 0.6s ease-out',
+                        'slide-up-delay': 'slide-up 0.6s ease-out 0.2s both',
+                        'bounce-gentle': 'bounce-gentle 2s ease-in-out infinite',
+                        'wiggle': 'wiggle 0.5s ease-in-out',
+                        'spin-slow': 'spin 8s linear infinite',
+                        'shimmer': 'shimmer 2s infinite',
+                        'typing': 'typing 1.5s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: { '0%,100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-12px)' } },
+                        'pulse-soft': { '0%,100%': { opacity: 1 }, '50%': { opacity: 0.6 } },
+                        gradient: { '0%,100%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' } },
+                        'slide-up': { '0%': { transform: 'translateY(30px)', opacity: 0 }, '100%': { transform: 'translateY(0)', opacity: 1 } },
+                        'bounce-gentle': { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } },
+                        'wiggle': { '0%,100%': { transform: 'rotate(-2deg)' }, '50%': { transform: 'rotate(2deg)' } },
+                        'shimmer': { '0%': { backgroundPosition: '-200% 0' }, '100%': { backgroundPosition: '200% 0' } },
+                        'typing': { '0%,100%': { opacity: 0.4 }, '50%': { opacity: 1 } },
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body>
+
+    <!-- ============================================ -->
+    <!-- USER DASHBOARD - CREATIVE STUDIO EDITION -->
+    <!-- ============================================ -->
+    <div
+        class="user-dashboard bg-gradient-to-br from-mist via-white to-cream dark:from-ink dark:via-ink dark:to-ink/95">
+
+        <!-- Sidebar -->
+        <div id="userSidebar"></div>
+
+        <!-- Main Content -->
+        <main class="user-dashboard-main relative overflow-hidden">
+
+            <!-- Decorative Background Orbs -->
+            <div class="absolute -top-40 -right-40 w-96 h-96 bg-olive/5 rounded-full blur-3xl animate-float"></div>
+            <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-peach/5 rounded-full blur-3xl animate-float-delay">
+            </div>
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-olive/3 to-peach/3 rounded-full blur-3xl animate-gradient">
+            </div>
+
+            <!-- Topbar -->
+            <div id="userTopbar"></div>
+
+            <!-- ========================================== -->
+            <!-- CREATIVE LICENSING HEADER -->
+            <!-- ========================================== -->
+            <section class="relative px-6 md:px-8 pt-6 pb-2">
+                <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+                    <div class="animate-slide-up">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span
+                                class="inline-flex items-center gap-1.5 px-3 py-1 bg-gradient-to-r from-olive/20 to-peach/20 text-olive rounded-full text-xs font-medium tracking-wide">
+                                <span class="w-1.5 h-1.5 rounded-full bg-olive animate-pulse"></span>
+                                ✦ Deal Studio
+                            </span>
+                            <span class="text-xs text-slate/60 dark:text-gray-500">🤝 8 active conversations</span>
+                        </div>
+                        <h2 class="font-display text-4xl md:text-5xl font-bold text-ink dark:text-white leading-tight">
+                            Your <span class="relative inline-block">
+                                <span class="relative z-10">licensing</span>
+                                <span
+                                    class="absolute bottom-1 left-0 w-full h-3 bg-olive/20 dark:bg-olive/30 -z-0"></span>
+                            </span>
+                            <span class="text-olive">pipeline</span>
+                        </h2>
+                        <p class="text-slate text-base mt-2 max-w-xl leading-relaxed">
+                            Track, negotiate, and close deals for your creative assets. Every conversation is an
+                            opportunity.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-3 flex-shrink-0 animate-slide-up-delay">
+                        <button
+                            class="group inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-olive to-emerald-500 text-white rounded-2xl font-medium hover:shadow-xl hover:shadow-olive/20 hover:-translate-y-0.5 transition-all duration-300">
+                            <svg class="w-4 h-4 group-hover:rotate-90 transition-transform duration-300" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 4v16m8-8H4" />
+                            </svg>
+                            New Deal
+                        </button>
+                        <button
+                            class="inline-flex items-center gap-2 px-6 py-3 border-2 border-dashed border-border dark:border-white/10 text-ink dark:text-white rounded-2xl font-medium hover:bg-white/60 hover:border-olive/30 hover:-translate-y-0.5 transition-all duration-300">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                            </svg>
+                            Export
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- PLAYFUL LICENSING STATS -->
+            <!-- ========================================== -->
+            <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-6 md:px-8 py-6">
+
+                <!-- Card 1 - Total Requests -->
+                <div
+                    class="group relative bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 p-6 hover:border-olive/40 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+                    <div
+                        class="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-olive/20 to-emerald-500/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700">
+                    </div>
+                    <div class="relative flex items-start justify-between">
+                        <div>
+                            <span class="text-sm text-slate/70 dark:text-gray-400 font-medium">Total Requests</span>
+                            <div class="text-3xl font-bold text-ink dark:text-white mt-1">24</div>
+                        </div>
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-olive group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="relative flex items-center gap-2 mt-3">
+                        <span
+                            class="inline-flex items-center gap-1 text-xs font-medium text-emerald-500 bg-emerald-500/10 px-2.5 py-1 rounded-full">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                            </svg>
+                            +4
+                        </span>
+                        <span class="text-xs text-slate/60 dark:text-gray-500">this month</span>
+                    </div>
+                    <div class="relative mt-4 h-1.5 w-full bg-border/50 dark:bg-white/5 rounded-full overflow-hidden">
+                        <div
+                            class="h-full w-3/4 bg-gradient-to-r from-olive to-emerald-500 rounded-full group-hover:w-full transition-all duration-1000">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 - Pending Review -->
+                <div
+                    class="group relative bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 p-6 hover:border-olive/40 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+                    <div
+                        class="absolute -bottom-10 -left-10 w-32 h-32 bg-gradient-to-br from-peach/20 to-coral/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700">
+                    </div>
+                    <div class="relative flex items-start justify-between">
+                        <div>
+                            <span class="text-sm text-slate/70 dark:text-gray-400 font-medium">Pending Review</span>
+                            <div class="text-3xl font-bold text-ink dark:text-white mt-1">6</div>
+                        </div>
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-gradient-to-br from-peach/20 to-coral/20 flex items-center justify-center text-peach group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="relative flex items-center gap-2 mt-3">
+                        <span
+                            class="inline-flex items-center gap-1 text-xs font-medium text-coral bg-coral/10 px-2.5 py-1 rounded-full animate-pulse-soft">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                            Awaiting response
+                        </span>
+                    </div>
+                    <div class="relative flex items-center gap-3 text-xs text-slate/60 dark:text-gray-500 mt-2">
+                        <span>⚡ 2 urgent</span>
+                        <span>·</span>
+                        <span>⏳ 4 in queue</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 - In Negotiation -->
+                <div
+                    class="group relative bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 p-6 hover:border-olive/40 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+                    <div
+                        class="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-mint/20 to-blue-500/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700">
+                    </div>
+                    <div class="relative flex items-start justify-between">
+                        <div>
+                            <span class="text-sm text-slate/70 dark:text-gray-400 font-medium">In Negotiation</span>
+                            <div class="text-3xl font-bold text-ink dark:text-white mt-1">3</div>
+                        </div>
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-gradient-to-br from-mint/20 to-blue-500/20 flex items-center justify-center text-mint group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="relative flex items-center gap-2 mt-3">
+                        <span
+                            class="inline-flex items-center gap-1 text-xs font-medium text-mint bg-mint/10 px-2.5 py-1 rounded-full">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                            </svg>
+                            Active discussions
+                        </span>
+                    </div>
+                    <div class="relative flex items-center gap-3 text-xs text-slate/60 dark:text-gray-500 mt-2">
+                        <span>💬 2 messages today</span>
+                        <span>·</span>
+                        <span>📝 1 counter-offer</span>
+                    </div>
+                </div>
+
+                <!-- Card 4 - Completed Deals -->
+                <div
+                    class="group relative bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 p-6 hover:border-olive/40 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+                    <div
+                        class="absolute -bottom-10 -left-10 w-32 h-32 bg-gradient-to-br from-lavender/20 to-purple-500/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700">
+                    </div>
+                    <div class="relative flex items-start justify-between">
+                        <div>
+                            <span class="text-sm text-slate/70 dark:text-gray-400 font-medium">Completed Deals</span>
+                            <div class="text-3xl font-bold text-ink dark:text-white mt-1">15</div>
+                        </div>
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-gradient-to-br from-lavender/20 to-purple-500/20 flex items-center justify-center text-lavender group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="relative flex items-center gap-2 mt-3">
+                        <span
+                            class="inline-flex items-center gap-1 text-xs font-medium text-emerald-500 bg-emerald-500/10 px-2.5 py-1 rounded-full">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                            </svg>
+                            +2
+                        </span>
+                        <span class="text-xs text-slate/60 dark:text-gray-500">this quarter</span>
+                    </div>
+                    <div class="relative flex items-center gap-3 text-xs text-slate/60 dark:text-gray-500 mt-2">
+                        <span>🏆 $28.4k total value</span>
+                        <span>·</span>
+                        <span>📈 94% success rate</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- LICENSING DEALS LIST -->
+            <!-- ========================================== -->
+            <section class="px-6 md:px-8 pb-8">
+                <div
+                    class="bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 overflow-hidden hover:border-olive/40 hover:shadow-2xl transition-all duration-500">
+
+                    <!-- Header -->
+                    <div
+                        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-6 py-5 border-b border-border/60 dark:border-white/10">
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-12 h-12 rounded-2xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-olive">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h2 class="font-display text-xl font-bold text-ink dark:text-white">Licensing Requests
+                                </h2>
+                                <p class="text-xs text-slate/60 dark:text-gray-500">Manage all your licensing
+                                    conversations in one place</p>
+                            </div>
+                        </div>
+
+                        <!-- Tabs -->
+                        <div
+                            class="flex items-center gap-1 bg-white/60 dark:bg-ink/60 rounded-2xl p-1 border border-border/60 dark:border-white/10 flex-wrap">
+                            <button
+                                class="active px-4 py-1.5 text-xs font-medium rounded-xl bg-gradient-to-r from-olive to-emerald-500 text-white shadow-sm transition-all duration-200"
+                                data-tab="all">
+                                All
+                                <span class="ml-1 text-[10px] text-white/70">24</span>
+                            </button>
+                            <button
+                                class="px-4 py-1.5 text-xs font-medium text-slate/60 hover:text-ink dark:hover:text-white rounded-xl transition-all duration-200"
+                                data-tab="pending">
+                                Pending
+                                <span class="ml-1 text-[10px] text-coral">6</span>
+                            </button>
+                            <button
+                                class="px-4 py-1.5 text-xs font-medium text-slate/60 hover:text-ink dark:hover:text-white rounded-xl transition-all duration-200"
+                                data-tab="active">
+                                Active
+                                <span class="ml-1 text-[10px] text-mint">3</span>
+                            </button>
+                            <button
+                                class="px-4 py-1.5 text-xs font-medium text-slate/60 hover:text-ink dark:hover:text-white rounded-xl transition-all duration-200"
+                                data-tab="completed">
+                                Completed
+                                <span class="ml-1 text-[10px] text-emerald-500">15</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- License Items -->
+                    <div class="divide-y divide-border/60 dark:divide-white/10">
+
+                        <!-- Deal 1 - Negotiating -->
+                        <div
+                            class="group/deal flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-6 py-4 hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-all duration-200 cursor-pointer">
+                            <div class="flex items-start sm:items-center gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-2xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-olive font-bold text-sm flex-shrink-0">
+                                    MS
+                                </div>
+                                <div>
+                                    <h4
+                                        class="font-semibold text-ink dark:text-white group-hover/deal:text-olive transition-colors duration-200">
+                                        Midnight Sun Pilot</h4>
+                                    <div
+                                        class="flex flex-wrap items-center gap-2 text-sm text-slate/60 dark:text-gray-500 mt-0.5">
+                                        <strong class="text-ink dark:text-white font-medium">Studio A</strong>
+                                        <span class="w-1 h-1 rounded-full bg-border"></span>
+                                        <span>Exclusive option</span>
+                                        <span class="w-1 h-1 rounded-full bg-border"></span>
+                                        <span class="font-medium text-ink dark:text-white">$12,500</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 ml-16 sm:ml-0">
+                                <span
+                                    class="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-full bg-gradient-to-r from-amber-500/10 to-orange-500/10 text-amber-600 border border-amber-500/20">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                                    Negotiating
+                                </span>
+                                <a href="#"
+                                    class="text-sm font-medium text-olive hover:text-olive-dark transition-colors duration-200 flex items-center gap-1 group/link">
+                                    Review
+                                    <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform duration-200"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </a>
+                                <span class="text-[10px] text-slate/40 hidden sm:block">2h ago</span>
+                            </div>
+                        </div>
+
+                        <!-- Deal 2 - In Review -->
+                        <div
+                            class="group/deal flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-6 py-4 hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-all duration-200 cursor-pointer">
+                            <div class="flex items-start sm:items-center gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-2xl bg-gradient-to-br from-mint/20 to-blue-500/20 flex items-center justify-center text-mint font-bold text-sm flex-shrink-0">
+                                    FL
+                                </div>
+                                <div>
+                                    <h4
+                                        class="font-semibold text-ink dark:text-white group-hover/deal:text-olive transition-colors duration-200">
+                                        Frames of Lagos</h4>
+                                    <div
+                                        class="flex flex-wrap items-center gap-2 text-sm text-slate/60 dark:text-gray-500 mt-0.5">
+                                        <strong class="text-ink dark:text-white font-medium">Brand X</strong>
+                                        <span class="w-1 h-1 rounded-full bg-border"></span>
+                                        <span>Sync license</span>
+                                        <span class="w-1 h-1 rounded-full bg-border"></span>
+                                        <span class="font-medium text-ink dark:text-white">$3,200</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 ml-16 sm:ml-0">
+                                <span
+                                    class="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-full bg-gradient-to-r from-mint/10 to-blue-500/10 text-mint border border-mint/20">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-mint"></span>
+                                    In Review
+                                </span>
+                                <a href="#"
+                                    class="text-sm font-medium text-olive hover:text-olive-dark transition-colors duration-200 flex items-center gap-1 group/link">
+                                    Review
+                                    <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform duration-200"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </a>
+                                <span class="text-[10px] text-slate/40 hidden sm:block">5h ago</span>
+                            </div>
+                        </div>
+
+                        <!-- Deal 3 - Pending -->
+                        <div
+                            class="group/deal flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-6 py-4 hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-all duration-200 cursor-pointer">
+                            <div class="flex items-start sm:items-center gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-2xl bg-gradient-to-br from-slate/20 to-gray-500/20 flex items-center justify-center text-slate font-bold text-sm flex-shrink-0">
+                                    RS
+                                </div>
+                                <div>
+                                    <h4
+                                        class="font-semibold text-ink dark:text-white group-hover/deal:text-olive transition-colors duration-200">
+                                        Rainline Sessions</h4>
+                                    <div
+                                        class="flex flex-wrap items-center gap-2 text-sm text-slate/60 dark:text-gray-500 mt-0.5">
+                                        <strong class="text-ink dark:text-white font-medium">Agency Y</strong>
+                                        <span class="w-1 h-1 rounded-full bg-border"></span>
+                                        <span>Custom deal</span>
+                                        <span class="w-1 h-1 rounded-full bg-border"></span>
+                                        <span class="font-medium text-ink dark:text-white">$8,000</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 ml-16 sm:ml-0">
+                                <span
+                                    class="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-full bg-gradient-to-r from-slate-500/10 to-gray-500/10 text-slate-600 border border-slate-500/20">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+                                    Pending
+                                </span>
+                                <a href="#"
+                                    class="text-sm font-medium text-olive hover:text-olive-dark transition-colors duration-200 flex items-center gap-1 group/link">
+                                    Review
+                                    <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform duration-200"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </a>
+                                <span class="text-[10px] text-slate/40 hidden sm:block">1d ago</span>
+                            </div>
+                        </div>
+
+                        <!-- Deal 4 - Completed -->
+                        <div
+                            class="group/deal flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-6 py-4 hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-all duration-200 cursor-pointer">
+                            <div class="flex items-start sm:items-center gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-mint/20 flex items-center justify-center text-emerald-500 font-bold text-sm flex-shrink-0">
+                                    LD
+                                </div>
+                                <div>
+                                    <h4
+                                        class="font-semibold text-ink dark:text-white group-hover/deal:text-olive transition-colors duration-200">
+                                        The Last Draft</h4>
+                                    <div
+                                        class="flex flex-wrap items-center gap-2 text-sm text-slate/60 dark:text-gray-500 mt-0.5">
+                                        <strong class="text-ink dark:text-white font-medium">Production Co.</strong>
+                                        <span class="w-1 h-1 rounded-full bg-border"></span>
+                                        <span>Exclusive option</span>
+                                        <span class="w-1 h-1 rounded-full bg-border"></span>
+                                        <span class="font-medium text-ink dark:text-white">$6,750</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 ml-16 sm:ml-0">
+                                <span
+                                    class="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-full bg-gradient-to-r from-emerald-500/10 to-mint/10 text-emerald-600 border border-emerald-500/20">
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    Completed
+                                </span>
+                                <a href="#"
+                                    class="text-sm font-medium text-olive hover:text-olive-dark transition-colors duration-200 flex items-center gap-1 group/link">
+                                    View
+                                    <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform duration-200"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                    </svg>
+                                </a>
+                                <span class="text-[10px] text-slate/40 hidden sm:block">3d ago</span>
+                            </div>
+                        </div>
+
+                        <!-- Deal 5 - Declined -->
+                        <div
+                            class="group/deal flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-6 py-4 hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-all duration-200 cursor-pointer">
+                            <div class="flex items-start sm:items-center gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-2xl bg-gradient-to-br from-coral/20 to-error/20 flex items-center justify-center text-coral font-bold text-sm flex-shrink-0">
+                                    CA
+                                </div>
+                                <div>
+                                    <h4
+                                        class="font-semibold text-ink dark:text-white group-hover/deal:text-olive transition-colors duration-200">
+                                        City Above Water</h4>
+                                    <div
+                                        class="flex flex-wrap items-center gap-2 text-sm text-slate/60 dark:text-gray-500 mt-0.5">
+                                        <strong class="text-ink dark:text-white font-medium">Game Studio Z</strong>
+                                        <span class="w-1 h-1 rounded-full bg-border"></span>
+                                        <span>Custom deal</span>
+                                        <span class="w-1 h-1 rounded-full bg-border"></span>
+                                        <span
+                                            class="font-medium text-ink dark:text-white line-through text-slate/40">$15,000</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 ml-16 sm:ml-0">
+                                <span
+                                    class="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-full bg-gradient-to-r from-coral/10 to-error/10 text-coral border border-coral/20">
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                    Declined
+                                </span>
+                                <a href="#"
+                                    class="text-sm font-medium text-olive hover:text-olive-dark transition-colors duration-200 flex items-center gap-1 group/link">
+                                    View
+                                    <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform duration-200"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                    </svg>
+                                </a>
+                                <span class="text-[10px] text-slate/40 hidden sm:block">1w ago</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div
+                        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-6 py-4 border-t border-border/60 dark:border-white/10 bg-gradient-to-r from-olive/5 to-transparent">
+                        <span class="text-xs text-slate/60 dark:text-gray-500">📋 Showing 5 of 24 licensing
+                            requests</span>
+                        <div class="flex items-center gap-3">
+                            <span class="text-xs text-slate/40">Page 1 of 5</span>
+                            <div class="flex items-center gap-1">
+                                <button
+                                    class="w-8 h-8 rounded-xl border border-border/60 dark:border-white/10 text-slate/40 hover:bg-white/60 hover:border-olive/30 transition-all duration-200 flex items-center justify-center text-sm disabled:opacity-40"
+                                    disabled>
+                                    ←
+                                </button>
+                                <button
+                                    class="w-8 h-8 rounded-xl bg-gradient-to-r from-olive to-emerald-500 text-white flex items-center justify-center text-sm font-medium hover:shadow-lg hover:shadow-olive/20 transition-all duration-200">
+                                    1
+                                </button>
+                                <button
+                                    class="w-8 h-8 rounded-xl border border-border/60 dark:border-white/10 text-slate/40 hover:bg-white/60 hover:border-olive/30 transition-all duration-200 flex items-center justify-center text-sm">
+                                    2
+                                </button>
+                                <button
+                                    class="w-8 h-8 rounded-xl border border-border/60 dark:border-white/10 text-slate/40 hover:bg-white/60 hover:border-olive/30 transition-all duration-200 flex items-center justify-center text-sm">
+                                    3
+                                </button>
+                                <button
+                                    class="w-8 h-8 rounded-xl border border-border/60 dark:border-white/10 text-slate/40 hover:bg-white/60 hover:border-olive/30 transition-all duration-200 flex items-center justify-center text-sm">
+                                    →
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- LICENSING INSIGHTS -->
+            <!-- ========================================== -->
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-4 px-6 md:px-8 pb-8">
+
+                <!-- Performance -->
+                <div
+                    class="bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 p-6 hover:border-olive/40 hover:shadow-2xl transition-all duration-500">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-2xl">📊</span>
+                        <div>
+                            <h3 class="text-sm font-semibold text-ink dark:text-white">Licensing Performance</h3>
+                            <p class="text-xs text-slate/60 dark:text-gray-500">Your deal conversion rate</p>
+                        </div>
+                    </div>
+                    <div class="flex items-end gap-6">
+                        <div>
+                            <span class="text-2xl font-bold text-olive">62%</span>
+                            <span class="text-xs text-slate/60 dark:text-gray-500 ml-1">conversion rate</span>
+                        </div>
+                        <div class="flex-1 h-2 bg-border/50 dark:bg-white/5 rounded-full overflow-hidden">
+                            <div class="h-full w-[62%] bg-gradient-to-r from-olive to-emerald-500 rounded-full"></div>
+                        </div>
+                    </div>
+                    <div class="mt-3 flex items-center gap-3 text-xs text-slate/60 dark:text-gray-500">
+                        <span class="flex items-center gap-1">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                            15 closed
+                        </span>
+                        <span class="flex items-center gap-1">
+                            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                            9 pending
+                        </span>
+                        <span class="flex items-center gap-1">
+                            <span class="w-2 h-2 rounded-full bg-coral"></span>
+                            3 declined
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Quick Action -->
+                <div
+                    class="bg-gradient-to-r from-olive/10 via-mint/5 to-olive/10 rounded-3xl border border-olive/10 p-6 backdrop-blur-sm">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <span class="text-3xl animate-bounce-gentle">💡</span>
+                            <h3 class="text-sm font-semibold text-ink dark:text-white mt-2">Quick action needed</h3>
+                            <p class="text-sm text-slate/70 dark:text-gray-400 mt-1 max-w-xs">
+                                You have <strong class="text-ink dark:text-white">2 pending</strong> licensing requests
+                                that need your response.
+                            </p>
+                            <button
+                                class="mt-4 inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium bg-gradient-to-r from-olive to-emerald-500 text-white rounded-full hover:shadow-xl hover:shadow-olive/20 hover:-translate-y-0.5 transition-all duration-300">
+                                Review now
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                        </div>
+                        <span
+                            class="flex-shrink-0 w-14 h-14 rounded-3xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-3xl animate-bounce-gentle">🔔</span>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SCRIPTS -->
+    <!-- ============================================ -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Supabase Client Library -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+    <!-- Supabase Config - ⚠️ REPLACE with your actual values -->
+    <script>
+        window.__ETCH_SUPABASE__ = {
+            url: 'https://YOUR_PROJECT_ID.supabase.co',
+            anonKey: 'YOUR_ANON_KEY',
+        };
+    </script>
+
+    <!-- ETCH Supabase Helper -->
+    <script src="../script/supabase.js"></script>
+
+    <!-- Auth Guard - Must load before other scripts -->
+    <script src="../script/user-auth-guard.js"></script>
+
+    <script src="../script/script.js"></script>
+    <script src="script/user.js"></script>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Set page title dynamically
+        document.querySelector('.greeting h1').textContent = 'Licensing';
+
+        // Tab switching
+        document.querySelectorAll('[data-tab]').forEach(tab => {
+            tab.addEventListener('click', function () {
+                // Remove active from all tabs
+                document.querySelectorAll('[data-tab]').forEach(t => {
+                    t.classList.remove('active', 'bg-gradient-to-r', 'from-olive', 'to-emerald-500', 'text-white');
+                    t.classList.add('text-slate/60');
+                });
+                // Add active to clicked
+                this.classList.add('active', 'bg-gradient-to-r', 'from-olive', 'to-emerald-500', 'text-white');
+                this.classList.remove('text-slate/60');
+            });
+        });
+    </script>
+</body>
+
+</html>

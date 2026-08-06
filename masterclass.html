@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Masterclass | ETCH — The Playbook for Creative Professionals</title>
+    <meta name="description"
+        content="Craft, contracts, creative business, and career moves — explained for the next generation of storytellers." />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/assets/logo.png" type="image/png" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style/style.css" />
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        olive: { DEFAULT: '#99A96A', dark: '#73824C', light: '#E8ECD9' },
+                        ink: '#151515', mist: '#FAFAF7'
+                    },
+                    fontFamily: {
+                        display: ['"Instrument Serif"', 'serif'],
+                        body: ['"Inter"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+    <div id="header"></div>
+
+    <!-- HERO -->
+    <section class="relative pt-28 pb-12 md:pt-32 md:pb-20 overflow-hidden">
+        <div
+            class="absolute inset-0 -z-10 bg-gradient-to-br from-mist via-white to-olive/5 dark:from-ink dark:via-ink/80 dark:to-transparent">
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 bg-olive/10 rounded-full text-olive text-xs font-medium">
+                        ETCH BY OMIMI MASTERCLASS</div>
+                    <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-ink dark:text-white">The
+                        Playbook for Creative Professionals.</h1>
+                    <p class="text-lg text-slate dark:text-gray-400 max-w-lg">Craft, contracts, creative business, and
+                        career moves — explained for the next generation of storytellers.</p>
+                    <div class="flex gap-4 mt-4">
+                        <a href="#latest"
+                            class="inline-flex items-center gap-2 px-6 py-3 bg-olive text-white rounded-2xl font-semibold">Explore
+                            the Masterclass</a>
+                        <a href="products.html"
+                            class="inline-flex items-center gap-2 px-6 py-3 border-2 border-border rounded-2xl text-ink dark:text-white">Explore
+                            Etch</a>
+                    </div>
+                </div>
+
+                <div id="featuredArticle" class="relative">
+                    <!-- Featured article will be injected here -->
+                    <div class="bg-white dark:bg-ink rounded-2xl border border-border p-4">
+                        <div class="w-full h-56 bg-stone rounded-lg flex items-center justify-center text-slate">
+                            Featured article will appear here when available.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LATEST ARTICLES -->
+    <section id="latest" class="py-12 bg-white dark:bg-ink transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="font-semibold text-2xl text-ink dark:text-white">Latest from the Masterclass</h2>
+            </div>
+
+            <div id="latestGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Article cards injected here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="py-12 bg-white dark:bg-ink transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h3 class="font-semibold text-xl text-ink dark:text-white mb-4">Explore by Topic</h3>
+            <div id="categoryList" class="flex flex-wrap gap-3">
+                <!-- Categories injected here -->
+            </div>
+        </div>
+    </section>
+
+    <div id="footer"></div>
+
+    <!-- Required Scripts -->
+    <script>
+        // Configure Supabase for Masterclass (set your URL & anonKey before using)
+        window.__ETCH_SUPABASE__ = window.__ETCH_SUPABASE__ || { url: '', anonKey: '' };
+    </script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="script/supabase.js"></script>
+    <script src="script/script.js"></script>
+    <script src="script/masterclass.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Article — Masterclass | ETCH</title>
+    <link rel="stylesheet" href="/style/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <main class="max-w-5xl mx-auto p-6">
+        <article id="article" class="prose max-w-full">
+            <header class="mb-6">
+                <div id="articleCategory" class="text-sm text-olive"></div>
+                <h1 id="articleTitle" class="text-3xl font-display font-bold mt-2"></h1>
+                <div id="articleMeta" class="text-sm text-slate mt-2"></div>
+            </header>
+
+            <div id="articleImage" class="mb-6"></div>
+
+            <div id="articleContent"></div>
+        </article>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>window.__ETCH_SUPABASE__ = window.__ETCH_SUPABASE__ || { url: '', anonKey: '' };</script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@2.4.0/dist/purify.min.js"></script>
+    <script src="/script/supabase.js"></script>
+    <script src="/script/script.js"></script>
+    <script src="/script/masterclass-article.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up | ETCH Creator Studio</title>
+    <meta name="description" content="Create your ETCH creator studio account." />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/assets/logo.png" type="image/png" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="../../style/style.css" />
+
+    <!-- User CSS -->
+    <link rel="stylesheet" href="../style/user.css" />
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        olive: { DEFAULT: '#99A96A', dark: '#73824C', light: '#E8ECD9' },
+                        ink: '#151515', mist: '#FAFAF7', stone: '#F2F3ED',
+                        slate: '#6C6C6C', muted: '#9A9A9A', border: '#E5E7E2',
+                        success: '#3D6B4F', warning: '#C9A54C', error: '#B25555', info: '#5B8DEF',
+                        cream: '#F5F3EE',
+                        coral: '#FF6B6B',
+                        peach: '#FFB347',
+                        mint: '#4ECDC4',
+                        lavender: '#A78BFA',
+                        blush: '#FF9A9E',
+                    },
+                    fontFamily: {
+                        display: ['"Instrument Serif"', 'serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delay': 'float 6s ease-in-out 2s infinite',
+                        'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
+                        'gradient': 'gradient 8s ease-in-out infinite',
+                        'slide-up': 'slide-up 0.6s ease-out',
+                        'slide-up-delay': 'slide-up 0.6s ease-out 0.2s both',
+                        'bounce-gentle': 'bounce-gentle 2s ease-in-out infinite',
+                        'wiggle': 'wiggle 0.5s ease-in-out',
+                        'spin-slow': 'spin 8s linear infinite',
+                        'shimmer': 'shimmer 2s infinite',
+                    },
+                    keyframes: {
+                        float: { '0%,100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-12px)' } },
+                        'pulse-soft': { '0%,100%': { opacity: 1 }, '50%': { opacity: 0.6 } },
+                        gradient: { '0%,100%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' } },
+                        'slide-up': { '0%': { transform: 'translateY(30px)', opacity: 0 }, '100%': { transform: 'translateY(0)', opacity: 1 } },
+                        'bounce-gentle': { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } },
+                        'wiggle': { '0%,100%': { transform: 'rotate(-2deg)' }, '50%': { transform: 'rotate(2deg)' } },
+                        'shimmer': { '0%': { backgroundPosition: '-200% 0' }, '100%': { backgroundPosition: '200% 0' } },
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body>
+
+    <!-- ============================================ -->
+    <!-- AUTH PAGE - CREATIVE STUDIO ENTRY -->
+    <!-- ============================================ -->
+    <div
+        class="min-h-screen flex items-center justify-center bg-gradient-to-br from-mist via-white to-cream dark:from-ink dark:via-ink dark:to-ink/95 p-4 relative overflow-hidden">
+
+        <!-- Decorative Background Orbs -->
+        <div class="absolute -top-40 -right-40 w-96 h-96 bg-olive/5 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-mint/5 rounded-full blur-3xl animate-float-delay"></div>
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-olive/3 to-mint/3 rounded-full blur-3xl animate-gradient">
+        </div>
+
+        <!-- Back to Home -->
+        <a href="/index.html"
+            class="absolute top-6 left-6 md:top-8 md:left-8 flex items-center gap-2 text-slate/60 dark:text-gray-500 hover:text-ink dark:hover:text-white transition-colors duration-200 group z-10">
+            <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-200" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            <span class="text-sm font-medium">Back to ETCH</span>
+        </a>
+
+        <!-- Theme Toggle -->
+        <button id="themeToggle"
+            class="absolute top-6 right-6 md:top-8 md:right-8 p-2 rounded-xl text-slate/60 dark:text-gray-500 hover:bg-white/60 dark:hover:bg-white/5 transition-all duration-300 z-10"
+            aria-label="Toggle theme">
+            <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+        </button>
+
+        <!-- Auth Card -->
+        <div class="relative z-10 w-full max-w-md animate-slide-up">
+
+            <!-- Brand -->
+            <div class="text-center mb-8">
+                <div class="flex items-center justify-center gap-2 mb-3">
+                    <img src="/assets/logo.png" alt="ETCH logo" class="h-10 w-10 object-contain" />
+                    <div>
+                        <span class="font-display text-3xl font-bold text-ink dark:text-white">ETCH</span>
+                        <span class="block -mt-1 text-[10px] font-medium text-olive tracking-widest uppercase">by
+                            OMIMI</span>
+                    </div>
+                </div>
+                <h2 class="font-display text-2xl font-bold text-ink dark:text-white">Join the studio ✦</h2>
+                <p class="text-slate/60 dark:text-gray-500 text-sm mt-1">Start your creative journey today</p>
+            </div>
+
+            <!-- Auth Card Body -->
+            <div
+                class="bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 p-6 md:p-8 shadow-2xl">
+
+                <!-- Divider -->
+                <div class="relative mb-6">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-border/60 dark:border-white/10"></div>
+                    </div>
+                    <div class="relative flex justify-center text-xs">
+                        <span class="px-3 bg-white/80 dark:bg-ink/80 text-slate/40">create with email</span>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <form class="space-y-4" data-handle-submit>
+                    <div>
+                        <label class="block text-sm font-medium text-ink dark:text-white mb-1.5">Full Name</label>
+                        <div class="relative">
+                            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate/40" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                            <input type="text" name="name" placeholder="Jane Doe" required
+                                class="w-full pl-11 pr-4 py-3 bg-white/60 dark:bg-ink/60 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white placeholder:text-slate/40 focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-ink dark:text-white mb-1.5">Email Address</label>
+                        <div class="relative">
+                            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate/40" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+                            </svg>
+                            <input type="email" name="email" placeholder="you@example.com" required
+                                class="w-full pl-11 pr-4 py-3 bg-white/60 dark:bg-ink/60 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white placeholder:text-slate/40 focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-ink dark:text-white mb-1.5">Password</label>
+                        <div class="relative">
+                            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate/40" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            </svg>
+                            <input type="password" name="password" placeholder="••••••••" required
+                                class="w-full pl-11 pr-12 py-3 bg-white/60 dark:bg-ink/60 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white placeholder:text-slate/40 focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200" />
+                            <button type="button"
+                                class="absolute right-4 top-1/2 -translate-y-1/2 text-slate/40 hover:text-ink dark:hover:text-white transition-colors duration-200"
+                                id="togglePassword">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-ink dark:text-white mb-1.5">Confirm
+                            Password</label>
+                        <div class="relative">
+                            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate/40" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                            <input type="password" name="confirm_password" placeholder="••••••••" required
+                                class="w-full pl-11 pr-4 py-3 bg-white/60 dark:bg-ink/60 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white placeholder:text-slate/40 focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200" />
+                        </div>
+                    </div>
+
+                    <!-- Terms -->
+                    <div class="flex items-start gap-2 pt-1">
+                        <input type="checkbox" required
+                            class="w-4 h-4 mt-0.5 rounded border-border/60 dark:border-white/10 text-olive focus:ring-olive focus:ring-2" />
+                        <span class="text-sm text-slate/60 dark:text-gray-500">
+                            I agree to the <a href="#"
+                                class="text-olive hover:text-olive-dark transition-colors duration-200">Terms of
+                                Service</a> and <a href="#"
+                                class="text-olive hover:text-olive-dark transition-colors duration-200">Privacy
+                                Policy</a>
+                        </span>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-olive to-mint text-white rounded-2xl font-medium hover:shadow-xl hover:shadow-olive/20 hover:-translate-y-0.5 transition-all duration-300 group">
+                        <span>Create Studio</span>
+                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                    </button>
+                </form>
+
+                <!-- Sign In Link -->
+                <p class="text-center text-sm text-slate/60 dark:text-gray-500 mt-6">
+                    Already have a studio?
+                    <a href="signin.html"
+                        class="text-olive font-medium hover:text-olive-dark transition-colors duration-200">Sign In
+                        →</a>
+                </p>
+            </div>
+
+            <!-- Footer Text -->
+            <p class="text-center text-xs text-slate/40 mt-6">
+                By creating an account, you agree to our <a href="#"
+                    class="hover:text-olive transition-colors duration-200">Terms</a> &amp; <a href="#"
+                    class="hover:text-olive transition-colors duration-200">Privacy Policy</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SCRIPTS -->
+    <!-- ============================================ -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Supabase Client Library -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+    <!-- Supabase Config -->
+    <script>
+        window.__ETCH_SUPABASE__ = {
+            url: 'https://cyoddvehzrmhubmislbb.supabase.co',
+            anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5b2RkdmVoenJtaHVibWlzbGJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUxNjI3MTQsImV4cCI6MjEwMDczODcxNH0.YaUyKP9f3tpKDny78_k_ka70zkFZe58GAFOo5oFFaFI',
+        };
+    </script>
+
+    <!-- ETCH Supabase Helper -->
+    <script src="../../script/supabase.js"></script>
+
+    <!-- ETCH Error Handler -->
+    <script src="../../script/error-handler.js"></script>
+
+    <script src="../../script/script.js"></script>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        if (localStorage.getItem('theme') === 'dark') {
+            html.classList.add('dark');
+            html.setAttribute('data-theme', 'dark');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            const isDark = html.classList.contains('dark');
+            html.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+
+        // Password Toggle
+        const togglePassword = document.getElementById('togglePassword');
+        if (togglePassword) {
+            togglePassword.addEventListener('click', function () {
+                const passwordInput = this.closest('.relative').querySelector('input[type="password"]');
+                if (passwordInput) {
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+                    const icon = this.querySelector('svg');
+                    if (icon) {
+                        if (type === 'text') {
+                            icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.542 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>';
+                        } else {
+                            icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>';
+                        }
+                    }
+                }
+            });
+        }
+
+        // ============================================
+        // SUPABASE AUTH: SIGN UP FORM HANDLING
+        // ============================================
+        const signUpForm = document.querySelector('form');
+        const submitBtn = signUpForm?.querySelector('button[type="submit"]');
+        const nameInput = signUpForm?.querySelector('input[name="name"]');
+        const emailInput = signUpForm?.querySelector('input[name="email"]');
+        const passwordInput = signUpForm?.querySelector('input[name="password"]');
+        const confirmInput = signUpForm?.querySelector('input[name="confirm_password"]');
+
+        // Create error/success message elements
+        let errorEl = document.getElementById('authError');
+        let successEl = document.getElementById('authSuccess');
+        if (!errorEl && signUpForm) {
+            errorEl = document.createElement('div');
+            errorEl.id = 'authError';
+            errorEl.className = 'hidden p-3 bg-error/10 border border-error/20 rounded-2xl text-sm text-error font-medium text-center';
+            signUpForm.insertBefore(errorEl, signUpForm.firstChild);
+        }
+
+        if (!successEl && signUpForm) {
+            successEl = document.createElement('div');
+            successEl.id = 'authSuccess';
+            successEl.className = 'hidden p-4 bg-success/10 border border-success/20 rounded-2xl text-center';
+            successEl.innerHTML = `
+                <div class="flex items-center justify-center gap-2 mb-2">
+                    <svg class="w-6 h-6 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                    <span class="text-sm font-medium text-success">Account created! Check your email.</span>
+                </div>
+                <p class="text-sm text-success/70">We've sent a confirmation link to <strong class="text-success" id="sentEmail">your email</strong>. Please verify your account to continue.</p>
+            `;
+            signUpForm.insertBefore(successEl, signUpForm.firstChild);
+        }
+
+        signUpForm?.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const name = nameInput?.value.trim();
+            const email = emailInput?.value.trim();
+            const password = passwordInput?.value;
+            const confirm = confirmInput?.value;
+
+            // Reset messages
+            if (errorEl) errorEl.classList.add('hidden');
+            if (successEl) successEl.classList.add('hidden');
+
+            // Validate
+            if (!name || !email || !password || !confirm) {
+                if (errorEl) {
+                    errorEl.textContent = 'Please fill in all fields';
+                    errorEl.classList.remove('hidden');
+                }
+                return;
+            }
+
+            if (password !== confirm) {
+                if (errorEl) {
+                    errorEl.textContent = 'Passwords do not match';
+                    errorEl.classList.remove('hidden');
+                }
+                return;
+            }
+
+            if (password.length < 6) {
+                if (errorEl) {
+                    errorEl.textContent = 'Password must be at least 6 characters';
+                    errorEl.classList.remove('hidden');
+                }
+                return;
+            }
+
+            // Show loading state
+            const originalText = submitBtn?.querySelector('span');
+            if (originalText) originalText.textContent = 'Creating account...';
+            submitBtn.disabled = true;
+
+            try {
+                const { data, error } = await EtchSupabase.signUp(email, password, name);
+
+                if (error) {
+                    // Use centralized error handler
+                    EtchErrorHandler.displayError(error, 'authError');
+                    if (originalText) originalText.textContent = 'Create Studio';
+                    submitBtn.disabled = false;
+                    return;
+                }
+
+                // Success
+                if (successEl) {
+                    const sentEmailEl = document.getElementById('sentEmail');
+                    if (sentEmailEl) sentEmailEl.textContent = email;
+                    successEl.classList.remove('hidden');
+                }
+
+                // Store email and redirect to OTP verification
+                localStorage.setItem('etch_pending_email', email);
+
+                // Redirect to verify OTP page after 1.5 seconds
+                setTimeout(() => {
+                    window.location.href = 'verify-otp.html?email=' + encodeURIComponent(email);
+                }, 1500);
+            } catch (err) {
+                // Use centralized error handler
+                EtchErrorHandler.displayError(err, 'authError');
+            }
+
+            if (originalText) originalText.textContent = 'Create Studio';
+            submitBtn.disabled = false;
+        });
+
+    </script>
+</body>
+
+</html>

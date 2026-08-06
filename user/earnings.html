@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Earnings | ETCH Creator Studio</title>
+    <meta name="description" content="Track your creative revenue and earnings on ETCH." />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/assets/logo.png" type="image/png" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="../style/style.css" />
+
+    <!-- User CSS -->
+    <link rel="stylesheet" href="style/user.css" />
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        olive: { DEFAULT: '#99A96A', dark: '#73824C', light: '#E8ECD9' },
+                        ink: '#151515', mist: '#FAFAF7', stone: '#F2F3ED',
+                        slate: '#6C6C6C', muted: '#9A9A9A', border: '#E5E7E2',
+                        success: '#3D6B4F', warning: '#C9A54C', error: '#B25555', info: '#5B8DEF',
+                        cream: '#F5F3EE',
+                        coral: '#FF6B6B',
+                        peach: '#FFB347',
+                        mint: '#4ECDC4',
+                        lavender: '#A78BFA',
+                        blush: '#FF9A9E',
+                    },
+                    fontFamily: {
+                        display: ['"Instrument Serif"', 'serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delay': 'float 6s ease-in-out 2s infinite',
+                        'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
+                        'gradient': 'gradient 8s ease-in-out infinite',
+                        'slide-up': 'slide-up 0.6s ease-out',
+                        'slide-up-delay': 'slide-up 0.6s ease-out 0.2s both',
+                        'bounce-gentle': 'bounce-gentle 2s ease-in-out infinite',
+                        'wiggle': 'wiggle 0.5s ease-in-out',
+                        'spin-slow': 'spin 8s linear infinite',
+                        'shimmer': 'shimmer 2s infinite',
+                        'count-up': 'count-up 1.5s ease-out',
+                    },
+                    keyframes: {
+                        float: { '0%,100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-12px)' } },
+                        'pulse-soft': { '0%,100%': { opacity: 1 }, '50%': { opacity: 0.6 } },
+                        gradient: { '0%,100%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' } },
+                        'slide-up': { '0%': { transform: 'translateY(30px)', opacity: 0 }, '100%': { transform: 'translateY(0)', opacity: 1 } },
+                        'bounce-gentle': { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } },
+                        'wiggle': { '0%,100%': { transform: 'rotate(-2deg)' }, '50%': { transform: 'rotate(2deg)' } },
+                        'shimmer': { '0%': { backgroundPosition: '-200% 0' }, '100%': { backgroundPosition: '200% 0' } },
+                        'count-up': { '0%': { transform: 'scale(0.8)', opacity: 0 }, '100%': { transform: 'scale(1)', opacity: 1 } },
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body>
+
+    <!-- ============================================ -->
+    <!-- USER DASHBOARD - CREATIVE STUDIO EDITION -->
+    <!-- ============================================ -->
+    <div
+        class="user-dashboard bg-gradient-to-br from-mist via-white to-cream dark:from-ink dark:via-ink dark:to-ink/95">
+
+        <!-- Sidebar -->
+        <div id="userSidebar"></div>
+
+        <!-- Main Content -->
+        <main class="user-dashboard-main relative overflow-hidden">
+
+            <!-- Decorative Background Orbs -->
+            <div class="absolute -top-40 -right-40 w-96 h-96 bg-olive/5 rounded-full blur-3xl animate-float"></div>
+            <div
+                class="absolute -bottom-40 -left-40 w-80 h-80 bg-emerald-500/5 rounded-full blur-3xl animate-float-delay">
+            </div>
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-olive/3 to-emerald-500/3 rounded-full blur-3xl animate-gradient">
+            </div>
+
+            <!-- Topbar -->
+            <div id="userTopbar"></div>
+
+            <!-- ========================================== -->
+            <!-- CREATIVE EARNINGS HEADER -->
+            <!-- ========================================== -->
+            <section class="relative px-6 md:px-8 pt-6 pb-2">
+                <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+                    <div class="animate-slide-up">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span
+                                class="inline-flex items-center gap-1.5 px-3 py-1 bg-gradient-to-r from-olive/20 to-emerald-500/20 text-olive rounded-full text-xs font-medium tracking-wide">
+                                <span class="w-1.5 h-1.5 rounded-full bg-olive animate-pulse"></span>
+                                ✦ Revenue Studio
+                            </span>
+                            <span class="text-xs text-slate/60 dark:text-gray-500">💰 $40,707 net earnings</span>
+                        </div>
+                        <h2 class="font-display text-4xl md:text-5xl font-bold text-ink dark:text-white leading-tight">
+                            Your <span class="relative inline-block">
+                                <span class="relative z-10">earnings</span>
+                                <span
+                                    class="absolute bottom-1 left-0 w-full h-3 bg-olive/20 dark:bg-olive/30 -z-0"></span>
+                            </span>
+                            <span class="text-olive">at a glance</span>
+                        </h2>
+                        <p class="text-slate text-base mt-2 max-w-xl leading-relaxed">
+                            Track your revenue, monitor payouts, and understand your creative business performance.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-3 flex-shrink-0 animate-slide-up-delay">
+                        <button
+                            class="group inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-olive to-emerald-500 text-white rounded-2xl font-medium hover:shadow-xl hover:shadow-olive/20 hover:-translate-y-0.5 transition-all duration-300">
+                            <svg class="w-4 h-4 group-hover:rotate-90 transition-transform duration-300" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 4v16m8-8H4" />
+                            </svg>
+                            Request Payout
+                        </button>
+                        <button
+                            class="inline-flex items-center gap-2 px-6 py-3 border-2 border-dashed border-border dark:border-white/10 text-ink dark:text-white rounded-2xl font-medium hover:bg-white/60 hover:border-olive/30 hover:-translate-y-0.5 transition-all duration-300">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                            </svg>
+                            Export
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- PLAYFUL EARNINGS STATS -->
+            <!-- ========================================== -->
+            <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-6 md:px-8 py-6">
+
+                <!-- Card 1 - Total Revenue -->
+                <div
+                    class="group relative bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 p-6 hover:border-olive/40 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+                    <div
+                        class="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-olive/20 to-emerald-500/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700">
+                    </div>
+                    <div class="relative flex items-start justify-between">
+                        <div>
+                            <span class="text-sm text-slate/70 dark:text-gray-400 font-medium">Total Revenue</span>
+                            <div class="text-3xl font-bold text-ink dark:text-white mt-1">$45,230</div>
+                        </div>
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-olive group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="relative flex items-center gap-2 mt-3">
+                        <span
+                            class="inline-flex items-center gap-1 text-xs font-medium text-emerald-500 bg-emerald-500/10 px-2.5 py-1 rounded-full">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                            </svg>
+                            +18.5%
+                        </span>
+                        <span class="text-xs text-slate/60 dark:text-gray-500">this quarter</span>
+                    </div>
+                    <div class="relative mt-4 h-1.5 w-full bg-border/50 dark:bg-white/5 rounded-full overflow-hidden">
+                        <div
+                            class="h-full w-4/5 bg-gradient-to-r from-olive to-emerald-500 rounded-full group-hover:w-full transition-all duration-1000">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 - Pending Payouts -->
+                <div
+                    class="group relative bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 p-6 hover:border-olive/40 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+                    <div
+                        class="absolute -bottom-10 -left-10 w-32 h-32 bg-gradient-to-br from-peach/20 to-coral/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700">
+                    </div>
+                    <div class="relative flex items-start justify-between">
+                        <div>
+                            <span class="text-sm text-slate/70 dark:text-gray-400 font-medium">Pending Payouts</span>
+                            <div class="text-3xl font-bold text-ink dark:text-white mt-1">$8,450</div>
+                        </div>
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-gradient-to-br from-peach/20 to-coral/20 flex items-center justify-center text-peach group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="relative flex items-center gap-2 mt-3">
+                        <span
+                            class="inline-flex items-center gap-1 text-xs font-medium text-coral bg-coral/10 px-2.5 py-1 rounded-full animate-pulse-soft">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                            Processing
+                        </span>
+                    </div>
+                    <div class="relative flex items-center gap-3 text-xs text-slate/60 dark:text-gray-500 mt-2">
+                        <span>⏳ 3-5 days</span>
+                        <span>·</span>
+                        <span>📦 4 transactions</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 - Total Sales -->
+                <div
+                    class="group relative bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 p-6 hover:border-olive/40 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+                    <div
+                        class="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-mint/20 to-blue-500/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700">
+                    </div>
+                    <div class="relative flex items-start justify-between">
+                        <div>
+                            <span class="text-sm text-slate/70 dark:text-gray-400 font-medium">Total Sales</span>
+                            <div class="text-3xl font-bold text-ink dark:text-white mt-1">24</div>
+                        </div>
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-gradient-to-br from-mint/20 to-blue-500/20 flex items-center justify-center text-mint group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="relative flex items-center gap-2 mt-3">
+                        <span
+                            class="inline-flex items-center gap-1 text-xs font-medium text-emerald-500 bg-emerald-500/10 px-2.5 py-1 rounded-full">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                            </svg>
+                            +4
+                        </span>
+                        <span class="text-xs text-slate/60 dark:text-gray-500">this month</span>
+                    </div>
+                    <div class="relative flex items-center gap-3 text-xs text-slate/60 dark:text-gray-500 mt-2">
+                        <span>📈 94% success rate</span>
+                        <span>·</span>
+                        <span>⭐ 4.8 avg rating</span>
+                    </div>
+                </div>
+
+                <!-- Card 4 - Average Order -->
+                <div
+                    class="group relative bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 p-6 hover:border-olive/40 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+                    <div
+                        class="absolute -bottom-10 -left-10 w-32 h-32 bg-gradient-to-br from-lavender/20 to-purple-500/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700">
+                    </div>
+                    <div class="relative flex items-start justify-between">
+                        <div>
+                            <span class="text-sm text-slate/70 dark:text-gray-400 font-medium">Average Order</span>
+                            <div class="text-3xl font-bold text-ink dark:text-white mt-1">$1,884</div>
+                        </div>
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-gradient-to-br from-lavender/20 to-purple-500/20 flex items-center justify-center text-lavender group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="relative flex items-center gap-2 mt-3">
+                        <span
+                            class="inline-flex items-center gap-1 text-xs font-medium text-emerald-500 bg-emerald-500/10 px-2.5 py-1 rounded-full">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                            </svg>
+                            +6.2%
+                        </span>
+                        <span class="text-xs text-slate/60 dark:text-gray-500">growth</span>
+                    </div>
+                    <div class="relative flex items-center gap-3 text-xs text-slate/60 dark:text-gray-500 mt-2">
+                        <span>💰 Top: <strong class="text-ink dark:text-white">$15,000</strong></span>
+                        <span>·</span>
+                        <span>📊 24 transactions</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- EARNINGS BREAKDOWN & CHART -->
+            <!-- ========================================== -->
+            <section class="grid grid-cols-1 lg:grid-cols-3 gap-6 px-6 md:px-8 py-4">
+
+                <!-- Earnings Breakdown -->
+                <div
+                    class="lg:col-span-1 bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 p-6 hover:border-olive/40 hover:shadow-2xl transition-all duration-500">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-olive">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-lg font-bold text-ink dark:text-white">Earnings Breakdown</h3>
+                            <p class="text-xs text-slate/60 dark:text-gray-500">Revenue distribution by license type</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Licensing Revenue -->
+                        <div
+                            class="group cursor-pointer hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent rounded-xl p-2 transition-all duration-200">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-slate/70 dark:text-gray-400 flex items-center gap-2">
+                                    <span
+                                        class="w-3 h-3 rounded-full bg-gradient-to-r from-olive to-emerald-500"></span>
+                                    Licensing Revenue
+                                </span>
+                                <span class="font-semibold text-ink dark:text-white">$38,750</span>
+                            </div>
+                            <div class="mt-1.5 h-1.5 w-full bg-border/50 dark:bg-white/5 rounded-full overflow-hidden">
+                                <div
+                                    class="h-full w-[85%] bg-gradient-to-r from-olive to-emerald-500 rounded-full group-hover:w-full transition-all duration-1000">
+                                </div>
+                            </div>
+                            <span class="text-[10px] text-slate/40 mt-1 block">85% of total</span>
+                        </div>
+
+                        <!-- Sync License -->
+                        <div
+                            class="group cursor-pointer hover:bg-gradient-to-r hover:from-mint/5 hover:to-transparent rounded-xl p-2 transition-all duration-200">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-slate/70 dark:text-gray-400 flex items-center gap-2">
+                                    <span class="w-3 h-3 rounded-full bg-gradient-to-r from-mint to-blue-500"></span>
+                                    Sync License Revenue
+                                </span>
+                                <span class="font-semibold text-ink dark:text-white">$6,480</span>
+                            </div>
+                            <div class="mt-1.5 h-1.5 w-full bg-border/50 dark:bg-white/5 rounded-full overflow-hidden">
+                                <div
+                                    class="h-full w-[14%] bg-gradient-to-r from-mint to-blue-500 rounded-full group-hover:w-full transition-all duration-1000">
+                                </div>
+                            </div>
+                            <span class="text-[10px] text-slate/40 mt-1 block">14% of total</span>
+                        </div>
+
+                        <!-- Platform Fee -->
+                        <div
+                            class="group cursor-pointer hover:bg-gradient-to-r hover:from-coral/5 hover:to-transparent rounded-xl p-2 transition-all duration-200">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-slate/70 dark:text-gray-400 flex items-center gap-2">
+                                    <span class="w-3 h-3 rounded-full bg-coral"></span>
+                                    Platform Fee (10%)
+                                </span>
+                                <span class="font-semibold text-coral">-$4,523</span>
+                            </div>
+                            <div class="mt-1.5 h-1.5 w-full bg-border/50 dark:bg-white/5 rounded-full overflow-hidden">
+                                <div class="h-full w-[10%] bg-coral rounded-full"></div>
+                            </div>
+                            <span class="text-[10px] text-slate/40 mt-1 block">10% platform fee</span>
+                        </div>
+
+                        <!-- Divider -->
+                        <div class="border-t border-border/60 dark:border-white/10 my-2"></div>
+
+                        <!-- Net Earnings -->
+                        <div
+                            class="bg-gradient-to-r from-olive/10 to-emerald-500/10 rounded-xl p-3 border border-olive/20">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-semibold text-ink dark:text-white flex items-center gap-2">
+                                    <span class="w-3 h-3 rounded-full bg-olive"></span>
+                                    Net Earnings
+                                </span>
+                                <span class="text-xl font-bold text-olive">$40,707</span>
+                            </div>
+                            <span class="text-[10px] text-slate/40 mt-1 block">💰 Available for payout</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart Section -->
+                <div
+                    class="lg:col-span-2 bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 p-6 hover:border-olive/40 hover:shadow-2xl transition-all duration-500">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-12 h-12 rounded-2xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-olive">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-display text-lg font-bold text-ink dark:text-white">Revenue Trend</h3>
+                                <p class="text-xs text-slate/60 dark:text-gray-500">Monthly earnings over the last 6
+                                    months</p>
+                            </div>
+                        </div>
+                        <select
+                            class="text-xs border border-border/60 dark:border-white/10 rounded-2xl px-3 py-1.5 bg-white/60 dark:bg-ink/60 text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200">
+                            <option>Last 6 months</option>
+                            <option>Last 12 months</option>
+                            <option>Last 30 days</option>
+                        </select>
+                    </div>
+
+                    <!-- Interactive Bar Chart -->
+                    <div class="relative h-56 pt-4">
+                        <div class="flex items-end justify-between h-48 gap-2 sm:gap-3">
+                            <!-- Month 1 - Jan -->
+                            <div class="flex-1 flex flex-col items-center gap-1.5 group/chart">
+                                <div class="relative w-full bg-olive/20 rounded-t-sm transition-all duration-500 hover:bg-olive/30"
+                                    style="height: 65px;">
+                                    <div
+                                        class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/chart:opacity-100 transition-opacity duration-200 bg-ink dark:bg-white text-white dark:text-ink text-[10px] font-medium px-2 py-0.5 rounded whitespace-nowrap">
+                                        $6,200
+                                    </div>
+                                </div>
+                                <span class="text-[10px] text-slate/40">Jan</span>
+                            </div>
+                            <!-- Month 2 - Feb -->
+                            <div class="flex-1 flex flex-col items-center gap-1.5 group/chart">
+                                <div class="relative w-full bg-olive/30 rounded-t-sm transition-all duration-500 hover:bg-olive/40"
+                                    style="height: 85px;">
+                                    <div
+                                        class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/chart:opacity-100 transition-opacity duration-200 bg-ink dark:bg-white text-white dark:text-ink text-[10px] font-medium px-2 py-0.5 rounded whitespace-nowrap">
+                                        $7,800
+                                    </div>
+                                </div>
+                                <span class="text-[10px] text-slate/40">Feb</span>
+                            </div>
+                            <!-- Month 3 - Mar -->
+                            <div class="flex-1 flex flex-col items-center gap-1.5 group/chart">
+                                <div class="relative w-full bg-olive/50 rounded-t-sm transition-all duration-500 hover:bg-olive/60"
+                                    style="height: 110px;">
+                                    <div
+                                        class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/chart:opacity-100 transition-opacity duration-200 bg-ink dark:bg-white text-white dark:text-ink text-[10px] font-medium px-2 py-0.5 rounded whitespace-nowrap">
+                                        $9,400
+                                    </div>
+                                </div>
+                                <span class="text-[10px] text-slate/40">Mar</span>
+                            </div>
+                            <!-- Month 4 - Apr -->
+                            <div class="flex-1 flex flex-col items-center gap-1.5 group/chart">
+                                <div class="relative w-full bg-olive/70 rounded-t-sm transition-all duration-500 hover:bg-olive/80"
+                                    style="height: 140px;">
+                                    <div
+                                        class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/chart:opacity-100 transition-opacity duration-200 bg-ink dark:bg-white text-white dark:text-ink text-[10px] font-medium px-2 py-0.5 rounded whitespace-nowrap">
+                                        $11,200
+                                    </div>
+                                </div>
+                                <span class="text-[10px] text-slate/40">Apr</span>
+                            </div>
+                            <!-- Month 5 - May -->
+                            <div class="flex-1 flex flex-col items-center gap-1.5 group/chart">
+                                <div class="relative w-full bg-olive rounded-t-sm transition-all duration-500 hover:bg-olive-dark"
+                                    style="height: 165px;">
+                                    <div
+                                        class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/chart:opacity-100 transition-opacity duration-200 bg-ink dark:bg-white text-white dark:text-ink text-[10px] font-medium px-2 py-0.5 rounded whitespace-nowrap">
+                                        $13,500
+                                    </div>
+                                </div>
+                                <span class="text-[10px] font-medium text-olive">May</span>
+                            </div>
+                            <!-- Month 6 - Jun -->
+                            <div class="flex-1 flex flex-col items-center gap-1.5 group/chart">
+                                <div class="relative w-full bg-emerald-500 rounded-t-sm transition-all duration-500 hover:bg-emerald-600"
+                                    style="height: 195px;">
+                                    <div
+                                        class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/chart:opacity-100 transition-opacity duration-200 bg-ink dark:bg-white text-white dark:text-ink text-[10px] font-medium px-2 py-0.5 rounded whitespace-nowrap">
+                                        $15,200
+                                    </div>
+                                </div>
+                                <span class="text-[10px] font-bold text-emerald-500">Jun</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chart Legend -->
+                    <div
+                        class="flex items-center justify-center gap-6 mt-4 pt-4 border-t border-border/60 dark:border-white/10">
+                        <span class="flex items-center gap-2 text-xs text-slate/60 dark:text-gray-500">
+                            <span class="w-3 h-3 rounded bg-gradient-to-r from-olive to-emerald-500"></span>
+                            Revenue
+                        </span>
+                        <span class="flex items-center gap-2 text-xs text-slate/60 dark:text-gray-500">
+                            <span class="w-3 h-3 rounded bg-gradient-to-r from-emerald-500 to-olive"></span>
+                            Projected
+                        </span>
+                        <span class="flex items-center gap-2 text-xs text-slate/60 dark:text-gray-500">
+                            <span class="w-3 h-3 rounded border-2 border-dashed border-emerald-500"></span>
+                            Target: $14,000
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- TRANSACTION TABLE -->
+            <!-- ========================================== -->
+            <section class="px-6 md:px-8 py-6 pb-8">
+                <div
+                    class="bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 overflow-hidden hover:border-olive/40 hover:shadow-2xl transition-all duration-500">
+
+                    <!-- Header -->
+                    <div
+                        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-6 py-5 border-b border-border/60 dark:border-white/10">
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-12 h-12 rounded-2xl bg-gradient-to-br from-mint/20 to-blue-500/20 flex items-center justify-center text-mint">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h2 class="font-display text-xl font-bold text-ink dark:text-white">Transaction History
+                                </h2>
+                                <p class="text-xs text-slate/60 dark:text-gray-500">Complete record of all your sales
+                                    and earnings</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <select
+                                class="text-xs border border-border/60 dark:border-white/10 rounded-2xl px-3 py-2 bg-white/60 dark:bg-ink/60 text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200">
+                                <option>Last 30 days</option>
+                                <option>Last 90 days</option>
+                                <option>Last 12 months</option>
+                                <option>All time</option>
+                            </select>
+                            <button
+                                class="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium border border-border/60 dark:border-white/10 rounded-2xl hover:bg-white/60 hover:border-olive/30 transition-all duration-200">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                                </svg>
+                                Export
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Table -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr
+                                    class="border-b border-border/60 dark:border-white/10 bg-gradient-to-r from-mist/50 to-transparent dark:from-ink/50">
+                                    <th
+                                        class="text-left px-6 py-3.5 text-xs font-semibold text-slate/60 dark:text-gray-500 uppercase tracking-wider">
+                                        Transaction</th>
+                                    <th
+                                        class="text-left px-6 py-3.5 text-xs font-semibold text-slate/60 dark:text-gray-500 uppercase tracking-wider">
+                                        Buyer</th>
+                                    <th
+                                        class="text-left px-6 py-3.5 text-xs font-semibold text-slate/60 dark:text-gray-500 uppercase tracking-wider">
+                                        License Type</th>
+                                    <th
+                                        class="text-left px-6 py-3.5 text-xs font-semibold text-slate/60 dark:text-gray-500 uppercase tracking-wider">
+                                        Amount</th>
+                                    <th
+                                        class="text-left px-6 py-3.5 text-xs font-semibold text-slate/60 dark:text-gray-500 uppercase tracking-wider">
+                                        Date</th>
+                                    <th
+                                        class="text-left px-6 py-3.5 text-xs font-semibold text-slate/60 dark:text-gray-500 uppercase tracking-wider">
+                                        Status</th>
+                                    <th
+                                        class="text-right px-6 py-3.5 text-xs font-semibold text-slate/60 dark:text-gray-500 uppercase tracking-wider">
+                                        Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-border/60 dark:divide-white/10">
+
+                                <!-- Transaction 1 - Completed -->
+                                <tr
+                                    class="group hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-150">
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="w-9 h-9 rounded-xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-xs font-bold text-olive flex-shrink-0">
+                                                MS
+                                            </div>
+                                            <div>
+                                                <strong class="text-ink dark:text-white font-semibold">Midnight Sun
+                                                    Pilot</strong>
+                                                <p class="text-xs text-slate/40">#ETCH-2026-001</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div>
+                                            <span class="text-ink dark:text-white font-medium">Studio A</span>
+                                            <p class="text-xs text-slate/40">Entertainment</p>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="inline-flex px-2.5 py-1 rounded-full text-[10px] font-medium bg-gradient-to-r from-olive/10 to-emerald-500/10 text-olive">
+                                            Exclusive Option
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span class="font-semibold text-emerald-500">+$12,500</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-slate/60 dark:text-gray-500">Mar 15, 2026</td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-full bg-gradient-to-r from-emerald-500/10 to-mint/10 text-emerald-600 border border-emerald-500/20">
+                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            Completed
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <a href="#"
+                                            class="text-olive hover:text-olive-dark text-xs font-medium transition-colors duration-200 flex items-center justify-end gap-1 group/link">
+                                            View
+                                            <svg class="w-3 h-3 group-hover/link:translate-x-0.5 transition-transform duration-200"
+                                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!-- Transaction 2 - Pending -->
+                                <tr
+                                    class="group hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-150">
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="w-9 h-9 rounded-xl bg-gradient-to-br from-slate/20 to-gray-500/20 flex items-center justify-center text-xs font-bold text-slate flex-shrink-0">
+                                                RS
+                                            </div>
+                                            <div>
+                                                <strong class="text-ink dark:text-white font-semibold">Rainline
+                                                    Sessions</strong>
+                                                <p class="text-xs text-slate/40">#ETCH-2026-002</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div>
+                                            <span class="text-ink dark:text-white font-medium">Agency Y</span>
+                                            <p class="text-xs text-slate/40">Music Agency</p>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="inline-flex px-2.5 py-1 rounded-full text-[10px] font-medium bg-gradient-to-r from-mint/10 to-blue-500/10 text-mint">
+                                            Custom Deal
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span class="font-semibold text-amber-500">+$8,000</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-slate/60 dark:text-gray-500">Mar 12, 2026</td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-full bg-gradient-to-r from-amber-500/10 to-orange-500/10 text-amber-600 border border-amber-500/20">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                                            Pending
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <a href="#"
+                                            class="text-olive hover:text-olive-dark text-xs font-medium transition-colors duration-200 flex items-center justify-end gap-1 group/link">
+                                            View
+                                            <svg class="w-3 h-3 group-hover/link:translate-x-0.5 transition-transform duration-200"
+                                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!-- Transaction 3 - Processing -->
+                                <tr
+                                    class="group hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-150">
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="w-9 h-9 rounded-xl bg-gradient-to-br from-mint/20 to-blue-500/20 flex items-center justify-center text-xs font-bold text-mint flex-shrink-0">
+                                                FL
+                                            </div>
+                                            <div>
+                                                <strong class="text-ink dark:text-white font-semibold">Frames of
+                                                    Lagos</strong>
+                                                <p class="text-xs text-slate/40">#ETCH-2026-003</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div>
+                                            <span class="text-ink dark:text-white font-medium">Brand X</span>
+                                            <p class="text-xs text-slate/40">Consumer Goods</p>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="inline-flex px-2.5 py-1 rounded-full text-[10px] font-medium bg-gradient-to-r from-mint/10 to-blue-500/10 text-mint">
+                                            Sync License
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span class="font-semibold text-emerald-500">+$3,200</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-slate/60 dark:text-gray-500">Mar 8, 2026</td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-full bg-gradient-to-r from-mint/10 to-blue-500/10 text-mint border border-mint/20">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-mint animate-pulse"></span>
+                                            Processing
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <a href="#"
+                                            class="text-olive hover:text-olive-dark text-xs font-medium transition-colors duration-200 flex items-center justify-end gap-1 group/link">
+                                            View
+                                            <svg class="w-3 h-3 group-hover/link:translate-x-0.5 transition-transform duration-200"
+                                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!-- Transaction 4 - Completed -->
+                                <tr
+                                    class="group hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-150">
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="w-9 h-9 rounded-xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-xs font-bold text-olive flex-shrink-0">
+                                                LD
+                                            </div>
+                                            <div>
+                                                <strong class="text-ink dark:text-white font-semibold">The Last
+                                                    Draft</strong>
+                                                <p class="text-xs text-slate/40">#ETCH-2026-004</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div>
+                                            <span class="text-ink dark:text-white font-medium">Production Co.</span>
+                                            <p class="text-xs text-slate/40">Production</p>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="inline-flex px-2.5 py-1 rounded-full text-[10px] font-medium bg-gradient-to-r from-olive/10 to-emerald-500/10 text-olive">
+                                            Exclusive Option
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span class="font-semibold text-emerald-500">+$6,750</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-slate/60 dark:text-gray-500">Mar 3, 2026</td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-full bg-gradient-to-r from-emerald-500/10 to-mint/10 text-emerald-600 border border-emerald-500/20">
+                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            Completed
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <a href="#"
+                                            class="text-olive hover:text-olive-dark text-xs font-medium transition-colors duration-200 flex items-center justify-end gap-1 group/link">
+                                            View
+                                            <svg class="w-3 h-3 group-hover/link:translate-x-0.5 transition-transform duration-200"
+                                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!-- Transaction 5 - Failed -->
+                                <tr
+                                    class="group hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-150">
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="w-9 h-9 rounded-xl bg-gradient-to-br from-coral/20 to-error/20 flex items-center justify-center text-xs font-bold text-coral flex-shrink-0">
+                                                CA
+                                            </div>
+                                            <div>
+                                                <strong class="text-ink dark:text-white font-semibold">City Above
+                                                    Water</strong>
+                                                <p class="text-xs text-slate/40">#ETCH-2026-005</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div>
+                                            <span class="text-ink dark:text-white font-medium">Game Studio Z</span>
+                                            <p class="text-xs text-slate/40">Gaming</p>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="inline-flex px-2.5 py-1 rounded-full text-[10px] font-medium bg-gradient-to-r from-mint/10 to-blue-500/10 text-mint">
+                                            Custom Deal
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span class="font-semibold text-coral line-through">+$15,000</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-slate/60 dark:text-gray-500">Feb 28, 2026</td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-full bg-gradient-to-r from-coral/10 to-error/10 text-coral border border-coral/20">
+                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M6 18L18 6M6 6l12 12" />
+                                            </svg>
+                                            Failed
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <a href="#"
+                                            class="text-olive hover:text-olive-dark text-xs font-medium transition-colors duration-200 flex items-center justify-end gap-1 group/link">
+                                            View
+                                            <svg class="w-3 h-3 group-hover/link:translate-x-0.5 transition-transform duration-200"
+                                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Footer -->
+                    <div
+                        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-6 py-4 border-t border-border/60 dark:border-white/10 bg-gradient-to-r from-olive/5 to-transparent">
+                        <span class="text-xs text-slate/60 dark:text-gray-500">📊 Showing 5 of 24 transactions</span>
+                        <div class="flex items-center gap-3">
+                            <span class="text-xs text-slate/40">Page 1 of 5</span>
+                            <div class="flex items-center gap-1">
+                                <button
+                                    class="w-8 h-8 rounded-xl border border-border/60 dark:border-white/10 text-slate/40 hover:bg-white/60 hover:border-olive/30 transition-all duration-200 flex items-center justify-center text-sm disabled:opacity-40"
+                                    disabled>
+                                    ←
+                                </button>
+                                <button
+                                    class="w-8 h-8 rounded-xl bg-gradient-to-r from-olive to-emerald-500 text-white flex items-center justify-center text-sm font-medium hover:shadow-lg hover:shadow-olive/20 transition-all duration-200">
+                                    1
+                                </button>
+                                <button
+                                    class="w-8 h-8 rounded-xl border border-border/60 dark:border-white/10 text-slate/40 hover:bg-white/60 hover:border-olive/30 transition-all duration-200 flex items-center justify-center text-sm">
+                                    2
+                                </button>
+                                <button
+                                    class="w-8 h-8 rounded-xl border border-border/60 dark:border-white/10 text-slate/40 hover:bg-white/60 hover:border-olive/30 transition-all duration-200 flex items-center justify-center text-sm">
+                                    3
+                                </button>
+                                <button
+                                    class="w-8 h-8 rounded-xl border border-border/60 dark:border-white/10 text-slate/40 hover:bg-white/60 hover:border-olive/30 transition-all duration-200 flex items-center justify-center text-sm">
+                                    →
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- CREATIVE FINANCIAL INSIGHTS -->
+            <!-- ========================================== -->
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-4 px-6 md:px-8 pb-8">
+
+                <!-- Payout Summary -->
+                <div
+                    class="bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 p-6 hover:border-olive/40 hover:shadow-2xl transition-all duration-500">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-2xl">💰</span>
+                        <div>
+                            <h3 class="text-sm font-semibold text-ink dark:text-white">Payout Summary</h3>
+                            <p class="text-xs text-slate/60 dark:text-gray-500">Your payout history and schedule</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <span class="text-xs text-slate/60 dark:text-gray-500">Next Payout</span>
+                            <p class="text-lg font-bold text-ink dark:text-white">$8,450</p>
+                            <span class="text-[10px] text-slate/40">Est. Mar 25, 2026</span>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate/60 dark:text-gray-500">Last Payout</span>
+                            <p class="text-lg font-bold text-ink dark:text-white">$5,200</p>
+                            <span class="text-[10px] text-slate/40">Feb 25, 2026</span>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate/60 dark:text-gray-500">Total Payouts</span>
+                            <p class="text-lg font-bold text-ink dark:text-white">$32,000</p>
+                            <span class="text-[10px] text-slate/40">12 transactions</span>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate/60 dark:text-gray-500">Avg. Payout</span>
+                            <p class="text-lg font-bold text-ink dark:text-white">$2,667</p>
+                            <span class="text-[10px] text-slate/40">Monthly average</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Action -->
+                <div
+                    class="bg-gradient-to-r from-olive/10 via-emerald-500/5 to-olive/10 rounded-3xl border border-olive/10 p-6 backdrop-blur-sm">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <span class="text-3xl animate-bounce-gentle">⚡</span>
+                            <h3 class="text-sm font-semibold text-ink dark:text-white mt-2">Ready for payout</h3>
+                            <p class="text-sm text-slate/70 dark:text-gray-400 mt-1 max-w-xs">
+                                You have <strong class="text-ink dark:text-white">$8,450</strong> available for
+                                withdrawal.
+                            </p>
+                            <button
+                                class="mt-4 inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium bg-gradient-to-r from-olive to-emerald-500 text-white rounded-full hover:shadow-xl hover:shadow-olive/20 hover:-translate-y-0.5 transition-all duration-300">
+                                Request withdrawal
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                        </div>
+                        <span
+                            class="flex-shrink-0 w-14 h-14 rounded-3xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-3xl animate-bounce-gentle">💳</span>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SCRIPTS -->
+    <!-- ============================================ -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Supabase Client Library -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+    <!-- Supabase Config - ⚠️ REPLACE with your actual values -->
+    <script>
+        window.__ETCH_SUPABASE__ = {
+            url: 'https://YOUR_PROJECT_ID.supabase.co',
+            anonKey: 'YOUR_ANON_KEY',
+        };
+    </script>
+
+    <!-- ETCH Supabase Helper -->
+    <script src="../script/supabase.js"></script>
+
+    <!-- Auth Guard - Must load before other scripts -->
+    <script src="../script/user-auth-guard.js"></script>
+
+    <script src="../script/script.js"></script>
+    <script src="script/user.js"></script>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Set page title dynamically
+        document.querySelector('.greeting h1').textContent = 'Earnings';
+
+        // Tab switching for period selector
+        document.querySelectorAll('.period-tab').forEach(tab => {
+            tab.addEventListener('click', function () {
+                document.querySelectorAll('.period-tab').forEach(t => {
+                    t.classList.remove('active', 'bg-gradient-to-r', 'from-olive', 'to-emerald-500', 'text-white');
+                    t.classList.add('text-slate/60');
+                });
+                this.classList.add('active', 'bg-gradient-to-r', 'from-olive', 'to-emerald-500', 'text-white');
+                this.classList.remove('text-slate/60');
+            });
+        });
+    </script>
+</body>
+
+</html>

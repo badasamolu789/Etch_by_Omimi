@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Sign In | ETCH</title>
+    <meta name="description" content="Sign in to the ETCH admin panel." />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/assets/logo.png" type="image/png" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="../../style/style.css" />
+
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="../style/admin.css?v=20260806-components1" />
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        olive: { DEFAULT: '#99A96A', dark: '#73824C', light: '#E8ECD9' },
+                        ink: '#151515', mist: '#FAFAF7', stone: '#F2F3ED',
+                        slate: '#6C6C6C', muted: '#9A9A9A', border: '#E5E7E2',
+                        success: '#3D6B4F', warning: '#C9A54C', error: '#B25555', info: '#5B8DEF',
+                        cream: '#F5F3EE',
+                        coral: '#FF6B6B',
+                        peach: '#FFB347',
+                        mint: '#4ECDC4',
+                        lavender: '#A78BFA',
+                        blush: '#FF9A9E',
+                    },
+                    fontFamily: {
+                        display: ['"Instrument Serif"', 'serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delay': 'float 6s ease-in-out 2s infinite',
+                        'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
+                        'gradient': 'gradient 8s ease-in-out infinite',
+                        'slide-up': 'slide-up 0.6s ease-out',
+                        'slide-up-delay': 'slide-up 0.6s ease-out 0.2s both',
+                        'bounce-gentle': 'bounce-gentle 2s ease-in-out infinite',
+                        'spin-slow': 'spin 8s linear infinite',
+                        'shimmer': 'shimmer 2s infinite',
+                    },
+                    keyframes: {
+                        float: { '0%,100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-12px)' } },
+                        'pulse-soft': { '0%,100%': { opacity: 1 }, '50%': { opacity: 0.6 } },
+                        gradient: { '0%,100%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' } },
+                        'slide-up': { '0%': { transform: 'translateY(30px)', opacity: 0 }, '100%': { transform: 'translateY(0)', opacity: 1 } },
+                        'bounce-gentle': { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } },
+                        'spin-slow': { '0%': { transform: 'rotate(0deg)' }, '100%': { transform: 'rotate(360deg)' } },
+                        'shimmer': { '0%': { backgroundPosition: '-200% 0' }, '100%': { backgroundPosition: '200% 0' } },
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body>
+
+    <!-- ============================================ -->
+    <!-- ADMIN SIGN IN -->
+    <!-- ============================================ -->
+    <div class="admin-auth-shell">
+
+        <!-- Back to Home -->
+        <a href="/index.html"
+            class="admin-auth-back group">
+            <i data-lucide="arrow-left" class="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-200"></i>
+            <span class="text-sm font-medium">Back to ETCH</span>
+        </a>
+
+        <!-- Theme Toggle -->
+        <button id="themeToggle"
+            class="admin-auth-theme"
+            aria-label="Toggle theme">
+            <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
+            <i data-lucide="moon" class="w-5 h-5 block dark:hidden"></i>
+        </button>
+
+        <!-- Auth Card -->
+        <div class="admin-auth-panel animate-slide-up">
+
+            <!-- Brand -->
+            <div class="text-center mb-8">
+                <div class="flex items-center justify-center gap-2 mb-3">
+                    <img src="/assets/logo.png" alt="ETCH logo" class="h-10 w-10 object-contain" />
+                    <div>
+                        <span class="font-display text-3xl font-bold text-ink dark:text-white">ETCH</span>
+                        <span class="block -mt-1 text-[10px] font-medium text-olive tracking-widest uppercase">by
+                            OMIMI</span>
+                    </div>
+                </div>
+                <div
+                    class="admin-auth-badge">
+                    <span></span>
+                    Admin Access
+                </div>
+                <h2 class="font-display text-2xl font-bold text-ink dark:text-white">Welcome back, Admin</h2>
+                <p class="text-slate/60 dark:text-gray-500 text-sm mt-1">Sign in to manage your platform</p>
+            </div>
+
+            <!-- Auth Card Body -->
+            <div
+                class="admin-auth-card">
+
+                <!-- Form -->
+                <form class="space-y-5" id="signinForm" data-handle-submit>
+
+                    <!-- Email -->
+                    <div>
+                        <label class="block text-sm font-medium text-ink dark:text-white mb-1.5">Email Address</label>
+                        <div class="relative">
+                            <i data-lucide="mail" class="auth-icon absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate/40 transition-colors duration-200"></i>
+                            <input type="email" id="emailInput" name="email" placeholder="admin@etch.omimi.com" required
+                                autocomplete="username"
+                                class="auth-input w-full pl-11 pr-4 py-3 bg-white/60 dark:bg-ink/60 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white placeholder:text-slate/40 focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200" />
+                        </div>
+                        <p class="text-xs text-slate/40 mt-1.5 hidden" id="emailError">Please enter a valid email
+                            address</p>
+                    </div>
+
+                    <!-- Password -->
+                    <div>
+                        <div class="flex items-center mb-1.5">
+                            <label class="text-sm font-medium text-ink dark:text-white">Password</label>
+                        </div>
+                        <div class="relative">
+                            <i data-lucide="lock-keyhole" class="auth-icon absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate/40 transition-colors duration-200"></i>
+                            <input type="password" id="passwordInput" name="password" placeholder="••••••••" required
+                                autocomplete="current-password"
+                                class="auth-input w-full pl-11 pr-12 py-3 bg-white/60 dark:bg-ink/60 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white placeholder:text-slate/40 focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200" />
+                            <button type="button"
+                                class="absolute right-4 top-1/2 -translate-y-1/2 text-slate/40 hover:text-ink dark:hover:text-white transition-colors duration-200"
+                                id="togglePassword" aria-label="Show password" aria-pressed="false">
+                                <i data-lucide="eye" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Remember Me -->
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="rememberMe"
+                            class="w-4 h-4 rounded border-border/60 dark:border-white/10 text-olive focus:ring-olive focus:ring-2" />
+                        <label for="rememberMe" class="text-sm text-slate/60 dark:text-gray-500 cursor-pointer">Remember
+                            me</label>
+                    </div>
+
+                    <!-- Status Message (hidden by default) -->
+                    <div id="errorMessage"
+                        class="hidden p-3 bg-gradient-to-r from-error/10 to-coral/10 border border-error/20 rounded-2xl text-center"
+                        role="alert" aria-live="polite">
+                        <div class="flex items-center justify-center gap-2">
+                            <i data-lucide="triangle-alert" class="w-4 h-4 text-error"></i>
+                            <span class="text-sm text-error" id="errorText">Invalid email or password. Please try
+                                again.</span>
+                        </div>
+                    </div>
+
+                    <div id="successMessage"
+                        class="hidden p-3 bg-gradient-to-r from-emerald-500/10 to-olive/10 border border-emerald-500/20 rounded-2xl text-center"
+                        role="status" aria-live="polite">
+                        <div class="flex items-center justify-center gap-2">
+                            <i data-lucide="circle-check" class="w-4 h-4 text-emerald-600"></i>
+                            <span class="text-sm text-emerald-700 dark:text-emerald-400" id="successText">Signed in
+                                successfully. Redirecting…</span>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit"
+                        class="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-olive to-lavender text-white rounded-2xl font-medium hover:shadow-xl hover:shadow-olive/20 hover:-translate-y-0.5 transition-all duration-300 group"
+                        id="signinBtn">
+                        <span>Sign In</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200"></i>
+                    </button>
+
+                    <!-- Loading State (hidden by default) -->
+                    <div id="loadingState" class="hidden">
+                        <div
+                            class="flex items-center justify-center gap-3 px-6 py-3 bg-gradient-to-r from-olive/20 to-lavender/20 rounded-2xl">
+                            <i data-lucide="loader-circle" class="w-5 h-5 text-olive animate-spin"></i>
+                            <span class="text-sm font-medium text-ink dark:text-white">Signing in...</span>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Admin Notice -->
+                <div class="mt-6 pt-6 border-t border-border/60 dark:border-white/10">
+                    <div class="flex items-start gap-3 p-3 bg-amber-500/5 rounded-2xl border border-amber-500/10">
+                        <i data-lucide="info" class="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5"></i>
+                        <p class="text-xs text-slate/60 dark:text-gray-500">
+                            <span class="font-medium text-ink dark:text-white">Admin only:</span>
+                            This area is restricted to authorized personnel only. Unauthorized access is prohibited.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <p class="text-center text-xs text-slate/40 mt-6">
+                Protected by Supabase Auth &bull; ETCH Admin v1.0
+            </p>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SCRIPTS -->
+    <!-- ============================================ -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script>
+        window.__ETCH_SUPABASE__ = window.__ETCH_SUPABASE__ || {
+            url: 'https://cyoddvehzrmhubmislbb.supabase.co',
+            anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5b2RkdmVoenJtaHVibWlzbGJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUxNjI3MTQsImV4cCI6MjEwMDczODcxNH0.YaUyKP9f3tpKDny78_k_ka70zkFZe58GAFOo5oFFaFI',
+        };
+    </script>
+    <script src="/script/supabase.js"></script>
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // ==========================================
+        // THEME TOGGLE
+        // ==========================================
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        if (localStorage.getItem('theme') === 'dark') {
+            html.classList.add('dark');
+            html.setAttribute('data-theme', 'dark');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            const isDark = html.classList.contains('dark');
+            html.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+
+        // ==========================================
+        // PASSWORD TOGGLE
+        // ==========================================
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('passwordInput');
+
+        togglePassword.addEventListener('click', function () {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.setAttribute('aria-pressed', type === 'text' ? 'true' : 'false');
+            this.setAttribute('aria-label', type === 'text' ? 'Hide password' : 'Show password');
+            const icon = this.querySelector('i');
+            if (icon) {
+                icon.setAttribute('data-lucide', type === 'text' ? 'eye-off' : 'eye');
+                lucide.createIcons();
+            }
+        });
+
+        // ==========================================
+        // FORM SUBMISSION
+        // ==========================================
+        const form = document.getElementById('signinForm');
+        const signinBtn = document.getElementById('signinBtn');
+        const loadingState = document.getElementById('loadingState');
+        const errorMessage = document.getElementById('errorMessage');
+        const successMessage = document.getElementById('successMessage');
+        const errorText = document.getElementById('errorText');
+        const successText = document.getElementById('successText');
+        const emailInput = document.getElementById('emailInput');
+        const emailError = document.getElementById('emailError');
+        const ADMIN_EMAIL = 'etchadmin@gmail.com';
+        const ADMIN_SESSION_KEY = 'etch_admin_session';
+
+        function clearAdminSession() {
+            sessionStorage.removeItem(ADMIN_SESSION_KEY);
+            localStorage.removeItem(ADMIN_SESSION_KEY);
+            sessionStorage.removeItem('etch_admin_verified');
+            sessionStorage.removeItem('etch_admin_remember');
+        }
+
+        function saveAdminSession(remember) {
+            const session = JSON.stringify({
+                email: ADMIN_EMAIL,
+                name: 'Super Admin',
+                signedInAt: new Date().toISOString(),
+            });
+
+            clearAdminSession();
+            const storage = remember ? localStorage : sessionStorage;
+            storage.setItem(ADMIN_SESSION_KEY, session);
+        }
+
+        function hasAdminSession() {
+            return !!(sessionStorage.getItem(ADMIN_SESSION_KEY) || localStorage.getItem(ADMIN_SESSION_KEY));
+        }
+
+        if (hasAdminSession()) {
+            window.location.href = '/admin/index.html';
+        }
+
+        function showError(message) {
+            successMessage.classList.add('hidden');
+            errorText.textContent = message;
+            errorMessage.classList.remove('hidden');
+        }
+
+        function showSuccess(message) {
+            errorMessage.classList.add('hidden');
+            successText.textContent = message;
+            successMessage.classList.remove('hidden');
+        }
+
+        function clearStatus() {
+            errorMessage.classList.add('hidden');
+            successMessage.classList.add('hidden');
+        }
+
+        emailInput.addEventListener('blur', function () {
+            const email = this.value.trim();
+            const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            if (email && !isValid) {
+                this.classList.add('auth-input-error');
+                emailError.classList.remove('hidden');
+            } else {
+                this.classList.remove('auth-input-error');
+                emailError.classList.add('hidden');
+            }
+        });
+
+        emailInput.addEventListener('input', function () {
+            this.classList.remove('auth-input-error');
+            emailError.classList.add('hidden');
+        });
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const email = emailInput.value.trim();
+            const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            if (!isValid) {
+                emailInput.classList.add('auth-input-error');
+                emailError.classList.remove('hidden');
+                emailInput.focus();
+                return;
+            }
+
+            signinBtn.classList.add('hidden');
+            signinBtn.disabled = true;
+            loadingState.classList.remove('hidden');
+            clearStatus();
+
+            const password = passwordInput.value;
+            const remember = document.getElementById('rememberMe').checked;
+
+            try {
+                if (email.toLowerCase() !== ADMIN_EMAIL) {
+                    throw new Error('Only the ETCH admin account can access this panel.');
+                }
+
+                const result = await EtchSupabase.signIn(email, password);
+
+                if (result.error || !result.data?.user) {
+                    throw result.error || new Error('Invalid email or password');
+                }
+
+                if (result.data.user.email?.toLowerCase() !== ADMIN_EMAIL) {
+                    clearAdminSession();
+                    throw new Error('This account is not authorized for the admin panel.');
+                }
+
+                saveAdminSession(remember);
+
+                showSuccess('Signed in successfully. Redirecting…');
+                loadingState.classList.add('hidden');
+                setTimeout(() => {
+                    window.location.href = '/admin/index.html';
+                }, 800);
+            } catch (error) {
+                loadingState.classList.add('hidden');
+                signinBtn.classList.remove('hidden');
+                signinBtn.disabled = false;
+                showError(error.message || 'Unable to sign in right now. Please try again.');
+            }
+        });
+    </script>
+</body>
+
+</html>

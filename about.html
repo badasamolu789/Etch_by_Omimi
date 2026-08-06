@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About | ETCH — Premium Creative Marketplace</title>
+    <meta name="description"
+        content="Learn about ETCH, the premium creative marketplace connecting talented creators with visionary buyers." />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/assets/logo.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/assets/logo.png" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style/style.css" />
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        olive: {
+                            DEFAULT: '#99A96A',
+                            dark: '#73824C',
+                            light: '#E8ECD9',
+                        },
+                        ink: '#151515',
+                        mist: '#FAFAF7',
+                        stone: '#F2F3ED',
+                        slate: '#6C6C6C',
+                        muted: '#9A9A9A',
+                        border: '#E5E7E2',
+                        success: '#3D6B4F',
+                        warning: '#C9A54C',
+                        error: '#B25555',
+                        info: '#5B8DEF',
+                    },
+                    fontFamily: {
+                        display: ['"Instrument Serif"', 'serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delay': 'float 6s ease-in-out 2s infinite',
+                        'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
+                        'gradient': 'gradient 8s ease-in-out infinite',
+                        'slide-up': 'slide-up 0.6s ease-out',
+                        'slide-up-delay': 'slide-up 0.6s ease-out 0.2s both',
+                        'slide-up-delay-2': 'slide-up 0.6s ease-out 0.4s both',
+                        'bounce-gentle': 'bounce-gentle 2s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        },
+                        'pulse-soft': {
+                            '0%, 100%': { opacity: 1 },
+                            '50%': { opacity: 0.6 },
+                        },
+                        gradient: {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                        },
+                        'slide-up': {
+                            '0%': { transform: 'translateY(30px)', opacity: 0 },
+                            '100%': { transform: 'translateY(0)', opacity: 1 },
+                        },
+                        'bounce-gentle': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-6px)' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body>
+
+    <!-- ============================================ -->
+    <!-- SHARED HEADER (loaded from component/header.html) -->
+    <!-- ============================================ -->
+    <div id="header"></div>
+
+    <!-- ============================================ -->
+    <!-- PAGE CONTENT -->
+    <!-- ============================================ -->
+    <section class="relative pt-28 pb-16 md:pt-32 md:pb-24 overflow-hidden">
+        <div
+            class="absolute inset-0 -z-10 bg-gradient-to-br from-mist via-white to-olive/5 dark:from-ink dark:via-ink dark:to-olive/10">
+        </div>
+        <div class="absolute top-20 right-10 w-72 h-72 bg-olive/10 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-20 left-10 w-96 h-96 bg-olive/5 rounded-full blur-3xl animate-float-delay"></div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div class="animate-slide-up">
+                <span
+                    class="inline-flex items-center gap-1.5 px-3 py-1 bg-olive/10 text-olive rounded-full text-xs font-medium tracking-wide mb-4">
+                    <span class="w-1.5 h-1.5 rounded-full bg-olive animate-pulse"></span>
+                    About Us
+                </span>
+                <h1
+                    class="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-ink dark:text-white leading-tight">
+                    Empowering <span class="relative inline-block">
+                        <span class="relative z-10">creativity</span>
+                        <span class="absolute bottom-2 left-0 w-full h-4 bg-olive/20 dark:bg-olive/30 -z-0"></span>
+                    </span>
+                    <br />worldwide
+                </h1>
+                <p class="text-lg text-slate dark:text-gray-400 mt-4 max-w-2xl mx-auto leading-relaxed">
+                    ETCH is a premium creative marketplace that connects talented creators with visionary buyers.
+                    We believe in the power of exceptional creative work and make it accessible to everyone.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- MISSION SECTION -->
+    <!-- ============================================ -->
+    <section class="py-16 md:py-24 bg-white dark:bg-ink transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span
+                        class="inline-block text-sm font-medium text-olive bg-olive/10 px-4 py-1 rounded-full mb-4">Our
+                        Mission</span>
+                    <h2 class="font-display text-3xl md:text-4xl font-bold text-ink dark:text-white">
+                        Making creative licensing <span class="text-olive">simple</span>
+                    </h2>
+                    <p class="text-slate dark:text-gray-400 mt-4 leading-relaxed">
+                        We're building the world's most trusted marketplace for creative intellectual property.
+                        From scripts and storyboards to music and design, we make it easy for creators to license
+                        their work and for buyers to find exactly what they need.
+                    </p>
+                    <p class="text-slate dark:text-gray-400 mt-4 leading-relaxed">
+                        Our platform handles the marketplace, licensing, and discovery so creators can focus on what
+                        they do best — creating exceptional work.
+                    </p>
+                </div>
+                <div class="bg-stone dark:bg-white/5 rounded-2xl p-8 border border-border dark:border-white/10">
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="text-center">
+                            <span class="block text-4xl font-bold text-olive">500+</span>
+                            <span class="text-sm text-slate dark:text-gray-400">Creators</span>
+                        </div>
+                        <div class="text-center">
+                            <span class="block text-4xl font-bold text-olive">2.4k+</span>
+                            <span class="text-sm text-slate dark:text-gray-400">Assets</span>
+                        </div>
+                        <div class="text-center">
+                            <span class="block text-4xl font-bold text-olive">98%</span>
+                            <span class="text-sm text-slate dark:text-gray-400">Satisfaction</span>
+                        </div>
+                        <div class="text-center">
+                            <span class="block text-4xl font-bold text-olive">50+</span>
+                            <span class="text-sm text-slate dark:text-gray-400">Countries</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- VALUES SECTION -->
+    <!-- ============================================ -->
+    <section class="py-16 md:py-24 bg-stone dark:bg-white/5 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span
+                    class="inline-block text-sm font-medium text-olive bg-olive/10 px-4 py-1 rounded-full mb-4">Values</span>
+                <h2 class="font-display text-3xl md:text-4xl font-bold text-ink dark:text-white">What we stand for</h2>
+                <p class="text-slate dark:text-gray-400 mt-3">Our core principles guide everything we do</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center group">
+                    <div
+                        class="w-16 h-16 mx-auto rounded-2xl bg-olive/10 flex items-center justify-center text-olive group-hover:bg-olive group-hover:text-white transition-all duration-300">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="mt-4 text-lg font-bold text-ink dark:text-white">Quality First</h3>
+                    <p class="text-slate dark:text-gray-400 mt-2 text-sm">Every asset on ETCH is vetted to ensure the
+                        highest standards of creative excellence.</p>
+                </div>
+
+                <div class="text-center group">
+                    <div
+                        class="w-16 h-16 mx-auto rounded-2xl bg-olive/10 flex items-center justify-center text-olive group-hover:bg-olive group-hover:text-white transition-all duration-300">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="mt-4 text-lg font-bold text-ink dark:text-white">Fair Compensation</h3>
+                    <p class="text-slate dark:text-gray-400 mt-2 text-sm">Creators set their own prices and receive
+                        competitive compensation for their work.</p>
+                </div>
+
+                <div class="text-center group">
+                    <div
+                        class="w-16 h-16 mx-auto rounded-2xl bg-olive/10 flex items-center justify-center text-olive group-hover:bg-olive group-hover:text-white transition-all duration-300">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                    </div>
+                    <h3 class="mt-4 text-lg font-bold text-ink dark:text-white">Secure Licensing</h3>
+                    <p class="text-slate dark:text-gray-400 mt-2 text-sm">Clear terms, secure transactions, and peace of
+                        mind for both creators and buyers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SHARED FOOTER (loaded from component/footer.html) -->
+    <!-- ============================================ -->
+    <div id="footer"></div>
+
+    <!-- ============================================ -->
+    <!-- SCRIPTS -->
+    <!-- ============================================ -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+    </script>
+    <script src="script/script.js"></script>
+</body>
+
+</html>

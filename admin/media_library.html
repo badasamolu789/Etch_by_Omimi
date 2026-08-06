@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Media Library | Masterclass | ETCH Admin</title>
+    <meta name="description" content="Manage Masterclass media assets on ETCH." />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/assets/logo.png" type="image/png" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="/style/style.css" />
+
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="style/admin.css?v=20260806-components1" />
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        olive: { DEFAULT: '#99A96A', dark: '#73824C', light: '#E8ECD9' },
+                        ink: '#151515', mist: '#FAFAF7', stone: '#F2F3ED',
+                        slate: '#6C6C6C', muted: '#9A9A9A', border: '#E5E7E2',
+                        success: '#3D6B4F', warning: '#C9A54C', error: '#B25555', info: '#5B8DEF',
+                        cream: '#F5F3EE',
+                        coral: '#FF6B6B',
+                        peach: '#FFB347',
+                        mint: '#4ECDC4',
+                        lavender: '#A78BFA',
+                        blush: '#FF9A9E',
+                    },
+                    fontFamily: {
+                        display: ['"Instrument Serif"', 'serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delay': 'float 6s ease-in-out 2s infinite',
+                        'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
+                        'gradient': 'gradient 8s ease-in-out infinite',
+                        'slide-up': 'slide-up 0.6s ease-out',
+                        'slide-up-delay': 'slide-up 0.6s ease-out 0.2s both',
+                        'bounce-gentle': 'bounce-gentle 2s ease-in-out infinite',
+                        'spin-slow': 'spin 8s linear infinite',
+                        'shimmer': 'shimmer 2s infinite',
+                    },
+                    keyframes: {
+                        float: { '0%,100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-12px)' } },
+                        'pulse-soft': { '0%,100%': { opacity: 1 }, '50%': { opacity: 0.6 } },
+                        gradient: { '0%,100%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' } },
+                        'slide-up': { '0%': { transform: 'translateY(30px)', opacity: 0 }, '100%': { transform: 'translateY(0)', opacity: 1 } },
+                        'bounce-gentle': { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } },
+                        'spin-slow': { '0%': { transform: 'rotate(0deg)' }, '100%': { transform: 'rotate(360deg)' } },
+                        'shimmer': { '0%': { backgroundPosition: '-200% 0' }, '100%': { backgroundPosition: '200% 0' } },
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body>
+
+    <!-- ============================================ -->
+    <!-- ADMIN DASHBOARD - MASTERCLASS MEDIA -->
+    <!-- ============================================ -->
+    <div
+        class="admin-dashboard bg-gradient-to-br from-mist via-white to-cream dark:from-ink dark:via-ink dark:to-ink/95">
+
+        <!-- Sidebar -->
+        <div data-component="include" data-src="component/sidebar.html"></div>
+
+        <!-- Main Content -->
+        <main class="admin-dashboard-main relative overflow-hidden">
+
+            <!-- Decorative Background Orbs -->
+            <div class="absolute -top-40 -right-40 w-96 h-96 bg-olive/5 rounded-full blur-3xl animate-float"></div>
+            <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-mint/5 rounded-full blur-3xl animate-float-delay">
+            </div>
+
+            <!-- Topbar -->
+            <div data-component="include" data-src="component/topbar.html"></div>
+
+            <!-- ========================================== -->
+            <!-- BREADCRUMB -->
+            <!-- ========================================== -->
+            <div class="px-6 md:px-8 pt-4">
+                <nav class="flex items-center gap-2 text-sm text-slate/60 dark:text-gray-500">
+                    <a href="/admin/dashboard.html"
+                        class="hover:text-ink dark:hover:text-white transition-colors duration-200">Dashboard</a>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    <a href="/admin/masterclass/index.html"
+                        class="hover:text-ink dark:hover:text-white transition-colors duration-200">Masterclass</a>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    <span class="text-ink dark:text-white font-medium">Media Library</span>
+                </nav>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- PAGE HEADER -->
+            <!-- ========================================== -->
+            <section class="relative px-6 md:px-8 pt-4 pb-2">
+                <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+                    <div class="animate-slide-up">
+                        <div class="flex items-center gap-3 mb-1">
+                            <span
+                                class="inline-flex items-center gap-1.5 px-3 py-1 bg-gradient-to-r from-olive/20 to-mint/20 text-olive rounded-full text-xs font-medium tracking-wide">
+                                <span class="w-1.5 h-1.5 rounded-full bg-olive animate-pulse"></span>
+                                ✦ Asset Management
+                            </span>
+                            <span class="text-xs text-slate/60 dark:text-gray-500">🖼️ 156 total assets</span>
+                        </div>
+                        <h2 class="font-display text-3xl md:text-4xl font-bold text-ink dark:text-white leading-tight">
+                            <span class="relative inline-block">
+                                <span class="relative z-10">Media Library</span>
+                                <span
+                                    class="absolute bottom-1 left-0 w-full h-3 bg-olive/20 dark:bg-olive/30 -z-0"></span>
+                            </span>
+                        </h2>
+                        <p class="text-slate text-sm mt-1 max-w-xl leading-relaxed">
+                            Upload and manage images for your articles, categories, authors, and OG metadata.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-3 flex-shrink-0 animate-slide-up-delay">
+                        <button id="uploadBtn"
+                            class="group inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-olive to-mint text-white rounded-2xl font-medium hover:shadow-xl hover:shadow-olive/20 hover:-translate-y-0.5 transition-all duration-300">
+                            <svg class="w-4 h-4 group-hover:rotate-90 transition-transform duration-300" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                            </svg>
+                            Upload
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- STATS ROW -->
+            <!-- ========================================== -->
+            <section class="grid grid-cols-2 md:grid-cols-4 gap-4 px-6 md:px-8 py-4">
+
+                <div
+                    class="bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-2xl border border-border/60 dark:border-white/10 p-4 hover:border-olive/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-olive">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-xl font-bold text-ink dark:text-white">156</p>
+                            <p class="text-xs text-slate/60 dark:text-gray-500">Total Assets</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-2xl border border-border/60 dark:border-white/10 p-4 hover:border-olive/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500/20 to-mint/20 flex items-center justify-center text-emerald-500">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-xl font-bold text-emerald-500">89</p>
+                            <p class="text-xs text-slate/60 dark:text-gray-500">Images</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-2xl border border-border/60 dark:border-white/10 p-4 hover:border-olive/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-gradient-to-br from-lavender/20 to-purple-500/20 flex items-center justify-center text-lavender">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-xl font-bold text-lavender">42</p>
+                            <p class="text-xs text-slate/60 dark:text-gray-500">URLs</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-2xl border border-border/60 dark:border-white/10 p-4 hover:border-olive/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-gradient-to-br from-peach/20 to-coral/20 flex items-center justify-center text-peach">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-xl font-bold text-peach">1.2GB</p>
+                            <p class="text-xs text-slate/60 dark:text-gray-500">Total Storage</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- UPLOAD ZONE -->
+            <!-- ========================================== -->
+            <section class="px-6 md:px-8 py-2">
+                <div id="uploadZone"
+                    class="border-2 border-dashed border-border/60 dark:border-white/10 rounded-3xl p-8 text-center hover:border-olive/40 transition-all duration-300 group">
+                    <div class="flex flex-col items-center gap-4">
+                        <div
+                            class="w-20 h-20 rounded-3xl bg-gradient-to-br from-olive/20 to-mint/20 flex items-center justify-center text-olive group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-lg font-medium text-ink dark:text-white">Drop images here to upload</p>
+                            <p class="text-sm text-slate/60 dark:text-gray-500">or</p>
+                            <button id="browseBtn"
+                                class="px-6 py-2.5 text-sm font-medium bg-gradient-to-r from-olive to-mint text-white rounded-full hover:shadow-xl hover:shadow-olive/20 transition-all duration-300">
+                                Browse Files
+                            </button>
+                            <input type="file" id="fileInput" class="hidden" accept="image/*" multiple />
+                        </div>
+                        <p class="text-xs text-slate/40">Supported: JPG, PNG, WEBP, GIF up to 5MB each</p>
+                    </div>
+                </div>
+
+                <!-- Upload Progress (hidden by default) -->
+                <div id="uploadProgress"
+                    class="hidden mt-4 p-4 bg-white/80 dark:bg-ink/80 rounded-2xl border border-border/60 dark:border-white/10">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm font-medium text-ink dark:text-white">Uploading files...</span>
+                        <span class="text-sm text-olive font-medium" id="progressPercent">0%</span>
+                    </div>
+                    <div class="w-full h-2 bg-border/50 dark:bg-white/5 rounded-full overflow-hidden">
+                        <div class="h-full w-0 bg-gradient-to-r from-olive to-mint rounded-full transition-all duration-500"
+                            id="progressBar"></div>
+                    </div>
+                    <p class="text-xs text-slate/60 dark:text-gray-500 mt-2" id="uploadStatus">0 of 0 files uploaded</p>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- MEDIA GRID -->
+            <!-- ========================================== -->
+            <section class="px-6 md:px-8 py-6 pb-8">
+                <div
+                    class="bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 overflow-hidden hover:border-olive/40 hover:shadow-2xl transition-all duration-500">
+
+                    <!-- Grid Header -->
+                    <div
+                        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-6 py-4 border-b border-border/60 dark:border-white/10">
+                        <div class="flex items-center gap-3">
+                            <span class="text-sm font-medium text-ink dark:text-white">All Media</span>
+                            <span class="text-xs text-slate/60 dark:text-gray-500">156 items</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <select
+                                class="px-3 py-2 bg-white/60 dark:bg-ink/60 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200">
+                                <option value="">All Types</option>
+                                <option value="image">Images</option>
+                                <option value="url">URLs</option>
+                            </select>
+                            <select
+                                class="px-3 py-2 bg-white/60 dark:bg-ink/60 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200">
+                                <option value="">Sort by Latest</option>
+                                <option value="oldest">Oldest</option>
+                                <option value="name">Name A-Z</option>
+                            </select>
+                            <button
+                                class="p-2.5 border border-border/60 dark:border-white/10 rounded-2xl hover:bg-white/60 hover:border-olive/30 transition-all duration-200">
+                                <svg class="w-4 h-4 text-slate/40" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                                </svg>
+                            </button>
+                            <button
+                                class="p-2.5 border border-border/60 dark:border-white/10 rounded-2xl hover:bg-white/60 hover:border-olive/30 transition-all duration-200">
+                                <svg class="w-4 h-4 text-slate/40" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 6h16M4 12h16M4 18h16" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Media Grid -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4">
+
+                        <!-- Media Item 1 -->
+                        <div
+                            class="group bg-white/60 dark:bg-ink/60 rounded-2xl border border-border/60 dark:border-white/10 overflow-hidden hover:border-olive/40 hover:shadow-xl transition-all duration-300">
+                            <div class="relative aspect-square overflow-hidden bg-stone dark:bg-ink/50">
+                                <img src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?auto=format&fit=crop&w=400&q=80"
+                                    alt="Article image"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-3">
+                                    <span class="text-xs text-white font-medium truncate">midnight-sun-pilot.jpg</span>
+                                    <button
+                                        class="p-1.5 bg-white/90 rounded-lg hover:bg-coral hover:text-white transition-all duration-200"
+                                        title="Delete">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="p-3">
+                                <p class="text-xs font-medium text-ink dark:text-white truncate">midnight-sun-pilot.jpg
+                                </p>
+                                <div class="flex items-center justify-between mt-1">
+                                    <span class="text-[10px] text-slate/40">2.4 MB</span>
+                                    <button
+                                        class="text-[10px] text-olive hover:text-olive-dark transition-colors duration-200 copy-btn"
+                                        data-url="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc">
+                                        Copy URL
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Media Item 2 -->
+                        <div
+                            class="group bg-white/60 dark:bg-ink/60 rounded-2xl border border-border/60 dark:border-white/10 overflow-hidden hover:border-olive/40 hover:shadow-xl transition-all duration-300">
+                            <div class="relative aspect-square overflow-hidden bg-stone dark:bg-ink/50">
+                                <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=400&q=80"
+                                    alt="Article image"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-3">
+                                    <span class="text-xs text-white font-medium truncate">frames-of-lagos.jpg</span>
+                                    <button
+                                        class="p-1.5 bg-white/90 rounded-lg hover:bg-coral hover:text-white transition-all duration-200"
+                                        title="Delete">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="p-3">
+                                <p class="text-xs font-medium text-ink dark:text-white truncate">frames-of-lagos.jpg</p>
+                                <div class="flex items-center justify-between mt-1">
+                                    <span class="text-[10px] text-slate/40">1.8 MB</span>
+                                    <button
+                                        class="text-[10px] text-olive hover:text-olive-dark transition-colors duration-200 copy-btn"
+                                        data-url="https://images.unsplash.com/photo-1516280440614-37939bbacd81">
+                                        Copy URL
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Media Item 3 -->
+                        <div
+                            class="group bg-white/60 dark:bg-ink/60 rounded-2xl border border-border/60 dark:border-white/10 overflow-hidden hover:border-olive/40 hover:shadow-xl transition-all duration-300">
+                            <div class="relative aspect-square overflow-hidden bg-stone dark:bg-ink/50">
+                                <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=400&q=80"
+                                    alt="Article image"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-3">
+                                    <span class="text-xs text-white font-medium truncate">rainline-sessions.jpg</span>
+                                    <button
+                                        class="p-1.5 bg-white/90 rounded-lg hover:bg-coral hover:text-white transition-all duration-200"
+                                        title="Delete">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="p-3">
+                                <p class="text-xs font-medium text-ink dark:text-white truncate">rainline-sessions.jpg
+                                </p>
+                                <div class="flex items-center justify-between mt-1">
+                                    <span class="text-[10px] text-slate/40">3.1 MB</span>
+                                    <button
+                                        class="text-[10px] text-olive hover:text-olive-dark transition-colors duration-200 copy-btn"
+                                        data-url="https://images.unsplash.com/photo-1511379938547-c1f69419868d">
+                                        Copy URL
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Media Item 4 -->
+                        <div
+                            class="group bg-white/60 dark:bg-ink/60 rounded-2xl border border-border/60 dark:border-white/10 overflow-hidden hover:border-olive/40 hover:shadow-xl transition-all duration-300">
+                            <div class="relative aspect-square overflow-hidden bg-stone dark:bg-ink/50">
+                                <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=400&q=80"
+                                    alt="Article image"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-3">
+                                    <span class="text-xs text-white font-medium truncate">city-above-water.jpg</span>
+                                    <button
+                                        class="p-1.5 bg-white/90 rounded-lg hover:bg-coral hover:text-white transition-all duration-200"
+                                        title="Delete">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="p-3">
+                                <p class="text-xs font-medium text-ink dark:text-white truncate">city-above-water.jpg
+                                </p>
+                                <div class="flex items-center justify-between mt-1">
+                                    <span class="text-[10px] text-slate/40">4.2 MB</span>
+                                    <button
+                                        class="text-[10px] text-olive hover:text-olive-dark transition-colors duration-200 copy-btn"
+                                        data-url="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b">
+                                        Copy URL
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Media Item 5 -->
+                        <div
+                            class="group bg-white/60 dark:bg-ink/60 rounded-2xl border border-border/60 dark:border-white/10 overflow-hidden hover:border-olive/40 hover:shadow-xl transition-all duration-300">
+                            <div class="relative aspect-square overflow-hidden bg-stone dark:bg-ink/50">
+                                <img src="https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?auto=format&fit=crop&w=400&q=80"
+                                    alt="Article image"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-3">
+                                    <span class="text-xs text-white font-medium truncate">the-last-draft.jpg</span>
+                                    <button
+                                        class="p-1.5 bg-white/90 rounded-lg hover:bg-coral hover:text-white transition-all duration-200"
+                                        title="Delete">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="p-3">
+                                <p class="text-xs font-medium text-ink dark:text-white truncate">the-last-draft.jpg</p>
+                                <div class="flex items-center justify-between mt-1">
+                                    <span class="text-[10px] text-slate/40">2.1 MB</span>
+                                    <button
+                                        class="text-[10px] text-olive hover:text-olive-dark transition-colors duration-200 copy-btn"
+                                        data-url="https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d">
+                                        Copy URL
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Media Item 6 -->
+                        <div
+                            class="group bg-white/60 dark:bg-ink/60 rounded-2xl border border-border/60 dark:border-white/10 overflow-hidden hover:border-olive/40 hover:shadow-xl transition-all duration-300">
+                            <div class="relative aspect-square overflow-hidden bg-stone dark:bg-ink/50">
+                                <img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=400&q=80"
+                                    alt="Article image"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-3">
+                                    <span class="text-xs text-white font-medium truncate">neon-dreams.jpg</span>
+                                    <button
+                                        class="p-1.5 bg-white/90 rounded-lg hover:bg-coral hover:text-white transition-all duration-200"
+                                        title="Delete">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="p-3">
+                                <p class="text-xs font-medium text-ink dark:text-white truncate">neon-dreams.jpg</p>
+                                <div class="flex items-center justify-between mt-1">
+                                    <span class="text-[10px] text-slate/40">3.8 MB</span>
+                                    <button
+                                        class="text-[10px] text-olive hover:text-olive-dark transition-colors duration-200 copy-btn"
+                                        data-url="https://images.unsplash.com/photo-1518791841217-8f162f1e1131">
+                                        Copy URL
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Media Item 7 -->
+                        <div
+                            class="group bg-white/60 dark:bg-ink/60 rounded-2xl border border-border/60 dark:border-white/10 overflow-hidden hover:border-olive/40 hover:shadow-xl transition-all duration-300">
+                            <div class="relative aspect-square overflow-hidden bg-stone dark:bg-ink/50">
+                                <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=400&q=80"
+                                    alt="Article image"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-3">
+                                    <span class="text-xs text-white font-medium truncate">echo-chamber.jpg</span>
+                                    <button
+                                        class="p-1.5 bg-white/90 rounded-lg hover:bg-coral hover:text-white transition-all duration-200"
+                                        title="Delete">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="p-3">
+                                <p class="text-xs font-medium text-ink dark:text-white truncate">echo-chamber.jpg</p>
+                                <div class="flex items-center justify-between mt-1">
+                                    <span class="text-[10px] text-slate/40">2.6 MB</span>
+                                    <button
+                                        class="text-[10px] text-olive hover:text-olive-dark transition-colors duration-200 copy-btn"
+                                        data-url="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c">
+                                        Copy URL
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Media Item 8 -->
+                        <div
+                            class="group bg-white/60 dark:bg-ink/60 rounded-2xl border border-border/60 dark:border-white/10 overflow-hidden hover:border-olive/40 hover:shadow-xl transition-all duration-300">
+                            <div class="relative aspect-square overflow-hidden bg-stone dark:bg-ink/50">
+                                <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=400&q=80"
+                                    alt="Article image"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-3">
+                                    <span class="text-xs text-white font-medium truncate">abstract-forms.jpg</span>
+                                    <button
+                                        class="p-1.5 bg-white/90 rounded-lg hover:bg-coral hover:text-white transition-all duration-200"
+                                        title="Delete">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="p-3">
+                                <p class="text-xs font-medium text-ink dark:text-white truncate">abstract-forms.jpg</p>
+                                <div class="flex items-center justify-between mt-1">
+                                    <span class="text-[10px] text-slate/40">1.5 MB</span>
+                                    <button
+                                        class="text-[10px] text-olive hover:text-olive-dark transition-colors duration-200 copy-btn"
+                                        data-url="https://images.unsplash.com/photo-1541701494587-cb58502866ab">
+                                        Copy URL
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Media Item 9 - Add More (Placeholder) -->
+                        <div
+                            class="group bg-white/60 dark:bg-ink/60 rounded-2xl border-2 border-dashed border-border/60 dark:border-white/10 overflow-hidden hover:border-olive/40 hover:shadow-xl transition-all duration-300 cursor-pointer flex items-center justify-center min-h-[180px]">
+                            <div class="text-center p-4">
+                                <div
+                                    class="w-12 h-12 mx-auto rounded-2xl bg-gradient-to-br from-olive/10 to-mint/10 flex items-center justify-center text-olive group-hover:scale-110 transition-transform duration-300">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 4v16m8-8H4" />
+                                    </svg>
+                                </div>
+                                <p class="text-xs text-slate/60 dark:text-gray-500 mt-2">Upload more</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Grid Footer -->
+                    <div
+                        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-6 py-4 border-t border-border/60 dark:border-white/10 bg-gradient-to-r from-olive/5 to-transparent">
+                        <span class="text-xs text-slate/60 dark:text-gray-500">Showing 1-8 of 156 assets</span>
+                        <div class="flex items-center gap-3">
+                            <span class="text-xs text-slate/40">Page 1 of 20</span>
+                            <div class="flex items-center gap-1">
+                                <button
+                                    class="w-8 h-8 rounded-xl border border-border/60 dark:border-white/10 text-slate/40 hover:bg-white/60 hover:border-olive/30 transition-all duration-200 flex items-center justify-center text-sm disabled:opacity-40"
+                                    disabled>
+                                    ←
+                                </button>
+                                <button
+                                    class="w-8 h-8 rounded-xl bg-gradient-to-r from-olive to-mint text-white flex items-center justify-center text-sm font-medium hover:shadow-lg hover:shadow-olive/20 transition-all duration-200">
+                                    1
+                                </button>
+                                <button
+                                    class="w-8 h-8 rounded-xl border border-border/60 dark:border-white/10 text-slate/40 hover:bg-white/60 hover:border-olive/30 transition-all duration-200 flex items-center justify-center text-sm">
+                                    2
+                                </button>
+                                <button
+                                    class="w-8 h-8 rounded-xl border border-border/60 dark:border-white/10 text-slate/40 hover:bg-white/60 hover:border-olive/30 transition-all duration-200 flex items-center justify-center text-sm">
+                                    3
+                                </button>
+                                <button
+                                    class="w-8 h-8 rounded-xl border border-border/60 dark:border-white/10 text-slate/40 hover:bg-white/60 hover:border-olive/30 transition-all duration-200 flex items-center justify-center text-sm">
+                                    →
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SCRIPTS -->
+    <!-- ============================================ -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="/scripts/global.js"></script>
+    <script src="script/admin.js?v=20260806-components1"></script>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Set page title dynamically
+        document.addEventListener('admin:components-ready', function () { const title = document.querySelector('.greeting h1'); if (title) title.textContent = 'Media Library'; });
+
+        // ==========================================
+        // UPLOAD FUNCTIONALITY
+        // ==========================================
+        const uploadZone = document.getElementById('uploadZone');
+        const fileInput = document.getElementById('fileInput');
+        const browseBtn = document.getElementById('browseBtn');
+        const uploadProgress = document.getElementById('uploadProgress');
+        const progressBar = document.getElementById('progressBar');
+        const progressPercent = document.getElementById('progressPercent');
+        const uploadStatus = document.getElementById('uploadStatus');
+
+        // Browse button
+        browseBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            fileInput.click();
+        });
+
+        // Click on upload zone
+        uploadZone.addEventListener('click', function () {
+            fileInput.click();
+        });
+
+        // File input change
+        fileInput.addEventListener('change', function () {
+            if (this.files.length > 0) {
+                handleFiles(this.files);
+            }
+        });
+
+        // Drag and drop events
+        uploadZone.addEventListener('dragover', function (e) {
+            e.preventDefault();
+            this.classList.add('border-olive', 'bg-olive/5');
+        });
+
+        uploadZone.addEventListener('dragleave', function (e) {
+            e.preventDefault();
+            this.classList.remove('border-olive', 'bg-olive/5');
+        });
+
+        uploadZone.addEventListener('drop', function (e) {
+            e.preventDefault();
+            this.classList.remove('border-olive', 'bg-olive/5');
+            if (e.dataTransfer.files.length > 0) {
+                handleFiles(e.dataTransfer.files);
+            }
+        });
+
+        function handleFiles(files) {
+            // Show progress
+            uploadProgress.classList.remove('hidden');
+            let uploaded = 0;
+            const total = files.length;
+            uploadStatus.textContent = `0 of ${total} files uploaded`;
+
+            // Simulate upload for each file
+            const uploadFile = (index) => {
+                if (index >= total) {
+                    // All done
+                    uploadStatus.textContent = `✅ All ${total} files uploaded successfully!`;
+                    setTimeout(() => {
+                        uploadProgress.classList.add('hidden');
+                        progressBar.style.width = '0%';
+                        progressPercent.textContent = '0%';
+                    }, 3000);
+                    return;
+                }
+
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += Math.random() * 15 + 5;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                        uploaded++;
+                        const percent = Math.round((uploaded / total) * 100);
+                        progressBar.style.width = percent + '%';
+                        progressPercent.textContent = percent + '%';
+                        uploadStatus.textContent = `${uploaded} of ${total} files uploaded`;
+                        uploadFile(index + 1);
+                    } else {
+                        const percent = Math.round(((uploaded + progress / 100) / total) * 100);
+                        progressBar.style.width = percent + '%';
+                        progressPercent.textContent = percent + '%';
+                    }
+                }, 150);
+            };
+
+            uploadFile(0);
+        }
+
+        // ==========================================
+        // COPY URL
+        // ==========================================
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                const url = this.dataset.url;
+                navigator.clipboard.writeText(url).then(() => {
+                    const originalText = this.textContent;
+                    this.textContent = '✓ Copied!';
+                    this.classList.add('text-emerald-500');
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                        this.classList.remove('text-emerald-500');
+                    }, 2000);
+                }).catch(() => {
+                    // Fallback
+                    const textarea = document.createElement('textarea');
+                    textarea.value = url;
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textarea);
+                    const originalText = this.textContent;
+                    this.textContent = '✓ Copied!';
+                    this.classList.add('text-emerald-500');
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                        this.classList.remove('text-emerald-500');
+                    }, 2000);
+                });
+            });
+        });
+
+        // ==========================================
+        // DELETE CONFIRMATION
+        // ==========================================
+        document.querySelectorAll('[title="Delete"]').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                if (confirm('Are you sure you want to delete this media file?')) {
+                    const item = this.closest('.group');
+                    if (item) {
+                        item.style.opacity = '0.5';
+                        item.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

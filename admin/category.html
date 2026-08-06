@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Categories | Masterclass | ETCH Admin</title>
+    <meta name="description" content="Manage Masterclass categories on ETCH." />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/assets/logo.png" type="image/png" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="/style/style.css" />
+
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="style/admin.css?v=20260806-components1" />
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        olive: { DEFAULT: '#99A96A', dark: '#73824C', light: '#E8ECD9' },
+                        ink: '#151515', mist: '#FAFAF7', stone: '#F2F3ED',
+                        slate: '#6C6C6C', muted: '#9A9A9A', border: '#E5E7E2',
+                        success: '#3D6B4F', warning: '#C9A54C', error: '#B25555', info: '#5B8DEF',
+                        cream: '#F5F3EE',
+                        coral: '#FF6B6B',
+                        peach: '#FFB347',
+                        mint: '#4ECDC4',
+                        lavender: '#A78BFA',
+                        blush: '#FF9A9E',
+                    },
+                    fontFamily: {
+                        display: ['"Instrument Serif"', 'serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delay': 'float 6s ease-in-out 2s infinite',
+                        'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
+                        'gradient': 'gradient 8s ease-in-out infinite',
+                        'slide-up': 'slide-up 0.6s ease-out',
+                        'slide-up-delay': 'slide-up 0.6s ease-out 0.2s both',
+                        'bounce-gentle': 'bounce-gentle 2s ease-in-out infinite',
+                        'spin-slow': 'spin 8s linear infinite',
+                        'shimmer': 'shimmer 2s infinite',
+                    },
+                    keyframes: {
+                        float: { '0%,100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-12px)' } },
+                        'pulse-soft': { '0%,100%': { opacity: 1 }, '50%': { opacity: 0.6 } },
+                        gradient: { '0%,100%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' } },
+                        'slide-up': { '0%': { transform: 'translateY(30px)', opacity: 0 }, '100%': { transform: 'translateY(0)', opacity: 1 } },
+                        'bounce-gentle': { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } },
+                        'spin-slow': { '0%': { transform: 'rotate(0deg)' }, '100%': { transform: 'rotate(360deg)' } },
+                        'shimmer': { '0%': { backgroundPosition: '-200% 0' }, '100%': { backgroundPosition: '200% 0' } },
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body>
+
+    <!-- ============================================ -->
+    <!-- ADMIN DASHBOARD - MASTERCLASS CATEGORIES -->
+    <!-- ============================================ -->
+    <div
+        class="admin-dashboard bg-gradient-to-br from-mist via-white to-cream dark:from-ink dark:via-ink dark:to-ink/95">
+
+        <!-- Sidebar -->
+        <div data-component="include" data-src="component/sidebar.html"></div>
+
+        <!-- Main Content -->
+        <main class="admin-dashboard-main relative overflow-hidden">
+
+            <!-- Decorative Background Orbs -->
+            <div class="absolute -top-40 -right-40 w-96 h-96 bg-olive/5 rounded-full blur-3xl animate-float"></div>
+            <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-lavender/5 rounded-full blur-3xl animate-float-delay">
+            </div>
+
+            <!-- Topbar -->
+            <div data-component="include" data-src="component/topbar.html"></div>
+
+            <!-- ========================================== -->
+            <!-- BREADCRUMB -->
+            <!-- ========================================== -->
+            <div class="px-6 md:px-8 pt-4">
+                <nav class="flex items-center gap-2 text-sm text-slate/60 dark:text-gray-500">
+                    <a href="/admin/dashboard.html"
+                        class="hover:text-ink dark:hover:text-white transition-colors duration-200">Dashboard</a>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    <a href="/admin/masterclass/index.html"
+                        class="hover:text-ink dark:hover:text-white transition-colors duration-200">Masterclass</a>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    <span class="text-ink dark:text-white font-medium">Categories</span>
+                </nav>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- PAGE HEADER -->
+            <!-- ========================================== -->
+            <section class="relative px-6 md:px-8 pt-4 pb-2">
+                <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+                    <div class="animate-slide-up">
+                        <div class="flex items-center gap-3 mb-1">
+                            <span
+                                class="inline-flex items-center gap-1.5 px-3 py-1 bg-gradient-to-r from-olive/20 to-lavender/20 text-olive rounded-full text-xs font-medium tracking-wide">
+                                <span class="w-1.5 h-1.5 rounded-full bg-olive animate-pulse"></span>
+                                ✦ Taxonomy Management
+                            </span>
+                            <span class="text-xs text-slate/60 dark:text-gray-500">📂 8 total categories</span>
+                        </div>
+                        <h2 class="font-display text-3xl md:text-4xl font-bold text-ink dark:text-white leading-tight">
+                            <span class="relative inline-block">
+                                <span class="relative z-10">Categories</span>
+                                <span
+                                    class="absolute bottom-1 left-0 w-full h-3 bg-olive/20 dark:bg-olive/30 -z-0"></span>
+                            </span>
+                        </h2>
+                        <p class="text-slate text-sm mt-1 max-w-xl leading-relaxed">
+                            Organize your editorial content with categories. Create, edit, and manage taxonomy for your
+                            articles.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-3 flex-shrink-0 animate-slide-up-delay">
+                        <a href="create.html"
+                            class="group inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-olive to-lavender text-white rounded-2xl font-medium hover:shadow-xl hover:shadow-olive/20 hover:-translate-y-0.5 transition-all duration-300">
+                            <svg class="w-4 h-4 group-hover:rotate-90 transition-transform duration-300" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 4v16m8-8H4" />
+                            </svg>
+                            New Category
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- STATS ROW -->
+            <!-- ========================================== -->
+            <section class="grid grid-cols-2 md:grid-cols-4 gap-4 px-6 md:px-8 py-4">
+
+                <div
+                    class="bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-2xl border border-border/60 dark:border-white/10 p-4 hover:border-olive/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-olive">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-xl font-bold text-ink dark:text-white">8</p>
+                            <p class="text-xs text-slate/60 dark:text-gray-500">Total Categories</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-2xl border border-border/60 dark:border-white/10 p-4 hover:border-olive/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500/20 to-mint/20 flex items-center justify-center text-emerald-500">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-xl font-bold text-emerald-500">6</p>
+                            <p class="text-xs text-slate/60 dark:text-gray-500">Active</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-2xl border border-border/60 dark:border-white/10 p-4 hover:border-olive/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-500/20 to-gray-500/20 flex items-center justify-center text-slate-500">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-xl font-bold text-slate-500">2</p>
+                            <p class="text-xs text-slate/60 dark:text-gray-500">Inactive</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-2xl border border-border/60 dark:border-white/10 p-4 hover:border-olive/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-gradient-to-br from-lavender/20 to-purple-500/20 flex items-center justify-center text-lavender">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-xl font-bold text-lavender">48</p>
+                            <p class="text-xs text-slate/60 dark:text-gray-500">Total Articles</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- SEARCH & FILTER -->
+            <!-- ========================================== -->
+            <section class="px-6 md:px-8 py-2">
+                <div
+                    class="bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 p-4 hover:border-olive/40 hover:shadow-xl transition-all duration-300">
+                    <div class="flex flex-col md:flex-row md:items-center gap-4">
+                        <!-- Search -->
+                        <div class="flex-1 relative">
+                            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate/40" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                            <input type="text" placeholder="Search categories by name or slug..."
+                                class="w-full pl-11 pr-4 py-2.5 bg-white/60 dark:bg-ink/60 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white placeholder:text-slate/40 focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200" />
+                        </div>
+
+                        <!-- Filters -->
+                        <div class="flex flex-wrap items-center gap-3">
+                            <select
+                                class="px-4 py-2.5 bg-white/60 dark:bg-ink/60 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200">
+                                <option value="">All Status</option>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                            <button
+                                class="px-4 py-2.5 bg-gradient-to-r from-olive to-lavender text-white rounded-2xl text-sm font-medium hover:shadow-xl hover:shadow-olive/20 hover:-translate-y-0.5 transition-all duration-300">
+                                Apply
+                            </button>
+                            <button
+                                class="px-4 py-2.5 border border-border/60 dark:border-white/10 text-slate/60 rounded-2xl text-sm font-medium hover:bg-white/60 hover:text-ink dark:hover:text-white transition-all duration-200">
+                                Clear
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- CATEGORIES TABLE -->
+            <!-- ========================================== -->
+            <section class="px-6 md:px-8 py-4 pb-8">
+                <div
+                    class="bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 overflow-hidden hover:border-olive/40 hover:shadow-2xl transition-all duration-500">
+
+                    <!-- Table Header -->
+                    <div
+                        class="flex items-center justify-between px-6 py-4 border-b border-border/60 dark:border-white/10">
+                        <div class="flex items-center gap-3">
+                            <span class="text-sm font-medium text-ink dark:text-white">8 Categories</span>
+                            <span class="text-xs text-slate/60 dark:text-gray-500">Sorted by name</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs text-slate/60 dark:text-gray-500">Showing 1-8</span>
+                        </div>
+                    </div>
+
+                    <!-- Table -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr
+                                    class="border-b border-border/60 dark:border-white/10 bg-gradient-to-r from-mist/30 to-transparent dark:from-ink/30">
+                                    <th
+                                        class="text-left px-6 py-3 text-xs font-semibold text-slate/60 dark:text-gray-500 uppercase tracking-wider w-[30%]">
+                                        Category</th>
+                                    <th
+                                        class="text-left px-6 py-3 text-xs font-semibold text-slate/60 dark:text-gray-500 uppercase tracking-wider">
+                                        Slug</th>
+                                    <th
+                                        class="text-left px-6 py-3 text-xs font-semibold text-slate/60 dark:text-gray-500 uppercase tracking-wider">
+                                        Articles</th>
+                                    <th
+                                        class="text-left px-6 py-3 text-xs font-semibold text-slate/60 dark:text-gray-500 uppercase tracking-wider">
+                                        Status</th>
+                                    <th
+                                        class="text-left px-6 py-3 text-xs font-semibold text-slate/60 dark:text-gray-500 uppercase tracking-wider">
+                                        Created</th>
+                                    <th
+                                        class="text-right px-6 py-3 text-xs font-semibold text-slate/60 dark:text-gray-500 uppercase tracking-wider">
+                                        Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-border/60 dark:divide-white/10">
+
+                                <!-- Category 1 - Screenwriting -->
+                                <tr
+                                    class="group hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-150">
+                                    <td class="px-6 py-3.5">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="w-10 h-10 rounded-xl bg-gradient-to-br from-olive/10 to-emerald-500/10 flex items-center justify-center text-olive flex-shrink-0">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <span
+                                                    class="font-medium text-ink dark:text-white group-hover:text-olive transition-colors duration-200">Screenwriting</span>
+                                                <p class="text-xs text-slate/40">Practical lessons, techniques and
+                                                    insights for writers</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">screenwriting</td>
+                                    <td class="px-6 py-3.5">
+                                        <span
+                                            class="inline-flex items-center gap-1 text-sm font-medium text-ink dark:text-white">12</span>
+                                    </td>
+                                    <td class="px-6 py-3.5">
+                                        <span
+                                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/10 text-emerald-600">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                            Active
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">Jan 15, 2026</td>
+                                    <td class="px-6 py-3.5 text-right">
+                                        <div class="flex items-center justify-end gap-1">
+                                            <a href="#"
+                                                class="p-1.5 text-slate/40 hover:text-olive transition-colors duration-200 rounded-lg hover:bg-olive/10"
+                                                title="Edit">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                </svg>
+                                            </a>
+                                            <button
+                                                class="p-1.5 text-slate/40 hover:text-coral transition-colors duration-200 rounded-lg hover:bg-coral/10"
+                                                title="Delete">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Category 2 - Creative Business -->
+                                <tr
+                                    class="group hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-150">
+                                    <td class="px-6 py-3.5">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500/10 to-mint/10 flex items-center justify-center text-emerald-500 flex-shrink-0">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                        d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <span
+                                                    class="font-medium text-ink dark:text-white group-hover:text-olive transition-colors duration-200">Creative
+                                                    Business</span>
+                                                <p class="text-xs text-slate/40">Pricing, contracts, and creative
+                                                    entrepreneurship</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">creative-business</td>
+                                    <td class="px-6 py-3.5">
+                                        <span
+                                            class="inline-flex items-center gap-1 text-sm font-medium text-ink dark:text-white">8</span>
+                                    </td>
+                                    <td class="px-6 py-3.5">
+                                        <span
+                                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/10 text-emerald-600">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                            Active
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">Feb 3, 2026</td>
+                                    <td class="px-6 py-3.5 text-right">
+                                        <div class="flex items-center justify-end gap-1">
+                                            <a href="#"
+                                                class="p-1.5 text-slate/40 hover:text-olive transition-colors duration-200 rounded-lg hover:bg-olive/10"
+                                                title="Edit">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                </svg>
+                                            </a>
+                                            <button
+                                                class="p-1.5 text-slate/40 hover:text-coral transition-colors duration-200 rounded-lg hover:bg-coral/10"
+                                                title="Delete">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Category 3 - Licensing -->
+                                <tr
+                                    class="group hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-150">
+                                    <td class="px-6 py-3.5">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="w-10 h-10 rounded-xl bg-gradient-to-br from-lavender/10 to-purple-500/10 flex items-center justify-center text-lavender flex-shrink-0">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <span
+                                                    class="font-medium text-ink dark:text-white group-hover:text-olive transition-colors duration-200">Licensing</span>
+                                                <p class="text-xs text-slate/40">Music, IP, and content licensing guides
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">licensing</td>
+                                    <td class="px-6 py-3.5">
+                                        <span
+                                            class="inline-flex items-center gap-1 text-sm font-medium text-ink dark:text-white">5</span>
+                                    </td>
+                                    <td class="px-6 py-3.5">
+                                        <span
+                                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/10 text-emerald-600">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                            Active
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">Mar 12, 2026</td>
+                                    <td class="px-6 py-3.5 text-right">
+                                        <div class="flex items-center justify-end gap-1">
+                                            <a href="#"
+                                                class="p-1.5 text-slate/40 hover:text-olive transition-colors duration-200 rounded-lg hover:bg-olive/10"
+                                                title="Edit">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                </svg>
+                                            </a>
+                                            <button
+                                                class="p-1.5 text-slate/40 hover:text-coral transition-colors duration-200 rounded-lg hover:bg-coral/10"
+                                                title="Delete">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Category 4 - Industry Insights -->
+                                <tr
+                                    class="group hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-150">
+                                    <td class="px-6 py-3.5">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="w-10 h-10 rounded-xl bg-gradient-to-br from-mint/10 to-blue-500/10 flex items-center justify-center text-mint flex-shrink-0">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <span
+                                                    class="font-medium text-ink dark:text-white group-hover:text-olive transition-colors duration-200">Industry
+                                                    Insights</span>
+                                                <p class="text-xs text-slate/40">Film, TV, and media industry analysis
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">industry-insights</td>
+                                    <td class="px-6 py-3.5">
+                                        <span
+                                            class="inline-flex items-center gap-1 text-sm font-medium text-ink dark:text-white">9</span>
+                                    </td>
+                                    <td class="px-6 py-3.5">
+                                        <span
+                                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/10 text-emerald-600">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                            Active
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">Apr 8, 2026</td>
+                                    <td class="px-6 py-3.5 text-right">
+                                        <div class="flex items-center justify-end gap-1">
+                                            <a href="#"
+                                                class="p-1.5 text-slate/40 hover:text-olive transition-colors duration-200 rounded-lg hover:bg-olive/10"
+                                                title="Edit">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                </svg>
+                                            </a>
+                                            <button
+                                                class="p-1.5 text-slate/40 hover:text-coral transition-colors duration-200 rounded-lg hover:bg-coral/10"
+                                                title="Delete">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Category 5 - Career -->
+                                <tr
+                                    class="group hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-150">
+                                    <td class="px-6 py-3.5">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="w-10 h-10 rounded-xl bg-gradient-to-br from-peach/10 to-coral/10 flex items-center justify-center text-peach flex-shrink-0">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                        d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <span
+                                                    class="font-medium text-ink dark:text-white group-hover:text-olive transition-colors duration-200">Career</span>
+                                                <p class="text-xs text-slate/40">Building a sustainable creative career
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">career</td>
+                                    <td class="px-6 py-3.5">
+                                        <span
+                                            class="inline-flex items-center gap-1 text-sm font-medium text-ink dark:text-white">7</span>
+                                    </td>
+                                    <td class="px-6 py-3.5">
+                                        <span
+                                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/10 text-emerald-600">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                            Active
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">May 20, 2026</td>
+                                    <td class="px-6 py-3.5 text-right">
+                                        <div class="flex items-center justify-end gap-1">
+                                            <a href="#"
+                                                class="p-1.5 text-slate/40 hover:text-olive transition-colors duration-200 rounded-lg hover:bg-olive/10"
+                                                title="Edit">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                </svg>
+                                            </a>
+                                            <button
+                                                class="p-1.5 text-slate/40 hover:text-coral transition-colors duration-200 rounded-lg hover:bg-coral/10"
+                                                title="Delete">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Category 6 - Storyboarding (Inactive) -->
+                                <tr
+                                    class="group hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-150 opacity-70">
+                                    <td class="px-6 py-3.5">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-500/10 to-gray-500/10 flex items-center justify-center text-slate-500 flex-shrink-0">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5" d="M7 4v16M17 4v16M3 8h18M3 12h18M3 16h18" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <span
+                                                    class="font-medium text-ink dark:text-white group-hover:text-olive transition-colors duration-200">Storyboarding</span>
+                                                <p class="text-xs text-slate/40">Visual storytelling and storyboard
+                                                    techniques</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">storyboarding</td>
+                                    <td class="px-6 py-3.5">
+                                        <span
+                                            class="inline-flex items-center gap-1 text-sm font-medium text-ink dark:text-white">3</span>
+                                    </td>
+                                    <td class="px-6 py-3.5">
+                                        <span
+                                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-slate-500/10 text-slate-600">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+                                            Inactive
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">Jun 10, 2026</td>
+                                    <td class="px-6 py-3.5 text-right">
+                                        <div class="flex items-center justify-end gap-1">
+                                            <a href="#"
+                                                class="p-1.5 text-slate/40 hover:text-olive transition-colors duration-200 rounded-lg hover:bg-olive/10"
+                                                title="Edit">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                </svg>
+                                            </a>
+                                            <button
+                                                class="p-1.5 text-slate/40 hover:text-coral transition-colors duration-200 rounded-lg hover:bg-coral/10"
+                                                title="Delete">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Category 7 - Marketing (Inactive) -->
+                                <tr
+                                    class="group hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-150 opacity-70">
+                                    <td class="px-6 py-3.5">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-500/10 to-gray-500/10 flex items-center justify-center text-slate-500 flex-shrink-0">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                        d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                        d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <span
+                                                    class="font-medium text-ink dark:text-white group-hover:text-olive transition-colors duration-200">Marketing</span>
+                                                <p class="text-xs text-slate/40">Creative marketing and promotion
+                                                    strategies</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">marketing</td>
+                                    <td class="px-6 py-3.5">
+                                        <span
+                                            class="inline-flex items-center gap-1 text-sm font-medium text-ink dark:text-white">4</span>
+                                    </td>
+                                    <td class="px-6 py-3.5">
+                                        <span
+                                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-slate-500/10 text-slate-600">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+                                            Inactive
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">Jul 22, 2026</td>
+                                    <td class="px-6 py-3.5 text-right">
+                                        <div class="flex items-center justify-end gap-1">
+                                            <a href="#"
+                                                class="p-1.5 text-slate/40 hover:text-olive transition-colors duration-200 rounded-lg hover:bg-olive/10"
+                                                title="Edit">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                </svg>
+                                            </a>
+                                            <button
+                                                class="p-1.5 text-slate/40 hover:text-coral transition-colors duration-200 rounded-lg hover:bg-coral/10"
+                                                title="Delete">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Table Footer -->
+                    <div
+                        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-6 py-4 border-t border-border/60 dark:border-white/10 bg-gradient-to-r from-olive/5 to-transparent">
+                        <span class="text-xs text-slate/60 dark:text-gray-500">Showing 1-7 of 8 categories</span>
+                        <div class="flex items-center gap-3">
+                            <span class="text-xs text-slate/40">Page 1 of 1</span>
+                            <div class="flex items-center gap-1">
+                                <button
+                                    class="w-8 h-8 rounded-xl border border-border/60 dark:border-white/10 text-slate/40 hover:bg-white/60 hover:border-olive/30 transition-all duration-200 flex items-center justify-center text-sm disabled:opacity-40"
+                                    disabled>
+                                    ←
+                                </button>
+                                <button
+                                    class="w-8 h-8 rounded-xl bg-gradient-to-r from-olive to-lavender text-white flex items-center justify-center text-sm font-medium hover:shadow-lg hover:shadow-olive/20 transition-all duration-200">
+                                    1
+                                </button>
+                                <button
+                                    class="w-8 h-8 rounded-xl border border-border/60 dark:border-white/10 text-slate/40 hover:bg-white/60 hover:border-olive/30 transition-all duration-200 flex items-center justify-center text-sm"
+                                    disabled>
+                                    →
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SCRIPTS -->
+    <!-- ============================================ -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="/scripts/global.js"></script>
+    <script src="script/admin.js?v=20260806-components1"></script>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Set page title dynamically
+        document.addEventListener('admin:components-ready', function () { const title = document.querySelector('.greeting h1'); if (title) title.textContent = 'Categories'; });
+    </script>
+</body>
+
+</html>

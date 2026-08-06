@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Messages | ETCH Creator Studio</title>
+    <meta name="description" content="Manage your creative conversations on ETCH." />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/assets/logo.png" type="image/png" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="../style/style.css" />
+
+    <!-- User CSS -->
+    <link rel="stylesheet" href="style/user.css" />
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        olive: { DEFAULT: '#99A96A', dark: '#73824C', light: '#E8ECD9' },
+                        ink: '#151515', mist: '#FAFAF7', stone: '#F2F3ED',
+                        slate: '#6C6C6C', muted: '#9A9A9A', border: '#E5E7E2',
+                        success: '#3D6B4F', warning: '#C9A54C', error: '#B25555', info: '#5B8DEF',
+                        cream: '#F5F3EE',
+                        coral: '#FF6B6B',
+                        peach: '#FFB347',
+                        mint: '#4ECDC4',
+                        lavender: '#A78BFA',
+                        blush: '#FF9A9E',
+                    },
+                    fontFamily: {
+                        display: ['"Instrument Serif"', 'serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delay': 'float 6s ease-in-out 2s infinite',
+                        'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
+                        'gradient': 'gradient 8s ease-in-out infinite',
+                        'slide-up': 'slide-up 0.6s ease-out',
+                        'slide-up-delay': 'slide-up 0.6s ease-out 0.2s both',
+                        'bounce-gentle': 'bounce-gentle 2s ease-in-out infinite',
+                        'wiggle': 'wiggle 0.5s ease-in-out',
+                        'spin-slow': 'spin 8s linear infinite',
+                        'shimmer': 'shimmer 2s infinite',
+                        'typing': 'typing 1.5s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: { '0%,100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-12px)' } },
+                        'pulse-soft': { '0%,100%': { opacity: 1 }, '50%': { opacity: 0.6 } },
+                        gradient: { '0%,100%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' } },
+                        'slide-up': { '0%': { transform: 'translateY(30px)', opacity: 0 }, '100%': { transform: 'translateY(0)', opacity: 1 } },
+                        'bounce-gentle': { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } },
+                        'wiggle': { '0%,100%': { transform: 'rotate(-2deg)' }, '50%': { transform: 'rotate(2deg)' } },
+                        'shimmer': { '0%': { backgroundPosition: '-200% 0' }, '100%': { backgroundPosition: '200% 0' } },
+                        'typing': { '0%,100%': { opacity: 0.4 }, '50%': { opacity: 1 } },
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body>
+
+    <!-- ============================================ -->
+    <!-- USER DASHBOARD - CREATIVE STUDIO EDITION -->
+    <!-- ============================================ -->
+    <div
+        class="user-dashboard bg-gradient-to-br from-mist via-white to-cream dark:from-ink dark:via-ink dark:to-ink/95">
+
+        <!-- Sidebar -->
+        <div id="userSidebar"></div>
+
+        <!-- Main Content -->
+        <main class="user-dashboard-main relative overflow-hidden">
+
+            <!-- Decorative Background Orbs -->
+            <div class="absolute -top-40 -right-40 w-96 h-96 bg-olive/5 rounded-full blur-3xl animate-float"></div>
+            <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-mint/5 rounded-full blur-3xl animate-float-delay">
+            </div>
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-olive/3 to-mint/3 rounded-full blur-3xl animate-gradient">
+            </div>
+
+            <!-- Topbar -->
+            <div id="userTopbar"></div>
+
+            <!-- ========================================== -->
+            <!-- CREATIVE MESSAGES HEADER -->
+            <!-- ========================================== -->
+            <section class="relative px-6 md:px-8 pt-6 pb-2">
+                <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+                    <div class="animate-slide-up">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span
+                                class="inline-flex items-center gap-1.5 px-3 py-1 bg-gradient-to-r from-olive/20 to-mint/20 text-olive rounded-full text-xs font-medium tracking-wide">
+                                <span class="w-1.5 h-1.5 rounded-full bg-olive animate-pulse"></span>
+                                ✦ Inbox Studio
+                            </span>
+                            <span class="text-xs text-slate/60 dark:text-gray-500">💬 6 unread messages</span>
+                        </div>
+                        <h2 class="font-display text-4xl md:text-5xl font-bold text-ink dark:text-white leading-tight">
+                            Your <span class="relative inline-block">
+                                <span class="relative z-10">conversations</span>
+                                <span
+                                    class="absolute bottom-1 left-0 w-full h-3 bg-olive/20 dark:bg-olive/30 -z-0"></span>
+                            </span>
+                        </h2>
+                        <p class="text-slate text-base mt-2 max-w-xl leading-relaxed">
+                            Stay connected with buyers, collaborators, and your creative network.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-3 flex-shrink-0 animate-slide-up-delay">
+                        <button
+                            class="group inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-olive to-mint text-white rounded-2xl font-medium hover:shadow-xl hover:shadow-olive/20 hover:-translate-y-0.5 transition-all duration-300">
+                            <svg class="w-4 h-4 group-hover:rotate-90 transition-transform duration-300" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 4v16m8-8H4" />
+                            </svg>
+                            New Message
+                        </button>
+                        <button
+                            class="inline-flex items-center gap-2 px-6 py-3 border-2 border-dashed border-border dark:border-white/10 text-ink dark:text-white rounded-2xl font-medium hover:bg-white/60 hover:border-olive/30 hover:-translate-y-0.5 transition-all duration-300">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            Mark all read
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- PLAYFUL MESSAGE STATS -->
+            <!-- ========================================== -->
+            <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-6 md:px-8 py-6">
+
+                <!-- Card 1 - Total Messages -->
+                <div
+                    class="group relative bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 p-6 hover:border-olive/40 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+                    <div
+                        class="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-olive/20 to-emerald-500/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700">
+                    </div>
+                    <div class="relative flex items-start justify-between">
+                        <div>
+                            <span class="text-sm text-slate/70 dark:text-gray-400 font-medium">Total Messages</span>
+                            <div class="text-3xl font-bold text-ink dark:text-white mt-1">48</div>
+                        </div>
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-olive group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="relative flex items-center gap-2 mt-3">
+                        <span
+                            class="inline-flex items-center gap-1 text-xs font-medium text-emerald-500 bg-emerald-500/10 px-2.5 py-1 rounded-full">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                            </svg>
+                            +12
+                        </span>
+                        <span class="text-xs text-slate/60 dark:text-gray-500">this week</span>
+                    </div>
+                    <div class="relative mt-4 h-1.5 w-full bg-border/50 dark:bg-white/5 rounded-full overflow-hidden">
+                        <div
+                            class="h-full w-3/4 bg-gradient-to-r from-olive to-emerald-500 rounded-full group-hover:w-full transition-all duration-1000">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 - Unread -->
+                <div
+                    class="group relative bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 p-6 hover:border-olive/40 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+                    <div
+                        class="absolute -bottom-10 -left-10 w-32 h-32 bg-gradient-to-br from-mint/20 to-blue-500/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700">
+                    </div>
+                    <div class="relative flex items-start justify-between">
+                        <div>
+                            <span class="text-sm text-slate/70 dark:text-gray-400 font-medium">Unread</span>
+                            <div class="text-3xl font-bold text-ink dark:text-white mt-1">6</div>
+                        </div>
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-gradient-to-br from-mint/20 to-blue-500/20 flex items-center justify-center text-mint group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="relative flex items-center gap-2 mt-3">
+                        <span
+                            class="inline-flex items-center gap-1 text-xs font-medium text-coral bg-coral/10 px-2.5 py-1 rounded-full animate-pulse-soft">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                            Need attention
+                        </span>
+                    </div>
+                    <div class="relative flex items-center gap-3 text-xs text-slate/60 dark:text-gray-500 mt-2">
+                        <span>🔔 3 urgent</span>
+                        <span>·</span>
+                        <span>⏳ 3 from today</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 - Active Conversations -->
+                <div
+                    class="group relative bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 p-6 hover:border-olive/40 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+                    <div
+                        class="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-peach/20 to-coral/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700">
+                    </div>
+                    <div class="relative flex items-start justify-between">
+                        <div>
+                            <span class="text-sm text-slate/70 dark:text-gray-400 font-medium">Active
+                                Conversations</span>
+                            <div class="text-3xl font-bold text-ink dark:text-white mt-1">8</div>
+                        </div>
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-gradient-to-br from-peach/20 to-coral/20 flex items-center justify-center text-peach group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="relative flex items-center gap-2 mt-3">
+                        <span
+                            class="inline-flex items-center gap-1 text-xs font-medium text-emerald-500 bg-emerald-500/10 px-2.5 py-1 rounded-full">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                            </svg>
+                            Ongoing
+                        </span>
+                    </div>
+                    <div class="relative flex items-center gap-3 text-xs text-slate/60 dark:text-gray-500 mt-2">
+                        <span>💬 4 today</span>
+                        <span>·</span>
+                        <span>📝 2 pending replies</span>
+                    </div>
+                </div>
+
+                <!-- Card 4 - Response Rate -->
+                <div
+                    class="group relative bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 p-6 hover:border-olive/40 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+                    <div
+                        class="absolute -bottom-10 -left-10 w-32 h-32 bg-gradient-to-br from-lavender/20 to-purple-500/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700">
+                    </div>
+                    <div class="relative flex items-start justify-between">
+                        <div>
+                            <span class="text-sm text-slate/70 dark:text-gray-400 font-medium">Response Rate</span>
+                            <div class="text-3xl font-bold text-ink dark:text-white mt-1">94%</div>
+                        </div>
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-gradient-to-br from-lavender/20 to-purple-500/20 flex items-center justify-center text-lavender group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="relative flex items-center gap-2 mt-3">
+                        <span
+                            class="inline-flex items-center gap-1 text-xs font-medium text-emerald-500 bg-emerald-500/10 px-2.5 py-1 rounded-full">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                            </svg>
+                            +3%
+                        </span>
+                        <span class="text-xs text-slate/60 dark:text-gray-500">this month</span>
+                    </div>
+                    <div class="relative flex items-center gap-3 text-xs text-slate/60 dark:text-gray-500 mt-2">
+                        <span>⚡ Avg. response: <strong class="text-ink dark:text-white">2.4h</strong></span>
+                        <span>·</span>
+                        <span>🏆 Above average</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- MESSAGES LAYOUT - CREATIVE INBOX -->
+            <!-- ========================================== -->
+            <section class="px-6 md:px-8 pb-8">
+                <div
+                    class="bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 overflow-hidden hover:border-olive/40 hover:shadow-2xl transition-all duration-500">
+
+                    <div class="flex flex-col lg:flex-row h-[600px] lg:h-[650px]">
+
+                        <!-- ========================================== -->
+                        <!-- CONVERSATION LIST -->
+                        <!-- ========================================== -->
+                        <div
+                            class="w-full lg:w-80 xl:w-96 flex-shrink-0 border-b lg:border-b-0 lg:border-r border-border/60 dark:border-white/10 flex flex-col">
+
+                            <!-- List Header -->
+                            <div
+                                class="flex items-center justify-between px-5 py-4 border-b border-border/60 dark:border-white/10">
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 rounded-2xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-olive">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                        </svg>
+                                    </div>
+                                    <h3 class="font-display text-lg font-bold text-ink dark:text-white">Conversations
+                                    </h3>
+                                </div>
+                                <span
+                                    class="text-xs font-medium text-olive bg-gradient-to-r from-olive/10 to-emerald-500/10 px-2.5 py-1 rounded-full">12</span>
+                            </div>
+
+                            <!-- Search -->
+                            <div class="px-4 py-3 border-b border-border/60 dark:border-white/10">
+                                <div class="relative">
+                                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate/40"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg>
+                                    <input type="text" placeholder="Search conversations..."
+                                        class="w-full pl-9 pr-4 py-2.5 bg-white/60 dark:bg-ink/60 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white placeholder:text-slate/40 focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200" />
+                                </div>
+                            </div>
+
+                            <!-- Conversation Items -->
+                            <div class="flex-1 overflow-y-auto divide-y divide-border/60 dark:divide-white/10">
+
+                                <!-- Item 1 - Active -->
+                                <div
+                                    class="conversation-item active bg-gradient-to-r from-olive/5 to-transparent border-l-4 border-olive px-5 py-4 hover:bg-gradient-to-r hover:from-olive/10 hover:to-transparent transition-all duration-200 cursor-pointer">
+                                    <div class="flex items-start gap-3">
+                                        <div
+                                            class="avatar relative flex-shrink-0 w-11 h-11 rounded-2xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-sm font-bold text-olive">
+                                            JM
+                                            <span
+                                                class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 rounded-full border-2 border-white"></span>
+                                        </div>
+                                        <div class="info flex-1 min-w-0">
+                                            <div class="name flex items-center gap-2">
+                                                <strong class="text-ink dark:text-white font-semibold">Jane M.</strong>
+                                                <span class="w-2 h-2 rounded-full bg-olive animate-pulse"></span>
+                                            </div>
+                                            <div class="preview text-sm text-slate/70 dark:text-gray-400 truncate">Hey!
+                                                I'm interested in licensing Midnight Sun...</div>
+                                            <div class="flex items-center gap-2 mt-1">
+                                                <span class="text-[10px] text-slate/40">Studio A</span>
+                                                <span class="w-1 h-1 rounded-full bg-border"></span>
+                                                <span
+                                                    class="text-[10px] font-medium text-olive bg-gradient-to-r from-olive/10 to-emerald-500/10 px-1.5 py-0.5 rounded">Licensing</span>
+                                            </div>
+                                        </div>
+                                        <span class="time text-[10px] text-slate/40 flex-shrink-0">2m</span>
+                                    </div>
+                                </div>
+
+                                <!-- Item 2 -->
+                                <div
+                                    class="conversation-item px-5 py-4 hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-all duration-200 cursor-pointer">
+                                    <div class="flex items-start gap-3">
+                                        <div
+                                            class="avatar flex-shrink-0 w-11 h-11 rounded-2xl overflow-hidden border-2 border-border/60">
+                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80"
+                                                alt="Avatar" class="w-full h-full object-cover" />
+                                        </div>
+                                        <div class="info flex-1 min-w-0">
+                                            <div class="name flex items-center gap-2">
+                                                <strong class="text-ink dark:text-white font-semibold">Michael
+                                                    R.</strong>
+                                            </div>
+                                            <div class="preview text-sm text-slate/70 dark:text-gray-400 truncate">
+                                                Thanks for the quick response! Let's schedule a...</div>
+                                            <div class="flex items-center gap-2 mt-1">
+                                                <span class="text-[10px] text-slate/40">Production Co.</span>
+                                                <span class="w-1 h-1 rounded-full bg-border"></span>
+                                                <span class="text-[10px] text-slate/40">Deal</span>
+                                            </div>
+                                        </div>
+                                        <span class="time text-[10px] text-slate/40 flex-shrink-0">1h</span>
+                                    </div>
+                                </div>
+
+                                <!-- Item 3 - Unread -->
+                                <div
+                                    class="conversation-item px-5 py-4 hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-all duration-200 cursor-pointer bg-gradient-to-r from-mint/5 to-transparent">
+                                    <div class="flex items-start gap-3">
+                                        <div
+                                            class="avatar relative flex-shrink-0 w-11 h-11 rounded-2xl bg-gradient-to-br from-mint/20 to-blue-500/20 flex items-center justify-center text-sm font-bold text-mint">
+                                            SA
+                                            <span
+                                                class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-coral rounded-full border-2 border-white animate-pulse"></span>
+                                        </div>
+                                        <div class="info flex-1 min-w-0">
+                                            <div class="name flex items-center gap-2">
+                                                <strong class="text-ink dark:text-white font-semibold">Sarah A.</strong>
+                                                <span
+                                                    class="inline-flex items-center gap-1 text-[10px] font-medium text-coral bg-coral/10 px-2 py-0.5 rounded-full">
+                                                    <span class="w-1 h-1 rounded-full bg-coral animate-pulse"></span>
+                                                    Unread
+                                                </span>
+                                            </div>
+                                            <div
+                                                class="preview text-sm text-slate/70 dark:text-gray-400 truncate font-medium">
+                                                I've reviewed the pitch deck. A few questions...</div>
+                                            <div class="flex items-center gap-2 mt-1">
+                                                <span class="text-[10px] text-slate/40">Agency X</span>
+                                                <span class="w-1 h-1 rounded-full bg-border"></span>
+                                                <span
+                                                    class="text-[10px] font-medium text-mint bg-gradient-to-r from-mint/10 to-blue-500/10 px-1.5 py-0.5 rounded">Review</span>
+                                            </div>
+                                        </div>
+                                        <span class="time text-[10px] text-slate/40 flex-shrink-0">3h</span>
+                                    </div>
+                                </div>
+
+                                <!-- Item 4 -->
+                                <div
+                                    class="conversation-item px-5 py-4 hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-all duration-200 cursor-pointer">
+                                    <div class="flex items-start gap-3">
+                                        <div
+                                            class="avatar flex-shrink-0 w-11 h-11 rounded-2xl overflow-hidden border-2 border-border/60">
+                                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=100&q=80"
+                                                alt="Avatar" class="w-full h-full object-cover" />
+                                        </div>
+                                        <div class="info flex-1 min-w-0">
+                                            <div class="name flex items-center gap-2">
+                                                <strong class="text-ink dark:text-white font-semibold">David K.</strong>
+                                            </div>
+                                            <div class="preview text-sm text-slate/70 dark:text-gray-400 truncate">The
+                                                deal structure looks good. Let's move forward...</div>
+                                            <div class="flex items-center gap-2 mt-1">
+                                                <span class="text-[10px] text-slate/40">Game Studio Z</span>
+                                                <span class="w-1 h-1 rounded-full bg-border"></span>
+                                                <span
+                                                    class="text-[10px] text-emerald-500 bg-emerald-500/10 px-1.5 py-0.5 rounded">Negotiating</span>
+                                            </div>
+                                        </div>
+                                        <span class="time text-[10px] text-slate/40 flex-shrink-0">1d</span>
+                                    </div>
+                                </div>
+
+                                <!-- Item 5 -->
+                                <div
+                                    class="conversation-item px-5 py-4 hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-all duration-200 cursor-pointer">
+                                    <div class="flex items-start gap-3">
+                                        <div
+                                            class="avatar flex-shrink-0 w-11 h-11 rounded-2xl bg-gradient-to-br from-peach/20 to-coral/20 flex items-center justify-center text-sm font-bold text-peach">
+                                            AL
+                                        </div>
+                                        <div class="info flex-1 min-w-0">
+                                            <div class="name flex items-center gap-2">
+                                                <strong class="text-ink dark:text-white font-semibold">Amara L.</strong>
+                                            </div>
+                                            <div class="preview text-sm text-slate/70 dark:text-gray-400 truncate">Do
+                                                you have more samples from the Rainline...</div>
+                                            <div class="flex items-center gap-2 mt-1">
+                                                <span class="text-[10px] text-slate/40">Brand Y</span>
+                                                <span class="w-1 h-1 rounded-full bg-border"></span>
+                                                <span class="text-[10px] text-slate/40">Music</span>
+                                            </div>
+                                        </div>
+                                        <span class="time text-[10px] text-slate/40 flex-shrink-0">2d</span>
+                                    </div>
+                                </div>
+
+                                <!-- Item 6 -->
+                                <div
+                                    class="conversation-item px-5 py-4 hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-all duration-200 cursor-pointer">
+                                    <div class="flex items-start gap-3">
+                                        <div
+                                            class="avatar flex-shrink-0 w-11 h-11 rounded-2xl bg-gradient-to-br from-lavender/20 to-purple-500/20 flex items-center justify-center text-sm font-bold text-lavender">
+                                            TR
+                                        </div>
+                                        <div class="info flex-1 min-w-0">
+                                            <div class="name flex items-center gap-2">
+                                                <strong class="text-ink dark:text-white font-semibold">Tunde R.</strong>
+                                            </div>
+                                            <div class="preview text-sm text-slate/70 dark:text-gray-400 truncate">Great
+                                                work on the Frames of Lagos project! We'd...</div>
+                                            <div class="flex items-center gap-2 mt-1">
+                                                <span class="text-[10px] text-slate/40">Creative Agency</span>
+                                                <span class="w-1 h-1 rounded-full bg-border"></span>
+                                                <span class="text-[10px] text-slate/40">Storyboard</span>
+                                            </div>
+                                        </div>
+                                        <span class="time text-[10px] text-slate/40 flex-shrink-0">3d</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ========================================== -->
+                        <!-- MESSAGE VIEW -->
+                        <!-- ========================================== -->
+                        <div class="message-view flex-1 flex flex-col bg-white/30 dark:bg-ink/30">
+
+                            <!-- View Header -->
+                            <div
+                                class="view-header flex items-center justify-between px-5 py-4 border-b border-border/60 dark:border-white/10">
+                                <div class="recipient flex items-center gap-3">
+                                    <div
+                                        class="avatar w-10 h-10 rounded-2xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-sm font-bold text-olive">
+                                        JM
+                                    </div>
+                                    <div class="info">
+                                        <strong class="text-ink dark:text-white font-semibold block text-sm">Jane
+                                            M.</strong>
+                                        <small class="text-xs text-slate/60 dark:text-gray-500">Studio A • Licensing
+                                            Inquiry</small>
+                                    </div>
+                                </div>
+                                <div class="actions flex items-center gap-1">
+                                    <button
+                                        class="p-2 text-slate/40 hover:text-ink dark:hover:text-white rounded-xl hover:bg-white/60 transition-all duration-200"
+                                        title="Archive">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                                        </svg>
+                                    </button>
+                                    <button
+                                        class="p-2 text-slate/40 hover:text-peach rounded-xl hover:bg-white/60 transition-all duration-200"
+                                        title="Flag">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                d="M5 5v16M5 5h10a1 1 0 011 1v4a1 1 0 01-1 1H5m14 0V5a1 1 0 00-1-1H5" />
+                                        </svg>
+                                    </button>
+                                    <button
+                                        class="p-2 text-slate/40 hover:text-coral rounded-xl hover:bg-white/60 transition-all duration-200"
+                                        title="Delete">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Messages Thread -->
+                            <div class="messages-thread flex-1 overflow-y-auto px-5 py-4 space-y-4">
+
+                                <!-- Message 1 - Received -->
+                                <div class="message-bubble received flex items-start gap-3 animate-slide-up">
+                                    <div
+                                        class="avatar flex-shrink-0 w-8 h-8 rounded-xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-xs font-bold text-olive">
+                                        JM
+                                    </div>
+                                    <div class="flex-1">
+                                        <div
+                                            class="bubble bg-white dark:bg-ink border border-border/60 dark:border-white/10 rounded-2xl rounded-tl-none px-4 py-3 max-w-lg">
+                                            <p class="text-sm text-ink dark:text-white leading-relaxed">
+                                                Hey! I'm interested in licensing Midnight Sun Pilot for a project we're
+                                                developing. Do you have a pitch deck or more details available?
+                                            </p>
+                                        </div>
+                                        <span class="time text-[10px] text-slate/40 mt-1 block">Today, 10:23 AM</span>
+                                    </div>
+                                </div>
+
+                                <!-- Message 2 - Sent -->
+                                <div class="message-bubble sent flex items-start gap-3 flex-row-reverse animate-slide-up"
+                                    style="animation-delay: 0.1s;">
+                                    <div
+                                        class="avatar flex-shrink-0 w-8 h-8 rounded-xl bg-gradient-to-r from-olive to-emerald-500 flex items-center justify-center text-xs font-bold text-white">
+                                        DK
+                                    </div>
+                                    <div class="flex-1 flex flex-col items-end">
+                                        <div
+                                            class="bubble bg-gradient-to-r from-olive to-emerald-500 text-white rounded-2xl rounded-tr-none px-4 py-3 max-w-lg">
+                                            <p class="text-sm leading-relaxed">
+                                                Hi Jane! Thanks for reaching out. Yes, I have a full pitch deck and
+                                                script sample ready for review. Would you like me to send those over?
+                                            </p>
+                                        </div>
+                                        <span class="time text-[10px] text-slate/40 mt-1 block">Today, 10:45 AM</span>
+                                    </div>
+                                </div>
+
+                                <!-- Message 3 - Received -->
+                                <div class="message-bubble received flex items-start gap-3 animate-slide-up"
+                                    style="animation-delay: 0.2s;">
+                                    <div
+                                        class="avatar flex-shrink-0 w-8 h-8 rounded-xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-xs font-bold text-olive">
+                                        JM
+                                    </div>
+                                    <div class="flex-1">
+                                        <div
+                                            class="bubble bg-white dark:bg-ink border border-border/60 dark:border-white/10 rounded-2xl rounded-tl-none px-4 py-3 max-w-lg">
+                                            <p class="text-sm text-ink dark:text-white leading-relaxed">
+                                                That would be great! We're especially interested in the exclusive option
+                                                terms. Could you also share what the typical timeline looks like?
+                                            </p>
+                                        </div>
+                                        <span class="time text-[10px] text-slate/40 mt-1 block">Today, 11:02 AM</span>
+                                    </div>
+                                </div>
+
+                                <!-- Message 4 - Sent -->
+                                <div class="message-bubble sent flex items-start gap-3 flex-row-reverse animate-slide-up"
+                                    style="animation-delay: 0.3s;">
+                                    <div
+                                        class="avatar flex-shrink-0 w-8 h-8 rounded-xl bg-gradient-to-r from-olive to-emerald-500 flex items-center justify-center text-xs font-bold text-white">
+                                        DK
+                                    </div>
+                                    <div class="flex-1 flex flex-col items-end">
+                                        <div
+                                            class="bubble bg-gradient-to-r from-olive to-emerald-500 text-white rounded-2xl rounded-tr-none px-4 py-3 max-w-lg">
+                                            <p class="text-sm leading-relaxed">
+                                                Absolutely. For exclusive options, we typically work with a 60-day
+                                                window for review. Happy to discuss specific terms based on your
+                                                timeline.
+                                            </p>
+                                        </div>
+                                        <span class="time text-[10px] text-slate/40 mt-1 block">Today, 11:15 AM</span>
+                                    </div>
+                                </div>
+
+                                <!-- Typing Indicator -->
+                                <div class="flex items-center gap-3 px-4 py-2 animate-slide-up"
+                                    style="animation-delay: 0.4s;">
+                                    <div
+                                        class="avatar flex-shrink-0 w-8 h-8 rounded-xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-xs font-bold text-olive">
+                                        JM
+                                    </div>
+                                    <div
+                                        class="flex items-center gap-1.5 bg-white dark:bg-ink border border-border/60 dark:border-white/10 rounded-2xl px-4 py-2.5">
+                                        <span class="w-2 h-2 rounded-full bg-slate/40 animate-typing"
+                                            style="animation-delay: 0s;"></span>
+                                        <span class="w-2 h-2 rounded-full bg-slate/40 animate-typing"
+                                            style="animation-delay: 0.3s;"></span>
+                                        <span class="w-2 h-2 rounded-full bg-slate/40 animate-typing"
+                                            style="animation-delay: 0.6s;"></span>
+                                        <span class="text-xs text-slate/40 ml-1">Typing...</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Message Input -->
+                            <div
+                                class="message-input flex items-center gap-3 px-5 py-4 border-t border-border/60 dark:border-white/10 bg-white/50 dark:bg-ink/50">
+                                <button
+                                    class="p-2 text-slate/40 hover:text-ink dark:hover:text-white rounded-xl hover:bg-white/60 transition-all duration-200">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                            d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                                    </svg>
+                                </button>
+                                <input type="text" placeholder="Type your message..."
+                                    class="flex-1 px-4 py-2.5 bg-white/60 dark:bg-ink/60 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white placeholder:text-slate/40 focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200" />
+                                <button
+                                    class="send-btn inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-olive to-emerald-500 text-white rounded-2xl font-medium hover:shadow-xl hover:shadow-olive/20 hover:-translate-y-0.5 transition-all duration-300 group">
+                                    <span>Send</span>
+                                    <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- CREATIVE INSIGHT BAR -->
+            <!-- ========================================== -->
+            <section class="mx-6 md:mx-8 pb-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                    <!-- Activity Chart -->
+                    <div
+                        class="bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 p-6 hover:border-olive/40 hover:shadow-2xl transition-all duration-500">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-2xl">📈</span>
+                            <div>
+                                <h3 class="text-sm font-semibold text-ink dark:text-white">Weekly Activity</h3>
+                                <p class="text-xs text-slate/60 dark:text-gray-500">Your messaging engagement</p>
+                            </div>
+                        </div>
+                        <div class="flex items-end gap-3 h-24">
+                            <div class="flex-1 flex flex-col items-center gap-1.5">
+                                <div class="w-full bg-olive/20 rounded-sm transition-all duration-300 hover:bg-olive/40"
+                                    style="height: 40px;"></div>
+                                <span class="text-[10px] text-slate/40">Mon</span>
+                            </div>
+                            <div class="flex-1 flex flex-col items-center gap-1.5">
+                                <div class="w-full bg-olive/30 rounded-sm transition-all duration-300 hover:bg-olive/50"
+                                    style="height: 55px;"></div>
+                                <span class="text-[10px] text-slate/40">Tue</span>
+                            </div>
+                            <div class="flex-1 flex flex-col items-center gap-1.5">
+                                <div class="w-full bg-olive/50 rounded-sm transition-all duration-300 hover:bg-olive/70"
+                                    style="height: 75px;"></div>
+                                <span class="text-[10px] text-slate/40">Wed</span>
+                            </div>
+                            <div class="flex-1 flex flex-col items-center gap-1.5">
+                                <div class="w-full bg-olive/70 rounded-sm transition-all duration-300 hover:bg-olive/90"
+                                    style="height: 60px;"></div>
+                                <span class="text-[10px] text-slate/40">Thu</span>
+                            </div>
+                            <div class="flex-1 flex flex-col items-center gap-1.5">
+                                <div class="w-full bg-olive rounded-sm transition-all duration-300 hover:bg-olive-dark"
+                                    style="height: 90px;"></div>
+                                <span class="text-[10px] font-medium text-olive">Fri</span>
+                            </div>
+                            <div class="flex-1 flex flex-col items-center gap-1.5">
+                                <div class="w-full bg-olive/15 rounded-sm transition-all duration-300 hover:bg-olive/25"
+                                    style="height: 25px;"></div>
+                                <span class="text-[10px] text-slate/40">Sat</span>
+                            </div>
+                            <div class="flex-1 flex flex-col items-center gap-1.5">
+                                <div class="w-full bg-olive/10 rounded-sm transition-all duration-300 hover:bg-olive/20"
+                                    style="height: 20px;"></div>
+                                <span class="text-[10px] text-slate/40">Sun</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 flex items-center justify-between text-xs text-slate/60 dark:text-gray-500">
+                            <span>💬 48 messages this week</span>
+                            <span class="text-emerald-500">↑ 12% from last week</span>
+                        </div>
+                    </div>
+
+                    <!-- Quick Action -->
+                    <div
+                        class="bg-gradient-to-r from-olive/10 via-mint/5 to-olive/10 rounded-3xl border border-olive/10 p-6 backdrop-blur-sm">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <span class="text-3xl animate-bounce-gentle">⚡</span>
+                                <h3 class="text-sm font-semibold text-ink dark:text-white mt-2">Quick response needed
+                                </h3>
+                                <p class="text-sm text-slate/70 dark:text-gray-400 mt-1 max-w-xs">
+                                    You have <strong class="text-ink dark:text-white">3 unread</strong> messages that
+                                    need your attention.
+                                </p>
+                                <button
+                                    class="mt-4 inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium bg-gradient-to-r from-olive to-emerald-500 text-white rounded-full hover:shadow-xl hover:shadow-olive/20 hover:-translate-y-0.5 transition-all duration-300">
+                                    View unread
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <span
+                                class="flex-shrink-0 w-14 h-14 rounded-3xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-3xl animate-bounce-gentle">🔔</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SCRIPTS -->
+    <!-- ============================================ -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Supabase Client Library -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+    <!-- Supabase Config - ⚠️ REPLACE with your actual values -->
+    <script>
+        window.__ETCH_SUPABASE__ = {
+            url: 'https://YOUR_PROJECT_ID.supabase.co',
+            anonKey: 'YOUR_ANON_KEY',
+        };
+    </script>
+
+    <!-- ETCH Supabase Helper -->
+    <script src="../script/supabase.js"></script>
+
+    <!-- Auth Guard - Must load before other scripts -->
+    <script src="../script/user-auth-guard.js"></script>
+
+    <script src="../script/script.js"></script>
+    <script src="script/user.js"></script>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Set page title dynamically
+        document.querySelector('.greeting h1').textContent = 'Messages';
+
+        // Simulate conversation selection (for demo)
+        document.querySelectorAll('.conversation-item').forEach(item => {
+            item.addEventListener('click', function () {
+                // Remove active state from all
+                document.querySelectorAll('.conversation-item').forEach(i => {
+                    i.classList.remove('active', 'bg-gradient-to-r', 'from-olive/5', 'to-transparent', 'border-l-4', 'border-olive');
+                });
+                // Add active state to clicked
+                this.classList.add('active', 'bg-gradient-to-r', 'from-olive/5', 'to-transparent', 'border-l-4', 'border-olive');
+            });
+        });
+    </script>
+</body>
+
+</html>

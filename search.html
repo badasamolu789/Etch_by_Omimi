@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Results | ETCH — Premium Creative Marketplace</title>
+    <meta name="description"
+        content="Search results for creative assets on ETCH. Find scripts, storyboards, music, design, and more." />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/assets/logo.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/assets/logo.png" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style/style.css" />
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        olive: {
+                            DEFAULT: '#99A96A',
+                            dark: '#73824C',
+                            light: '#E8ECD9',
+                        },
+                        ink: '#151515',
+                        mist: '#FAFAF7',
+                        stone: '#F2F3ED',
+                        slate: '#6C6C6C',
+                        muted: '#9A9A9A',
+                        border: '#E5E7E2',
+                        success: '#3D6B4F',
+                        warning: '#C9A54C',
+                        error: '#B25555',
+                        info: '#5B8DEF',
+                    },
+                    fontFamily: {
+                        display: ['"Instrument Serif"', 'serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delay': 'float 6s ease-in-out 2s infinite',
+                        'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
+                        'gradient': 'gradient 8s ease-in-out infinite',
+                        'slide-up': 'slide-up 0.6s ease-out',
+                        'slide-up-delay': 'slide-up 0.6s ease-out 0.2s both',
+                        'slide-up-delay-2': 'slide-up 0.6s ease-out 0.4s both',
+                        'bounce-gentle': 'bounce-gentle 2s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        },
+                        'pulse-soft': {
+                            '0%, 100%': { opacity: 1 },
+                            '50%': { opacity: 0.6 },
+                        },
+                        gradient: {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                        },
+                        'slide-up': {
+                            '0%': { transform: 'translateY(30px)', opacity: 0 },
+                            '100%': { transform: 'translateY(0)', opacity: 1 },
+                        },
+                        'bounce-gentle': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-6px)' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body>
+
+    <!-- ============================================ -->
+    <!-- SHARED HEADER (loaded from component/header.html) -->
+    <!-- ============================================ -->
+    <div id="header"></div>
+
+    <!-- ============================================ -->
+    <!-- SEARCH RESULTS HEADER -->
+    <!-- ============================================ -->
+    <section class="relative pt-28 pb-8 md:pt-32 md:pb-12 overflow-hidden">
+        <div class="absolute inset-0 -z-10">
+            <div
+                class="absolute inset-0 bg-gradient-to-br from-mist via-white to-olive/5 dark:from-ink dark:via-ink dark:to-olive/10">
+            </div>
+            <div class="absolute top-20 right-10 w-72 h-72 bg-olive/10 rounded-full blur-3xl animate-float"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="animate-slide-up">
+                <div class="flex items-center gap-3 mb-3">
+                    <span
+                        class="inline-flex items-center gap-1.5 px-3 py-1 bg-olive/10 text-olive rounded-full text-xs font-medium tracking-wide">
+                        <span class="w-1.5 h-1.5 rounded-full bg-olive animate-pulse"></span>
+                        Search Results
+                    </span>
+                    <span class="text-xs text-slate dark:text-gray-400">✦ <span id="resultCount">42</span> results
+                        found</span>
+                </div>
+                <h1 class="font-display text-3xl md:text-4xl font-bold text-ink dark:text-white">
+                    Results for <span class="text-olive" id="searchQueryDisplay">"noir thriller"</span>
+                </h1>
+                <p class="text-slate dark:text-gray-400 mt-2" id="resultSummary">Found 42 creative assets matching your
+                    search</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- MAIN CONTENT WITH SIDEBAR -->
+    <!-- ============================================ -->
+    <section class="pb-12 md:pb-16 bg-white dark:bg-ink transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-8">
+
+                <!-- ========================================== -->
+                <!-- SIDEBAR - FILTERS -->
+                <!-- ========================================== -->
+                <aside class="lg:w-72 xl:w-80 flex-shrink-0">
+                    <div class="sticky top-24 space-y-6">
+
+                        <!-- Filter Header -->
+                        <div class="flex items-center justify-between">
+                            <h2 class="font-semibold text-ink dark:text-white">Filters</h2>
+                            <button
+                                class="text-sm text-olive hover:text-olive-dark transition-colors duration-200">Clear
+                                all</button>
+                        </div>
+
+                        <!-- Category Filter -->
+                        <div>
+                            <h3 class="text-sm font-medium text-ink dark:text-white mb-3">Category</h3>
+                            <div class="space-y-2">
+                                <label
+                                    class="flex items-center gap-3 text-sm text-slate dark:text-gray-400 hover:text-ink dark:hover:text-white cursor-pointer transition-colors duration-200">
+                                    <input type="checkbox"
+                                        class="w-4 h-4 rounded border-border dark:border-white/10 text-olive focus:ring-olive focus:ring-2 focus:ring-offset-0"
+                                        checked />
+                                    All Categories
+                                    <span class="ml-auto text-xs text-slate/40">42</span>
+                                </label>
+                                <label
+                                    class="flex items-center gap-3 text-sm text-slate dark:text-gray-400 hover:text-ink dark:hover:text-white cursor-pointer transition-colors duration-200">
+                                    <input type="checkbox"
+                                        class="w-4 h-4 rounded border-border dark:border-white/10 text-olive focus:ring-olive focus:ring-2 focus:ring-offset-0"
+                                        checked />
+                                    Scripts
+                                    <span class="ml-auto text-xs text-slate/40">18</span>
+                                </label>
+                                <label
+                                    class="flex items-center gap-3 text-sm text-slate dark:text-gray-400 hover:text-ink dark:hover:text-white cursor-pointer transition-colors duration-200">
+                                    <input type="checkbox"
+                                        class="w-4 h-4 rounded border-border dark:border-white/10 text-olive focus:ring-olive focus:ring-2 focus:ring-offset-0" />
+                                    Storyboards
+                                    <span class="ml-auto text-xs text-slate/40">9</span>
+                                </label>
+                                <label
+                                    class="flex items-center gap-3 text-sm text-slate dark:text-gray-400 hover:text-ink dark:hover:text-white cursor-pointer transition-colors duration-200">
+                                    <input type="checkbox"
+                                        class="w-4 h-4 rounded border-border dark:border-white/10 text-olive focus:ring-olive focus:ring-2 focus:ring-offset-0" />
+                                    Music
+                                    <span class="ml-auto text-xs text-slate/40">7</span>
+                                </label>
+                                <label
+                                    class="flex items-center gap-3 text-sm text-slate dark:text-gray-400 hover:text-ink dark:hover:text-white cursor-pointer transition-colors duration-200">
+                                    <input type="checkbox"
+                                        class="w-4 h-4 rounded border-border dark:border-white/10 text-olive focus:ring-olive focus:ring-2 focus:ring-offset-0" />
+                                    Design
+                                    <span class="ml-auto text-xs text-slate/40">5</span>
+                                </label>
+                                <label
+                                    class="flex items-center gap-3 text-sm text-slate dark:text-gray-400 hover:text-ink dark:hover:text-white cursor-pointer transition-colors duration-200">
+                                    <input type="checkbox"
+                                        class="w-4 h-4 rounded border-border dark:border-white/10 text-olive focus:ring-olive focus:ring-2 focus:ring-offset-0" />
+                                    Motion
+                                    <span class="ml-auto text-xs text-slate/40">3</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Price Range -->
+                        <div>
+                            <h3 class="text-sm font-medium text-ink dark:text-white mb-3">Price Range</h3>
+                            <div class="flex items-center gap-3">
+                                <input type="number" placeholder="Min" value="500"
+                                    class="w-full px-3 py-2 bg-stone dark:bg-white/5 border border-border/40 dark:border-white/10 rounded-xl text-sm text-ink dark:text-white placeholder:text-slate/40 focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200" />
+                                <span class="text-slate dark:text-gray-400">—</span>
+                                <input type="number" placeholder="Max" value="20000"
+                                    class="w-full px-3 py-2 bg-stone dark:bg-white/5 border border-border/40 dark:border-white/10 rounded-xl text-sm text-ink dark:text-white placeholder:text-slate/40 focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200" />
+                            </div>
+                        </div>
+
+                        <!-- License Type -->
+                        <div>
+                            <h3 class="text-sm font-medium text-ink dark:text-white mb-3">License Type</h3>
+                            <div class="space-y-2">
+                                <label
+                                    class="flex items-center gap-3 text-sm text-slate dark:text-gray-400 hover:text-ink dark:hover:text-white cursor-pointer transition-colors duration-200">
+                                    <input type="radio" name="license"
+                                        class="w-4 h-4 border-border dark:border-white/10 text-olive focus:ring-olive focus:ring-2 focus:ring-offset-0"
+                                        checked />
+                                    All Licenses
+                                </label>
+                                <label
+                                    class="flex items-center gap-3 text-sm text-slate dark:text-gray-400 hover:text-ink dark:hover:text-white cursor-pointer transition-colors duration-200">
+                                    <input type="radio" name="license"
+                                        class="w-4 h-4 border-border dark:border-white/10 text-olive focus:ring-olive focus:ring-2 focus:ring-offset-0"
+                                        checked />
+                                    Exclusive Option
+                                    <span class="ml-auto text-xs text-slate/40">12</span>
+                                </label>
+                                <label
+                                    class="flex items-center gap-3 text-sm text-slate dark:text-gray-400 hover:text-ink dark:hover:text-white cursor-pointer transition-colors duration-200">
+                                    <input type="radio" name="license"
+                                        class="w-4 h-4 border-border dark:border-white/10 text-olive focus:ring-olive focus:ring-2 focus:ring-offset-0" />
+                                    Sync License
+                                    <span class="ml-auto text-xs text-slate/40">8</span>
+                                </label>
+                                <label
+                                    class="flex items-center gap-3 text-sm text-slate dark:text-gray-400 hover:text-ink dark:hover:text-white cursor-pointer transition-colors duration-200">
+                                    <input type="radio" name="license"
+                                        class="w-4 h-4 border-border dark:border-white/10 text-olive focus:ring-olive focus:ring-2 focus:ring-offset-0" />
+                                    Custom Deal
+                                    <span class="ml-auto text-xs text-slate/40">22</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Apply Filters Button -->
+                        <button
+                            class="w-full py-3 bg-olive text-white rounded-xl font-medium hover:bg-olive-dark hover:shadow-lg hover:shadow-olive/20 transition-all duration-300">
+                            Apply Filters
+                        </button>
+
+                        <!-- Related Searches -->
+                        <div class="pt-4 border-t border-border/40 dark:border-white/10">
+                            <h3 class="text-sm font-medium text-ink dark:text-white mb-3">Related Searches</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <a href="search.html?q=thriller+script"
+                                    class="px-3 py-1.5 bg-stone dark:bg-white/5 text-xs text-slate dark:text-gray-400 rounded-full hover:bg-olive/10 hover:text-olive transition-all duration-200">thriller
+                                    script</a>
+                                <a href="search.html?q=noir+film"
+                                    class="px-3 py-1.5 bg-stone dark:bg-white/5 text-xs text-slate dark:text-gray-400 rounded-full hover:bg-olive/10 hover:text-olive transition-all duration-200">noir
+                                    film</a>
+                                <a href="search.html?q=detective+story"
+                                    class="px-3 py-1.5 bg-stone dark:bg-white/5 text-xs text-slate dark:text-gray-400 rounded-full hover:bg-olive/10 hover:text-olive transition-all duration-200">detective
+                                    story</a>
+                                <a href="search.html?q=Tokyo+noir"
+                                    class="px-3 py-1.5 bg-stone dark:bg-white/5 text-xs text-slate dark:text-gray-400 rounded-full hover:bg-olive/10 hover:text-olive transition-all duration-200">Tokyo
+                                    noir</a>
+                                <a href="search.html?q=1980s+thriller"
+                                    class="px-3 py-1.5 bg-stone dark:bg-white/5 text-xs text-slate dark:text-gray-400 rounded-full hover:bg-olive/10 hover:text-olive transition-all duration-200">1980s
+                                    thriller</a>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- ========================================== -->
+                <!-- RESULTS GRID -->
+                <!-- ========================================== -->
+                <div class="flex-1 min-w-0">
+
+                    <!-- Toolbar -->
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+                        <span class="text-sm text-slate dark:text-gray-400">Showing <strong
+                                class="text-ink dark:text-white">12</strong> of <strong
+                                class="text-ink dark:text-white">42</strong> results</span>
+                        <div class="flex items-center gap-3">
+                            <select
+                                class="px-3 py-2 bg-transparent border border-border/40 dark:border-white/10 rounded-xl text-sm text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-olive/20">
+                                <option>Sort by: Relevance</option>
+                                <option>Sort by: Latest</option>
+                                <option>Sort by: Price: Low to High</option>
+                                <option>Sort by: Price: High to Low</option>
+                                <option>Sort by: Most Viewed</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Results Grid -->
+                    <div class="grid sm:grid-cols-2 gap-6">
+
+                        <!-- Result 1 -->
+                        <div
+                            class="group bg-white dark:bg-ink/50 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
+                            <a href="product-detail.html" class="block">
+                                <div class="relative overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?auto=format&fit=crop&w=400&q=80"
+                                        alt="Midnight Sun Pilot"
+                                        class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
+                                    <div class="absolute top-3 left-3 flex gap-2">
+                                        <span
+                                            class="px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Script</span>
+                                        <span
+                                            class="px-3 py-1 bg-olive/90 backdrop-blur-sm text-xs font-medium text-white rounded-full">Featured</span>
+                                    </div>
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-t from-ink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                        <span
+                                            class="px-4 py-2 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-sm font-medium text-ink dark:text-white rounded-xl">Quick
+                                            View</span>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <h3
+                                            class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200">
+                                            Midnight Sun Pilot</h3>
+                                        <span class="text-lg font-bold text-ink dark:text-white">$2,400</span>
+                                    </div>
+                                    <p class="text-sm text-slate dark:text-gray-400 line-clamp-2">A noir thriller set in
+                                        1980s Tokyo...</p>
+                                    <div
+                                        class="flex items-center justify-between mt-3 pt-3 border-t border-border dark:border-white/10">
+                                        <div class="flex items-center gap-2">
+                                            <div
+                                                class="w-6 h-6 rounded-full bg-olive/20 flex items-center justify-center text-[10px] font-bold text-olive">
+                                                DK</div>
+                                            <span class="text-xs text-slate dark:text-gray-400">@daniel_k</span>
+                                        </div>
+                                        <div class="flex items-center gap-3 text-xs text-slate dark:text-gray-400">
+                                            <span class="flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                </svg>
+                                                142
+                                            </span>
+                                            <span class="flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                                98%
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Result 2 -->
+                        <div
+                            class="group bg-white dark:bg-ink/50 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 delay-75">
+                            <a href="product-detail.html" class="block">
+                                <div class="relative overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?auto=format&fit=crop&w=400&q=80"
+                                        alt="The Last Draft"
+                                        class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
+                                    <div class="absolute top-3 left-3 flex gap-2">
+                                        <span
+                                            class="px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Script</span>
+                                    </div>
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-t from-ink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                        <span
+                                            class="px-4 py-2 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-sm font-medium text-ink dark:text-white rounded-xl">Quick
+                                            View</span>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <h3
+                                            class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200">
+                                            The Last Draft</h3>
+                                        <span class="text-lg font-bold text-ink dark:text-white">$6,750</span>
+                                    </div>
+                                    <p class="text-sm text-slate dark:text-gray-400 line-clamp-2">A coming-of-age drama
+                                        set in New York...</p>
+                                    <div
+                                        class="flex items-center justify-between mt-3 pt-3 border-t border-border dark:border-white/10">
+                                        <div class="flex items-center gap-2">
+                                            <div
+                                                class="w-6 h-6 rounded-full bg-olive/20 flex items-center justify-center text-[10px] font-bold text-olive">
+                                                DK</div>
+                                            <span class="text-xs text-slate dark:text-gray-400">@daniel_k</span>
+                                        </div>
+                                        <div class="flex items-center gap-3 text-xs text-slate dark:text-gray-400">
+                                            <span class="flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                </svg>
+                                                56
+                                            </span>
+                                            <span class="flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                                92%
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Result 3 -->
+                        <div
+                            class="group bg-white dark:bg-ink/50 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 delay-150">
+                            <a href="product-detail.html" class="block">
+                                <div class="relative overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=400&q=80"
+                                        alt="Frames of Lagos"
+                                        class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
+                                    <div class="absolute top-3 left-3 flex gap-2">
+                                        <span
+                                            class="px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Storyboard</span>
+                                    </div>
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-t from-ink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                        <span
+                                            class="px-4 py-2 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-sm font-medium text-ink dark:text-white rounded-xl">Quick
+                                            View</span>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <h3
+                                            class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200">
+                                            Frames of Lagos</h3>
+                                        <span class="text-lg font-bold text-ink dark:text-white">$3,200</span>
+                                    </div>
+                                    <p class="text-sm text-slate dark:text-gray-400 line-clamp-2">Storyboard for a
+                                        Lagos-based brand launch...</p>
+                                    <div
+                                        class="flex items-center justify-between mt-3 pt-3 border-t border-border dark:border-white/10">
+                                        <div class="flex items-center gap-2">
+                                            <div
+                                                class="w-6 h-6 rounded-full bg-olive/20 flex items-center justify-center text-[10px] font-bold text-olive">
+                                                AL</div>
+                                            <span class="text-xs text-slate dark:text-gray-400">@amara_art</span>
+                                        </div>
+                                        <div class="flex items-center gap-3 text-xs text-slate dark:text-gray-400">
+                                            <span class="flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                </svg>
+                                                87
+                                            </span>
+                                            <span class="flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                                95%
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Result 4 -->
+                        <div
+                            class="group bg-white dark:bg-ink/50 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 delay-200">
+                            <a href="product-detail.html" class="block">
+                                <div class="relative overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=400&q=80"
+                                        alt="Rainline Sessions"
+                                        class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
+                                    <div class="absolute top-3 left-3 flex gap-2">
+                                        <span
+                                            class="px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Music</span>
+                                        <span
+                                            class="px-3 py-1 bg-warning/90 backdrop-blur-sm text-xs font-medium text-white rounded-full">Premium</span>
+                                    </div>
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-t from-ink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                        <span
+                                            class="px-4 py-2 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-sm font-medium text-ink dark:text-white rounded-xl">Quick
+                                            View</span>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <h3
+                                            class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200">
+                                            Rainline Sessions</h3>
+                                        <span class="text-lg font-bold text-ink dark:text-white">$8,000</span>
+                                    </div>
+                                    <p class="text-sm text-slate dark:text-gray-400 line-clamp-2">Ambient electronic
+                                        music for sync licensing...</p>
+                                    <div
+                                        class="flex items-center justify-between mt-3 pt-3 border-t border-border dark:border-white/10">
+                                        <div class="flex items-center gap-2">
+                                            <div
+                                                class="w-6 h-6 rounded-full bg-olive/20 flex items-center justify-center text-[10px] font-bold text-olive">
+                                                SA</div>
+                                            <span class="text-xs text-slate dark:text-gray-400">@sarah_audio</span>
+                                        </div>
+                                        <div class="flex items-center gap-3 text-xs text-slate dark:text-gray-400">
+                                            <span class="flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                </svg>
+                                                64
+                                            </span>
+                                            <span class="flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                                97%
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Result 5 -->
+                        <div
+                            class="group bg-white dark:bg-ink/50 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 delay-75">
+                            <a href="product-detail.html" class="block">
+                                <div class="relative overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=400&q=80"
+                                        alt="City Above Water"
+                                        class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
+                                    <div class="absolute top-3 left-3 flex gap-2">
+                                        <span
+                                            class="px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Design</span>
+                                    </div>
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-t from-ink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                        <span
+                                            class="px-4 py-2 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-sm font-medium text-ink dark:text-white rounded-xl">Quick
+                                            View</span>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <h3
+                                            class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200">
+                                            City Above Water</h3>
+                                        <span class="text-lg font-bold text-ink dark:text-white">$15,000</span>
+                                    </div>
+                                    <p class="text-sm text-slate dark:text-gray-400 line-clamp-2">Concept art series for
+                                        a game studio pitch...</p>
+                                    <div
+                                        class="flex items-center justify-between mt-3 pt-3 border-t border-border dark:border-white/10">
+                                        <div class="flex items-center gap-2">
+                                            <div
+                                                class="w-6 h-6 rounded-full bg-olive/20 flex items-center justify-center text-[10px] font-bold text-olive">
+                                                DK</div>
+                                            <span class="text-xs text-slate dark:text-gray-400">@david_art</span>
+                                        </div>
+                                        <div class="flex items-center gap-3 text-xs text-slate dark:text-gray-400">
+                                            <span class="flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                </svg>
+                                                201
+                                            </span>
+                                            <span class="flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                                91%
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Result 6 -->
+                        <div
+                            class="group bg-white dark:bg-ink/50 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 delay-150">
+                            <a href="product-detail.html" class="block">
+                                <div class="relative overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=400&q=80"
+                                        alt="Neon Dreams"
+                                        class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
+                                    <div class="absolute top-3 left-3 flex gap-2">
+                                        <span
+                                            class="px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Motion</span>
+                                        <span
+                                            class="px-3 py-1 bg-success/90 backdrop-blur-sm text-xs font-medium text-white rounded-full">New</span>
+                                    </div>
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-t from-ink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                        <span
+                                            class="px-4 py-2 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-sm font-medium text-ink dark:text-white rounded-xl">Quick
+                                            View</span>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <h3
+                                            class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200">
+                                            Neon Dreams</h3>
+                                        <span class="text-lg font-bold text-ink dark:text-white">$4,500</span>
+                                    </div>
+                                    <p class="text-sm text-slate dark:text-gray-400 line-clamp-2">Motion graphics
+                                        package for tech brand...</p>
+                                    <div
+                                        class="flex items-center justify-between mt-3 pt-3 border-t border-border dark:border-white/10">
+                                        <div class="flex items-center gap-2">
+                                            <div
+                                                class="w-6 h-6 rounded-full bg-olive/20 flex items-center justify-center text-[10px] font-bold text-olive">
+                                                JL</div>
+                                            <span class="text-xs text-slate dark:text-gray-400">@jenny_creative</span>
+                                        </div>
+                                        <div class="flex items-center gap-3 text-xs text-slate dark:text-gray-400">
+                                            <span class="flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                </svg>
+                                                189
+                                            </span>
+                                            <span class="flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                                94%
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- ============================================ -->
+                    <!-- PAGINATION -->
+                    <!-- ============================================ -->
+                    <div
+                        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-10 pt-6 border-t border-border/40 dark:border-white/10">
+                        <span class="text-sm text-slate dark:text-gray-400">Showing 1-6 of 42 results</span>
+                        <div class="flex items-center gap-2">
+                            <button
+                                class="px-4 py-2 rounded-xl border border-border/40 dark:border-white/10 text-slate dark:text-gray-400 hover:bg-stone dark:hover:bg-white/5 hover:text-ink dark:hover:text-white transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
+                                disabled>
+                                Previous
+                            </button>
+                            <button
+                                class="px-4 py-2 rounded-xl bg-olive text-white font-medium hover:bg-olive-dark transition-all duration-200">1</button>
+                            <button
+                                class="px-4 py-2 rounded-xl border border-border/40 dark:border-white/10 text-slate dark:text-gray-400 hover:bg-stone dark:hover:bg-white/5 hover:text-ink dark:hover:text-white transition-all duration-200">2</button>
+                            <button
+                                class="px-4 py-2 rounded-xl border border-border/40 dark:border-white/10 text-slate dark:text-gray-400 hover:bg-stone dark:hover:bg-white/5 hover:text-ink dark:hover:text-white transition-all duration-200">3</button>
+                            <span class="text-slate dark:text-gray-400">...</span>
+                            <button
+                                class="px-4 py-2 rounded-xl border border-border/40 dark:border-white/10 text-slate dark:text-gray-400 hover:bg-stone dark:hover:bg-white/5 hover:text-ink dark:hover:text-white transition-all duration-200">7</button>
+                            <button
+                                class="px-4 py-2 rounded-xl border border-border/40 dark:border-white/10 text-slate dark:text-gray-400 hover:bg-stone dark:hover:bg-white/5 hover:text-ink dark:hover:text-white transition-all duration-200">
+                                Next
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- No Results State (hidden by default) -->
+                    <div id="noResults" class="hidden text-center py-12">
+                        <div
+                            class="w-20 h-20 mx-auto rounded-2xl bg-stone dark:bg-white/5 flex items-center justify-center text-4xl mb-4">
+                            🔍</div>
+                        <h3 class="font-display text-xl font-bold text-ink dark:text-white">No results found</h3>
+                        <p class="text-slate dark:text-gray-400 mt-2">Try adjusting your search terms or filters</p>
+                        <button
+                            class="mt-4 px-6 py-2 bg-olive text-white rounded-xl font-medium hover:bg-olive-dark transition-all duration-300">Clear
+                            filters</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SHARED FOOTER (loaded from component/footer.html) -->
+    <!-- ============================================ -->
+    <div id="footer"></div>
+
+    <!-- ============================================ -->
+    <!-- SCRIPTS -->
+    <!-- ============================================ -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Get search query from URL and display it
+        const urlParams = new URLSearchParams(window.location.search);
+        const query = urlParams.get('q') || 'noir thriller';
+
+        const searchQueryDisplay = document.getElementById('searchQueryDisplay');
+        if (searchQueryDisplay) {
+            searchQueryDisplay.textContent = '"' + query + '"';
+        }
+    </script>
+    <script src="script/script.js"></script>
+</body>
+
+</html>
