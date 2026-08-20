@@ -5,14 +5,19 @@
 const EtchSupabase = (function () {
     'use strict';
 
+    const DEFAULT_CONFIG = {
+        url: 'https://cyoddvehzrmhubmislbb.supabase.co',
+        anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5b2RkdmVoenJtaHVibWlzbGJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUxNjI3MTQsImV4cCI6MjEwMDczODcxNH0.YaUyKP9f3tpKDny78_k_ka70zkFZe58GAFOo5oFFaFI',
+    };
+
     // ============================================
     // CONFIGURATION
     // ============================================
     // These are set via window.__ETCH_SUPABASE__ config
     // defined in each page's inline script tag
     const CONFIG = {
-        url: window.__ETCH_SUPABASE__?.url || '',
-        anonKey: window.__ETCH_SUPABASE__?.anonKey || '',
+        url: window.__ETCH_SUPABASE__?.url || DEFAULT_CONFIG.url,
+        anonKey: window.__ETCH_SUPABASE__?.anonKey || DEFAULT_CONFIG.anonKey,
     };
 
     let supabaseClient = null;
@@ -182,6 +187,34 @@ const EtchSupabase = (function () {
         }
     }
 
+    async function countRows(tableName, options = {}) {
+        const client = getClient();
+        if (!client) return { count: 0, error: new Error('Supabase not initialized') };
+
+        try {
+            let query = client.from(tableName).select('*', { count: 'exact', head: true });
+
+            if (options.filters && Array.isArray(options.filters)) {
+                options.filters.forEach(({ field, value, operator = 'eq' }) => {
+                    if (field && value !== undefined && value !== null) {
+                        if (operator === 'eq') query = query.eq(field, value);
+                        if (operator === 'neq') query = query.neq(field, value);
+                        if (operator === 'gt') query = query.gt(field, value);
+                        if (operator === 'gte') query = query.gte(field, value);
+                        if (operator === 'lt') query = query.lt(field, value);
+                        if (operator === 'lte') query = query.lte(field, value);
+                    }
+                });
+            }
+
+            const { count, error } = await query;
+            if (error) throw error;
+            return { count: count || 0, error: null };
+        } catch (error) {
+            return { count: 0, error };
+        }
+    }
+
     // ============================================
     // AUTH: GET SESSION
     // ============================================
@@ -235,6 +268,72 @@ const EtchSupabase = (function () {
     }
 
     // ============================================
+    // STORAGE: FILE UPLOADS
+    // ============================================
+    async function uploadFile(bucketName, filePath, file, options = {}) {
+        const client = getClient();
+        if (!client) return { data: null, error: new Error('Supabase not initialized') };
+
+        try {
+            const normalizedPath = (filePath || '').replace(/^\/+/, '');
+            const { data, error } = await client.storage.from(bucketName).upload(normalizedPath, file, {
+                cacheControl: options.cacheControl || '3600',
+                upsert: options.upsert ?? false,
+                contentType: file?.type || 'application/octet-stream',
+            });
+
+            if (error) throw error;
+            return { data, error: null };
+        } catch (error) {
+            return { data: null, error };
+        }
+    }
+
+    async function listFiles(bucketName, options = {}) {
+        const client = getClient();
+        if (!client) return { data: [], error: new Error('Supabase not initialized') };
+
+        try {
+            const { data, error } = await client.storage.from(bucketName).list(options.path || '', {
+                limit: options.limit || 100,
+                offset: options.offset || 0,
+                sortBy: options.sortBy || { column: 'created_at', order: 'desc' },
+            });
+
+            if (error) throw error;
+            return { data: data || [], error: null };
+        } catch (error) {
+            return { data: [], error };
+        }
+    }
+
+    async function removeFile(bucketName, filePaths) {
+        const client = getClient();
+        if (!client) return { data: null, error: new Error('Supabase not initialized') };
+
+        try {
+            const paths = (Array.isArray(filePaths) ? filePaths : [filePaths])
+                .map(path => String(path || '').replace(/^\/+/, ''))
+                .filter(Boolean);
+            const { data, error } = await client.storage.from(bucketName).remove(paths);
+
+            if (error) throw error;
+            return { data, error: null };
+        } catch (error) {
+            return { data: null, error };
+        }
+    }
+
+    function getPublicUrl(bucketName, filePath) {
+        const client = getClient();
+        if (!client) return null;
+
+        const normalizedPath = (filePath || '').replace(/^\/+/, '');
+        const { data } = client.storage.from(bucketName).getPublicUrl(normalizedPath);
+        return data?.publicUrl || null;
+    }
+
+    // ============================================
     // PROFILE: UPDATE PROFILE
     // ============================================
     async function updateProfile(userId, updates) {
@@ -257,13 +356,711 @@ const EtchSupabase = (function () {
     }
 
     // ============================================
+    // MASTERCLASS: AUTHORS
+    // ============================================
+    async function getAuthors(options = {}) {
+        const client = getClient();
+        if (!client) return { data: [], error: new Error('Supabase not initialized') };
+
+        try {
+            let query = client.from('masterclass_authors').select('*');
+
+            if (options.status) {
+                query = query.eq('status', options.status);
+            }
+
+            query = query.order('name', { ascending: true });
+
+            const { data, error } = await query;
+            if (error) throw error;
+            return { data: data || [], error: null };
+        } catch (error) {
+            return { data: [], error };
+        }
+    }
+
+    async function createAuthor(authorData) {
+        const client = getClient();
+        if (!client) return { data: null, error: new Error('Supabase not initialized') };
+
+        try {
+            const { data, error } = await client
+                .from('masterclass_authors')
+                .insert(authorData)
+                .select()
+                .single();
+
+            if (error) throw error;
+            return { data, error: null };
+        } catch (error) {
+            return { data: null, error };
+        }
+    }
+
+    async function updateAuthor(id, updates) {
+        const client = getClient();
+        if (!client) return { data: null, error: new Error('Supabase not initialized') };
+
+        try {
+            const { data, error } = await client
+                .from('masterclass_authors')
+                .update(updates)
+                .eq('id', id)
+                .select()
+                .single();
+
+            if (error) throw error;
+            return { data, error: null };
+        } catch (error) {
+            return { data: null, error };
+        }
+    }
+
+    async function deleteAuthor(id) {
+        const client = getClient();
+        if (!client) return { error: new Error('Supabase not initialized') };
+
+        try {
+            const { error } = await client
+                .from('masterclass_authors')
+                .delete()
+                .eq('id', id);
+
+            if (error) throw error;
+            return { error: null };
+        } catch (error) {
+            return { error };
+        }
+    }
+
+    // ============================================
+    // MASTERCLASS: CATEGORIES
+    // ============================================
+    async function getCategories(options = {}) {
+        const client = getClient();
+        if (!client) return { data: [], error: new Error('Supabase not initialized') };
+
+        try {
+            let query = client.from('masterclass_categories').select('*');
+
+            if (options.status) {
+                query = query.eq('status', options.status);
+            }
+
+            query = query.order('name', { ascending: true });
+
+            const { data, error } = await query;
+            if (error) throw error;
+            return { data: data || [], error: null };
+        } catch (error) {
+            return { data: [], error };
+        }
+    }
+
+    async function createCategory(categoryData) {
+        const client = getClient();
+        if (!client) return { data: null, error: new Error('Supabase not initialized') };
+
+        try {
+            const { data, error } = await client
+                .from('masterclass_categories')
+                .insert(categoryData)
+                .select()
+                .single();
+
+            if (error) throw error;
+            return { data, error: null };
+        } catch (error) {
+            return { data: null, error };
+        }
+    }
+
+    async function updateCategory(id, updates) {
+        const client = getClient();
+        if (!client) return { data: null, error: new Error('Supabase not initialized') };
+
+        try {
+            const { data, error } = await client
+                .from('masterclass_categories')
+                .update(updates)
+                .eq('id', id)
+                .select()
+                .single();
+
+            if (error) throw error;
+            return { data, error: null };
+        } catch (error) {
+            return { data: null, error };
+        }
+    }
+
+    async function deleteCategory(id) {
+        const client = getClient();
+        if (!client) return { error: new Error('Supabase not initialized') };
+
+        try {
+            const { error } = await client
+                .from('masterclass_categories')
+                .delete()
+                .eq('id', id);
+
+            if (error) throw error;
+            return { error: null };
+        } catch (error) {
+            return { error };
+        }
+    }
+
+    // ============================================
+    // MASTERCLASS: ARTICLES
+    // ============================================
+    async function getArticles(options = {}) {
+        const client = getClient();
+        if (!client) return { data: [], error: new Error('Supabase not initialized') };
+
+        try {
+            let query = client
+                .from('masterclass_articles')
+                .select('*, category:masterclass_categories(*), author:masterclass_authors(*)');
+
+            if (options.status) {
+                query = query.eq('status', options.status);
+            }
+
+            if (options.featured) {
+                query = query.eq('is_featured', true);
+            }
+
+            if (options.categoryId) {
+                query = query.eq('category_id', options.categoryId);
+            }
+
+            if (options.authorId) {
+                query = query.eq('author_id', options.authorId);
+            }
+
+            if (options.search) {
+                query = query.ilike('title', `%${options.search}%`);
+            }
+
+            if (options.limit) {
+                query = query.limit(options.limit);
+            }
+
+            query = query.order('published_at', { ascending: false, nullsFirst: false });
+
+            const { data, error } = await query;
+            if (error) throw error;
+            return { data: data || [], error: null };
+        } catch (error) {
+            return { data: [], error };
+        }
+    }
+
+    async function getArticleBySlug(slug) {
+        const client = getClient();
+        if (!client) return { data: null, error: new Error('Supabase not initialized') };
+
+        try {
+            const { data, error } = await client
+                .from('masterclass_articles')
+                .select('*, category:masterclass_categories(*), author:masterclass_authors(*)')
+                .eq('slug', slug)
+                .single();
+
+            if (error) throw error;
+            return { data, error: null };
+        } catch (error) {
+            return { data: null, error };
+        }
+    }
+
+    async function createArticle(articleData) {
+        const client = getClient();
+        if (!client) return { data: null, error: new Error('Supabase not initialized') };
+
+        try {
+            const { data, error } = await client
+                .from('masterclass_articles')
+                .insert(articleData)
+                .select()
+                .single();
+
+            if (error) throw error;
+            return { data, error: null };
+        } catch (error) {
+            return { data: null, error };
+        }
+    }
+
+    async function updateArticle(id, updates) {
+        const client = getClient();
+        if (!client) return { data: null, error: new Error('Supabase not initialized') };
+
+        try {
+            const { data, error } = await client
+                .from('masterclass_articles')
+                .update(updates)
+                .eq('id', id)
+                .select()
+                .single();
+
+            if (error) throw error;
+            return { data, error: null };
+        } catch (error) {
+            return { data: null, error };
+        }
+    }
+
+    async function deleteArticle(id) {
+        const client = getClient();
+        if (!client) return { error: new Error('Supabase not initialized') };
+
+        try {
+            const { error } = await client
+                .from('masterclass_articles')
+                .delete()
+                .eq('id', id);
+
+            if (error) throw error;
+            return { error: null };
+        } catch (error) {
+            return { error };
+        }
+    }
+
+    // ============================================
+    // LISTINGS: LIVE CREATOR DATA
+    // ============================================
+    async function getListings(options = {}) {
+        const client = getClient();
+        if (!client) return { data: [], error: new Error('Supabase not initialized') };
+
+        try {
+            let query = client.from('listings').select('*, creator:profiles(*)');
+
+            if (options.status) {
+                query = query.eq('status', options.status);
+            }
+
+            if (options.category) {
+                query = query.eq('category', options.category);
+            }
+
+            if (options.creatorId) {
+                query = query.eq('creator_id', options.creatorId);
+            }
+
+            if (options.search) {
+                query = query.ilike('title', `%${options.search}%`);
+            }
+
+            if (options.featured) {
+                query = query.eq('is_featured', true);
+            }
+
+            if (options.limit) {
+                query = query.limit(options.limit);
+            }
+
+            query = query.order('created_at', { ascending: false });
+
+            const { data, error } = await query;
+            if (error) throw error;
+            return { data: data || [], error: null };
+        } catch (error) {
+            return { data: [], error };
+        }
+    }
+
+    // ============================================
+    // LISTINGS: GET SINGLE LISTING BY SLUG
+    // ============================================
+    async function getListingBySlug(slug) {
+        const client = getClient();
+        if (!client) return { data: null, error: new Error('Supabase not initialized') };
+
+        try {
+            const { data, error } = await client
+                .from('listings')
+                .select('*, creator:profiles(*)')
+                .eq('slug', slug)
+                .single();
+
+            if (error) throw error;
+            return { data, error: null };
+        } catch (error) {
+            return { data: null, error };
+        }
+    }
+
+    // ============================================
+    // LISTINGS: GET SINGLE LISTING BY ID
+    // ============================================
+    async function getListingById(id) {
+        const client = getClient();
+        if (!client) return { data: null, error: new Error('Supabase not initialized') };
+
+        try {
+            const { data, error } = await client
+                .from('listings')
+                .select('*, creator:profiles(*)')
+                .eq('id', id)
+                .single();
+
+            if (error) throw error;
+            return { data, error: null };
+        } catch (error) {
+            return { data: null, error };
+        }
+    }
+
+    // ============================================
+    // LISTINGS: SEARCH
+    // ============================================
+    async function searchListings(query, options = {}) {
+        const client = getClient();
+        if (!client) return { data: [], error: new Error('Supabase not initialized') };
+
+        try {
+            let q = client.from('listings').select('*, creator:profiles(*)');
+
+            if (options.status) {
+                q = q.eq('status', options.status);
+            } else {
+                q = q.eq('status', 'published');
+            }
+
+            if (query) {
+                q = q.or(`title.ilike.%${query}%,description.ilike.%${query}%,category.ilike.%${query}%`);
+            }
+
+            if (options.category) {
+                q = q.eq('category', options.category);
+            }
+
+            if (options.minPrice) {
+                q = q.gte('price', options.minPrice);
+            }
+
+            if (options.maxPrice) {
+                q = q.lte('price', options.maxPrice);
+            }
+
+            if (options.limit) {
+                q = q.limit(options.limit);
+            }
+
+            q = q.order('created_at', { ascending: false });
+
+            const { data, error } = await q;
+            if (error) throw error;
+            return { data: data || [], error: null };
+        } catch (error) {
+            return { data: [], error };
+        }
+    }
+
+    // ============================================
+    // STATS: GET REAL COUNTS FROM BACKEND
+    // ============================================
+    async function getStats() {
+        const client = getClient();
+        if (!client) return { stats: null, error: new Error('Supabase not initialized') };
+
+        try {
+            // Count published listings
+            const { count: listingsCount, error: listingsError } = await client
+                .from('listings')
+                .select('*', { count: 'exact', head: true })
+                .eq('status', 'published');
+
+            if (listingsError) throw listingsError;
+
+            // Count creators (profiles with role = 'creator')
+            const { count: creatorsCount, error: creatorsError } = await client
+                .from('profiles')
+                .select('*', { count: 'exact', head: true })
+                .eq('role', 'creator');
+
+            if (creatorsError) throw creatorsError;
+
+            // Count published masterclass articles
+            const { count: articlesCount, error: articlesError } = await client
+                .from('masterclass_articles')
+                .select('*', { count: 'exact', head: true })
+                .eq('status', 'published');
+
+            if (articlesError) throw articlesError;
+
+            // Count newsletter subscribers
+            const { count: subscribersCount, error: subscribersError } = await client
+                .from('newsletter_subscribers')
+                .select('*', { count: 'exact', head: true })
+                .eq('is_active', true);
+
+            if (subscribersError) throw subscribersError;
+
+            return {
+                stats: {
+                    listings: listingsCount || 0,
+                    creators: creatorsCount || 0,
+                    articles: articlesCount || 0,
+                    subscribers: subscribersCount || 0,
+                },
+                error: null
+            };
+        } catch (error) {
+            return { stats: null, error };
+        }
+    }
+
+    // ============================================
+    // LISTINGS: GET FEATURED
+    // ============================================
+    async function getFeaturedListings(limit = 4) {
+        const client = getClient();
+        if (!client) return { data: [], error: new Error('Supabase not initialized') };
+
+        try {
+            const { data, error } = await client
+                .from('listings')
+                .select('*, creator:profiles(*)')
+                .eq('status', 'published')
+                .eq('is_featured', true)
+                .limit(limit)
+                .order('created_at', { ascending: false });
+
+            if (error) throw error;
+            return { data: data || [], error: null };
+        } catch (error) {
+            return { data: [], error };
+        }
+    }
+
+    async function subscribeToNewsletter(payload = {}) {
+        const client = getClient();
+        if (!client) return { data: null, error: new Error('Supabase not initialized') };
+
+        const email = String(payload.email || '').trim().toLowerCase();
+        const name = String(payload.name || '').trim();
+
+        if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+            return { data: null, error: new Error('Please enter a valid email address.') };
+        }
+
+        try {
+            const { data, error } = await client
+                .from('newsletter_subscribers')
+                .upsert({
+                    email,
+                    name: name || null,
+                    is_active: true,
+                    subscribed_at: new Date().toISOString(),
+                }, { onConflict: 'email' })
+                .select()
+                .single();
+
+            if (error) throw error;
+            return { data, error: null };
+        } catch (error) {
+            return { data: null, error };
+        }
+    }
+
+    async function getNewsletterSubscribers(options = {}) {
+        const client = getClient();
+        if (!client) return { data: [], error: new Error('Supabase not initialized') };
+
+        try {
+            let query = client.from('newsletter_subscribers').select('*');
+
+            if (options.activeOnly) {
+                query = query.eq('is_active', true);
+            }
+
+            query = query.order('subscribed_at', { ascending: false });
+
+            const { data, error } = await query;
+            if (error) throw error;
+            return { data: data || [], error: null };
+        } catch (error) {
+            return { data: [], error };
+        }
+    }
+
+    async function sendNewsletterCampaign(campaign = {}) {
+        const config = window.__ETCH_NEWSLETTER__ || {};
+        const endpoint = config.endpoint || '';
+        const apiKey = config.apiKey || '';
+        const provider = config.provider || 'supabase-function';
+
+        if (!endpoint) {
+            return {
+                sent: false,
+                error: new Error(
+                    'Newsletter delivery endpoint is not configured.\n\n' +
+                    'Please set window.__ETCH_NEWSLETTER__.endpoint\n\n' +
+                    'Setup instructions: See /docs/NEWSLETTER_SETUP.md'
+                ),
+                count: 0,
+            };
+        }
+
+        const subscribers = await getNewsletterSubscribers({ activeOnly: true });
+        const recipients = subscribers.data || [];
+
+        if (recipients.length === 0) {
+            return {
+                sent: false,
+                error: new Error('No active subscribers to send newsletter to'),
+                count: 0,
+            };
+        }
+
+        try {
+            const headers = {
+                'Content-Type': 'application/json',
+            };
+
+            if (apiKey && provider === 'resend') {
+                headers['Authorization'] = `Bearer ${apiKey}`;
+            }
+
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers,
+                body: JSON.stringify({
+                    subject: campaign.subject || 'ETCH Newsletter',
+                    message: campaign.message || '',
+                    fromName: campaign.fromName || 'ETCH Newsletter',
+                    recipients: recipients.map(item => item.email),
+                }),
+            });
+
+            if (!response.ok) {
+                const text = await response.text();
+                throw new Error(`Newsletter delivery failed: ${text || response.statusText}`);
+            }
+
+            const result = await response.json().catch(() => ({}));
+            return {
+                sent: true,
+                data: result,
+                error: null,
+                count: recipients.length,
+                message: result.message || `Newsletter sent to ${recipients.length} subscribers`,
+            };
+        } catch (error) {
+            return {
+                sent: false,
+                data: null,
+                error,
+                count: recipients.length,
+            };
+        }
+    }
+
+    async function createListing(listingData) {
+        const client = getClient();
+        if (!client) return { data: null, error: new Error('Supabase not initialized') };
+
+        try {
+            const { data, error } = await client
+                .from('listings')
+                .insert(listingData)
+                .select()
+                .single();
+
+            if (error) throw error;
+            return { data, error: null };
+        } catch (error) {
+            return { data: null, error };
+        }
+    }
+
+    async function updateListing(id, updates) {
+        const client = getClient();
+        if (!client) return { data: null, error: new Error('Supabase not initialized') };
+
+        try {
+            const { data, error } = await client
+                .from('listings')
+                .update(updates)
+                .eq('id', id)
+                .select()
+                .single();
+
+            if (error) throw error;
+            return { data, error: null };
+        } catch (error) {
+            return { data: null, error };
+        }
+    }
+
+    async function deleteListing(id) {
+        const client = getClient();
+        if (!client) return { error: new Error('Supabase not initialized') };
+
+        try {
+            const { error } = await client
+                .from('listings')
+                .delete()
+                .eq('id', id);
+
+            if (error) throw error;
+            return { error: null };
+        } catch (error) {
+            return { error };
+        }
+    }
+
+    // ============================================
+    // SITE SETTINGS: CONTACT INFO & SOCIAL LINKS
+    // ============================================
+    async function getSiteSettings() {
+        const client = getClient();
+        if (!client) return { data: null, error: new Error('Supabase not initialized') };
+
+        try {
+            const { data, error } = await client
+                .from('site_settings')
+                .select('*')
+                .single();
+
+            if (error) throw error;
+            return { data, error: null };
+        } catch (error) {
+            return { data: null, error };
+        }
+    }
+
+    async function updateSiteSettings(updates) {
+        const client = getClient();
+        if (!client) return { data: null, error: new Error('Supabase not initialized') };
+
+        try {
+            const { data, error } = await client
+                .from('site_settings')
+                .upsert(updates)
+                .select()
+                .single();
+
+            if (error) throw error;
+            return { data, error: null };
+        } catch (error) {
+            return { data: null, error };
+        }
+    }
+
+    // ============================================
     // AUTH GUARD: PROTECT DASHBOARD PAGES
     // ============================================
     async function requireAuth(options = {}) {
         const client = getClient();
         if (!client) {
             console.warn('Supabase not initialized');
-            return { authenticated: false, redirect: options.redirectTo || '../auth/signin.html' };
+            return { authenticated: false, redirect: options.redirectTo || '/user/auth/signin.html' };
         }
 
         try {
@@ -272,7 +1069,7 @@ const EtchSupabase = (function () {
             if (error || !session) {
                 return {
                     authenticated: false,
-                    redirect: options.redirectTo || '../auth/signin.html',
+                    redirect: options.redirectTo || '/user/auth/signin.html',
                     error: error || new Error('No active session')
                 };
             }
@@ -289,7 +1086,7 @@ const EtchSupabase = (function () {
         } catch (error) {
             return {
                 authenticated: false,
-                redirect: options.redirectTo || '../auth/signin.html',
+                redirect: options.redirectTo || '/user/auth/signin.html',
                 error: error
             };
         }
@@ -307,11 +1104,46 @@ const EtchSupabase = (function () {
         resetPassword,
         updatePassword,
         getCurrentUser,
+        countRows,
         getSession,
         onAuthStateChange,
         getProfile,
         updateProfile,
+        uploadFile,
+        listFiles,
+        removeFile,
+        getPublicUrl,
         requireAuth,
+        getListings,
+        getListingBySlug,
+        getListingById,
+        searchListings,
+        getStats,
+        getFeaturedListings,
+        getSiteSettings,
+        updateSiteSettings,
+        subscribeToNewsletter,
+        getNewsletterSubscribers,
+        sendNewsletterCampaign,
+        createListing,
+        updateListing,
+        deleteListing,
+        // Masterclass: Authors
+        getAuthors,
+        createAuthor,
+        updateAuthor,
+        deleteAuthor,
+        // Masterclass: Categories
+        getCategories,
+        createCategory,
+        updateCategory,
+        deleteCategory,
+        // Masterclass: Articles
+        getArticles,
+        getArticleBySlug,
+        createArticle,
+        updateArticle,
+        deleteArticle,
     };
 
     window.EtchSupabase = api;

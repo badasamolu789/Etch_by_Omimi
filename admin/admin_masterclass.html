@@ -105,12 +105,12 @@
             <!-- ========================================== -->
             <div class="px-6 md:px-8 pt-4">
                 <nav class="flex items-center gap-2 text-sm text-slate/60 dark:text-gray-500">
-                    <a href="/admin/dashboard.html"
+                    <a href="/admin/index.html"
                         class="hover:text-ink dark:hover:text-white transition-colors duration-200">Dashboard</a>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
-                    <a href="/admin/masterclass/index.html"
+                    <a href="/admin/admin_masterclass.html"
                         class="hover:text-ink dark:hover:text-white transition-colors duration-200">Masterclass</a>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -131,7 +131,8 @@
                                 <span class="w-1.5 h-1.5 rounded-full bg-olive animate-pulse"></span>
                                 ✦ Content Management
                             </span>
-                            <span class="text-xs text-slate/60 dark:text-gray-500">📝 48 total articles</span>
+                            <span class="text-xs text-slate/60 dark:text-gray-500" id="articleCount">📝 0 total
+                                articles</span>
                         </div>
                         <h2 class="font-display text-3xl md:text-4xl font-bold text-ink dark:text-white leading-tight">
                             All <span class="relative inline-block">
@@ -145,7 +146,7 @@
                         </p>
                     </div>
                     <div class="flex flex-wrap items-center gap-3 flex-shrink-0 animate-slide-up-delay">
-                        <a href="create.html"
+                        <a href="create_article.html"
                             class="group inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-olive to-lavender text-white rounded-2xl font-medium hover:shadow-xl hover:shadow-olive/20 hover:-translate-y-0.5 transition-all duration-300">
                             <svg class="w-4 h-4 group-hover:rotate-90 transition-transform duration-300" fill="none"
                                 stroke="currentColor" viewBox="0 0 24 24">
@@ -182,7 +183,7 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="text-xl font-bold text-ink dark:text-white">48</p>
+                            <p id="articlesTotalStat" class="text-xl font-bold text-ink dark:text-white">0</p>
                             <p class="text-xs text-slate/60 dark:text-gray-500">Total</p>
                         </div>
                     </div>
@@ -199,7 +200,7 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="text-xl font-bold text-emerald-500">39</p>
+                            <p id="articlesPublishedStat" class="text-xl font-bold text-emerald-500">0</p>
                             <p class="text-xs text-slate/60 dark:text-gray-500">Published</p>
                         </div>
                     </div>
@@ -325,11 +326,11 @@
                     <div
                         class="flex items-center justify-between px-6 py-4 border-b border-border/60 dark:border-white/10">
                         <div class="flex items-center gap-3">
-                            <span class="text-sm font-medium text-ink dark:text-white">48 Articles</span>
+                            <span class="text-sm font-medium text-ink dark:text-white">0 Articles</span>
                             <span class="text-xs text-slate/60 dark:text-gray-500">Sorted by latest</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span class="text-xs text-slate/60 dark:text-gray-500">Showing 1-10</span>
+                            <span class="text-xs text-slate/60 dark:text-gray-500">Showing 0</span>
                         </div>
                     </div>
 
@@ -362,419 +363,8 @@
                                         Actions</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-border/60 dark:divide-white/10">
-
-                                <!-- Article 1 - Published, Featured -->
-                                <tr
-                                    class="group hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-150">
-                                    <td class="px-6 py-3.5">
-                                        <div class="flex items-center gap-3">
-                                            <div
-                                                class="w-10 h-10 rounded-xl bg-gradient-to-br from-olive/10 to-emerald-500/10 flex-shrink-0 overflow-hidden">
-                                                <img src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?auto=format&fit=crop&w=100&q=80"
-                                                    alt="Article" class="w-full h-full object-cover" />
-                                            </div>
-                                            <div>
-                                                <span
-                                                    class="font-medium text-ink dark:text-white group-hover:text-olive transition-colors duration-200">How
-                                                    to Build a Screenplay Producers Want</span>
-                                                <p class="text-xs text-slate/40 truncate max-w-xs">
-                                                    /masterclass/article/how-to-build-a-screenplay-producers-want</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-3.5">
-                                        <span
-                                            class="inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-gradient-to-r from-olive/10 to-emerald-500/10 text-olive">Screenwriting</span>
-                                    </td>
-                                    <td class="px-6 py-3.5 text-ink dark:text-white">Etch Editorial</td>
-                                    <td class="px-6 py-3.5">
-                                        <span
-                                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/10 text-emerald-600">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                                            Published
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">Aug 6, 2026</td>
-                                    <td class="px-6 py-3.5 text-center">
-                                        <span class="inline-flex items-center gap-1 text-emerald-500">
-                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                                <path
-                                                    d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-                                            </svg>
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-3.5 text-right">
-                                        <div class="flex items-center justify-end gap-1">
-                                            <a href="#"
-                                                class="p-1.5 text-slate/40 hover:text-olive transition-colors duration-200 rounded-lg hover:bg-olive/10"
-                                                title="Edit">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                                </svg>
-                                            </a>
-                                            <a href="#"
-                                                class="p-1.5 text-slate/40 hover:text-olive transition-colors duration-200 rounded-lg hover:bg-olive/10"
-                                                title="Preview">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                                </svg>
-                                            </a>
-                                            <button
-                                                class="p-1.5 text-slate/40 hover:text-blue-500 transition-colors duration-200 rounded-lg hover:bg-blue-50"
-                                                title="Duplicate">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                                                </svg>
-                                            </button>
-                                            <button
-                                                class="p-1.5 text-slate/40 hover:text-coral transition-colors duration-200 rounded-lg hover:bg-coral/10"
-                                                title="Delete">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Article 2 - Draft -->
-                                <tr
-                                    class="group hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-150">
-                                    <td class="px-6 py-3.5">
-                                        <div class="flex items-center gap-3">
-                                            <div
-                                                class="w-10 h-10 rounded-xl bg-gradient-to-br from-mint/10 to-blue-500/10 flex-shrink-0 overflow-hidden">
-                                                <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=100&q=80"
-                                                    alt="Article" class="w-full h-full object-cover" />
-                                            </div>
-                                            <div>
-                                                <span
-                                                    class="font-medium text-ink dark:text-white group-hover:text-olive transition-colors duration-200">The
-                                                    Future of Film Distribution</span>
-                                                <p class="text-xs text-slate/40 truncate max-w-xs">
-                                                    /masterclass/article/the-future-of-film-distribution</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-3.5">
-                                        <span
-                                            class="inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-gradient-to-r from-mint/10 to-blue-500/10 text-mint">Industry</span>
-                                    </td>
-                                    <td class="px-6 py-3.5 text-ink dark:text-white">Samuel Ade</td>
-                                    <td class="px-6 py-3.5">
-                                        <span
-                                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-amber-500/10 text-amber-600">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
-                                            Draft
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">Aug 5, 2026</td>
-                                    <td class="px-6 py-3.5 text-center text-slate/30">—</td>
-                                    <td class="px-6 py-3.5 text-right">
-                                        <div class="flex items-center justify-end gap-1">
-                                            <a href="#"
-                                                class="p-1.5 text-slate/40 hover:text-olive transition-colors duration-200 rounded-lg hover:bg-olive/10"
-                                                title="Edit">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                                </svg>
-                                            </a>
-                                            <a href="#"
-                                                class="p-1.5 text-slate/40 hover:text-olive transition-colors duration-200 rounded-lg hover:bg-olive/10"
-                                                title="Preview">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                                </svg>
-                                            </a>
-                                            <button
-                                                class="p-1.5 text-slate/40 hover:text-blue-500 transition-colors duration-200 rounded-lg hover:bg-blue-50"
-                                                title="Duplicate">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                                                </svg>
-                                            </button>
-                                            <button
-                                                class="p-1.5 text-slate/40 hover:text-coral transition-colors duration-200 rounded-lg hover:bg-coral/10"
-                                                title="Delete">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Article 3 - Published -->
-                                <tr
-                                    class="group hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-150">
-                                    <td class="px-6 py-3.5">
-                                        <div class="flex items-center gap-3">
-                                            <div
-                                                class="w-10 h-10 rounded-xl bg-gradient-to-br from-lavender/10 to-purple-500/10 flex-shrink-0 overflow-hidden">
-                                                <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=100&q=80"
-                                                    alt="Article" class="w-full h-full object-cover" />
-                                            </div>
-                                            <div>
-                                                <span
-                                                    class="font-medium text-ink dark:text-white group-hover:text-olive transition-colors duration-200">Licensing
-                                                    Music for Film: A Complete Guide</span>
-                                                <p class="text-xs text-slate/40 truncate max-w-xs">
-                                                    /masterclass/article/licensing-music-for-film-guide</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-3.5">
-                                        <span
-                                            class="inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-gradient-to-r from-lavender/10 to-purple-500/10 text-lavender">Licensing</span>
-                                    </td>
-                                    <td class="px-6 py-3.5 text-ink dark:text-white">Amara Oke</td>
-                                    <td class="px-6 py-3.5">
-                                        <span
-                                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/10 text-emerald-600">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                                            Published
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">Aug 4, 2026</td>
-                                    <td class="px-6 py-3.5 text-center text-slate/30">—</td>
-                                    <td class="px-6 py-3.5 text-right">
-                                        <div class="flex items-center justify-end gap-1">
-                                            <a href="#"
-                                                class="p-1.5 text-slate/40 hover:text-olive transition-colors duration-200 rounded-lg hover:bg-olive/10"
-                                                title="Edit">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                                </svg>
-                                            </a>
-                                            <a href="#"
-                                                class="p-1.5 text-slate/40 hover:text-olive transition-colors duration-200 rounded-lg hover:bg-olive/10"
-                                                title="Preview">
-                                                <svg class="w-4 h-4" fill"none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                                </svg>
-                                            </a>
-                                            <button
-                                                class="p-1.5 text-slate/40 hover:text-blue-500 transition-colors duration-200 rounded-lg hover:bg-blue-50"
-                                                title="Duplicate">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                                                </svg>
-                                            </button>
-                                            <button
-                                                class="p-1.5 text-slate/40 hover:text-coral transition-colors duration-200 rounded-lg hover:bg-coral/10"
-                                                title="Delete">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Article 4 - Scheduled -->
-                                <tr
-                                    class="group hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-150">
-                                    <td class="px-6 py-3.5">
-                                        <div class="flex items-center gap-3">
-                                            <div
-                                                class="w-10 h-10 rounded-xl bg-gradient-to-br from-peach/10 to-coral/10 flex-shrink-0 overflow-hidden">
-                                                <img src="https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?auto=format&fit=crop&w=100&q=80"
-                                                    alt="Article" class="w-full h-full object-cover" />
-                                            </div>
-                                            <div>
-                                                <span
-                                                    class="font-medium text-ink dark:text-white group-hover:text-olive transition-colors duration-200">The
-                                                    Art of Storyboarding: A Visual Guide</span>
-                                                <p class="text-xs text-slate/40 truncate max-w-xs">
-                                                    /masterclass/article/the-art-of-storyboarding-guide</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-3.5">
-                                        <span
-                                            class="inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-gradient-to-r from-peach/10 to-coral/10 text-peach">Storyboarding</span>
-                                    </td>
-                                    <td class="px-6 py-3.5 text-ink dark:text-white">Etch Editorial</td>
-                                    <td class="px-6 py-3.5">
-                                        <span
-                                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-blue-500/10 text-blue-600">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
-                                            Scheduled
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">Aug 10, 2026</td>
-                                    <td class="px-6 py-3.5 text-center text-slate/30">—</td>
-                                    <td class="px-6 py-3.5 text-right">
-                                        <div class="flex items-center justify-end gap-1">
-                                            <a href="#"
-                                                class="p-1.5 text-slate/40 hover:text-olive transition-colors duration-200 rounded-lg hover:bg-olive/10"
-                                                title="Edit">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                                </svg>
-                                            </a>
-                                            <a href="#"
-                                                class="p-1.5 text-slate/40 hover:text-olive transition-colors duration-200 rounded-lg hover:bg-olive/10"
-                                                title="Preview">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                                </svg>
-                                            </a>
-                                            <button
-                                                class="p-1.5 text-slate/40 hover:text-blue-500 transition-colors duration-200 rounded-lg hover:bg-blue-50"
-                                                title="Duplicate">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                                                </svg>
-                                            </button>
-                                            <button
-                                                class="p-1.5 text-slate/40 hover:text-coral transition-colors duration-200 rounded-lg hover:bg-coral/10"
-                                                title="Delete">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Article 5 - Published -->
-                                <tr
-                                    class="group hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-150">
-                                    <td class="px-6 py-3.5">
-                                        <div class="flex items-center gap-3">
-                                            <div
-                                                class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500/10 to-mint/10 flex-shrink-0 overflow-hidden">
-                                                <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=100&q=80"
-                                                    alt="Article" class="w-full h-full object-cover" />
-                                            </div>
-                                            <div>
-                                                <span
-                                                    class="font-medium text-ink dark:text-white group-hover:text-olive transition-colors duration-200">Creative
-                                                    Business: Pricing Your Work</span>
-                                                <p class="text-xs text-slate/40 truncate max-w-xs">
-                                                    /masterclass/article/creative-business-pricing-work</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-3.5">
-                                        <span
-                                            class="inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-gradient-to-r from-emerald-500/10 to-mint/10 text-emerald-500">Business</span>
-                                    </td>
-                                    <td class="px-6 py-3.5 text-ink dark:text-white">Samuel Ade</td>
-                                    <td class="px-6 py-3.5">
-                                        <span
-                                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/10 text-emerald-600">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                                            Published
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">Aug 2, 2026</td>
-                                    <td class="px-6 py-3.5 text-center text-slate/30">—</td>
-                                    <td class="px-6 py-3.5 text-right">
-                                        <div class="flex items-center justify-end gap-1">
-                                            <a href="#"
-                                                class="p-1.5 text-slate/40 hover:text-olive transition-colors duration-200 rounded-lg hover:bg-olive/10"
-                                                title="Edit">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                                </svg>
-                                            </a>
-                                            <a href="#"
-                                                class="p-1.5 text-slate/40 hover:text-olive transition-colors duration-200 rounded-lg hover:bg-olive/10"
-                                                title="Preview">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                                </svg>
-                                            </a>
-                                            <button
-                                                class="p-1.5 text-slate/40 hover:text-blue-500 transition-colors duration-200 rounded-lg hover:bg-blue-50"
-                                                title="Duplicate">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                                                </svg>
-                                            </button>
-                                            <button
-                                                class="p-1.5 text-slate/40 hover:text-coral transition-colors duration-200 rounded-lg hover:bg-coral/10"
-                                                title="Delete">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
+                            <tbody id="articlesTableBody" class="divide-y divide-border/60 dark:divide-white/10">
+                                <!-- Articles loaded dynamically from Supabase -->
                             </tbody>
                         </table>
                     </div>
@@ -782,9 +372,10 @@
                     <!-- Table Footer -->
                     <div
                         class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-6 py-4 border-t border-border/60 dark:border-white/10 bg-gradient-to-r from-olive/5 to-transparent">
-                        <span class="text-xs text-slate/60 dark:text-gray-500">Showing 1-5 of 48 articles</span>
+                        <span class="text-xs text-slate/60 dark:text-gray-500" id="articlesShowing">Showing 0
+                            articles</span>
                         <div class="flex items-center gap-3">
-                            <span class="text-xs text-slate/40">Page 1 of 10</span>
+                            <span class="text-xs text-slate/40">Live results</span>
                             <div class="flex items-center gap-1">
                                 <button
                                     class="w-8 h-8 rounded-xl border border-border/60 dark:border-white/10 text-slate/40 hover:bg-white/60 hover:border-olive/30 transition-all duration-200 flex items-center justify-center text-sm disabled:opacity-40"
@@ -824,7 +415,15 @@
     <!-- SCRIPTS -->
     <!-- ============================================ -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="/scripts/global.js"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script>
+        window.__ETCH_SUPABASE__ = window.__ETCH_SUPABASE__ || {
+            url: 'https://cyoddvehzrmhubmislbb.supabase.co',
+            anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5b2RkdmVoenJtaHVibWlzbGJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUxNjI3MTQsImV4cCI6MjEwMDczODcxNH0.YaUyKP9f3tpKDny78_k_ka70zkFZe58GAFOo5oFFaFI',
+        };
+    </script>
+    <script src="/script/supabase.js"></script>
+    <script src="/script/script.js"></script>
     <script src="script/admin.js?v=20260806-components1"></script>
 
     <script>
@@ -833,6 +432,157 @@
 
         // Set page title dynamically
         document.addEventListener('admin:components-ready', function () { const title = document.querySelector('.greeting h1'); if (title) title.textContent = 'Articles'; });
+
+        // ==========================================
+        // LOAD ARTICLES FROM SUPABASE
+        // ==========================================
+        async function loadArticles() {
+            const tbody = document.getElementById('articlesTableBody');
+            const countEl = document.getElementById('articleCount');
+            const showingEl = document.getElementById('articlesShowing');
+
+            if (!tbody) return;
+
+            if (typeof EtchSupabase === 'undefined') {
+                tbody.innerHTML = getEmptyRow('Supabase not configured');
+                return;
+            }
+
+            try {
+                const { data, error } = await EtchSupabase.getArticles();
+
+                if (error) {
+                    console.error('Error loading articles:', error);
+                    tbody.innerHTML = getEmptyRow('Failed to load articles');
+                    return;
+                }
+
+                const articles = data || [];
+                const publishedCount = articles.filter(article => article.status === 'published').length;
+                document.getElementById('articlesTotalStat')?.replaceChildren(String(articles.length));
+                document.getElementById('articlesPublishedStat')?.replaceChildren(String(publishedCount));
+                if (countEl) countEl.textContent = `📝 ${articles.length} total articles`;
+                if (showingEl) showingEl.textContent = `Showing ${articles.length} articles`;
+
+                if (!articles.length) {
+                    tbody.innerHTML = getEmptyRow('No articles yet. Create your first article to get started.');
+                    return;
+                }
+
+                tbody.innerHTML = articles.map(article => {
+                    const category = article.category?.name || 'Uncategorized';
+                    const author = article.author?.name || 'Unknown';
+                    const statusColors = {
+                        'published': 'bg-emerald-500/10 text-emerald-600',
+                        'draft': 'bg-amber-500/10 text-amber-600',
+                        'scheduled': 'bg-blue-500/10 text-blue-600',
+                        'archived': 'bg-slate-500/10 text-slate-600'
+                    };
+                    const statusDot = {
+                        'published': 'bg-emerald-500',
+                        'draft': 'bg-amber-500 animate-pulse',
+                        'scheduled': 'bg-blue-500',
+                        'archived': 'bg-slate-500'
+                    };
+                    const statusClass = statusColors[article.status] || statusColors['draft'];
+                    const dotClass = statusDot[article.status] || statusDot['draft'];
+                    const date = article.published_at ? new Date(article.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—';
+
+                    return `
+                        <tr class="group hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-150">
+                            <td class="px-6 py-3.5">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-olive/10 to-emerald-500/10 flex-shrink-0 overflow-hidden">
+                                        ${article.featured_image
+                            ? `<img src="${article.featured_image}" alt="" class="w-full h-full object-cover" />`
+                            : `<div class="w-full h-full flex items-center justify-center text-olive font-bold text-sm">${(article.title || 'A').charAt(0).toUpperCase()}</div>`
+                        }
+                                    </div>
+                                    <div>
+                                        <span class="font-medium text-ink dark:text-white group-hover:text-olive transition-colors duration-200">${article.title}</span>
+                                        <p class="text-xs text-slate/40 truncate max-w-xs">/masterclass/article/${article.slug}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-3.5">
+                                <span class="inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-gradient-to-r from-olive/10 to-emerald-500/10 text-olive">${category}</span>
+                            </td>
+                            <td class="px-6 py-3.5 text-ink dark:text-white">${author}</td>
+                            <td class="px-6 py-3.5">
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-medium ${statusClass}">
+                                    <span class="w-1.5 h-1.5 rounded-full ${dotClass}"></span>
+                                    ${article.status.charAt(0).toUpperCase() + article.status.slice(1)}
+                                </span>
+                            </td>
+                            <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">${date}</td>
+                            <td class="px-6 py-3.5 text-center">
+                                ${article.is_featured
+                            ? `<span class="inline-flex items-center gap-1 text-emerald-500">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                                        </svg>
+                                    </span>`
+                            : '<span class="text-slate/30">—</span>'
+                        }
+                            </td>
+                            <td class="px-6 py-3.5 text-right">
+                                <div class="flex items-center justify-end gap-1">
+                                    <a href="article.html?slug=${article.slug}" target="_blank"
+                                        class="p-1.5 text-slate/40 hover:text-olive transition-colors duration-200 rounded-lg hover:bg-olive/10" title="Preview">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                        </svg>
+                                    </a>
+                                    <button onclick="deleteArticle('${article.id}')"
+                                        class="p-1.5 text-slate/40 hover:text-coral transition-colors duration-200 rounded-lg hover:bg-coral/10" title="Delete">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            } catch (error) {
+                console.error('Error loading articles:', error);
+                tbody.innerHTML = getEmptyRow('Failed to load articles');
+            }
+        }
+
+        function getEmptyRow(message) {
+            return `
+                <tr>
+                    <td colspan="7" class="px-6 py-16">
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-olive/10 to-lavender/10 flex items-center justify-center mb-3">
+                                <svg class="w-8 h-8 text-olive" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                </svg>
+                            </div>
+                            <p class="text-sm font-medium text-ink dark:text-white mb-1">${message}</p>
+                            <a href="create_article.html" class="text-sm text-olive hover:text-olive-dark transition-colors duration-200 mt-2">Create your first article →</a>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }
+
+        async function deleteArticle(id) {
+            if (!confirm('Are you sure you want to delete this article?')) return;
+            const { error } = await EtchSupabase.deleteArticle(id);
+            if (error) {
+                alert('Failed to delete article: ' + error.message);
+                return;
+            }
+            loadArticles();
+        }
+
+        // Load articles when components are ready
+        document.addEventListener('admin:components-ready', loadArticles);
+        // Also try immediately in case components are already loaded
+        setTimeout(loadArticles, 500);
     </script>
 </body>
 

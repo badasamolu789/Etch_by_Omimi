@@ -157,18 +157,18 @@
             <!-- ========================================== -->
             <div class="px-6 md:px-8 pt-4">
                 <nav class="flex items-center gap-2 text-sm text-slate/60 dark:text-gray-500">
-                    <a href="/admin/dashboard.html"
+                    <a href="/admin/index.html"
                         class="hover:text-ink dark:hover:text-white transition-colors duration-200">Dashboard</a>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
-                    <a href="/admin/masterclass/index.html"
+                    <a href="/admin/admin_masterclass.html"
                         class="hover:text-ink dark:hover:text-white transition-colors duration-200">Masterclass</a>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
-                    <a href="index.html"
-                        class="hover:text-ink dark:hover:text-white transition-colors duration-200">Articles</a>
+                    <a href="/admin/category.html"
+                        class="hover:text-ink dark:hover:text-white transition-colors duration-200">Categories</a>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
@@ -272,7 +272,15 @@
                                             class="absolute left-4 top-1/2 -translate-y-1/2 text-xs text-slate/40">/masterclass/article/</span>
                                         <input type="text" id="articleSlug"
                                             placeholder="how-to-build-a-screenplay-producers-want" required
-                                            class="w-full pl-44 pr-4 py-3 bg-white/60 dark:bg-ink/60 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white placeholder:text-slate/40 focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200" />
+                                            class="w-full pl-44 pr-14 py-3 bg-white/60 dark:bg-ink/60 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white placeholder:text-slate/40 focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200" />
+                                        <button type="button" id="copySlugBtn"
+                                            class="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-lg bg-olive/10 hover:bg-olive/20 text-olive transition-all duration-200 group"
+                                            title="Copy slug">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                            </svg>
+                                        </button>
                                     </div>
                                     <p class="text-xs text-slate/40 mt-1.5">Auto-generated from title. Must be unique
                                         and URL-friendly.</p>
@@ -285,13 +293,7 @@
                                     </label>
                                     <select id="articleCategory" required
                                         class="w-full px-4 py-3 bg-white/60 dark:bg-ink/60 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200 appearance-none">
-                                        <option value="">Select Category</option>
-                                        <option value="screenwriting">Screenwriting</option>
-                                        <option value="creative-business">Creative Business</option>
-                                        <option value="licensing">Licensing</option>
-                                        <option value="industry-insights">Industry Insights</option>
-                                        <option value="career">Career</option>
-                                        <option value="storyboarding">Storyboarding</option>
+                                        <option value="">Loading categories...</option>
                                     </select>
                                     <p class="text-xs text-slate/40 mt-1.5">Select the primary category for this article
                                     </p>
@@ -304,10 +306,7 @@
                                     </label>
                                     <select id="articleAuthor" required
                                         class="w-full px-4 py-3 bg-white/60 dark:bg-ink/60 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200 appearance-none">
-                                        <option value="">Select Author</option>
-                                        <option value="etch-editorial">Etch Editorial</option>
-                                        <option value="samuel-ade">Samuel Ade</option>
-                                        <option value="amara-oke">Amara Oke</option>
+                                        <option value="">Loading authors...</option>
                                     </select>
                                     <p class="text-xs text-slate/40 mt-1.5">The person credited as the author</p>
                                 </div>
@@ -333,7 +332,7 @@
                             <label class="block text-sm font-medium text-ink dark:text-white mb-1.5">Featured
                                 Image</label>
                             <div
-                                class="border-2 border-dashed border-border/60 dark:border-white/10 rounded-2xl p-8 text-center hover:border-olive/40 transition-all duration-300 group">
+                                class="relative border-2 border-dashed border-border/60 dark:border-white/10 rounded-2xl p-8 text-center hover:border-olive/40 transition-all duration-300 group">
                                 <div class="flex flex-col items-center gap-3">
                                     <div
                                         class="w-16 h-16 rounded-2xl bg-gradient-to-br from-olive/20 to-lavender/20 flex items-center justify-center text-olive group-hover:scale-110 transition-transform duration-300">
@@ -347,12 +346,13 @@
                                         </p>
                                         <p class="text-xs text-slate/60 dark:text-gray-500">PNG, JPG, WEBP up to 5MB</p>
                                     </div>
-                                    <button type="button"
+                                    <button type="button" id="chooseArticleFeaturedImageBtn"
                                         class="px-4 py-2 text-sm font-medium bg-gradient-to-r from-olive to-lavender text-white rounded-full hover:shadow-xl hover:shadow-olive/20 transition-all duration-300">
                                         Choose Image
                                     </button>
                                 </div>
-                                <input type="file" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*" />
+                                <!-- File input hidden inside label area -->
+                                <input type="file" id="articleFeaturedImageInput" accept="image/*" class="hidden" />
                             </div>
                             <!-- Image Preview (hidden by default) -->
                             <div id="imagePreview"
@@ -506,13 +506,13 @@
                                             </div>
                                             <p class="text-xs text-slate/60 dark:text-gray-500">Upload OG Image
                                                 (1200x630 recommended)</p>
-                                            <button type="button"
+                                            <button type="button" id="chooseArticleOGImageBtn"
                                                 class="px-4 py-1.5 text-xs font-medium bg-gradient-to-r from-lavender to-purple-500 text-white rounded-full hover:shadow-xl transition-all duration-300">
                                                 Choose Image
                                             </button>
                                         </div>
-                                        <input type="file" class="absolute inset-0 opacity-0 cursor-pointer"
-                                            accept="image/*" />
+                                        <!-- File input -->
+                                        <input type="file" id="articleOGImageInput" accept="image/*" class="hidden" />
                                     </div>
                                 </div>
                             </div>
@@ -600,7 +600,15 @@
     <!-- SCRIPTS -->
     <!-- ============================================ -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="/scripts/global.js"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script>
+        window.__ETCH_SUPABASE__ = window.__ETCH_SUPABASE__ || {
+            url: 'https://cyoddvehzrmhubmislbb.supabase.co',
+            anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5b2RkdmVoenJtaHVibWlzbGJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUxNjI3MTQsImV4cCI6MjEwMDczODcxNH0.YaUyKP9f3tpKDny78_k_ka70zkFZe58GAFOo5oFFaFI',
+        };
+    </script>
+    <script src="/script/supabase.js"></script>
+    <script src="/script/script.js"></script>
     <script src="script/admin.js?v=20260806-components1"></script>
 
     <script>
@@ -669,14 +677,159 @@
         });
 
         // ==========================================
+        // COPY SLUG BUTTON
+        // ==========================================
+        const copySlugBtn = document.getElementById('copySlugBtn');
+        if (copySlugBtn) {
+            copySlugBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (slugInput.value) {
+                    // Copy to clipboard
+                    navigator.clipboard.writeText(slugInput.value).then(() => {
+                        // Visual feedback
+                        const originalHtml = copySlugBtn.innerHTML;
+                        copySlugBtn.innerHTML = `
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                        `;
+                        copySlugBtn.classList.add('bg-success/20', 'text-success');
+                        copySlugBtn.classList.remove('bg-olive/10', 'text-olive');
+
+                        // Restore original state after 2 seconds
+                        setTimeout(() => {
+                            copySlugBtn.innerHTML = originalHtml;
+                            copySlugBtn.classList.remove('bg-success/20', 'text-success');
+                            copySlugBtn.classList.add('bg-olive/10', 'text-olive');
+                        }, 2000);
+                    }).catch(() => {
+                        alert('Failed to copy slug');
+                    });
+                }
+            });
+        }
+
+        // ==========================================
+        // AUTO-GENERATE SEO DATA
+        // ==========================================
+        const seoTitleInput = document.getElementById('seoTitle');
+        const seoDescriptionInput = document.getElementById('seoDescription');
+        const canonicalUrlInput = document.getElementById('canonicalUrl');
+
+        // Track if SEO fields have been manually edited
+        if (seoTitleInput) seoTitleInput.dataset.autoGenerated = 'true';
+        if (seoDescriptionInput) seoDescriptionInput.dataset.autoGenerated = 'true';
+        if (canonicalUrlInput) canonicalUrlInput.dataset.autoGenerated = 'true';
+
+        // Auto-generate SEO Title from Article Title
+        if (titleInput && seoTitleInput) {
+            titleInput.addEventListener('input', function () {
+                if (seoTitleInput.dataset.autoGenerated === 'true') {
+                    const seoTitle = this.value.length > 0
+                        ? (this.value.length > 55 ? this.value.substring(0, 55) + '...' : this.value) + ' | ETCH Masterclass'
+                        : '';
+                    seoTitleInput.value = seoTitle;
+                }
+            });
+        }
+
+        // Mark SEO Title as manually edited
+        if (seoTitleInput) {
+            seoTitleInput.addEventListener('input', function () {
+                this.dataset.autoGenerated = 'false';
+            });
+        }
+
+        // Auto-generate SEO Description from Article Excerpt
+        const excerptInput = document.getElementById('articleExcerpt');
+        if (excerptInput && seoDescriptionInput) {
+            excerptInput.addEventListener('input', function () {
+                if (seoDescriptionInput.dataset.autoGenerated === 'true') {
+                    const excerpt = this.value;
+                    const seoDesc = excerpt.length > 0
+                        ? (excerpt.length > 155 ? excerpt.substring(0, 155) + '...' : excerpt)
+                        : '';
+                    seoDescriptionInput.value = seoDesc;
+                }
+            });
+        }
+
+        // Mark SEO Description as manually edited
+        if (seoDescriptionInput) {
+            seoDescriptionInput.addEventListener('input', function () {
+                this.dataset.autoGenerated = 'false';
+            });
+        }
+
+        // Helper function to update canonical URL
+        function updateCanonicalUrl() {
+            if (canonicalUrlInput && canonicalUrlInput.dataset.autoGenerated === 'true' && slugInput.value) {
+                const baseUrl = 'https://etch.omimi.com/masterclass/article';
+                canonicalUrlInput.value = baseUrl + '/' + slugInput.value;
+            }
+        }
+
+        // Auto-generate Canonical URL from Slug (both user input and when slug is auto-generated)
+        if (slugInput && canonicalUrlInput) {
+            // When user types in slug field
+            slugInput.addEventListener('input', updateCanonicalUrl);
+
+            // When slug is auto-generated from title, update canonical URL too
+            if (titleInput) {
+                titleInput.addEventListener('input', function () {
+                    setTimeout(updateCanonicalUrl, 0);
+                });
+            }
+        }
+
+        // ==========================================
         // IMAGE PREVIEW
         // ==========================================
-        const fileInput = document.querySelector('input[type="file"]');
+        const featuredFileInput = document.getElementById('articleFeaturedImageInput');
+        const ogFileInput = document.getElementById('articleOGImageInput');
+        const chooseArticleFeaturedImageBtn = document.getElementById('chooseArticleFeaturedImageBtn');
+        const chooseArticleOGImageBtn = document.getElementById('chooseArticleOGImageBtn');
         const imagePreview = document.getElementById('imagePreview');
         const previewImg = document.getElementById('previewImg');
 
-        if (fileInput) {
-            fileInput.addEventListener('change', function () {
+        async function uploadFeaturedImageIfNeeded() {
+            if (!featuredFileInput || !featuredFileInput.files || !featuredFileInput.files[0]) {
+                return null;
+            }
+
+            const file = featuredFileInput.files[0];
+            const safeName = (file.name || 'featured-image').replace(/\s+/g, '-').replace(/[^a-zA-Z0-9._-]/g, '');
+            const filePath = `masterclass-media/${Date.now()}-${Math.random().toString(36).slice(2, 10)}-${safeName}`;
+
+            let bucketName = 'masterclass-media';
+            let uploadResult = await EtchSupabase.uploadFile(bucketName, filePath, file, { upsert: true });
+            if (uploadResult.error && !uploadResult.error.message?.toLowerCase().includes('not found')) {
+                throw uploadResult.error;
+            }
+
+            if (uploadResult.error) {
+                bucketName = 'listing-media';
+                uploadResult = await EtchSupabase.uploadFile(bucketName, filePath, file, { upsert: true });
+            }
+
+            if (uploadResult.error) {
+                throw uploadResult.error;
+            }
+
+            const publicUrl = EtchSupabase.getPublicUrl(bucketName, filePath);
+            return publicUrl || null;
+        }
+
+        // Featured Image Upload
+        if (chooseArticleFeaturedImageBtn) {
+            chooseArticleFeaturedImageBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                featuredFileInput.click();
+            });
+        }
+
+        if (featuredFileInput) {
+            featuredFileInput.addEventListener('change', function () {
                 const file = this.files[0];
                 if (file) {
                     const reader = new FileReader();
@@ -689,11 +842,19 @@
             });
         }
 
+        // OG Image Upload
+        if (chooseArticleOGImageBtn) {
+            chooseArticleOGImageBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                ogFileInput.click();
+            });
+        }
+
         // Remove image preview
         document.querySelector('#imagePreview button')?.addEventListener('click', function () {
             imagePreview.classList.add('hidden');
             previewImg.src = '#';
-            if (fileInput) fileInput.value = '';
+            if (featuredFileInput) featuredFileInput.value = '';
         });
 
         // ==========================================
@@ -720,14 +881,62 @@
         });
 
         // ==========================================
+        // LOAD CATEGORIES & AUTHORS FOR DROPDOWNS
+        // ==========================================
+        async function loadFormOptions() {
+            const categorySelect = document.getElementById('articleCategory');
+            const authorSelect = document.getElementById('articleAuthor');
+
+            try {
+                // Load categories
+                const catResult = await EtchSupabase.getCategories({ status: 'active' });
+                if (catResult.data?.length) {
+                    categorySelect.innerHTML = '<option value="">Select Category</option>' +
+                        catResult.data.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+                } else {
+                    categorySelect.innerHTML = '<option value="">No categories available</option>';
+                    console.warn('No active categories found');
+                }
+
+                // Load authors
+                const authResult = await EtchSupabase.getAuthors({ status: 'active' });
+                if (authResult.data?.length) {
+                    authorSelect.innerHTML = '<option value="">Select Author</option>' +
+                        authResult.data.map(a => `<option value="${a.id}">${a.name}</option>`).join('');
+                } else {
+                    authorSelect.innerHTML = '<option value="">No authors available</option>';
+                    console.warn('No active authors found');
+                }
+            } catch (error) {
+                console.error('Error loading form options:', error);
+                categorySelect.innerHTML = '<option value="">Error loading categories</option>';
+                authorSelect.innerHTML = '<option value="">Error loading authors</option>';
+            }
+        }
+
+        // ==========================================
         // FORM SUBMISSION
         // ==========================================
         const form = document.getElementById('articleForm');
         const successMessage = document.getElementById('successMessage');
         const saveBtn = document.getElementById('saveBtn');
 
-        form.addEventListener('submit', function (e) {
+        form.addEventListener('submit', async function (e) {
             e.preventDefault();
+
+            // Validate that category and author are selected
+            const categoryId = document.getElementById('articleCategory').value;
+            const authorId = document.getElementById('articleAuthor').value;
+
+            if (!categoryId) {
+                alert('Please select a category');
+                return;
+            }
+
+            if (!authorId) {
+                alert('Please select an author');
+                return;
+            }
 
             // Get editor content
             let content = '';
@@ -737,25 +946,44 @@
                 content = document.querySelector('#articleContent').value;
             }
 
+            let featuredImageUrl = null;
+            try {
+                featuredImageUrl = await uploadFeaturedImageIfNeeded();
+            } catch (error) {
+                console.error('Featured image upload failed:', error);
+                alert('Featured image upload failed: ' + (error.message || 'Unknown error'));
+                saveBtn.innerHTML = `
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    Save Article
+                `;
+                saveBtn.disabled = false;
+                return;
+            }
+
             // Collect form data
             const formData = {
                 title: document.getElementById('articleTitle').value,
                 slug: document.getElementById('articleSlug').value,
-                category: document.getElementById('articleCategory').value,
-                author: document.getElementById('articleAuthor').value,
+                category_id: categoryId,
+                author_id: authorId,
                 excerpt: document.getElementById('articleExcerpt').value,
                 content: content,
-                readingTime: document.getElementById('readingTime').value,
-                isFeatured: document.getElementById('isFeatured').checked,
-                seoTitle: document.getElementById('seoTitle').value,
-                seoDescription: document.getElementById('seoDescription').value,
-                seoKeywords: document.getElementById('seoKeywords').value,
-                canonicalUrl: document.getElementById('canonicalUrl').value,
+                featured_image: featuredImageUrl,
+                reading_time: parseInt(document.getElementById('readingTime').value) || 5,
+                is_featured: document.getElementById('isFeatured').checked,
+                seo_title: document.getElementById('seoTitle').value,
+                seo_description: document.getElementById('seoDescription').value,
+                seo_keywords: document.getElementById('seoKeywords').value,
+                canonical_url: document.getElementById('canonicalUrl').value,
                 status: document.getElementById('articleStatus').value,
-                publishDate: document.getElementById('publishDate').value
+                published_at: document.getElementById('articleStatus').value === 'published'
+                    ? new Date().toISOString()
+                    : (document.getElementById('publishDate').value
+                        ? new Date(document.getElementById('publishDate').value).toISOString()
+                        : null)
             };
-
-            console.log('Article Data:', formData);
 
             // Show loading state
             saveBtn.innerHTML = `
@@ -766,8 +994,13 @@
             `;
             saveBtn.disabled = true;
 
-            // Simulate API call
-            setTimeout(() => {
+            try {
+                const { data, error } = await EtchSupabase.createArticle(formData);
+
+                if (error) {
+                    throw error;
+                }
+
                 // Reset button
                 saveBtn.innerHTML = `
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -785,8 +1018,28 @@
                 setTimeout(() => {
                     successMessage.classList.add('hidden');
                 }, 5000);
-            }, 1500);
+
+                // Reset form
+                form.reset();
+                if (featuredFileInput) featuredFileInput.value = '';
+                if (imagePreview) imagePreview.classList.add('hidden');
+                if (previewImg) previewImg.src = '#';
+                if (editor) editor.setData('');
+            } catch (error) {
+                console.error('Error saving article:', error);
+                saveBtn.innerHTML = `
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    Save Article
+                `;
+                saveBtn.disabled = false;
+                alert('Failed to save article: ' + (error.message || 'Unknown error'));
+            }
         });
+
+        // Load dropdown options on page load
+        loadFormOptions();
 
         // ==========================================
         // SAVE DRAFT BUTTON

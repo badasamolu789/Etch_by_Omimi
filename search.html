@@ -303,390 +303,61 @@
                     </div>
 
                     <!-- Results Grid -->
-                    <div class="grid sm:grid-cols-2 gap-6">
-
-                        <!-- Result 1 -->
-                        <div
-                            class="group bg-white dark:bg-ink/50 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
-                            <a href="product-detail.html" class="block">
-                                <div class="relative overflow-hidden">
-                                    <img src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?auto=format&fit=crop&w=400&q=80"
-                                        alt="Midnight Sun Pilot"
-                                        class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
-                                    <div class="absolute top-3 left-3 flex gap-2">
-                                        <span
-                                            class="px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Script</span>
-                                        <span
-                                            class="px-3 py-1 bg-olive/90 backdrop-blur-sm text-xs font-medium text-white rounded-full">Featured</span>
-                                    </div>
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-t from-ink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                        <span
-                                            class="px-4 py-2 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-sm font-medium text-ink dark:text-white rounded-xl">Quick
-                                            View</span>
-                                    </div>
-                                </div>
-                                <div class="p-4">
-                                    <div class="flex items-center justify-between mb-1">
-                                        <h3
-                                            class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200">
-                                            Midnight Sun Pilot</h3>
-                                        <span class="text-lg font-bold text-ink dark:text-white">$2,400</span>
-                                    </div>
-                                    <p class="text-sm text-slate dark:text-gray-400 line-clamp-2">A noir thriller set in
-                                        1980s Tokyo...</p>
-                                    <div
-                                        class="flex items-center justify-between mt-3 pt-3 border-t border-border dark:border-white/10">
-                                        <div class="flex items-center gap-2">
-                                            <div
-                                                class="w-6 h-6 rounded-full bg-olive/20 flex items-center justify-center text-[10px] font-bold text-olive">
-                                                DK</div>
-                                            <span class="text-xs text-slate dark:text-gray-400">@daniel_k</span>
-                                        </div>
-                                        <div class="flex items-center gap-3 text-xs text-slate dark:text-gray-400">
-                                            <span class="flex items-center gap-1">
-                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                                </svg>
-                                                142
-                                            </span>
-                                            <span class="flex items-center gap-1">
-                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                </svg>
-                                                98%
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+                    <div id="searchResultsGrid" class="grid sm:grid-cols-2 gap-6">
+                        <!-- Loading skeletons -->
+                        <div class="search-skeleton">
+                            <div class="skeleton h-48 w-full rounded-t-2xl"></div>
+                            <div class="p-4 space-y-3">
+                                <div class="skeleton h-4 w-3/4"></div>
+                                <div class="skeleton h-3 w-1/2"></div>
+                                <div class="skeleton h-3 w-full"></div>
+                                <div class="skeleton h-3 w-2/3"></div>
+                            </div>
                         </div>
-
-                        <!-- Result 2 -->
-                        <div
-                            class="group bg-white dark:bg-ink/50 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 delay-75">
-                            <a href="product-detail.html" class="block">
-                                <div class="relative overflow-hidden">
-                                    <img src="https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?auto=format&fit=crop&w=400&q=80"
-                                        alt="The Last Draft"
-                                        class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
-                                    <div class="absolute top-3 left-3 flex gap-2">
-                                        <span
-                                            class="px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Script</span>
-                                    </div>
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-t from-ink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                        <span
-                                            class="px-4 py-2 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-sm font-medium text-ink dark:text-white rounded-xl">Quick
-                                            View</span>
-                                    </div>
-                                </div>
-                                <div class="p-4">
-                                    <div class="flex items-center justify-between mb-1">
-                                        <h3
-                                            class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200">
-                                            The Last Draft</h3>
-                                        <span class="text-lg font-bold text-ink dark:text-white">$6,750</span>
-                                    </div>
-                                    <p class="text-sm text-slate dark:text-gray-400 line-clamp-2">A coming-of-age drama
-                                        set in New York...</p>
-                                    <div
-                                        class="flex items-center justify-between mt-3 pt-3 border-t border-border dark:border-white/10">
-                                        <div class="flex items-center gap-2">
-                                            <div
-                                                class="w-6 h-6 rounded-full bg-olive/20 flex items-center justify-center text-[10px] font-bold text-olive">
-                                                DK</div>
-                                            <span class="text-xs text-slate dark:text-gray-400">@daniel_k</span>
-                                        </div>
-                                        <div class="flex items-center gap-3 text-xs text-slate dark:text-gray-400">
-                                            <span class="flex items-center gap-1">
-                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                                </svg>
-                                                56
-                                            </span>
-                                            <span class="flex items-center gap-1">
-                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                </svg>
-                                                92%
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+                        <div class="search-skeleton">
+                            <div class="skeleton h-48 w-full rounded-t-2xl"></div>
+                            <div class="p-4 space-y-3">
+                                <div class="skeleton h-4 w-3/4"></div>
+                                <div class="skeleton h-3 w-1/2"></div>
+                                <div class="skeleton h-3 w-full"></div>
+                                <div class="skeleton h-3 w-2/3"></div>
+                            </div>
                         </div>
-
-                        <!-- Result 3 -->
-                        <div
-                            class="group bg-white dark:bg-ink/50 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 delay-150">
-                            <a href="product-detail.html" class="block">
-                                <div class="relative overflow-hidden">
-                                    <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=400&q=80"
-                                        alt="Frames of Lagos"
-                                        class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
-                                    <div class="absolute top-3 left-3 flex gap-2">
-                                        <span
-                                            class="px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Storyboard</span>
-                                    </div>
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-t from-ink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                        <span
-                                            class="px-4 py-2 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-sm font-medium text-ink dark:text-white rounded-xl">Quick
-                                            View</span>
-                                    </div>
-                                </div>
-                                <div class="p-4">
-                                    <div class="flex items-center justify-between mb-1">
-                                        <h3
-                                            class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200">
-                                            Frames of Lagos</h3>
-                                        <span class="text-lg font-bold text-ink dark:text-white">$3,200</span>
-                                    </div>
-                                    <p class="text-sm text-slate dark:text-gray-400 line-clamp-2">Storyboard for a
-                                        Lagos-based brand launch...</p>
-                                    <div
-                                        class="flex items-center justify-between mt-3 pt-3 border-t border-border dark:border-white/10">
-                                        <div class="flex items-center gap-2">
-                                            <div
-                                                class="w-6 h-6 rounded-full bg-olive/20 flex items-center justify-center text-[10px] font-bold text-olive">
-                                                AL</div>
-                                            <span class="text-xs text-slate dark:text-gray-400">@amara_art</span>
-                                        </div>
-                                        <div class="flex items-center gap-3 text-xs text-slate dark:text-gray-400">
-                                            <span class="flex items-center gap-1">
-                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                                </svg>
-                                                87
-                                            </span>
-                                            <span class="flex items-center gap-1">
-                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                </svg>
-                                                95%
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+                        <div class="search-skeleton">
+                            <div class="skeleton h-48 w-full rounded-t-2xl"></div>
+                            <div class="p-4 space-y-3">
+                                <div class="skeleton h-4 w-3/4"></div>
+                                <div class="skeleton h-3 w-1/2"></div>
+                                <div class="skeleton h-3 w-full"></div>
+                                <div class="skeleton h-3 w-2/3"></div>
+                            </div>
                         </div>
-
-                        <!-- Result 4 -->
-                        <div
-                            class="group bg-white dark:bg-ink/50 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 delay-200">
-                            <a href="product-detail.html" class="block">
-                                <div class="relative overflow-hidden">
-                                    <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=400&q=80"
-                                        alt="Rainline Sessions"
-                                        class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
-                                    <div class="absolute top-3 left-3 flex gap-2">
-                                        <span
-                                            class="px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Music</span>
-                                        <span
-                                            class="px-3 py-1 bg-warning/90 backdrop-blur-sm text-xs font-medium text-white rounded-full">Premium</span>
-                                    </div>
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-t from-ink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                        <span
-                                            class="px-4 py-2 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-sm font-medium text-ink dark:text-white rounded-xl">Quick
-                                            View</span>
-                                    </div>
-                                </div>
-                                <div class="p-4">
-                                    <div class="flex items-center justify-between mb-1">
-                                        <h3
-                                            class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200">
-                                            Rainline Sessions</h3>
-                                        <span class="text-lg font-bold text-ink dark:text-white">$8,000</span>
-                                    </div>
-                                    <p class="text-sm text-slate dark:text-gray-400 line-clamp-2">Ambient electronic
-                                        music for sync licensing...</p>
-                                    <div
-                                        class="flex items-center justify-between mt-3 pt-3 border-t border-border dark:border-white/10">
-                                        <div class="flex items-center gap-2">
-                                            <div
-                                                class="w-6 h-6 rounded-full bg-olive/20 flex items-center justify-center text-[10px] font-bold text-olive">
-                                                SA</div>
-                                            <span class="text-xs text-slate dark:text-gray-400">@sarah_audio</span>
-                                        </div>
-                                        <div class="flex items-center gap-3 text-xs text-slate dark:text-gray-400">
-                                            <span class="flex items-center gap-1">
-                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                                </svg>
-                                                64
-                                            </span>
-                                            <span class="flex items-center gap-1">
-                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                </svg>
-                                                97%
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+                        <div class="search-skeleton">
+                            <div class="skeleton h-48 w-full rounded-t-2xl"></div>
+                            <div class="p-4 space-y-3">
+                                <div class="skeleton h-4 w-3/4"></div>
+                                <div class="skeleton h-3 w-1/2"></div>
+                                <div class="skeleton h-3 w-full"></div>
+                                <div class="skeleton h-3 w-2/3"></div>
+                            </div>
                         </div>
-
-                        <!-- Result 5 -->
-                        <div
-                            class="group bg-white dark:bg-ink/50 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 delay-75">
-                            <a href="product-detail.html" class="block">
-                                <div class="relative overflow-hidden">
-                                    <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=400&q=80"
-                                        alt="City Above Water"
-                                        class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
-                                    <div class="absolute top-3 left-3 flex gap-2">
-                                        <span
-                                            class="px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Design</span>
-                                    </div>
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-t from-ink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                        <span
-                                            class="px-4 py-2 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-sm font-medium text-ink dark:text-white rounded-xl">Quick
-                                            View</span>
-                                    </div>
-                                </div>
-                                <div class="p-4">
-                                    <div class="flex items-center justify-between mb-1">
-                                        <h3
-                                            class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200">
-                                            City Above Water</h3>
-                                        <span class="text-lg font-bold text-ink dark:text-white">$15,000</span>
-                                    </div>
-                                    <p class="text-sm text-slate dark:text-gray-400 line-clamp-2">Concept art series for
-                                        a game studio pitch...</p>
-                                    <div
-                                        class="flex items-center justify-between mt-3 pt-3 border-t border-border dark:border-white/10">
-                                        <div class="flex items-center gap-2">
-                                            <div
-                                                class="w-6 h-6 rounded-full bg-olive/20 flex items-center justify-center text-[10px] font-bold text-olive">
-                                                DK</div>
-                                            <span class="text-xs text-slate dark:text-gray-400">@david_art</span>
-                                        </div>
-                                        <div class="flex items-center gap-3 text-xs text-slate dark:text-gray-400">
-                                            <span class="flex items-center gap-1">
-                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                                </svg>
-                                                201
-                                            </span>
-                                            <span class="flex items-center gap-1">
-                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                </svg>
-                                                91%
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+                        <div class="search-skeleton">
+                            <div class="skeleton h-48 w-full rounded-t-2xl"></div>
+                            <div class="p-4 space-y-3">
+                                <div class="skeleton h-4 w-3/4"></div>
+                                <div class="skeleton h-3 w-1/2"></div>
+                                <div class="skeleton h-3 w-full"></div>
+                                <div class="skeleton h-3 w-2/3"></div>
+                            </div>
                         </div>
-
-                        <!-- Result 6 -->
-                        <div
-                            class="group bg-white dark:bg-ink/50 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 delay-150">
-                            <a href="product-detail.html" class="block">
-                                <div class="relative overflow-hidden">
-                                    <img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=400&q=80"
-                                        alt="Neon Dreams"
-                                        class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
-                                    <div class="absolute top-3 left-3 flex gap-2">
-                                        <span
-                                            class="px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Motion</span>
-                                        <span
-                                            class="px-3 py-1 bg-success/90 backdrop-blur-sm text-xs font-medium text-white rounded-full">New</span>
-                                    </div>
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-t from-ink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                        <span
-                                            class="px-4 py-2 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-sm font-medium text-ink dark:text-white rounded-xl">Quick
-                                            View</span>
-                                    </div>
-                                </div>
-                                <div class="p-4">
-                                    <div class="flex items-center justify-between mb-1">
-                                        <h3
-                                            class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200">
-                                            Neon Dreams</h3>
-                                        <span class="text-lg font-bold text-ink dark:text-white">$4,500</span>
-                                    </div>
-                                    <p class="text-sm text-slate dark:text-gray-400 line-clamp-2">Motion graphics
-                                        package for tech brand...</p>
-                                    <div
-                                        class="flex items-center justify-between mt-3 pt-3 border-t border-border dark:border-white/10">
-                                        <div class="flex items-center gap-2">
-                                            <div
-                                                class="w-6 h-6 rounded-full bg-olive/20 flex items-center justify-center text-[10px] font-bold text-olive">
-                                                JL</div>
-                                            <span class="text-xs text-slate dark:text-gray-400">@jenny_creative</span>
-                                        </div>
-                                        <div class="flex items-center gap-3 text-xs text-slate dark:text-gray-400">
-                                            <span class="flex items-center gap-1">
-                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                                </svg>
-                                                189
-                                            </span>
-                                            <span class="flex items-center gap-1">
-                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                </svg>
-                                                94%
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+                        <div class="search-skeleton">
+                            <div class="skeleton h-48 w-full rounded-t-2xl"></div>
+                            <div class="p-4 space-y-3">
+                                <div class="skeleton h-4 w-3/4"></div>
+                                <div class="skeleton h-3 w-1/2"></div>
+                                <div class="skeleton h-3 w-full"></div>
+                                <div class="skeleton h-3 w-2/3"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -695,7 +366,8 @@
                     <!-- ============================================ -->
                     <div
                         class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-10 pt-6 border-t border-border/40 dark:border-white/10">
-                        <span class="text-sm text-slate dark:text-gray-400">Showing 1-6 of 42 results</span>
+                        <span class="text-sm text-slate dark:text-gray-400">Showing <span id="pageShowing">0</span> of
+                            <span id="pageTotal">0</span> results</span>
                         <div class="flex items-center gap-2">
                             <button
                                 class="px-4 py-2 rounded-xl border border-border/40 dark:border-white/10 text-slate dark:text-gray-400 hover:bg-stone dark:hover:bg-white/5 hover:text-ink dark:hover:text-white transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
@@ -748,11 +420,149 @@
 
         // Get search query from URL and display it
         const urlParams = new URLSearchParams(window.location.search);
-        const query = urlParams.get('q') || 'noir thriller';
+        const query = urlParams.get('q') || '';
 
         const searchQueryDisplay = document.getElementById('searchQueryDisplay');
         if (searchQueryDisplay) {
             searchQueryDisplay.textContent = '"' + query + '"';
+        }
+    </script>
+    <script>
+        window.__ETCH_SUPABASE__ = window.__ETCH_SUPABASE__ || {
+            url: 'https://cyoddvehzrmhubmislbb.supabase.co',
+            anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5b2RkdmVoenJtaHVibWlzbGJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUxNjI3MTQsImV4cCI6MjEwMDczODcxNH0.YaUyKP9f3tpKDny78_k_ka70zkFZe58GAFOo5oFFaFI',
+        };
+    </script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="script/supabase.js"></script>
+    <script>
+        async function loadSearchResults() {
+            if (!window.EtchSupabase) {
+                console.warn('EtchSupabase not available');
+                return;
+            }
+
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                const query = urlParams.get('q') || '';
+
+                const { data: results, error } = await window.EtchSupabase.searchListings(query, {
+                    limit: 24
+                });
+
+                if (error) {
+                    console.error('Error searching:', error);
+                    const grid = document.getElementById('searchResultsGrid');
+                    if (grid) {
+                        grid.innerHTML = `
+                            <div class="col-span-full text-center py-16">
+                                <div class="w-20 h-20 mx-auto rounded-2xl bg-stone dark:bg-white/5 flex items-center justify-center text-4xl mb-4">🔍</div>
+                                <h3 class="font-display text-xl font-bold text-ink dark:text-white">No results available</h3>
+                                <p class="text-slate dark:text-gray-400 mt-2">We couldn't load search results right now. Please try again later.</p>
+                            </div>
+                        `;
+                    }
+                    return;
+                }
+
+                const grid = document.getElementById('searchResultsGrid');
+                if (!grid) return;
+
+                const resultCount = document.getElementById('resultCount');
+                const resultSummary = document.getElementById('resultSummary');
+                const pageShowing = document.getElementById('pageShowing');
+                const pageTotal = document.getElementById('pageTotal');
+
+                const count = results?.length || 0;
+                if (resultCount) resultCount.textContent = count.toLocaleString();
+                if (resultSummary) resultSummary.textContent = `Found ${count.toLocaleString()} creative assets matching your search`;
+                if (pageShowing) pageShowing.textContent = count.toLocaleString();
+                if (pageTotal) pageTotal.textContent = count.toLocaleString();
+
+                if (!results || results.length === 0) {
+                    grid.innerHTML = '';
+                    const noResults = document.getElementById('noResults');
+                    if (noResults) noResults.classList.remove('hidden');
+                    return;
+                }
+
+                const noResults = document.getElementById('noResults');
+                if (noResults) noResults.classList.add('hidden');
+
+                grid.innerHTML = '';
+
+                results.forEach((listing, index) => {
+                    const delay = index * 75;
+                    const creatorName = listing.creator?.username || listing.creator?.full_name || 'Unknown';
+                    const creatorInitials = (creatorName || 'ET').slice(0, 2).toUpperCase();
+                    const imageUrl = listing.cover_url || 'https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?auto=format&fit=crop&w=400&q=80';
+                    const price = listing.price ? '$' + Number(listing.price).toLocaleString() : '$0';
+                    const category = listing.category ? listing.category.charAt(0).toUpperCase() + listing.category.slice(1) : 'Asset';
+                    const views = listing.views || 0;
+                    const slug = listing.slug || listing.id;
+
+                    const card = document.createElement('div');
+                    card.className = `group bg-white dark:bg-ink/50 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500`;
+                    card.style.animationDelay = `${delay}ms`;
+
+                    card.innerHTML = `
+                        <a href="product-detail.html?id=${slug}" class="block">
+                            <div class="relative overflow-hidden">
+                                <img src="${imageUrl}" alt="${listing.title || 'Creative work'}"
+                                    class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
+                                <div class="absolute top-3 left-3 flex gap-2">
+                                    <span class="px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">${category}</span>
+                                </div>
+                                <div class="absolute inset-0 bg-gradient-to-t from-ink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                    <span class="px-4 py-2 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-sm font-medium text-ink dark:text-white rounded-xl">Quick View</span>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <div class="flex items-center justify-between mb-1">
+                                    <h3 class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200 line-clamp-1">${listing.title || 'Untitled'}</h3>
+                                    <span class="text-lg font-bold text-ink dark:text-white">${price}</span>
+                                </div>
+                                <p class="text-sm text-slate dark:text-gray-400 line-clamp-2">${listing.description || ''}</p>
+                                <div class="flex items-center justify-between mt-3 pt-3 border-t border-border dark:border-white/10">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-6 h-6 rounded-full bg-olive/20 flex items-center justify-center text-[10px] font-bold text-olive">${creatorInitials}</div>
+                                        <span class="text-xs text-slate dark:text-gray-400">@${creatorName}</span>
+                                    </div>
+                                    <div class="flex items-center gap-3 text-xs text-slate dark:text-gray-400">
+                                        <span class="flex items-center gap-1">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                            </svg>
+                                            ${views.toLocaleString()}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    `;
+
+                    grid.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Failed to load search results:', error);
+                const grid = document.getElementById('searchResultsGrid');
+                if (grid) {
+                    grid.innerHTML = `
+                        <div class="col-span-full text-center py-16">
+                            <div class="w-20 h-20 mx-auto rounded-2xl bg-stone dark:bg-white/5 flex items-center justify-center text-4xl mb-4">🔍</div>
+                            <h3 class="font-display text-xl font-bold text-ink dark:text-white">No results available</h3>
+                            <p class="text-slate dark:text-gray-400 mt-2">We couldn't load search results right now. Please try again later.</p>
+                        </div>
+                    `;
+                }
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadSearchResults);
+        } else {
+            loadSearchResults();
         }
     </script>
     <script src="script/script.js"></script>

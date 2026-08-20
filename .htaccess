@@ -1,0 +1,18 @@
+# Enable mod_rewrite for clean extensionless URLs
+RewriteEngine On
+RewriteBase /
+
+# Serve directory index files when requesting the folder path
+DirectoryIndex index.html
+
+# Redirect explicit .html requests to the clean version
+RewriteCond %{THE_REQUEST} /([^.]+?)\.html[?\s] [NC]
+RewriteRule ^ %1 [R=301,L]
+
+# Do not rewrite existing files or directories
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Rewrite extensionless URLs to their .html counterparts
+RewriteRule ^([^.]+)$ $1.html [L]

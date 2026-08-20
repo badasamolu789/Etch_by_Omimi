@@ -170,18 +170,18 @@
 
                     <div class="flex items-center gap-8 pt-4 animate-slide-up-delay-3">
                         <div class="text-center">
-                            <span class="block text-3xl font-bold text-ink dark:text-white">500+</span>
+                            <span id="statCreators" class="block text-3xl font-bold text-ink dark:text-white">0</span>
                             <span class="text-sm text-slate dark:text-gray-400">Creators</span>
                         </div>
                         <div class="w-px h-12 bg-border dark:bg-white/10"></div>
                         <div class="text-center">
-                            <span class="block text-3xl font-bold text-ink dark:text-white">2.4k+</span>
+                            <span id="statAssets" class="block text-3xl font-bold text-ink dark:text-white">0</span>
                             <span class="text-sm text-slate dark:text-gray-400">Assets</span>
                         </div>
                         <div class="w-px h-12 bg-border dark:bg-white/10"></div>
                         <div class="text-center">
-                            <span class="block text-3xl font-bold text-ink dark:text-white">98%</span>
-                            <span class="text-sm text-slate dark:text-gray-400">Satisfaction</span>
+                            <span id="statArticles" class="block text-3xl font-bold text-ink dark:text-white">0</span>
+                            <span class="text-sm text-slate dark:text-gray-400">Articles</span>
                         </div>
                     </div>
                 </div>
@@ -278,7 +278,7 @@
                         </svg>
                     </div>
                     <h3 class="mt-3 font-semibold text-ink dark:text-white text-sm">Scripts</h3>
-                    <span class="text-xs text-slate dark:text-gray-400">2.4k+ assets</span>
+                    <span id="catScript" class="text-xs text-slate dark:text-gray-400">0 assets</span>
                 </a>
 
                 <!-- Category 2 -->
@@ -292,7 +292,7 @@
                         </svg>
                     </div>
                     <h3 class="mt-3 font-semibold text-ink dark:text-white text-sm">Storyboards</h3>
-                    <span class="text-xs text-slate dark:text-gray-400">1.2k+ assets</span>
+                    <span id="catStoryboard" class="text-xs text-slate dark:text-gray-400">0 assets</span>
                 </a>
 
                 <!-- Category 3 -->
@@ -306,7 +306,7 @@
                         </svg>
                     </div>
                     <h3 class="mt-3 font-semibold text-ink dark:text-white text-sm">Music</h3>
-                    <span class="text-xs text-slate dark:text-gray-400">3.1k+ assets</span>
+                    <span id="catMusic" class="text-xs text-slate dark:text-gray-400">0 assets</span>
                 </a>
 
                 <!-- Category 4 -->
@@ -320,7 +320,7 @@
                         </svg>
                     </div>
                     <h3 class="mt-3 font-semibold text-ink dark:text-white text-sm">Design</h3>
-                    <span class="text-xs text-slate dark:text-gray-400">1.8k+ assets</span>
+                    <span id="catDesign" class="text-xs text-slate dark:text-gray-400">0 assets</span>
                 </a>
 
                 <!-- Category 5 -->
@@ -334,7 +334,7 @@
                         </svg>
                     </div>
                     <h3 class="mt-3 font-semibold text-ink dark:text-white text-sm">Motion</h3>
-                    <span class="text-xs text-slate dark:text-gray-400">856+ assets</span>
+                    <span id="catMotion" class="text-xs text-slate dark:text-gray-400">0 assets</span>
                 </a>
 
                 <!-- Category 6 -->
@@ -348,8 +348,66 @@
                         </svg>
                     </div>
                     <h3 class="mt-3 font-semibold text-ink dark:text-white text-sm">Copy</h3>
-                    <span class="text-xs text-slate dark:text-gray-400">632+ assets</span>
+                    <span id="catCopy" class="text-xs text-slate dark:text-gray-400">0 assets</span>
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- MASTERCLASS SECTION -->
+    <!-- ============================================ -->
+    <section class="py-16 md:py-24 bg-stone dark:bg-white/5 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <span
+                        class="inline-block text-sm font-medium text-olive bg-olive/10 px-4 py-1 rounded-full">Masterclass</span>
+                    <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-ink dark:text-white">Learn
+                        the craft behind premium creative licensing</h2>
+                    <p class="text-slate dark:text-gray-400 max-w-xl leading-relaxed">Gain access to expert lessons,
+                        case studies, and creator workflows designed to help you scale your creative business and
+                        publish market-ready assets.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="masterclass.html"
+                            class="inline-flex items-center gap-2 px-8 py-4 bg-olive text-white rounded-2xl font-semibold hover:bg-olive-dark hover:-translate-y-1 transition-all duration-300">View
+                            Masterclass
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                        </a>
+                        <a href="about.html"
+                            class="inline-flex items-center gap-2 px-8 py-4 border-2 border-border text-ink dark:text-white rounded-2xl font-semibold hover:bg-slate/10 dark:hover:bg-white/10 transition-all duration-300">Explore
+                            the program</a>
+                    </div>
+                </div>
+                <div class="grid gap-4 sm:grid-cols-2">
+                    <div
+                        class="rounded-3xl bg-white dark:bg-ink/80 border border-border dark:border-white/10 p-6 shadow-sm hover:shadow-lg transition-shadow duration-300">
+                        <h3 class="font-semibold text-ink dark:text-white">Creative Playbooks</h3>
+                        <p class="text-sm text-slate dark:text-gray-400 mt-2">Actionable guides for scripts,
+                            storyboards, music, and design.</p>
+                    </div>
+                    <div
+                        class="rounded-3xl bg-white dark:bg-ink/80 border border-border dark:border-white/10 p-6 shadow-sm hover:shadow-lg transition-shadow duration-300">
+                        <h3 class="font-semibold text-ink dark:text-white">Licensing Strategies</h3>
+                        <p class="text-sm text-slate dark:text-gray-400 mt-2">Learn how to price, package, and license
+                            creative work effectively.</p>
+                    </div>
+                    <div
+                        class="rounded-3xl bg-white dark:bg-ink/80 border border-border dark:border-white/10 p-6 shadow-sm hover:shadow-lg transition-shadow duration-300">
+                        <h3 class="font-semibold text-ink dark:text-white">Creator Workflows</h3>
+                        <p class="text-sm text-slate dark:text-gray-400 mt-2">Build workflow templates that help you
+                            ship polished work faster.</p>
+                    </div>
+                    <div
+                        class="rounded-3xl bg-white dark:bg-ink/80 border border-border dark:border-white/10 p-6 shadow-sm hover:shadow-lg transition-shadow duration-300">
+                        <h3 class="font-semibold text-ink dark:text-white">Marketplace insights</h3>
+                        <p class="text-sm text-slate dark:text-gray-400 mt-2">Understand what buyers value most in
+                            premium creative assets.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -377,221 +435,42 @@
                 </a>
             </div>
 
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-                <!-- Card 1 -->
-                <div
-                    class="group bg-white dark:bg-ink/50 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
-                    <div class="relative overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?auto=format&fit=crop&w=400&q=80"
-                            alt="Midnight Sun Pilot"
-                            class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
-                        <div class="absolute top-3 left-3 flex gap-2">
-                            <span
-                                class="px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Script</span>
-                            <span
-                                class="px-3 py-1 bg-olive/90 backdrop-blur-sm text-xs font-medium text-white rounded-full">Featured</span>
-                        </div>
-                        <button
-                            class="absolute top-3 right-3 p-2 bg-white/90 dark:bg-ink/90 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-olive hover:text-white">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="p-5">
-                        <div class="flex items-center justify-between mb-2">
-                            <h3
-                                class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200">
-                                Midnight Sun Pilot</h3>
-                            <span class="text-lg font-bold text-ink dark:text-white">$2,400</span>
-                        </div>
-                        <p class="text-sm text-slate dark:text-gray-400 line-clamp-2">A noir thriller set in 1980s
-                            Tokyo...</p>
-                        <div
-                            class="flex items-center justify-between mt-4 pt-4 border-t border-border dark:border-white/10">
-                            <span class="text-xs text-slate dark:text-gray-400">by @daniel_k</span>
-                            <div class="flex items-center gap-3 text-xs text-slate dark:text-gray-400">
-                                <span class="flex items-center gap-1">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                    </svg>
-                                    142
-                                </span>
-                                <span class="flex items-center gap-1">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                    </svg>
-                                    27
-                                </span>
-                            </div>
-                        </div>
+            <div id="featuredWorksGrid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Loading skeletons -->
+                <div class="featured-skeleton">
+                    <div class="skeleton h-48 w-full rounded-t-2xl"></div>
+                    <div class="p-5 space-y-3">
+                        <div class="skeleton h-4 w-3/4"></div>
+                        <div class="skeleton h-3 w-1/2"></div>
+                        <div class="skeleton h-3 w-full"></div>
+                        <div class="skeleton h-3 w-2/3"></div>
                     </div>
                 </div>
-
-                <!-- Card 2 -->
-                <div
-                    class="group bg-white dark:bg-ink/50 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 delay-75">
-                    <div class="relative overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=400&q=80"
-                            alt="Frames of Lagos"
-                            class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
-                        <div class="absolute top-3 left-3 flex gap-2">
-                            <span
-                                class="px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Storyboard</span>
-                        </div>
-                        <button
-                            class="absolute top-3 right-3 p-2 bg-white/90 dark:bg-ink/90 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-olive hover:text-white">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="p-5">
-                        <div class="flex items-center justify-between mb-2">
-                            <h3
-                                class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200">
-                                Frames of Lagos</h3>
-                            <span class="text-lg font-bold text-ink dark:text-white">$3,200</span>
-                        </div>
-                        <p class="text-sm text-slate dark:text-gray-400 line-clamp-2">Storyboard for a Lagos-based brand
-                            launch...</p>
-                        <div
-                            class="flex items-center justify-between mt-4 pt-4 border-t border-border dark:border-white/10">
-                            <span class="text-xs text-slate dark:text-gray-400">by @amara_art</span>
-                            <div class="flex items-center gap-3 text-xs text-slate dark:text-gray-400">
-                                <span class="flex items-center gap-1">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                    </svg>
-                                    87
-                                </span>
-                                <span class="flex items-center gap-1">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                    </svg>
-                                    18
-                                </span>
-                            </div>
-                        </div>
+                <div class="featured-skeleton">
+                    <div class="skeleton h-48 w-full rounded-t-2xl"></div>
+                    <div class="p-5 space-y-3">
+                        <div class="skeleton h-4 w-3/4"></div>
+                        <div class="skeleton h-3 w-1/2"></div>
+                        <div class="skeleton h-3 w-full"></div>
+                        <div class="skeleton h-3 w-2/3"></div>
                     </div>
                 </div>
-
-                <!-- Card 3 -->
-                <div
-                    class="group bg-white dark:bg-ink/50 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 delay-150">
-                    <div class="relative overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=400&q=80"
-                            alt="Rainline Sessions"
-                            class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
-                        <div class="absolute top-3 left-3 flex gap-2">
-                            <span
-                                class="px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Music</span>
-                            <span
-                                class="px-3 py-1 bg-warning/90 backdrop-blur-sm text-xs font-medium text-white rounded-full">Premium</span>
-                        </div>
-                        <button
-                            class="absolute top-3 right-3 p-2 bg-white/90 dark:bg-ink/90 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-olive hover:text-white">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="p-5">
-                        <div class="flex items-center justify-between mb-2">
-                            <h3
-                                class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200">
-                                Rainline Sessions</h3>
-                            <span class="text-lg font-bold text-ink dark:text-white">$8,000</span>
-                        </div>
-                        <p class="text-sm text-slate dark:text-gray-400 line-clamp-2">Ambient electronic music for sync
-                            licensing...</p>
-                        <div
-                            class="flex items-center justify-between mt-4 pt-4 border-t border-border dark:border-white/10">
-                            <span class="text-xs text-slate dark:text-gray-400">by @sarah_audio</span>
-                            <div class="flex items-center gap-3 text-xs text-slate dark:text-gray-400">
-                                <span class="flex items-center gap-1">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                    </svg>
-                                    64
-                                </span>
-                                <span class="flex items-center gap-1">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                    </svg>
-                                    42
-                                </span>
-                            </div>
-                        </div>
+                <div class="featured-skeleton">
+                    <div class="skeleton h-48 w-full rounded-t-2xl"></div>
+                    <div class="p-5 space-y-3">
+                        <div class="skeleton h-4 w-3/4"></div>
+                        <div class="skeleton h-3 w-1/2"></div>
+                        <div class="skeleton h-3 w-full"></div>
+                        <div class="skeleton h-3 w-2/3"></div>
                     </div>
                 </div>
-
-                <!-- Card 4 -->
-                <div
-                    class="group bg-white dark:bg-ink/50 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 delay-200">
-                    <div class="relative overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=400&q=80"
-                            alt="City Above Water"
-                            class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
-                        <div class="absolute top-3 left-3 flex gap-2">
-                            <span
-                                class="px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Design</span>
-                        </div>
-                        <button
-                            class="absolute top-3 right-3 p-2 bg-white/90 dark:bg-ink/90 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-olive hover:text-white">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="p-5">
-                        <div class="flex items-center justify-between mb-2">
-                            <h3
-                                class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200">
-                                City Above Water</h3>
-                            <span class="text-lg font-bold text-ink dark:text-white">$15,000</span>
-                        </div>
-                        <p class="text-sm text-slate dark:text-gray-400 line-clamp-2">Concept art series for a game
-                            studio pitch...</p>
-                        <div
-                            class="flex items-center justify-between mt-4 pt-4 border-t border-border dark:border-white/10">
-                            <span class="text-xs text-slate dark:text-gray-400">by @david_art</span>
-                            <div class="flex items-center gap-3 text-xs text-slate dark:text-gray-400">
-                                <span class="flex items-center gap-1">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                    </svg>
-                                    201
-                                </span>
-                                <span class="flex items-center gap-1">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                    </svg>
-                                    56
-                                </span>
-                            </div>
-                        </div>
+                <div class="featured-skeleton">
+                    <div class="skeleton h-48 w-full rounded-t-2xl"></div>
+                    <div class="p-5 space-y-3">
+                        <div class="skeleton h-4 w-3/4"></div>
+                        <div class="skeleton h-3 w-1/2"></div>
+                        <div class="skeleton h-3 w-full"></div>
+                        <div class="skeleton h-3 w-2/3"></div>
                     </div>
                 </div>
             </div>
@@ -660,6 +539,246 @@
     </section>
 
     <!-- ============================================ -->
+    <!-- MASTERCLASS BLOG SECTION -->
+    <!-- ============================================ -->
+    <section class="py-16 md:py-24 bg-white dark:bg-ink transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between mb-12">
+                <div>
+                    <span
+                        class="inline-block text-sm font-medium text-olive bg-olive/10 px-4 py-1 rounded-full mb-4">Learn
+                        from experts</span>
+                    <h2 class="font-display text-3xl md:text-4xl font-bold text-ink dark:text-white">Insights from top
+                        creators</h2>
+                </div>
+                <a href="masterclass.html"
+                    class="group inline-flex items-center gap-2 text-olive font-medium hover:text-olive-dark transition-colors duration-200">
+                    View all
+                    <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                </a>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <!-- Blog Card 1 -->
+                <article
+                    class="group bg-stone dark:bg-white/5 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
+                    <div class="relative overflow-hidden h-40">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=400&q=80"
+                            alt="Writing Compelling Scripts"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <span
+                            class="absolute top-3 left-3 px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Article</span>
+                    </div>
+                    <div class="p-5">
+                        <h3
+                            class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200 line-clamp-2">
+                            Writing Compelling Scripts for Licensing</h3>
+                        <p class="text-sm text-slate dark:text-gray-400 mt-2 line-clamp-2">Master the art of scripting
+                            that sells. Learn what buyers look for and how to structure your work.</p>
+                        <div
+                            class="flex items-center justify-between mt-4 pt-4 border-t border-border dark:border-white/10">
+                            <span class="text-xs text-slate dark:text-gray-400">Alex Chen</span>
+                            <span class="text-xs text-slate dark:text-gray-400">5 min</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Card 2 -->
+                <article
+                    class="group bg-stone dark:bg-white/5 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 delay-75">
+                    <div class="relative overflow-hidden h-40">
+                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=80"
+                            alt="Pricing Your Creative Work"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <span
+                            class="absolute top-3 left-3 px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Article</span>
+                    </div>
+                    <div class="p-5">
+                        <h3
+                            class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200 line-clamp-2">
+                            Pricing Your Creative Work: Strategy Guide</h3>
+                        <p class="text-sm text-slate dark:text-gray-400 mt-2 line-clamp-2">Discover pricing strategies
+                            that maximize revenue without undercutting your value.</p>
+                        <div
+                            class="flex items-center justify-between mt-4 pt-4 border-t border-border dark:border-white/10">
+                            <span class="text-xs text-slate dark:text-gray-400">Sarah Rivera</span>
+                            <span class="text-xs text-slate dark:text-gray-400">7 min</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Card 3 -->
+                <article
+                    class="group bg-stone dark:bg-white/5 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 delay-150">
+                    <div class="relative overflow-hidden h-40">
+                        <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=400&q=80"
+                            alt="Building Your Creator Brand"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <span
+                            class="absolute top-3 left-3 px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Article</span>
+                    </div>
+                    <div class="p-5">
+                        <h3
+                            class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200 line-clamp-2">
+                            Building Your Creator Brand in 2025</h3>
+                        <p class="text-sm text-slate dark:text-gray-400 mt-2 line-clamp-2">Stand out in a crowded
+                            marketplace. Learn how successful creators build recognizable brands.</p>
+                        <div
+                            class="flex items-center justify-between mt-4 pt-4 border-t border-border dark:border-white/10">
+                            <span class="text-xs text-slate dark:text-gray-400">Marcus Johnson</span>
+                            <span class="text-xs text-slate dark:text-gray-400">6 min</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Card 4 -->
+                <article
+                    class="group bg-stone dark:bg-white/5 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 delay-200">
+                    <div class="relative overflow-hidden h-40">
+                        <img src="https://images.unsplash.com/photo-1522869635100-ce306dc11310?auto=format&fit=crop&w=400&q=80"
+                            alt="Licensing 101"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <span
+                            class="absolute top-3 left-3 px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Article</span>
+                    </div>
+                    <div class="p-5">
+                        <h3
+                            class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200 line-clamp-2">
+                            Licensing 101: Types & Contracts</h3>
+                        <p class="text-sm text-slate dark:text-gray-400 mt-2 line-clamp-2">Understand different
+                            licensing models and protect your work with the right agreements.</p>
+                        <div
+                            class="flex items-center justify-between mt-4 pt-4 border-t border-border dark:border-white/10">
+                            <span class="text-xs text-slate dark:text-gray-400">Emma Williams</span>
+                            <span class="text-xs text-slate dark:text-gray-400">8 min</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- NEWSLETTER CTA -->
+    <!-- ============================================ -->
+    <section class="relative py-20 md:py-32 overflow-hidden">
+        <!-- Gradient background -->
+        <div class="absolute inset-0 bg-gradient-to-b from-slate/5 via-ivory to-stone/10"></div>
+
+        <!-- Decorative elements -->
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-olive/5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-gold/3 rounded-full blur-3xl"></div>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Main container with asymmetric layout -->
+            <div class="grid gap-12 lg:gap-16 lg:grid-cols-2 items-center">
+                <!-- Left content -->
+                <div class="text-left space-y-6">
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-olive/10 border border-olive/20 w-fit">
+                        <svg class="w-4 h-4 text-olive" fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M3 1a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V1zm0 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V5zm0 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V9zm0 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1v-2z" />
+                        </svg>
+                        <span class="text-xs font-semibold uppercase tracking-wider text-olive">Weekly digest</span>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h2 class="font-display text-5xl md:text-6xl font-bold leading-tight text-charcoal">
+                            Stay inspired.<br />
+                            <span class="text-olive">Stay ahead.</span>
+                        </h2>
+                        <p class="text-lg text-slate/70 max-w-lg leading-relaxed">
+                            Join 500+ creators getting exclusive insights on licensing, storytelling, and building a
+                            sustainable creative business—delivered directly to your inbox.
+                        </p>
+                    </div>
+
+                    <!-- Trust indicators -->
+                    <div class="flex flex-wrap gap-6 pt-4">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-olive" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-sm text-slate/80">No spam, ever</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-olive" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-sm text-slate/80">Unsubscribe anytime</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right form with enhanced styling -->
+                <div class="relative">
+                    <!-- Subtle background card -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-white via-white to-ivory/50 rounded-[32px] shadow-lg">
+                    </div>
+                    <div
+                        class="absolute -inset-1 bg-gradient-to-br from-olive/10 to-gold/5 rounded-[32px] blur-2xl opacity-60">
+                    </div>
+
+                    <form id="landingNewsletterForm" class="relative p-8 md:p-10 rounded-[32px] space-y-5">
+                        <!-- Form header -->
+                        <div>
+                            <h3 class="font-display text-2xl font-bold text-charcoal">Subscribe today</h3>
+                            <p class="text-sm text-slate/60 mt-2">Get your first insight in 24 hours</p>
+                        </div>
+
+                        <!-- Email input with icon -->
+                        <div class="relative">
+                            <label for="landingNewsletterEmail"
+                                class="block text-xs font-semibold uppercase tracking-wider text-slate/70 mb-3">Email
+                                address</label>
+                            <div class="relative">
+                                <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-olive/40"
+                                    fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                                </svg>
+                                <input id="landingNewsletterEmail" type="email" required placeholder="you@example.com"
+                                    class="w-full pl-11 pr-4 py-3.5 rounded-xl border-2 border-slate/15 bg-slate/2 text-charcoal text-base outline-none transition duration-300 focus:border-olive focus:ring-2 focus:ring-olive/15 hover:border-slate/25" />
+                            </div>
+                        </div>
+
+                        <!-- Submit button with enhanced styling -->
+                        <button type="submit"
+                            class="group w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-olive to-olive-dark rounded-xl font-semibold text-white shadow-lg shadow-olive/20 hover:shadow-xl hover:shadow-olive/30 hover:-translate-y-0.5 transition-all duration-300 ease-out">
+                            <span>Subscribe</span>
+                            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                            </svg>
+                        </button>
+
+                        <!-- Status message -->
+                        <p id="landingNewsletterStatus" class="text-sm min-h-[20px] text-slate/70 text-center"></p>
+
+                        <!-- Privacy note -->
+                        <p class="text-xs text-slate/50 text-center">
+                            We respect your privacy. <a href="#" class="text-olive hover:underline">See our privacy
+                                policy</a>.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
     <!-- CTA SECTION -->
     <!-- ============================================ -->
     <section class="relative py-16 md:py-24 overflow-hidden">
@@ -704,12 +823,440 @@
     <div id="footer"></div>
 
     <!-- ============================================ -->
+    <!-- BACK TO TOP BUTTON -->
+    <!-- ============================================ -->
+    <button id="backToTop" aria-label="Back to top"
+        class="fixed bottom-8 right-8 z-50 p-3 bg-olive text-white rounded-full shadow-lg hover:bg-olive-dark hover:shadow-2xl hover:shadow-olive/30 hover:-translate-y-1 hover:scale-110 transition-all duration-300 opacity-0 invisible">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+        </svg>
+    </button>
+
+    <!-- ============================================ -->
     <!-- SCRIPTS -->
     <!-- ============================================ -->
+    <div id="newsletterModal"
+        class="fixed inset-0 z-[60] hidden items-center justify-center bg-ink/60 p-4 backdrop-blur-sm">
+        <div
+            class="relative w-full max-w-xl rounded-[32px] bg-white p-6 shadow-[0_30px_80px_rgba(21,21,21,0.25)] md:p-8">
+            <button id="closeNewsletterModal" type="button"
+                class="absolute right-4 top-4 rounded-full border border-border p-2 text-slate transition hover:border-olive hover:text-olive"
+                aria-label="Close modal">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <div class="text-left">
+                <span
+                    class="inline-block rounded-full bg-olive/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-olive">Stay
+                    inspired</span>
+                <h3 class="mt-4 font-display text-4xl font-bold text-ink">Join ETCH’s newsletter.</h3>
+                <p class="mt-3 text-base text-slate">Get updates on new releases, exclusive creator drops, and practical
+                    creative insights once a week.</p>
+            </div>
+
+            <form id="newsletterModalForm" class="mt-6 space-y-4">
+                <div>
+                    <label for="newsletterModalEmail"
+                        class="block text-xs font-semibold uppercase tracking-[0.18em] text-slate/60">Email
+                        address</label>
+                    <input id="newsletterModalEmail" type="email" required placeholder="you@example.com"
+                        class="mt-2 w-full rounded-2xl border border-border bg-stone px-4 py-3 text-base text-ink outline-none transition focus:border-olive focus:ring-2 focus:ring-olive/20" />
+                </div>
+                <button type="submit"
+                    class="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-olive px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-olive-dark">Subscribe
+                    to updates</button>
+                <p id="newsletterModalStatus" class="min-h-[20px] text-sm text-slate/70"></p>
+            </form>
+        </div>
+    </div>
+
     <script>
-        // Initialize Lucide Icons
+        window.__ETCH_SUPABASE__ = window.__ETCH_SUPABASE__ || {
+            url: 'https://cyoddvehzrmhubmislbb.supabase.co',
+            anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5b2RkdmVoenJtaHVibWlzbGJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUxNjI3MTQsImV4cCI6MjEwMDczODcxNH0.YaUyKP9f3tpKDny78_k_ka70zkFZe58GAFOo5oFFaFI',
+        };
+        /**
+         * NEWSLETTER CONFIGURATION
+         * Set your email provider endpoint for newsletter signups.
+         * See /docs/NEWSLETTER_SETUP.md for complete setup instructions.
+         */
+        window.__ETCH_NEWSLETTER__ = window.__ETCH_NEWSLETTER__ || {
+            endpoint: 'https://cyoddvehzrmhubmislbb.supabase.co/functions/v1/send-newsletter', // Configure: https://your-project.supabase.co/functions/v1/send-newsletter
+            provider: 'supabase-function',
+            fromName: 'ETCH Newsletter'
+        };
+
         lucide.createIcons();
     </script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="script/supabase.js"></script>
+    <script>
+        async function handleNewsletterSubmit(formId, emailId, statusId) {
+            const form = document.getElementById(formId);
+            const input = document.getElementById(emailId);
+            const status = document.getElementById(statusId);
+
+            if (!form || !input || !status || !window.EtchSupabase) return;
+
+            form.addEventListener('submit', async function (event) {
+                event.preventDefault();
+                const email = input.value.trim();
+                if (!email) {
+                    status.textContent = 'Please enter your email address.';
+                    status.className = 'mt-3 min-h-[20px] text-sm text-error';
+                    return;
+                }
+
+                status.textContent = 'Subscribing...';
+                status.className = 'mt-3 min-h-[20px] text-sm text-slate/70';
+
+                try {
+                    const { data, error } = await window.EtchSupabase.subscribeToNewsletter({ email });
+
+                    if (error) {
+                        throw error;
+                    }
+
+                    status.textContent = 'You’re on the list — welcome to ETCH.';
+                    status.className = 'mt-3 min-h-[20px] text-sm text-success';
+                    form.reset();
+                    localStorage.setItem('etch_newsletter_subscribed', 'true');
+                } catch (error) {
+                    status.textContent = error.message || 'Something went wrong. Please try again.';
+                    status.className = 'mt-3 min-h-[20px] text-sm text-error';
+                }
+            });
+        }
+
+        handleNewsletterSubmit('landingNewsletterForm', 'landingNewsletterEmail', 'landingNewsletterStatus');
+        handleNewsletterSubmit('newsletterModalForm', 'newsletterModalEmail', 'newsletterModalStatus');
+
+        const modal = document.getElementById('newsletterModal');
+        const closeModalBtn = document.getElementById('closeNewsletterModal');
+
+        function maybeShowNewsletterModal() {
+            const alreadySubscribed = localStorage.getItem('etch_newsletter_subscribed') === 'true';
+            if (alreadySubscribed || !modal) return;
+
+            setTimeout(() => {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }, 5000);
+        }
+
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', function () {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                localStorage.setItem('etch_newsletter_dismissed', 'true');
+            });
+        }
+
+        if (modal) {
+            modal.addEventListener('click', function (event) {
+                if (event.target === modal) {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                    localStorage.setItem('etch_newsletter_dismissed', 'true');
+                }
+            });
+        }
+
+        if (!localStorage.getItem('etch_newsletter_dismissed')) {
+            maybeShowNewsletterModal();
+        }
+    </script>
+
+    <!-- Back to Top Button Script -->
+    <script>
+        const backToTopBtn = document.getElementById('backToTop');
+
+        // Show/hide back to top button based on scroll position
+        window.addEventListener('scroll', function () {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible');
+                backToTopBtn.classList.add('opacity-100');
+            } else {
+                backToTopBtn.classList.add('opacity-0', 'invisible');
+                backToTopBtn.classList.remove('opacity-100');
+            }
+        });
+
+        // Scroll to top when button is clicked
+        backToTopBtn.addEventListener('click', function () {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            });
+        });
+    </script>
+
+    <!-- Masterclass Blog Section - Load Live Data -->
+    <script>
+        async function loadMasterclassArticles() {
+            if (!window.EtchSupabase) {
+                console.warn('EtchSupabase not available');
+                return;
+            }
+
+            try {
+                // Fetch latest 4 published articles
+                const { data: articles, error } = await window.EtchSupabase.getArticles({
+                    status: 'published',
+                    limit: 4,
+                });
+
+                if (error) {
+                    console.error('Error fetching articles:', error);
+                    return;
+                }
+
+                if (!articles || articles.length === 0) {
+                    console.log('No articles found');
+                    return;
+                }
+
+                // Get the blog cards container
+                const blogCardsContainer = document.querySelector(
+                    '[id*="masterclass"] + section .grid:has([article])'
+                );
+
+                // Alternative: target the 4-column grid in the masterclass blog section
+                const masterclassSections = document.querySelectorAll('section');
+                let targetSection = null;
+
+                // Find the masterclass blog section (it's the one right before newsletter)
+                for (let i = 0; i < masterclassSections.length; i++) {
+                    const sectionText = masterclassSections[i].innerText;
+                    if (sectionText.includes('Insights from top creators')) {
+                        targetSection = masterclassSections[i];
+                        break;
+                    }
+                }
+
+                if (!targetSection) {
+                    console.warn('Masterclass blog section not found');
+                    return;
+                }
+
+                const grid = targetSection.querySelector('.grid');
+                if (!grid) {
+                    console.warn('Blog grid not found');
+                    return;
+                }
+
+                // Clear existing placeholder cards
+                grid.innerHTML = '';
+
+                // Create new blog cards from fetched data
+                articles.forEach((article, index) => {
+                    const delay = index * 75; // Stagger animation
+                    const author = article.author?.name || 'Unknown Author';
+                    const readTime = Math.ceil((article.content?.split(' ').length || 0) / 200) || 5;
+                    const imageUrl = article.featured_image || 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=400&q=80';
+                    const articleTitle = article.title || 'Untitled Article';
+                    const articleExcerpt = article.excerpt || article.content?.substring(0, 100) || '';
+                    const articleSlug = article.slug || '';
+
+                    const card = document.createElement('article');
+                    card.className = `group bg-stone dark:bg-white/5 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 ${delay > 0 ? `delay-${delay}` : ''}`;
+                    card.style.animationDelay = `${delay}ms`;
+
+                    card.innerHTML = `
+                        <a href="article.html?slug=${articleSlug}" class="block">
+                            <div class="relative overflow-hidden h-40">
+                                <img src="${imageUrl}"
+                                    alt="${articleTitle}"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                <span
+                                    class="absolute top-3 left-3 px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Article</span>
+                            </div>
+                            <div class="p-5">
+                                <h3 class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200 line-clamp-2">${articleTitle}</h3>
+                                <p class="text-sm text-slate dark:text-gray-400 mt-2 line-clamp-2">${articleExcerpt}</p>
+                                <div class="flex items-center justify-between mt-4 pt-4 border-t border-border dark:border-white/10">
+                                    <span class="text-xs text-slate dark:text-gray-400">${author}</span>
+                                    <span class="text-xs text-slate dark:text-gray-400">${readTime} min</span>
+                                </div>
+                            </div>
+                        </a>
+                    `;
+
+                    grid.appendChild(card);
+                });
+
+                console.log(`✅ Loaded ${articles.length} masterclass articles`);
+            } catch (error) {
+                console.error('Failed to load masterclass articles:', error);
+            }
+        }
+
+        // Load articles when page is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadMasterclassArticles);
+        } else {
+            loadMasterclassArticles();
+        }
+    </script>
+
+    <!-- Live Data Loading - Stats, Categories, Featured Works -->
+    <script>
+        async function loadLiveData() {
+            if (!window.EtchSupabase) {
+                console.warn('EtchSupabase not available for live data');
+                return;
+            }
+
+            try {
+                // 1. Load real stats from backend
+                const { stats, error: statsError } = await window.EtchSupabase.getStats();
+                if (!statsError && stats) {
+                    const creatorsEl = document.getElementById('statCreators');
+                    const assetsEl = document.getElementById('statAssets');
+                    const articlesEl = document.getElementById('statArticles');
+
+                    if (creatorsEl) creatorsEl.textContent = stats.creators.toLocaleString();
+                    if (assetsEl) assetsEl.textContent = stats.listings.toLocaleString();
+                    if (articlesEl) articlesEl.textContent = stats.articles.toLocaleString();
+
+                    // Update newsletter CTA text with real subscriber count
+                    const newsletterText = document.querySelector('.text-lg.text-slate\\/70.max-w-lg');
+                    if (newsletterText && stats.subscribers > 0) {
+                        newsletterText.innerHTML = newsletterText.innerHTML.replace(
+                            /Join \d+[+,]? creators/,
+                            `Join ${stats.subscribers.toLocaleString()} creators`
+                        );
+                    }
+
+                    // Update CTA section text
+                    const ctaText = document.querySelector('.text-white\\/80.text-lg.mt-4');
+                    if (ctaText && stats.creators > 0) {
+                        ctaText.innerHTML = ctaText.innerHTML.replace(
+                            /Join \d+[+,]? creators/,
+                            `Join ${stats.creators.toLocaleString()} creators`
+                        );
+                    }
+                }
+
+                // 2. Load category counts
+                const categories = ['script', 'storyboard', 'music', 'design', 'motion', 'copy'];
+                const categoryIds = {
+                    script: 'catScript',
+                    storyboard: 'catStoryboard',
+                    music: 'catMusic',
+                    design: 'catDesign',
+                    motion: 'catMotion',
+                    copy: 'catCopy'
+                };
+
+                for (const cat of categories) {
+                    const { count, error } = await window.EtchSupabase.countRows('listings', {
+                        filters: [
+                            { field: 'status', value: 'published' },
+                            { field: 'category', value: cat }
+                        ]
+                    });
+                    if (!error) {
+                        const el = document.getElementById(categoryIds[cat]);
+                        if (el) el.textContent = count.toLocaleString() + ' assets';
+                    }
+                }
+
+                // 3. Load featured works
+                const { data: featured, error: featuredError } = await window.EtchSupabase.getFeaturedListings(4);
+                const grid = document.getElementById('featuredWorksGrid');
+                if (grid) {
+                    // Show empty state if no featured listings or error
+                    if (featuredError || !featured || featured.length === 0) {
+                        grid.innerHTML = `
+                            <div class="col-span-full text-center py-16">
+                                <div class="w-20 h-20 mx-auto rounded-2xl bg-stone dark:bg-white/5 flex items-center justify-center text-4xl mb-4">🎨</div>
+                                <h3 class="font-display text-xl font-bold text-ink dark:text-white">No featured works yet</h3>
+                                <p class="text-slate dark:text-gray-400 mt-2">Check back soon for new creative assets. ${featuredError ? 'We couldn\'t load featured works right now.' : ''}</p>
+                            </div>
+                        `;
+                    } else {
+                        grid.innerHTML = '';
+
+                        featured.forEach((listing, index) => {
+                            const delay = index * 75;
+                            const creatorName = listing.creator?.username || listing.creator?.full_name || 'Unknown Creator';
+                            const creatorInitials = (creatorName || 'ET').slice(0, 2).toUpperCase();
+                            const imageUrl = listing.cover_url || 'https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?auto=format&fit=crop&w=400&q=80';
+                            const price = listing.price ? '$' + Number(listing.price).toLocaleString() : '$0';
+                            const category = listing.category ? listing.category.charAt(0).toUpperCase() + listing.category.slice(1) : 'Asset';
+                            const views = listing.views || 0;
+                            const slug = listing.slug || listing.id;
+
+                            const card = document.createElement('div');
+                            card.className = `group bg-white dark:bg-ink/50 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500`;
+                            card.style.animationDelay = `${delay}ms`;
+
+                            card.innerHTML = `
+                                <a href="product-detail.html?id=${slug}" class="block">
+                                    <div class="relative overflow-hidden">
+                                        <img src="${imageUrl}" alt="${listing.title || 'Creative work'}"
+                                            class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
+                                        <div class="absolute top-3 left-3 flex gap-2">
+                                            <span class="px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">${category}</span>
+                                            <span class="px-3 py-1 bg-olive/90 backdrop-blur-sm text-xs font-medium text-white rounded-full">Featured</span>
+                                        </div>
+                                        <button class="absolute top-3 right-3 p-2 bg-white/90 dark:bg-ink/90 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-olive hover:text-white">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="p-5">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <h3 class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200 line-clamp-1">${listing.title || 'Untitled'}</h3>
+                                            <span class="text-lg font-bold text-ink dark:text-white">${price}</span>
+                                        </div>
+                                        <p class="text-sm text-slate dark:text-gray-400 line-clamp-2">${listing.description || ''}</p>
+                                        <div class="flex items-center justify-between mt-4 pt-4 border-t border-border dark:border-white/10">
+                                            <span class="text-xs text-slate dark:text-gray-400">by @${creatorName}</span>
+                                            <div class="flex items-center gap-3 text-xs text-slate dark:text-gray-400">
+                                                <span class="flex items-center gap-1">
+                                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                    </svg>
+                                                    ${views.toLocaleString()}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            `;
+
+                            grid.appendChild(card);
+                        });
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to load live data:', error);
+                const grid = document.getElementById('featuredWorksGrid');
+                if (grid) {
+                    grid.innerHTML = `
+                        <div class="col-span-full text-center py-16">
+                            <div class="w-20 h-20 mx-auto rounded-2xl bg-stone dark:bg-white/5 flex items-center justify-center text-4xl mb-4">🎨</div>
+                            <h3 class="font-display text-xl font-bold text-ink dark:text-white">No featured works available</h3>
+                            <p class="text-slate dark:text-gray-400 mt-2">We couldn't load featured works right now. Please try again later.</p>
+                        </div>
+                    `;
+                }
+            }
+        }
+
+        // Load live data when page is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadLiveData);
+        } else {
+            loadLiveData();
+        }
+    </script>
+
     <script src="script/script.js"></script>
 </body>
 

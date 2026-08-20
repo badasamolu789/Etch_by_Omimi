@@ -9,8 +9,8 @@
     // CONFIGURATION
     // ============================================
     const CONFIG = {
-        redirectTo: '../auth/signin.html',
-        loginUrl: '../auth/signin.html',
+        redirectTo: '/user/auth/signin.html',
+        loginUrl: '/user/auth/signin.html',
     };
 
     // ============================================

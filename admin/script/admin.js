@@ -66,59 +66,63 @@
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></svg>
             Dashboard <span class="badge primary">Live</span>
         </a>
-        <a href="/admin/users.html">
+        <a href="/admin/media_library.html">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
-            Users <span class="badge primary">2.4k</span>
+            Media Library
         </a>
-        <a href="/admin/listings.html">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
-            Listings <span class="badge warning">24</span>
+        <a href="/admin/newsletter.html">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7.5A2.5 2.5 0 016.5 5h11A2.5 2.5 0 0120 7.5v9A2.5 2.5 0 0117.5 19h-11A2.5 2.5 0 014 16.5v-9zm0 0l8 6 8-6" /></svg>
+            Newsletter <span class="badge primary">Live</span>
         </a>
-        <a href="/admin/licensing.html">
+        <a href="/admin/admin_masterclass.html">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4" /><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-            Licensing <span class="badge danger">8</span>
+            Masterclass
         </a>
-        <a href="/admin/analytics.html">
+        <a href="/admin/category.html">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 12v-2a5 5 0 00-5-5H8a5 5 0 00-5 5v2" /><circle cx="12" cy="16" r="5" /><path d="M12 11v5M9 13l3 3 3-3" /></svg>
-            Analytics
+            Categories
         </a>
-        <a href="/admin/content.html">
+        <a href="/admin/author.html">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
-            Content
+            Authors
         </a>
 
         <div class="nav-divider"></div>
         <div class="nav-label">Masterclass</div>
         <a href="/admin/admin_masterclass.html">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
-            Dashboard <span class="badge primary">48</span>
+            Dashboard
         </a>
         <a href="/admin/admin_masterclass.html">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
-            Articles <span class="badge">48</span>
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6M9 16h6" /></svg>
+            Articles
         </a>
         <a href="/admin/category.html">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" /></svg>
-            Categories <span class="badge">8</span>
+            Categories
         </a>
         <a href="/admin/author.html">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
-            Authors <span class="badge">12</span>
+            Authors
         </a>
         <a href="/admin/media_library.html">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-            Media <span class="badge">156</span>
+            Media
         </a>
 
         <div class="nav-divider"></div>
         <div class="nav-label">System</div>
-        <a href="/admin/support.html">
+        <a href="/admin/create_article.html">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M18.364 5.636a9 9 0 010 12.728m0 0l-2.829-2.829m2.829 2.829L21 21M15.536 8.464a5 5 0 010 7.072m0 0l-2.829-2.829m-4.243 2.829a5 5 0 01-7.072 0m0 0a5 5 0 010-7.072m0 0l2.829 2.829m-2.829-2.829L3 3" /></svg>
-            Support <span class="badge danger">12</span>
+            Create Article
         </a>
-        <a href="/admin/settings/index.html">
+        <a href="/admin/create_category.html">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" /></svg>
-            Settings
+            Create Category
+        </a>
+        <a href="/admin/create_author.html">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+            Create Author
         </a>
         <div class="nav-divider"></div>
         <a href="/admin/auth/signin.html" class="sign-out">
@@ -126,14 +130,6 @@
             Sign Out
         </a>
     </nav>
-
-    <div class="admin-sidebar-footer">
-        <div class="health-card">
-            <div class="header"><span>OK</span><p>Platform Health</p></div>
-            <div class="progress"><div class="bar"><div class="fill" style="width:98%;"></div></div><span>98%</span></div>
-            <p class="text-[10px] text-slate/40 mt-1">All systems operational</p>
-        </div>
-    </div>
 </aside>
 <div class="admin-sidebar-overlay" id="adminSidebarOverlay"></div>`;
     }
@@ -186,6 +182,11 @@
                 placeholder.outerHTML = getAdminTopbarHTML();
             }
         });
+
+        // After loading components, set active nav link
+        setTimeout(() => {
+            setActiveNavLink();
+        }, 0);
     }
 
     // ============================================
@@ -234,11 +235,27 @@
 
         links.forEach(function (link) {
             const href = link.getAttribute('href');
-            if (href && currentPath.includes(href)) {
+            // Remove active class first
+            link.classList.remove('active');
+
+            // Add active class if path matches
+            if (href && (currentPath === href || currentPath.includes(href.replace('.html', '')))) {
                 link.classList.add('active');
-            } else {
-                link.classList.remove('active');
             }
+        });
+    }
+
+    // Add click handler to ensure active state updates
+    function addActiveNavClickHandlers() {
+        const links = document.querySelectorAll('.admin-sidebar-nav a:not(.sign-out)');
+
+        links.forEach(function (link) {
+            link.addEventListener('click', function () {
+                // Remove active from all links
+                links.forEach(l => l.classList.remove('active'));
+                // Add active to clicked link
+                this.classList.add('active');
+            });
         });
     }
 
@@ -358,6 +375,7 @@
         initializeSidebarInteractions();
         initializeComponentControls();
         setActiveNavLink();
+        addActiveNavClickHandlers();
         bindSignOut();
 
         // Update topbar after the initial guard has accepted the page.

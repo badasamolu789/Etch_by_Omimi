@@ -104,12 +104,12 @@
             <!-- ========================================== -->
             <div class="px-6 md:px-8 pt-4">
                 <nav class="flex items-center gap-2 text-sm text-slate/60 dark:text-gray-500">
-                    <a href="/admin/dashboard.html"
+                    <a href="/admin/index.html"
                         class="hover:text-ink dark:hover:text-white transition-colors duration-200">Dashboard</a>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
-                    <a href="/admin/masterclass/index.html"
+                    <a href="/admin/admin_masterclass.html"
                         class="hover:text-ink dark:hover:text-white transition-colors duration-200">Masterclass</a>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -130,7 +130,8 @@
                                 <span class="w-1.5 h-1.5 rounded-full bg-olive animate-pulse"></span>
                                 ✦ Contributor Management
                             </span>
-                            <span class="text-xs text-slate/60 dark:text-gray-500">✍️ 12 total authors</span>
+                            <span id="authorsHeaderLabel" class="text-xs text-slate/60 dark:text-gray-500">✍️ 0 total
+                                authors</span>
                         </div>
                         <h2 class="font-display text-3xl md:text-4xl font-bold text-ink dark:text-white leading-tight">
                             <span class="relative inline-block">
@@ -144,7 +145,7 @@
                         </p>
                     </div>
                     <div class="flex flex-wrap items-center gap-3 flex-shrink-0 animate-slide-up-delay">
-                        <a href="create.html"
+                        <a href="create_author.html"
                             class="group inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-olive to-peach text-white rounded-2xl font-medium hover:shadow-xl hover:shadow-olive/20 hover:-translate-y-0.5 transition-all duration-300">
                             <svg class="w-4 h-4 group-hover:rotate-90 transition-transform duration-300" fill="none"
                                 stroke="currentColor" viewBox="0 0 24 24">
@@ -190,7 +191,7 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="text-xl font-bold text-emerald-500">10</p>
+                            <p id="authorsActiveStat" class="text-xl font-bold text-emerald-500">0</p>
                             <p class="text-xs text-slate/60 dark:text-gray-500">Active</p>
                         </div>
                     </div>
@@ -207,7 +208,7 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="text-xl font-bold text-slate-500">2</p>
+                            <p id="authorsInactiveStat" class="text-xl font-bold text-slate-500">0</p>
                             <p class="text-xs text-slate/60 dark:text-gray-500">Inactive</p>
                         </div>
                     </div>
@@ -224,7 +225,7 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="text-xl font-bold text-lavender">48</p>
+                            <p id="authorsArticlesStat" class="text-xl font-bold text-lavender">0</p>
                             <p class="text-xs text-slate/60 dark:text-gray-500">Total Articles</p>
                         </div>
                     </div>
@@ -281,11 +282,13 @@
                     <div
                         class="flex items-center justify-between px-6 py-4 border-b border-border/60 dark:border-white/10">
                         <div class="flex items-center gap-3">
-                            <span class="text-sm font-medium text-ink dark:text-white">12 Authors</span>
+                            <span id="authorsTotalLabel" class="text-sm font-medium text-ink dark:text-white">0
+                                Authors</span>
                             <span class="text-xs text-slate/60 dark:text-gray-500">Sorted by name</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span class="text-xs text-slate/60 dark:text-gray-500">Showing 1-12</span>
+                            <span id="authorsShowingLabel" class="text-xs text-slate/60 dark:text-gray-500">Showing
+                                0</span>
                         </div>
                     </div>
 
@@ -315,302 +318,8 @@
                                         Actions</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-border/60 dark:divide-white/10">
-
-                                <!-- Author 1 - Etch Editorial -->
-                                <tr
-                                    class="group hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-150">
-                                    <td class="px-6 py-3.5">
-                                        <div class="flex items-center gap-3">
-                                            <div
-                                                class="w-10 h-10 rounded-xl bg-gradient-to-br from-olive/10 to-emerald-500/10 flex items-center justify-center text-olive font-bold text-sm flex-shrink-0">
-                                                EE
-                                            </div>
-                                            <div>
-                                                <span
-                                                    class="font-medium text-ink dark:text-white group-hover:text-olive transition-colors duration-200">Etch
-                                                    Editorial</span>
-                                                <p class="text-xs text-slate/40">The official ETCH editorial team</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">etch-editorial</td>
-                                    <td class="px-6 py-3.5">
-                                        <span
-                                            class="inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-gradient-to-r from-olive/10 to-emerald-500/10 text-olive">Editorial</span>
-                                    </td>
-                                    <td class="px-6 py-3.5">
-                                        <span
-                                            class="inline-flex items-center gap-1 text-sm font-medium text-ink dark:text-white">24</span>
-                                    </td>
-                                    <td class="px-6 py-3.5">
-                                        <span
-                                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/10 text-emerald-600">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                                            Active
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-3.5 text-right">
-                                        <div class="flex items-center justify-end gap-1">
-                                            <a href="#"
-                                                class="p-1.5 text-slate/40 hover:text-olive transition-colors duration-200 rounded-lg hover:bg-olive/10"
-                                                title="Edit">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                                </svg>
-                                            </a>
-                                            <button
-                                                class="p-1.5 text-slate/40 hover:text-coral transition-colors duration-200 rounded-lg hover:bg-coral/10"
-                                                title="Delete">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Author 2 - Samuel Ade -->
-                                <tr
-                                    class="group hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-150">
-                                    <td class="px-6 py-3.5">
-                                        <div class="flex items-center gap-3">
-                                            <div
-                                                class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500/10 to-mint/10 flex items-center justify-center text-emerald-500 font-bold text-sm flex-shrink-0">
-                                                SA
-                                            </div>
-                                            <div>
-                                                <span
-                                                    class="font-medium text-ink dark:text-white group-hover:text-olive transition-colors duration-200">Samuel
-                                                    Ade</span>
-                                                <p class="text-xs text-slate/40">Screenwriter & Creative Consultant</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">samuel-ade</td>
-                                    <td class="px-6 py-3.5">
-                                        <span
-                                            class="inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-gradient-to-r from-emerald-500/10 to-mint/10 text-emerald-500">Contributor</span>
-                                    </td>
-                                    <td class="px-6 py-3.5">
-                                        <span
-                                            class="inline-flex items-center gap-1 text-sm font-medium text-ink dark:text-white">12</span>
-                                    </td>
-                                    <td class="px-6 py-3.5">
-                                        <span
-                                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/10 text-emerald-600">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                                            Active
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-3.5 text-right">
-                                        <div class="flex items-center justify-end gap-1">
-                                            <a href="#"
-                                                class="p-1.5 text-slate/40 hover:text-olive transition-colors duration-200 rounded-lg hover:bg-olive/10"
-                                                title="Edit">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                                </svg>
-                                            </a>
-                                            <button
-                                                class="p-1.5 text-slate/40 hover:text-coral transition-colors duration-200 rounded-lg hover:bg-coral/10"
-                                                title="Delete">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Author 3 - Amara Oke -->
-                                <tr
-                                    class="group hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-150">
-                                    <td class="px-6 py-3.5">
-                                        <div class="flex items-center gap-3">
-                                            <div
-                                                class="w-10 h-10 rounded-xl bg-gradient-to-br from-lavender/10 to-purple-500/10 flex items-center justify-center text-lavender font-bold text-sm flex-shrink-0">
-                                                AO
-                                            </div>
-                                            <div>
-                                                <span
-                                                    class="font-medium text-ink dark:text-white group-hover:text-olive transition-colors duration-200">Amara
-                                                    Oke</span>
-                                                <p class="text-xs text-slate/40">Licensing & Music Rights Expert</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">amara-oke</td>
-                                    <td class="px-6 py-3.5">
-                                        <span
-                                            class="inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-gradient-to-r from-lavender/10 to-purple-500/10 text-lavender">Expert</span>
-                                    </td>
-                                    <td class="px-6 py-3.5">
-                                        <span
-                                            class="inline-flex items-center gap-1 text-sm font-medium text-ink dark:text-white">8</span>
-                                    </td>
-                                    <td class="px-6 py-3.5">
-                                        <span
-                                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/10 text-emerald-600">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                                            Active
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-3.5 text-right">
-                                        <div class="flex items-center justify-end gap-1">
-                                            <a href="#"
-                                                class="p-1.5 text-slate/40 hover:text-olive transition-colors duration-200 rounded-lg hover:bg-olive/10"
-                                                title="Edit">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                                </svg>
-                                            </a>
-                                            <button
-                                                class="p-1.5 text-slate/40 hover:text-coral transition-colors duration-200 rounded-lg hover:bg-coral/10"
-                                                title="Delete">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Author 4 - Tunde Rhodes -->
-                                <tr
-                                    class="group hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-150">
-                                    <td class="px-6 py-3.5">
-                                        <div class="flex items-center gap-3">
-                                            <div
-                                                class="w-10 h-10 rounded-xl bg-gradient-to-br from-mint/10 to-blue-500/10 flex items-center justify-center text-mint font-bold text-sm flex-shrink-0">
-                                                TR
-                                            </div>
-                                            <div>
-                                                <span
-                                                    class="font-medium text-ink dark:text-white group-hover:text-olive transition-colors duration-200">Tunde
-                                                    Rhodes</span>
-                                                <p class="text-xs text-slate/40">Film Industry Analyst</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">tunde-rhodes</td>
-                                    <td class="px-6 py-3.5">
-                                        <span
-                                            class="inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-gradient-to-r from-mint/10 to-blue-500/10 text-mint">Contributor</span>
-                                    </td>
-                                    <td class="px-6 py-3.5">
-                                        <span
-                                            class="inline-flex items-center gap-1 text-sm font-medium text-ink dark:text-white">6</span>
-                                    </td>
-                                    <td class="px-6 py-3.5">
-                                        <span
-                                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/10 text-emerald-600">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                                            Active
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-3.5 text-right">
-                                        <div class="flex items-center justify-end gap-1">
-                                            <a href="#"
-                                                class="p-1.5 text-slate/40 hover:text-olive transition-colors duration-200 rounded-lg hover:bg-olive/10"
-                                                title="Edit">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                                </svg>
-                                            </a>
-                                            <button
-                                                class="p-1.5 text-slate/40 hover:text-coral transition-colors duration-200 rounded-lg hover:bg-coral/10"
-                                                title="Delete">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Author 5 - Zara Williams (Inactive) -->
-                                <tr
-                                    class="group hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-150 opacity-70">
-                                    <td class="px-6 py-3.5">
-                                        <div class="flex items-center gap-3">
-                                            <div
-                                                class="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-500/10 to-gray-500/10 flex items-center justify-center text-slate-500 font-bold text-sm flex-shrink-0">
-                                                ZW
-                                            </div>
-                                            <div>
-                                                <span
-                                                    class="font-medium text-ink dark:text-white group-hover:text-olive transition-colors duration-200">Zara
-                                                    Williams</span>
-                                                <p class="text-xs text-slate/40">Creative Marketing Consultant</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">zara-williams</td>
-                                    <td class="px-6 py-3.5">
-                                        <span
-                                            class="inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-slate-500/10 text-slate-500">Consultant</span>
-                                    </td>
-                                    <td class="px-6 py-3.5">
-                                        <span
-                                            class="inline-flex items-center gap-1 text-sm font-medium text-ink dark:text-white">3</span>
-                                    </td>
-                                    <td class="px-6 py-3.5">
-                                        <span
-                                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-slate-500/10 text-slate-600">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
-                                            Inactive
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-3.5 text-right">
-                                        <div class="flex items-center justify-end gap-1">
-                                            <a href="#"
-                                                class="p-1.5 text-slate/40 hover:text-olive transition-colors duration-200 rounded-lg hover:bg-olive/10"
-                                                title="Edit">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                                </svg>
-                                            </a>
-                                            <button
-                                                class="p-1.5 text-slate/40 hover:text-coral transition-colors duration-200 rounded-lg hover:bg-coral/10"
-                                                title="Delete">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
+                            <tbody id="authorsTableBody" class="divide-y divide-border/60 dark:divide-white/10">
+                                <!-- Authors loaded dynamically from Supabase -->
                             </tbody>
                         </table>
                     </div>
@@ -618,9 +327,10 @@
                     <!-- Table Footer -->
                     <div
                         class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-6 py-4 border-t border-border/60 dark:border-white/10 bg-gradient-to-r from-olive/5 to-transparent">
-                        <span class="text-xs text-slate/60 dark:text-gray-500">Showing 1-5 of 12 authors</span>
+                        <span id="authorsFooterLabel" class="text-xs text-slate/60 dark:text-gray-500">No authors
+                            yet</span>
                         <div class="flex items-center gap-3">
-                            <span class="text-xs text-slate/40">Page 1 of 3</span>
+                            <span class="text-xs text-slate/40">Page 1 of 1</span>
                             <div class="flex items-center gap-1">
                                 <button
                                     class="w-8 h-8 rounded-xl border border-border/60 dark:border-white/10 text-slate/40 hover:bg-white/60 hover:border-olive/30 transition-all duration-200 flex items-center justify-center text-sm disabled:opacity-40"
@@ -656,7 +366,15 @@
     <!-- SCRIPTS -->
     <!-- ============================================ -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="/scripts/global.js"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script>
+        window.__ETCH_SUPABASE__ = window.__ETCH_SUPABASE__ || {
+            url: 'https://cyoddvehzrmhubmislbb.supabase.co',
+            anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5b2RkdmVoenJtaHVibWlzbGJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUxNjI3MTQsImV4cCI6MjEwMDczODcxNH0.YaUyKP9f3tpKDny78_k_ka70zkFZe58GAFOo5oFFaFI',
+        };
+    </script>
+    <script src="/script/supabase.js"></script>
+    <script src="/script/script.js"></script>
     <script src="script/admin.js?v=20260806-components1"></script>
 
     <script>
@@ -665,6 +383,128 @@
 
         // Set page title dynamically
         document.addEventListener('admin:components-ready', function () { const title = document.querySelector('.greeting h1'); if (title) title.textContent = 'Authors'; });
+
+        // ==========================================
+        // LOAD AUTHORS FROM SUPABASE
+        // ==========================================
+        async function loadAuthors() {
+            const tbody = document.querySelector('#authorsTableBody');
+            if (!tbody) return;
+
+            if (typeof EtchSupabase === 'undefined') {
+                tbody.innerHTML = getEmptyRow('Supabase not configured');
+                return;
+            }
+
+            try {
+                const [authorResult, articleResult] = await Promise.all([
+                    EtchSupabase.getAuthors(),
+                    EtchSupabase.getArticles(),
+                ]);
+                const { data, error } = authorResult;
+
+                if (error) {
+                    console.error('Error loading authors:', error);
+                    tbody.innerHTML = getEmptyRow('Failed to load authors');
+                    return;
+                }
+
+                const authors = data || [];
+                const articles = articleResult.data || [];
+                document.getElementById('authorsHeaderLabel').textContent = `✍️ ${authors.length} total author${authors.length === 1 ? '' : 's'}`;
+                document.getElementById('authorsArticlesStat').textContent = String(articles.length);
+                document.getElementById('authorsActiveStat')?.replaceChildren(String(authors.filter(author => author.status === 'active').length));
+                document.getElementById('authorsInactiveStat')?.replaceChildren(String(authors.filter(author => author.status !== 'active').length));
+                const totalLabel = document.getElementById('authorsTotalLabel');
+                const showingLabel = document.getElementById('authorsShowingLabel');
+                const footerLabel = document.getElementById('authorsFooterLabel');
+                if (totalLabel) totalLabel.textContent = `${authors.length} Author${authors.length === 1 ? '' : 's'}`;
+                if (showingLabel) showingLabel.textContent = `Showing ${authors.length}`;
+                if (footerLabel) footerLabel.textContent = authors.length ? `Showing ${authors.length} of ${authors.length} authors` : 'No authors yet';
+
+                if (!authors.length) {
+                    tbody.innerHTML = getEmptyRow('No authors yet. Create your first author to get started.');
+                    return;
+                }
+
+                tbody.innerHTML = authors.map(author => {
+                    const initials = (author.name || 'NA').split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase();
+                    return `
+                        <tr class="group hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-150">
+                            <td class="px-6 py-3.5">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-olive/10 to-emerald-500/10 flex items-center justify-center text-olive font-bold text-sm flex-shrink-0">
+                                        ${initials}
+                                    </div>
+                                    <div>
+                                        <span class="font-medium text-ink dark:text-white group-hover:text-olive transition-colors duration-200">${author.name}</span>
+                                        <p class="text-xs text-slate/40">${author.role || ''}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">${author.slug}</td>
+                            <td class="px-6 py-3.5">
+                                <span class="inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-gradient-to-r from-olive/10 to-emerald-500/10 text-olive">${author.role || 'Contributor'}</span>
+                            </td>
+                            <td class="px-6 py-3.5">
+                                <span class="inline-flex items-center gap-1 text-sm font-medium text-ink dark:text-white">—</span>
+                            </td>
+                            <td class="px-6 py-3.5">
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-medium ${author.status === 'active' ? 'bg-emerald-500/10 text-emerald-600' : 'bg-slate-500/10 text-slate-600'}">
+                                    <span class="w-1.5 h-1.5 rounded-full ${author.status === 'active' ? 'bg-emerald-500' : 'bg-slate-500'}"></span>
+                                    ${author.status.charAt(0).toUpperCase() + author.status.slice(1)}
+                                </span>
+                            </td>
+                            <td class="px-6 py-3.5 text-right">
+                                <div class="flex items-center justify-end gap-1">
+                                    <button onclick="deleteAuthor('${author.id}')"
+                                        class="p-1.5 text-slate/40 hover:text-coral transition-colors duration-200 rounded-lg hover:bg-coral/10" title="Delete">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            } catch (error) {
+                console.error('Error loading authors:', error);
+                tbody.innerHTML = getEmptyRow('Failed to load authors');
+            }
+        }
+
+        function getEmptyRow(message) {
+            return `
+                <tr>
+                    <td colspan="6" class="px-6 py-16">
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-olive/10 to-peach/10 flex items-center justify-center mb-3">
+                                <svg class="w-8 h-8 text-olive" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                                </svg>
+                            </div>
+                            <p class="text-sm font-medium text-ink dark:text-white mb-1">${message}</p>
+                            <a href="create_author.html" class="text-sm text-olive hover:text-olive-dark transition-colors duration-200 mt-2">Create your first author →</a>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }
+
+        async function deleteAuthor(id) {
+            if (!confirm('Are you sure you want to delete this author?')) return;
+            const { error } = await EtchSupabase.deleteAuthor(id);
+            if (error) {
+                alert('Failed to delete author: ' + error.message);
+                return;
+            }
+            loadAuthors();
+        }
+
+        // Load authors when components are ready
+        document.addEventListener('admin:components-ready', loadAuthors);
+        setTimeout(loadAuthors, 500);
     </script>
 </body>
 

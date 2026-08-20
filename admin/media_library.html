@@ -104,12 +104,12 @@
             <!-- ========================================== -->
             <div class="px-6 md:px-8 pt-4">
                 <nav class="flex items-center gap-2 text-sm text-slate/60 dark:text-gray-500">
-                    <a href="/admin/dashboard.html"
+                    <a href="/admin/index.html"
                         class="hover:text-ink dark:hover:text-white transition-colors duration-200">Dashboard</a>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
-                    <a href="/admin/masterclass/index.html"
+                    <a href="/admin/admin_masterclass.html"
                         class="hover:text-ink dark:hover:text-white transition-colors duration-200">Masterclass</a>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -130,7 +130,7 @@
                                 <span class="w-1.5 h-1.5 rounded-full bg-olive animate-pulse"></span>
                                 ✦ Asset Management
                             </span>
-                            <span class="text-xs text-slate/60 dark:text-gray-500">🖼️ 156 total assets</span>
+                            <span id="mediaTotal" class="text-xs text-slate/60 dark:text-gray-500">0 total assets</span>
                         </div>
                         <h2 class="font-display text-3xl md:text-4xl font-bold text-ink dark:text-white leading-tight">
                             <span class="relative inline-block">
@@ -173,7 +173,7 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="text-xl font-bold text-ink dark:text-white">156</p>
+                            <p id="mediaStatTotal" class="text-xl font-bold text-ink dark:text-white">0</p>
                             <p class="text-xs text-slate/60 dark:text-gray-500">Total Assets</p>
                         </div>
                     </div>
@@ -190,7 +190,7 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="text-xl font-bold text-emerald-500">89</p>
+                            <p id="mediaStatImages" class="text-xl font-bold text-emerald-500">0</p>
                             <p class="text-xs text-slate/60 dark:text-gray-500">Images</p>
                         </div>
                     </div>
@@ -285,7 +285,7 @@
                         class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-6 py-4 border-b border-border/60 dark:border-white/10">
                         <div class="flex items-center gap-3">
                             <span class="text-sm font-medium text-ink dark:text-white">All Media</span>
-                            <span class="text-xs text-slate/60 dark:text-gray-500">156 items</span>
+                            <span id="mediaGridTotal" class="text-xs text-slate/60 dark:text-gray-500">0 items</span>
                         </div>
                         <div class="flex items-center gap-3">
                             <select
@@ -320,7 +320,7 @@
                     </div>
 
                     <!-- Media Grid -->
-                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4">
+                    <div id="mediaGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4">
 
                         <!-- Media Item 1 -->
                         <div
@@ -608,9 +608,9 @@
                     <!-- Grid Footer -->
                     <div
                         class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-6 py-4 border-t border-border/60 dark:border-white/10 bg-gradient-to-r from-olive/5 to-transparent">
-                        <span class="text-xs text-slate/60 dark:text-gray-500">Showing 1-8 of 156 assets</span>
+                        <span id="mediaSummary" class="text-xs text-slate/60 dark:text-gray-500">No assets yet</span>
                         <div class="flex items-center gap-3">
-                            <span class="text-xs text-slate/40">Page 1 of 20</span>
+                            <span id="mediaPage" class="text-xs text-slate/40">Page 1 of 1</span>
                             <div class="flex items-center gap-1">
                                 <button
                                     class="w-8 h-8 rounded-xl border border-border/60 dark:border-white/10 text-slate/40 hover:bg-white/60 hover:border-olive/30 transition-all duration-200 flex items-center justify-center text-sm disabled:opacity-40"
@@ -646,7 +646,7 @@
     <!-- SCRIPTS -->
     <!-- ============================================ -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="/scripts/global.js"></script>
+    <script src="/script/script.js"></script>
     <script src="script/admin.js?v=20260806-components1"></script>
 
     <script>
@@ -799,6 +799,106 @@
                 }
             });
         });
+
+        const mediaBucket = 'masterclass-media';
+        const mediaGrid = document.getElementById('mediaGrid');
+        const mediaTotal = document.getElementById('mediaTotal');
+        const mediaGridTotal = document.getElementById('mediaGridTotal');
+        const mediaSummary = document.getElementById('mediaSummary');
+
+        function escapeMediaText(value) {
+            return String(value || '').replace(/[&<>'"]/g, char => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+            }[char]));
+        }
+
+        function renderMedia(files) {
+            const images = (files || []).filter(file => file.name && !file.name.endsWith('/'));
+            mediaTotal.textContent = `${images.length} total assets`;
+            mediaGridTotal.textContent = `${images.length} items`;
+            document.getElementById('mediaStatTotal').textContent = String(images.length);
+            document.getElementById('mediaStatImages').textContent = String(images.length);
+            mediaSummary.textContent = images.length ? `Showing ${images.length} of ${images.length} assets` : 'No assets yet';
+
+            if (!images.length) {
+                mediaGrid.innerHTML = '<div class="col-span-full py-16 text-center text-sm text-slate/60">No media has been uploaded yet.</div>';
+                return;
+            }
+
+            mediaGrid.innerHTML = images.map(file => {
+                const path = file.name;
+                const url = EtchSupabase.getPublicUrl(mediaBucket, path);
+                const label = escapeMediaText(path.split('/').pop());
+                return `<div class="group bg-white/60 dark:bg-ink/60 rounded-2xl border border-border/60 dark:border-white/10 overflow-hidden">
+                    <div class="relative aspect-square overflow-hidden bg-stone dark:bg-ink/50">
+                        <img src="${escapeMediaText(url)}" alt="${label}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <button type="button" class="media-delete absolute top-3 right-3 p-1.5 bg-white/90 rounded-lg hover:bg-coral hover:text-white" data-path="${escapeMediaText(path)}" title="Delete media">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v-1m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                        </button>
+                    </div>
+                    <div class="p-3"><p class="text-xs font-medium text-ink dark:text-white truncate">${label}</p><button type="button" class="copy-btn text-[10px] text-olive" data-url="${escapeMediaText(url)}">Copy URL</button></div>
+                </div>`;
+            }).join('');
+        }
+
+        async function loadMedia() {
+            mediaGrid.replaceChildren();
+            if (!window.EtchSupabase?.listFiles) {
+                renderMedia([]);
+                mediaSummary.textContent = 'Media storage is not configured';
+                return;
+            }
+            const results = await Promise.all([
+                EtchSupabase.listFiles(mediaBucket, { path: 'masterclass-media', limit: 100 }),
+                EtchSupabase.listFiles(mediaBucket, { path: 'admin', limit: 100 }),
+            ]);
+            if (results.some(result => result.error)) {
+                renderMedia([]);
+                mediaSummary.textContent = 'Unable to load media';
+                return;
+            }
+            const files = results.flatMap((result, index) => (result.data || []).map(file => ({
+                ...file,
+                name: `${index === 0 ? 'masterclass-media' : 'admin'}/${file.name}`,
+            })));
+            renderMedia(files);
+        }
+
+        handleFiles = async function (files) {
+            uploadProgress.classList.remove('hidden');
+            let uploaded = 0;
+            uploadStatus.textContent = `0 of ${files.length} files uploaded`;
+            for (const file of files) {
+                const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '-');
+                const result = await EtchSupabase.uploadFile(mediaBucket, `admin/${Date.now()}-${safeName}`, file, { upsert: false });
+                if (result.error) {
+                    uploadStatus.textContent = result.error.message;
+                    return;
+                }
+                uploaded += 1;
+                const percent = Math.round((uploaded / files.length) * 100);
+                progressBar.style.width = `${percent}%`;
+                progressPercent.textContent = `${percent}%`;
+                uploadStatus.textContent = `${uploaded} of ${files.length} files uploaded`;
+            }
+            await loadMedia();
+            setTimeout(() => uploadProgress.classList.add('hidden'), 1200);
+        };
+
+        mediaGrid.addEventListener('click', async event => {
+            const deleteButton = event.target.closest('.media-delete');
+            if (deleteButton) {
+                if (!confirm('Are you sure you want to delete this media file?')) return;
+                const result = await EtchSupabase.removeFile(mediaBucket, deleteButton.dataset.path);
+                if (result.error) return;
+                await loadMedia();
+                return;
+            }
+            const copyButton = event.target.closest('.copy-btn');
+            if (copyButton) await navigator.clipboard.writeText(copyButton.dataset.url);
+        });
+
+        loadMedia();
     </script>
 </body>
 

@@ -104,12 +104,12 @@
             <!-- ========================================== -->
             <div class="px-6 md:px-8 pt-4">
                 <nav class="flex items-center gap-2 text-sm text-slate/60 dark:text-gray-500">
-                    <a href="/admin/dashboard.html"
+                    <a href="/admin/index.html"
                         class="hover:text-ink dark:hover:text-white transition-colors duration-200">Dashboard</a>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
-                    <a href="/admin/masterclass/index.html"
+                    <a href="/admin/admin_masterclass.html"
                         class="hover:text-ink dark:hover:text-white transition-colors duration-200">Masterclass</a>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -227,7 +227,7 @@
                             <label class="block text-sm font-medium text-ink dark:text-white mb-1.5">Profile
                                 Image</label>
                             <div
-                                class="border-2 border-dashed border-border/60 dark:border-white/10 rounded-2xl p-8 text-center hover:border-olive/40 transition-all duration-300 group">
+                                class="relative border-2 border-dashed border-border/60 dark:border-white/10 rounded-2xl p-8 text-center hover:border-olive/40 transition-all duration-300 group">
                                 <div class="flex flex-col items-center gap-3">
                                     <div
                                         class="w-16 h-16 rounded-2xl bg-gradient-to-br from-olive/20 to-peach/20 flex items-center justify-center text-olive group-hover:scale-110 transition-transform duration-300">
@@ -240,12 +240,12 @@
                                         <p class="text-sm font-medium text-ink dark:text-white">Upload profile image</p>
                                         <p class="text-xs text-slate/60 dark:text-gray-500">PNG, JPG, WEBP up to 2MB</p>
                                     </div>
-                                    <button type="button"
+                                    <button type="button" id="chooseAuthorImageBtn"
                                         class="px-4 py-2 text-sm font-medium bg-gradient-to-r from-olive to-peach text-white rounded-full hover:shadow-xl hover:shadow-olive/20 transition-all duration-300">
                                         Choose Image
                                     </button>
                                 </div>
-                                <input type="file" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*" />
+                                <input type="file" id="authorImageInput" accept="image/*" class="hidden" />
                             </div>
                             <!-- Image Preview (hidden by default) -->
                             <div id="imagePreview"
@@ -399,7 +399,15 @@
     <!-- SCRIPTS -->
     <!-- ============================================ -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="/scripts/global.js"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script>
+        window.__ETCH_SUPABASE__ = window.__ETCH_SUPABASE__ || {
+            url: 'https://cyoddvehzrmhubmislbb.supabase.co',
+            anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5b2RkdmVoenJtaHVibWlzbGJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUxNjI3MTQsImV4cCI6MjEwMDczODcxNH0.YaUyKP9f3tpKDny78_k_ka70zkFZe58GAFOo5oFFaFI',
+        };
+    </script>
+    <script src="/script/supabase.js"></script>
+    <script src="/script/script.js"></script>
     <script src="script/admin.js?v=20260806-components1"></script>
 
     <script>
@@ -435,9 +443,18 @@
         // ==========================================
         // IMAGE PREVIEW
         // ==========================================
-        const fileInput = document.querySelector('input[type="file"]');
+        const fileInput = document.getElementById('authorImageInput');
+        const chooseImageBtn = document.getElementById('chooseAuthorImageBtn');
         const imagePreview = document.getElementById('imagePreview');
         const previewImg = document.getElementById('previewImg');
+
+        // Trigger file input when button is clicked
+        if (chooseImageBtn) {
+            chooseImageBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                fileInput.click();
+            });
+        }
 
         if (fileInput) {
             fileInput.addEventListener('change', function () {
@@ -467,7 +484,7 @@
         const successMessage = document.getElementById('successMessage');
         const saveBtn = document.getElementById('saveBtn');
 
-        form.addEventListener('submit', function (e) {
+        form.addEventListener('submit', async function (e) {
             e.preventDefault();
 
             // Collect form data
@@ -483,8 +500,6 @@
                 status: document.querySelector('input[name="status"]:checked').value
             };
 
-            console.log('Author Data:', formData);
-
             // Show loading state
             saveBtn.innerHTML = `
                 <svg class="w-4 h-4 animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -494,8 +509,11 @@
             `;
             saveBtn.disabled = true;
 
-            // Simulate API call
-            setTimeout(() => {
+            try {
+                const { data, error } = await EtchSupabase.createAuthor(formData);
+
+                if (error) throw error;
+
                 // Reset button
                 saveBtn.innerHTML = `
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -520,7 +538,17 @@
                 setTimeout(() => {
                     successMessage.classList.add('hidden');
                 }, 5000);
-            }, 1500);
+            } catch (error) {
+                console.error('Error creating author:', error);
+                saveBtn.innerHTML = `
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    Create Author
+                `;
+                saveBtn.disabled = false;
+                alert('Failed to create author: ' + (error.message || 'Unknown error'));
+            }
         });
     </script>
 </body>

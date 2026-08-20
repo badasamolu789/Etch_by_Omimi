@@ -103,7 +103,30 @@
     <!-- ============================================ -->
     <section class="relative pt-28 pb-16 md:pt-32 md:pb-24 bg-white dark:bg-ink transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-12">
+            <!-- Loading skeleton -->
+            <div id="productDetailSkeleton" class="grid lg:grid-cols-2 gap-12">
+                <div>
+                    <div class="skeleton h-96 w-full rounded-2xl mb-4"></div>
+                    <div class="grid grid-cols-4 gap-3">
+                        <div class="skeleton h-20 w-full rounded-xl"></div>
+                        <div class="skeleton h-20 w-full rounded-xl"></div>
+                        <div class="skeleton h-20 w-full rounded-xl"></div>
+                        <div class="skeleton h-20 w-full rounded-xl"></div>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div class="skeleton h-6 w-32"></div>
+                    <div class="skeleton h-10 w-3/4"></div>
+                    <div class="skeleton h-4 w-1/2"></div>
+                    <div class="skeleton h-8 w-40"></div>
+                    <div class="skeleton h-4 w-full"></div>
+                    <div class="skeleton h-4 w-full"></div>
+                    <div class="skeleton h-4 w-2/3"></div>
+                    <div class="skeleton h-12 w-48"></div>
+                </div>
+            </div>
+
+            <div id="productDetailContent" class="grid lg:grid-cols-2 gap-12 hidden">
                 <!-- Image Gallery -->
                 <div>
                     <div class="gallery-main rounded-2xl overflow-hidden mb-4">
@@ -233,6 +256,164 @@
     <script>
         // Initialize Lucide Icons
         lucide.createIcons();
+    </script>
+    <script>
+        window.__ETCH_SUPABASE__ = window.__ETCH_SUPABASE__ || {
+            url: 'https://cyoddvehzrmhubmislbb.supabase.co',
+            anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5b2RkdmVoenJtaHVibWlzbGJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUxNjI3MTQsImV4cCI6MjEwMDczODcxNH0.YaUyKP9f3tpKDny78_k_ka70zkFZe58GAFOo5oFFaFI',
+        };
+    </script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="script/supabase.js"></script>
+    <script>
+        async function loadProductDetail() {
+            if (!window.EtchSupabase) {
+                console.warn('EtchSupabase not available');
+                return;
+            }
+
+            try {
+                // Get listing ID or slug from URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const id = urlParams.get('id');
+                const slug = urlParams.get('slug');
+
+                if (!id && !slug) {
+                    console.warn('No listing ID or slug provided');
+                    return;
+                }
+
+                // Fetch listing
+                let result;
+                if (slug) {
+                    result = await window.EtchSupabase.getListingBySlug(slug);
+                } else {
+                    result = await window.EtchSupabase.getListingById(id);
+                }
+
+                const { data: listing, error } = result;
+                if (error || !listing) {
+                    console.error('Error loading listing:', error);
+                    // Show error state
+                    const skeleton = document.getElementById('productDetailSkeleton');
+                    const content = document.getElementById('productDetailContent');
+                    if (skeleton) skeleton.classList.add('hidden');
+                    if (content) {
+                        content.classList.remove('hidden');
+                        content.innerHTML = `
+                            <div class="col-span-full text-center py-16">
+                                <div class="w-20 h-20 mx-auto rounded-2xl bg-stone dark:bg-white/5 flex items-center justify-center text-4xl mb-4">🔍</div>
+                                <h3 class="font-display text-xl font-bold text-ink dark:text-white">Listing not found</h3>
+                                <p class="text-slate dark:text-gray-400 mt-2">This creative asset may have been removed or is no longer available.</p>
+                                <a href="products.html" class="mt-4 inline-flex items-center gap-2 px-6 py-3 bg-olive text-white rounded-xl font-medium hover:bg-olive-dark transition-all duration-300">
+                                    Browse marketplace
+                                </a>
+                            </div>
+                        `;
+                    }
+                    return;
+                }
+
+                // Hide skeleton, show content
+                const skeleton = document.getElementById('productDetailSkeleton');
+                const content = document.getElementById('productDetailContent');
+                if (skeleton) skeleton.classList.add('hidden');
+                if (content) content.classList.remove('hidden');
+
+                // Update page title
+                document.title = (listing.title || 'Creative Work') + ' | ETCH — Premium Creative Marketplace';
+
+                // Update meta description
+                const metaDesc = document.querySelector('meta[name="description"]');
+                if (metaDesc) {
+                    metaDesc.setAttribute('content', listing.description || 'Creative work available for licensing on ETCH.');
+                }
+
+                // Update image gallery
+                const mainImage = document.querySelector('.gallery-main img');
+                const imageUrl = listing.cover_url || 'https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?auto=format&fit=crop&w=800&q=80';
+                if (mainImage) {
+                    mainImage.src = imageUrl;
+                    mainImage.alt = listing.title || 'Creative work';
+                }
+
+                // Update thumbnails
+                const thumbnails = document.querySelectorAll('.gallery-thumbnail img');
+                if (thumbnails.length > 0) {
+                    thumbnails[0].src = imageUrl;
+                }
+
+                // Update category badges
+                const categoryBadges = document.querySelectorAll('.px-3.py-1.bg-olive\\/10');
+                if (categoryBadges.length > 0 && listing.category) {
+                    categoryBadges[0].textContent = listing.category.charAt(0).toUpperCase() + listing.category.slice(1);
+                }
+
+                // Update title
+                const titleEl = document.querySelector('h1.font-display');
+                if (titleEl) {
+                    titleEl.textContent = listing.title || 'Untitled';
+                }
+
+                // Update subtitle
+                const subtitleEl = document.querySelector('p.text-slate.dark\\:text-gray-400.mt-2');
+                if (subtitleEl) {
+                    subtitleEl.textContent = listing.description || '';
+                }
+
+                // Update price
+                const priceEl = document.querySelector('.text-3xl.font-bold');
+                if (priceEl) {
+                    priceEl.textContent = listing.price ? '$' + Number(listing.price).toLocaleString() : '$0';
+                }
+
+                // Update views
+                const viewsEl = document.querySelectorAll('.flex.items-center.gap-3.text-sm');
+                if (viewsEl.length > 0) {
+                    const viewSpan = viewsEl[0].querySelector('span');
+                    if (viewSpan) {
+                        viewSpan.textContent = (listing.views || 0).toLocaleString() + ' views';
+                    }
+                }
+
+                // Update description paragraph
+                const descEl = document.querySelector('p.text-slate.dark\\:text-gray-400.leading-relaxed');
+                if (descEl) {
+                    descEl.textContent = listing.description || '';
+                }
+
+                // Update creator info
+                const creatorName = listing.creator?.username || listing.creator?.full_name || 'Unknown Creator';
+                const creatorInitials = (creatorName || 'ET').slice(0, 2).toUpperCase();
+                const avatarEl = document.querySelector('.w-6.h-6.rounded-full');
+                if (avatarEl) {
+                    avatarEl.textContent = creatorInitials;
+                }
+
+                // Update rights summary if available
+                if (listing.rights_summary) {
+                    const deliverablesList = document.querySelector('.space-y-3 ul');
+                    if (deliverablesList) {
+                        deliverablesList.innerHTML = `
+                            <li class="flex items-center gap-2 text-sm text-slate dark:text-gray-400">
+                                <svg class="w-4 h-4 text-olive" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                ${listing.rights_summary}
+                            </li>
+                        `;
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to load product detail:', error);
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadProductDetail);
+        } else {
+            loadProductDetail();
+        }
     </script>
     <script src="script/script.js"></script>
 </body>

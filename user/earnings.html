@@ -168,7 +168,8 @@
                     <div class="relative flex items-start justify-between">
                         <div>
                             <span class="text-sm text-slate/70 dark:text-gray-400 font-medium">Total Revenue</span>
-                            <div class="text-3xl font-bold text-ink dark:text-white mt-1">$45,230</div>
+                            <div id="earningsRevenueValue" class="text-3xl font-bold text-ink dark:text-white mt-1">
+                                $45,230</div>
                         </div>
                         <div
                             class="w-12 h-12 rounded-2xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-olive group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
@@ -185,7 +186,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M5 10l7-7m0 0l7 7m-7-7v18" />
                             </svg>
-                            +18.5%
+                            0%
                         </span>
                         <span class="text-xs text-slate/60 dark:text-gray-500">this quarter</span>
                     </div>
@@ -205,7 +206,8 @@
                     <div class="relative flex items-start justify-between">
                         <div>
                             <span class="text-sm text-slate/70 dark:text-gray-400 font-medium">Pending Payouts</span>
-                            <div class="text-3xl font-bold text-ink dark:text-white mt-1">$8,450</div>
+                            <div id="earningsPendingValue" class="text-3xl font-bold text-ink dark:text-white mt-1">
+                                $8,450</div>
                         </div>
                         <div
                             class="w-12 h-12 rounded-2xl bg-gradient-to-br from-peach/20 to-coral/20 flex items-center justify-center text-peach group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300">
@@ -241,7 +243,8 @@
                     <div class="relative flex items-start justify-between">
                         <div>
                             <span class="text-sm text-slate/70 dark:text-gray-400 font-medium">Total Sales</span>
-                            <div class="text-3xl font-bold text-ink dark:text-white mt-1">24</div>
+                            <div id="earningsSalesValue" class="text-3xl font-bold text-ink dark:text-white mt-1">24
+                            </div>
                         </div>
                         <div
                             class="w-12 h-12 rounded-2xl bg-gradient-to-br from-mint/20 to-blue-500/20 flex items-center justify-center text-mint group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">
@@ -258,12 +261,12 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M5 10l7-7m0 0l7 7m-7-7v18" />
                             </svg>
-                            +4
+                            0
                         </span>
                         <span class="text-xs text-slate/60 dark:text-gray-500">this month</span>
                     </div>
                     <div class="relative flex items-center gap-3 text-xs text-slate/60 dark:text-gray-500 mt-2">
-                        <span>📈 94% success rate</span>
+                        <span>📈 0% success rate</span>
                         <span>·</span>
                         <span>⭐ 4.8 avg rating</span>
                     </div>
@@ -277,8 +280,9 @@
                     </div>
                     <div class="relative flex items-start justify-between">
                         <div>
-                            <span class="text-sm text-slate/70 dark:text-gray-400 font-medium">Average Order</span>
-                            <div class="text-3xl font-bold text-ink dark:text-white mt-1">$1,884</div>
+                            <span class="text-sm text-slate/70 dark:text-gray-400 font-medium">Net Payout</span>
+                            <div id="earningsNetValue" class="text-3xl font-bold text-ink dark:text-white mt-1">$1,884
+                            </div>
                         </div>
                         <div
                             class="w-12 h-12 rounded-2xl bg-gradient-to-br from-lavender/20 to-purple-500/20 flex items-center justify-center text-lavender group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300">
@@ -346,7 +350,7 @@
                                     class="h-full w-[85%] bg-gradient-to-r from-olive to-emerald-500 rounded-full group-hover:w-full transition-all duration-1000">
                                 </div>
                             </div>
-                            <span class="text-[10px] text-slate/40 mt-1 block">85% of total</span>
+                            <span class="text-[10px] text-slate/40 mt-1 block">0% of total</span>
                         </div>
 
                         <!-- Sync License -->
@@ -364,7 +368,7 @@
                                     class="h-full w-[14%] bg-gradient-to-r from-mint to-blue-500 rounded-full group-hover:w-full transition-all duration-1000">
                                 </div>
                             </div>
-                            <span class="text-[10px] text-slate/40 mt-1 block">14% of total</span>
+                            <span class="text-[10px] text-slate/40 mt-1 block">0% of total</span>
                         </div>
 
                         <!-- Platform Fee -->
@@ -380,7 +384,7 @@
                             <div class="mt-1.5 h-1.5 w-full bg-border/50 dark:bg-white/5 rounded-full overflow-hidden">
                                 <div class="h-full w-[10%] bg-coral rounded-full"></div>
                             </div>
-                            <span class="text-[10px] text-slate/40 mt-1 block">10% platform fee</span>
+                            <span class="text-[10px] text-slate/40 mt-1 block">0% platform fee</span>
                         </div>
 
                         <!-- Divider -->
@@ -978,8 +982,8 @@
     <!-- Supabase Config - ⚠️ REPLACE with your actual values -->
     <script>
         window.__ETCH_SUPABASE__ = {
-            url: 'https://YOUR_PROJECT_ID.supabase.co',
-            anonKey: 'YOUR_ANON_KEY',
+            url: 'https://cyoddvehzrmhubmislbb.supabase.co',
+            anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5b2RkdmVoenJtaHVibWlzbGJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUxNjI3MTQsImV4cCI6MjEwMDczODcxNH0.YaUyKP9f3tpKDny78_k_ka70zkFZe58GAFOo5oFFaFI',
         };
     </script>
 

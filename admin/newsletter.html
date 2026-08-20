@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Newsletter | ETCH Admin</title>
+    <meta name="description" content="Manage ETCH newsletter subscribers and sends." />
+
+    <link rel="icon" href="/assets/logo.png" type="image/png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="/style/style.css" />
+    <link rel="stylesheet" href="style/admin.css?v=20260806-newsletter" />
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        olive: { DEFAULT: '#99A96A', dark: '#73824C', light: '#E8ECD9' },
+                        ink: '#151515', mist: '#FAFAF7', stone: '#F2F3ED',
+                        slate: '#6C6C6C', muted: '#9A9A9A', border: '#E5E7E2',
+                        success: '#3D6B4F', warning: '#C9A54C', error: '#B25555', info: '#5B8DEF',
+                        cream: '#F5F3EE', coral: '#FF6B6B', peach: '#FFB347', mint: '#4ECDC4', lavender: '#A78BFA', blush: '#FF9A9E'
+                    },
+                    fontFamily: {
+                        display: ['"Instrument Serif"', 'serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body data-page-title="Newsletter">
+    <div
+        class="admin-dashboard bg-gradient-to-br from-mist via-white to-cream dark:from-ink dark:via-ink dark:to-ink/95">
+        <div data-component="include" data-src="component/sidebar.html"></div>
+
+        <main class="admin-dashboard-main relative overflow-hidden">
+            <div class="absolute -top-40 -right-40 w-96 h-96 bg-olive/5 rounded-full blur-3xl animate-float"></div>
+            <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-lavender/5 rounded-full blur-3xl animate-float-delay">
+            </div>
+
+            <div data-component="include" data-src="component/topbar.html"></div>
+
+            <section class="relative px-6 md:px-8 pt-6 pb-2">
+                <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+                    <div>
+                        <div class="flex items-center gap-3 mb-2">
+                            <span
+                                class="inline-flex items-center gap-1.5 px-3 py-1 bg-gradient-to-r from-olive/20 to-lavender/20 text-olive rounded-full text-xs font-medium tracking-wide">
+                                <span class="w-1.5 h-1.5 rounded-full bg-olive animate-pulse"></span>
+                                ✦ Email marketing
+                            </span>
+                            <span class="text-xs text-slate/60">📨 Subscriber list</span>
+                        </div>
+                        <h2 class="font-display text-3xl md:text-4xl font-bold text-ink dark:text-white leading-tight">
+                            Newsletter management
+                        </h2>
+                        <p class="text-slate text-sm mt-1 max-w-xl leading-relaxed">
+                            Keep creatives and customers engaged with curated weekly updates, launches, and ETCH
+                            highlights.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="grid grid-cols-2 md:grid-cols-4 gap-4 px-6 md:px-8 py-6">
+                <div
+                    class="group bg-white/80 rounded-2xl border border-border/60 p-5 hover:border-olive/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <span class="text-sm text-slate/60 font-medium">Subscribers</span>
+                            <p id="subscribersTotal" class="text-3xl font-bold text-ink mt-1">0</p>
+                        </div>
+                        <div
+                            class="w-12 h-12 rounded-xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-olive">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="group bg-white/80 rounded-2xl border border-border/60 p-5 hover:border-olive/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <span class="text-sm text-slate/60 font-medium">Active</span>
+                            <p id="subscribersActive" class="text-3xl font-bold text-ink mt-1">0</p>
+                        </div>
+                        <div
+                            class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500/20 to-mint/20 flex items-center justify-center text-emerald-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="group bg-white/80 rounded-2xl border border-border/60 p-5 hover:border-olive/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <span class="text-sm text-slate/60 font-medium">Delivery</span>
+                            <p id="deliveryStatus" class="text-3xl font-bold text-ink mt-1">Ready</p>
+                        </div>
+                        <div
+                            class="w-12 h-12 rounded-xl bg-gradient-to-br from-lavender/20 to-purple-500/20 flex items-center justify-center text-lavender">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="group bg-white/80 rounded-2xl border border-border/60 p-5 hover:border-olive/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <span class="text-sm text-slate/60 font-medium">Last send</span>
+                            <p id="lastSend" class="text-3xl font-bold text-ink mt-1">—</p>
+                        </div>
+                        <div
+                            class="w-12 h-12 rounded-xl bg-gradient-to-br from-peach/20 to-coral/20 flex items-center justify-center text-peach">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="grid grid-cols-1 xl:grid-cols-[1.1fr_0.9fr] gap-6 px-6 md:px-8 py-4">
+                <div class="bg-white/80 rounded-3xl border border-border/60 p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h3 class="font-display text-2xl font-bold text-ink">Subscribers</h3>
+                            <p class="text-sm text-slate/60">Recent signups and active audience</p>
+                        </div>
+                        <div
+                            class="flex items-center gap-2 rounded-full bg-olive/10 px-3 py-1 text-xs font-medium text-olive">
+                            <span class="h-2 w-2 rounded-full bg-olive animate-pulse"></span>
+                            Live list
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-left text-sm">
+                            <thead>
+                                <tr
+                                    class="border-b border-border text-slate/60 uppercase tracking-[0.12em] text-[10px]">
+                                    <th class="pb-3 pr-4 font-medium">Name</th>
+                                    <th class="pb-3 pr-4 font-medium">Email</th>
+                                    <th class="pb-3 pr-4 font-medium">Status</th>
+                                    <th class="pb-3 font-medium">Signed up</th>
+                                </tr>
+                            </thead>
+                            <tbody id="newsletterSubscribersTable" class="divide-y divide-border/60"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bg-white/80 rounded-3xl border border-border/60 p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h3 class="font-display text-2xl font-bold text-ink">Send campaign</h3>
+                            <p class="text-sm text-slate/60">Push a newsletter to all active subscribers</p>
+                        </div>
+                    </div>
+
+                    <form id="newsletterCampaignForm" class="space-y-4">
+                        <div>
+                            <label for="campaignSubject"
+                                class="block text-xs font-semibold uppercase tracking-[0.18em] text-slate/60">Subject</label>
+                            <input id="campaignSubject" type="text" value="ETCH Weekly Brief"
+                                class="mt-2 w-full rounded-2xl border border-border bg-stone px-4 py-3 text-sm text-ink outline-none focus:border-olive focus:ring-2 focus:ring-olive/20" />
+                        </div>
+
+                        <div>
+                            <label for="campaignMessage"
+                                class="block text-xs font-semibold uppercase tracking-[0.18em] text-slate/60">Message</label>
+                            <textarea id="campaignMessage" rows="8"
+                                class="mt-2 w-full resize-y rounded-2xl border border-border bg-stone px-4 py-3 text-sm text-ink outline-none focus:border-olive focus:ring-2 focus:ring-olive/20"
+                                placeholder="Write your newsletter here...">Fresh creative inspiration from ETCH this week. Discover new work, smart market insights, and practical lessons from storytellers, designers, and filmmakers building sustainable creative careers.</textarea>
+                        </div>
+
+                        <button type="submit" id="sendCampaignBtn"
+                            class="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-olive px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-olive-dark">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 8l9 4 9-4-9-4-9 4zm0 0v8l9 4 9-4V8" />
+                            </svg>
+                            Send to subscribers
+                        </button>
+
+                        <p id="newsletterCampaignStatus" class="min-h-[20px] text-sm text-slate/70"></p>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="/script/newsletter-config.js"></script>
+    <script src="/script/supabase.js"></script>
+
+    <script>
+        /**
+         * NEWSLETTER CONFIGURATION
+         * 
+         * Set your email provider endpoint here.
+         * See docs/NEWSLETTER_SETUP.md for setup instructions.
+         * 
+         * Example configurations:
+         * 
+         * 1. Supabase Edge Function (recommended):
+         *    endpoint: 'https://your-project.supabase.co/functions/v1/send-newsletter'
+         * 
+         * 2. Resend API (easy setup):
+         *    endpoint: 'https://api.resend.com/emails/batch',
+         *    apiKey: 'your_resend_api_key',
+         *    provider: 'resend'
+         * 
+         * 3. Custom backend:
+         *    endpoint: 'https://your-backend.com/api/send-newsletter'
+         */
+        window.__ETCH_NEWSLETTER__ = window.__ETCH_NEWSLETTER__ || {
+            endpoint: 'https://cyoddvehzrmhubmislbb.supabase.co/functions/v1/send-newsletter', // Configure your endpoint here
+            provider: 'supabase-function', // or 'resend', 'sendgrid', etc.
+            apiKey: '', // API key if needed (for Resend: your API key)
+            fromName: 'ETCH Newsletter'
+        };
+    </script>
+
+    <script src="script/admin.js"></script>
+
+    <script>
+
+        const subscribersTable = document.getElementById('newsletterSubscribersTable');
+        const subscribersTotal = document.getElementById('subscribersTotal');
+        const subscribersActive = document.getElementById('subscribersActive');
+        const deliveryStatus = document.getElementById('deliveryStatus');
+        const lastSend = document.getElementById('lastSend');
+        const campaignForm = document.getElementById('newsletterCampaignForm');
+        const campaignStatus = document.getElementById('newsletterCampaignStatus');
+
+        function formatDate(dateString) {
+            if (!dateString) return '—';
+            const date = new Date(dateString);
+            return isNaN(date.getTime()) ? '—' : date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
+
+        function setDeliveryState(label, tone) {
+            deliveryStatus.textContent = label;
+            deliveryStatus.className = 'text-3xl font-bold mt-1 ' + (tone === 'success' ? 'text-success' : tone === 'warning' ? 'text-warning' : 'text-ink');
+        }
+
+        async function loadSubscribers() {
+            if (!window.EtchSupabase || typeof window.EtchSupabase.getNewsletterSubscribers !== 'function') {
+                subscribersTable.innerHTML = '<tr><td colspan="4" class="py-6 text-center text-slate/60">Newsletter helpers are not available.</td></tr>';
+                return;
+            }
+
+            const { data, error } = await window.EtchSupabase.getNewsletterSubscribers();
+            if (error) {
+                subscribersTable.innerHTML = '<tr><td colspan="4" class="py-6 text-center text-error">Unable to load subscribers.</td></tr>';
+                setDeliveryState('Error', 'warning');
+                return;
+            }
+
+            const rows = data || [];
+            subscribersTotal.textContent = String(rows.length);
+            subscribersActive.textContent = String(rows.filter(item => item.is_active !== false).length);
+
+            if (!rows.length) {
+                subscribersTable.innerHTML = '<tr><td colspan="4" class="py-6 text-center text-slate/60">No subscribers yet.</td></tr>';
+                setDeliveryState('Idle', 'warning');
+                return;
+            }
+
+            subscribersTable.innerHTML = rows.slice(0, 12).map((subscriber) => {
+                const name = subscriber.name || 'New subscriber';
+                const active = subscriber.is_active !== false ? 'Active' : 'Paused';
+                const badgeClass = active === 'Active' ? 'bg-emerald-500/10 text-emerald-600' : 'bg-amber-500/10 text-amber-600';
+                return `
+                    <tr>
+                        <td class="py-4 pr-4 font-medium text-ink">${name}</td>
+                        <td class="py-4 pr-4 text-slate/70">${subscriber.email}</td>
+                        <td class="py-4 pr-4"><span class="inline-flex rounded-full px-2.5 py-1 text-[10px] font-semibold ${badgeClass}">${active}</span></td>
+                        <td class="py-4 text-slate/60">${formatDate(subscriber.subscribed_at)}</td>
+                    </tr>
+                `;
+            }).join('');
+
+            setDeliveryState('Ready', 'success');
+        }
+
+        campaignForm?.addEventListener('submit', async function (event) {
+            event.preventDefault();
+            const subject = document.getElementById('campaignSubject').value.trim();
+            const message = document.getElementById('campaignMessage').value.trim();
+            const sendBtn = document.getElementById('sendCampaignBtn');
+
+            if (!subject || !message) {
+                campaignStatus.textContent = 'Please add a subject and message before sending.';
+                campaignStatus.className = 'min-h-[20px] text-sm text-error';
+                return;
+            }
+
+            sendBtn.disabled = true;
+            campaignStatus.textContent = 'Sending newsletter...';
+            campaignStatus.className = 'min-h-[20px] text-sm text-slate/70';
+
+            try {
+                const result = await window.EtchSupabase.sendNewsletterCampaign({ subject, message, fromName: 'ETCH' });
+                if (!result.sent) {
+                    throw result.error || new Error('The newsletter could not be sent.');
+                }
+
+                lastSend.textContent = 'Now';
+                campaignStatus.textContent = `Newsletter sent successfully to ${result.count} subscriber${result.count === 1 ? '' : 's'}.`;
+                campaignStatus.className = 'min-h-[20px] text-sm text-success';
+                setDeliveryState('Sent', 'success');
+            } catch (error) {
+                const messageText = error?.message || 'Delivery is not configured yet.';
+                campaignStatus.textContent = messageText;
+                campaignStatus.className = 'min-h-[20px] text-sm text-error';
+                setDeliveryState('Pending', 'warning');
+            } finally {
+                sendBtn.disabled = false;
+            }
+        });
+
+        loadSubscribers();
+    </script>
+</body>
+
+</html>
