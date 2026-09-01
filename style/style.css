@@ -74,6 +74,343 @@ html.dark {
     --color-border: #3A3A3A;
 }
 
+html.dark body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+}
+
+html.dark .bg-white {
+    background-color: var(--color-surface-elevated) !important;
+}
+
+html.dark .bg-white\/80,
+html.dark .bg-white\/90,
+html.dark .bg-white\/60,
+html.dark .bg-white\/5 {
+    background-color: rgba(26, 26, 26, 0.82) !important;
+}
+
+html.dark .bg-stone {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+html.dark .bg-mist {
+    background-color: #121212 !important;
+}
+
+html.dark .bg-cream {
+    background-color: #171717 !important;
+}
+
+html.dark .bg-ivory {
+    background-color: rgba(18, 18, 18, 0.92) !important;
+}
+
+html.dark .bg-gold {
+    background-color: rgba(201, 165, 76, 0.12) !important;
+}
+
+html.dark .bg-slate\/2,
+html.dark .bg-slate\/5,
+html.dark .bg-slate\/15,
+html.dark .bg-slate\/25,
+html.dark .bg-slate\/50,
+html.dark .bg-slate\/60 {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+html.dark .text-charcoal,
+html.dark .text-ink,
+html.dark .text-ink\/*,
+html.dark .text-ink\/80,
+html.dark .text-ink\/70 {
+    color: var(--color-text) !important;
+}
+
+html.dark .text-slate,
+html.dark .text-slate\/60,
+html.dark .text-slate\/70,
+html.dark .text-slate\/80,
+html.dark .text-slate\/40,
+html.dark .text-slate\/50,
+html.dark .text-slate\/* {
+    color: var(--color-text-secondary) !important;
+}
+
+html.dark .border-border,
+html.dark .border-border\/60,
+html.dark .border-border\/40,
+html.dark .border-border\/50,
+html.dark .border-border\/10,
+html.dark .border-slate\/15,
+html.dark .border-slate\/25 {
+    border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+html.dark .shadow-2xl,
+html.dark .shadow-xl,
+html.dark .shadow-lg {
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 18px 50px rgba(0, 0, 0, 0.32) !important;
+}
+
+html.dark .bg-gradient-to-b,
+html.dark .bg-gradient-to-br,
+html.dark .bg-gradient-to-r,
+html.dark .bg-gradient-to-l,
+html.dark .bg-gradient-to-tr,
+html.dark .bg-gradient-to-tl {
+    background-image: linear-gradient(to bottom, rgba(18, 18, 18, 0.96), rgba(10, 10, 10, 0.96)) !important;
+}
+
+html.dark .bg-gradient-to-b.from-slate\/5 {
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.04), rgba(18, 18, 18, 0.98)) !important;
+}
+
+html.dark .text-olive {
+    color: #b7d37b !important;
+}
+
+html.dark .bg-olive\/10,
+html.dark .bg-olive\/5 {
+    background-color: rgba(153, 169, 106, 0.12) !important;
+}
+
+.sponsor-strip {
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid rgba(21, 21, 21, 0.08);
+    border-bottom: 1px solid rgba(21, 21, 21, 0.08);
+    background: linear-gradient(90deg, #f0f2e7 0%, #e9efd5 50%, #f0f2e7 100%);
+}
+
+html.dark .sponsor-strip {
+    background: linear-gradient(90deg, #111111 0%, #1b1b1b 50%, #111111 100%);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.sponsor-marquee {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+.sponsor-track {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    width: max-content;
+    gap: 1rem;
+    padding: 1rem 0;
+    animation: sponsor-scroll 26s linear infinite;
+}
+
+.sponsor-track span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 150px;
+    padding: 0.9rem 1.5rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(21, 21, 21, 0.08);
+    background: rgba(255, 255, 255, 0.35);
+    color: #1a1a1a;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+html.dark .sponsor-track span {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.08);
+    color: #f3f3f3;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.newsletter-panel,
+.newsletter-modal-panel {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+html.dark .newsletter-panel {
+    background: rgba(18, 20, 18, 0.98) !important;
+    color: #f4f6ef !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45) !important;
+}
+
+html.dark .newsletter-panel h3,
+html.dark .newsletter-panel h2,
+html.dark .newsletter-panel p,
+html.dark .newsletter-panel label,
+html.dark .newsletter-panel span,
+html.dark .newsletter-panel a,
+html.dark .newsletter-panel input,
+html.dark .newsletter-panel button {
+    color: inherit !important;
+}
+
+html.dark .newsletter-panel input {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #f5f5f2 !important;
+}
+
+html.dark .newsletter-panel input::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+html.dark .newsletter-panel .text-slate\/60,
+html.dark .newsletter-panel .text-slate\/70,
+html.dark .newsletter-panel .text-slate\/50,
+html.dark .newsletter-panel .text-slate\/40 {
+    color: rgba(255, 255, 255, 0.68) !important;
+}
+
+html.dark .newsletter-modal-panel {
+    background: rgba(22, 22, 22, 0.98) !important;
+    color: #fafaf5 !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.42) !important;
+}
+
+html.dark .newsletter-modal-panel h3,
+html.dark .newsletter-modal-panel p,
+html.dark .newsletter-modal-panel label,
+html.dark .newsletter-modal-panel span,
+html.dark .newsletter-modal-panel a,
+html.dark .newsletter-modal-panel input,
+html.dark .newsletter-modal-panel button {
+    color: inherit !important;
+}
+
+html.dark .newsletter-modal-panel input {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #f5f5f2 !important;
+}
+
+html.dark .newsletter-modal-panel input::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+html.dark #closeNewsletterModal {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+html.dark #newsletterModalStatus,
+html.dark #landingNewsletterStatus {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* ============================================
+   DARK MODE: GLOBAL SAFETY NET
+   Ensures base utility classes degrade gracefully
+   in dark mode when individual elements lack
+   explicit dark: variants.
+   ============================================ */
+
+/* Background: white → dark surface */
+html.dark .bg-white {
+    background-color: rgba(26, 26, 26, 0.98) !important;
+}
+
+html.dark .bg-white\/50 {
+    background-color: rgba(26, 26, 26, 0.5) !important;
+}
+
+html.dark .bg-white\/80 {
+    background-color: rgba(26, 26, 26, 0.8) !important;
+}
+
+html.dark .bg-white\/85 {
+    background-color: rgba(26, 26, 26, 0.85) !important;
+}
+
+html.dark .bg-white\/90 {
+    background-color: rgba(26, 26, 26, 0.9) !important;
+}
+
+/* Border: border-border → dark border */
+html.dark .border-border,
+html.dark .border {
+    border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Text: slate → readable gray in dark mode */
+html.dark .text-slate {
+    color: #8a8a8a !important;
+}
+html.dark .text-slate\/70 {
+    color: rgba(138, 138, 138, 0.72) !important;
+}
+html.dark .text-slate\/60 {
+    color: rgba(138, 138, 138, 0.62) !important;
+}
+html.dark .text-slate\/50 {
+    color: rgba(138, 138, 138, 0.52) !important;
+}
+html.dark .text-slate\/40 {
+    color: rgba(138, 138, 138, 0.42) !important;
+}
+
+/* Shadows: lighten dark-mode box-shadows for better visibility */
+html.dark .shadow-\[0_20px_50px_rgba\(21,21,21,0\.06\)\] {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25) !important;
+}
+html.dark .shadow-\[0_12px_32px_rgba\(21,21,21,0\.04\)\] {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18) !important;
+}
+html.dark .shadow-\[0_25px_60px_rgba\(0,0,0,0\.35\)\] {
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5) !important;
+}
+html.dark .shadow-\[0_30px_80px_rgba\(21,21,21,0\.25\)\] {
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4) !important;
+}
+html.dark .shadow-sm {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Gradients: dark mode overrides for light-heavy gradients */
+html.dark .bg-gradient-to-br\.from-olive\/10\.via-white\.to-lavender\/10 {
+    background-image: linear-gradient(135deg, rgba(153, 169, 106, 0.12) 0%, rgba(26, 26, 26, 0.9) 50%, rgba(167, 139, 255, 0.1) 100%) !important;
+}
+
+/* Newsletter Modal dark-mode background */
+html.dark #newsletterModal .newsletter-modal-panel,
+html.dark .newsletter-modal-panel {
+    background: rgba(22, 22, 22, 0.98) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Close button in modal */
+html.dark #closeNewsletterModal {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+html.dark #closeNewsletterModal:hover {
+    background: rgba(153, 169, 106, 0.12) !important;
+    border-color: rgba(153, 169, 106, 0.3) !important;
+    color: #99A96A !important;
+}
+
+@keyframes sponsor-scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
 /* ============================================
    2. RESET & BASE
    ============================================ */

@@ -64,6 +64,7 @@
             '        </div>',
             '        <a href="explore.html" class="mobile-menu-link block text-ink dark:text-white font-medium hover:text-olive transition-colors duration-200">Explore</a>',
             '        <a href="products.html" class="mobile-menu-link block text-ink dark:text-white font-medium hover:text-olive transition-colors duration-200">Marketplace</a>',
+            '        <a href="masterclass.html" class="mobile-menu-link block text-ink dark:text-white font-medium hover:text-olive transition-colors duration-200">Masterclass</a>',
             '        <a href="about.html" class="mobile-menu-link block text-ink dark:text-white font-medium hover:text-olive transition-colors duration-200">About</a>',
             '        <a href="contact.html" class="mobile-menu-link block text-ink dark:text-white font-medium hover:text-olive transition-colors duration-200">Contact</a>',
             '        <div class="pt-4 border-t border-border/40 dark:border-white/10 flex flex-col gap-3">',

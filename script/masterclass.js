@@ -61,12 +61,12 @@
 
         if (!article) {
             container.innerHTML = `
-                <div class="bg-white dark:bg-ink rounded-2xl border border-border p-4">
-                    <div class="w-full h-56 bg-stone rounded-lg flex flex-col items-center justify-center text-slate gap-3">
-                        <svg class="w-12 h-12 text-slate/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="bg-white dark:bg-ink rounded-2xl border border-border dark:border-white/10 p-4">
+                    <div class="w-full h-56 bg-stone dark:bg-white/5 rounded-lg flex flex-col items-center justify-center text-slate dark:text-gray-500 gap-3">
+                        <svg class="w-12 h-12 text-slate/30 dark:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                         </svg>
-                        <p class="text-sm">No featured article yet.</p>
+                        <p class="text-sm dark:text-gray-500">No featured article yet.</p>
                     </div>
                 </div>
             `;
@@ -103,7 +103,7 @@
                         </div>
                         <div class="text-xs">
                             <p class="font-medium text-ink dark:text-white">${escapeHtml(author)}</p>
-                            <p class="text-slate/40">${formatDate(article.published_at)} · ${article.reading_time || 5} min read</p>
+                            <p class="text-slate/40 dark:text-gray-500">${formatDate(article.published_at)} · ${article.reading_time || 5} min read</p>
                         </div>
                     </div>
                 </div>
@@ -151,7 +151,7 @@
                             ${escapeHtml(article.title)}
                         </h3>
                         <p class="text-sm text-slate/60 dark:text-gray-500 mt-2 line-clamp-2">${escapeHtml(article.excerpt || '')}</p>
-                        <div class="flex items-center gap-2 mt-4 text-xs text-slate/40">
+                        <div class="flex items-center gap-2 mt-4 text-xs text-slate/40 dark:text-gray-500">
                             <span>${escapeHtml(author)}</span>
                             <span>·</span>
                             <span>${formatDate(article.published_at)}</span>

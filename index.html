@@ -253,6 +253,34 @@
     </section>
 
     <!-- ============================================ -->
+    <!-- SPONSOR MARQUEE -->
+    <!-- ============================================ -->
+    <section class="sponsor-strip" aria-label="Featured sponsors">
+        <div class="sponsor-marquee">
+            <div class="sponsor-track">
+                <span>Spotify</span>
+                <span>Adobe</span>
+                <span>Airbnb</span>
+                <span>Notion</span>
+                <span>Canon</span>
+                <span>Asana</span>
+                <span>Dropbox</span>
+                <span>Stripe</span>
+                <span>Netflix</span>
+                <span>Spotify</span>
+                <span>Adobe</span>
+                <span>Airbnb</span>
+                <span>Notion</span>
+                <span>Canon</span>
+                <span>Asana</span>
+                <span>Dropbox</span>
+                <span>Stripe</span>
+                <span>Netflix</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
     <!-- FEATURED CATEGORIES -->
     <!-- ============================================ -->
     <section class="py-16 md:py-24 bg-white dark:bg-ink transition-colors duration-300">
@@ -666,48 +694,40 @@
     <!-- ============================================ -->
     <!-- NEWSLETTER CTA -->
     <!-- ============================================ -->
-    <section class="relative py-20 md:py-32 overflow-hidden">
-        <!-- Gradient background -->
-        <div class="absolute inset-0 bg-gradient-to-b from-slate/5 via-ivory to-stone/10"></div>
-
-        <!-- Decorative elements -->
-        <div class="absolute top-0 left-1/4 w-96 h-96 bg-olive/5 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-gold/3 rounded-full blur-3xl"></div>
+    <section class="relative py-20 md:py-32 overflow-hidden bg-white dark:bg-ink transition-colors duration-300">
+        <!-- Dark gradient overlay for both modes -->
+        <div
+            class="absolute inset-0 bg-gradient-to-br from-olive/5 via-transparent to-olive/5 dark:from-olive/10 dark:via-ink/50 dark:to-transparent">
+        </div>
 
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <!-- Main container with asymmetric layout -->
             <div class="grid gap-12 lg:gap-16 lg:grid-cols-2 items-center">
-                <!-- Left content -->
                 <div class="text-left space-y-6">
                     <div
                         class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-olive/10 border border-olive/20 w-fit">
-                        <svg class="w-4 h-4 text-olive" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                                d="M3 1a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V1zm0 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V5zm0 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V9zm0 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1v-2z" />
-                        </svg>
+                        <span class="w-2 h-2 rounded-full bg-olive"></span>
                         <span class="text-xs font-semibold uppercase tracking-wider text-olive">Weekly digest</span>
                     </div>
 
                     <div class="space-y-3">
-                        <h2 class="font-display text-5xl md:text-6xl font-bold leading-tight text-charcoal">
+                        <h2 class="font-display text-5xl md:text-6xl font-bold leading-tight text-ink dark:text-white">
                             Stay inspired.<br />
                             <span class="text-olive">Stay ahead.</span>
                         </h2>
-                        <p class="text-lg text-slate/70 max-w-lg leading-relaxed">
+                        <p class="text-lg text-slate dark:text-gray-400 max-w-lg leading-relaxed">
                             Join 500+ creators getting exclusive insights on licensing, storytelling, and building a
                             sustainable creative business—delivered directly to your inbox.
                         </p>
                     </div>
 
-                    <!-- Trust indicators -->
-                    <div class="flex flex-wrap gap-6 pt-4">
+                    <div class="flex flex-wrap gap-6 pt-4 text-slate/70 dark:text-gray-500">
                         <div class="flex items-center gap-2">
                             <svg class="w-5 h-5 text-olive" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd"
                                     d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                                     clip-rule="evenodd" />
                             </svg>
-                            <span class="text-sm text-slate/80">No spam, ever</span>
+                            <span class="text-sm">No spam, ever</span>
                         </div>
                         <div class="flex items-center gap-2">
                             <svg class="w-5 h-5 text-olive" fill="currentColor" viewBox="0 0 20 20">
@@ -715,32 +735,27 @@
                                     d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                                     clip-rule="evenodd" />
                             </svg>
-                            <span class="text-sm text-slate/80">Unsubscribe anytime</span>
+                            <span class="text-sm">Unsubscribe anytime</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right form with enhanced styling -->
                 <div class="relative">
-                    <!-- Subtle background card -->
                     <div
-                        class="absolute inset-0 bg-gradient-to-br from-white via-white to-ivory/50 rounded-[32px] shadow-lg">
+                        class="absolute inset-0 bg-stone dark:bg-ink rounded-[32px] shadow-[0_25px_60px_rgba(0,0,0,0.35)] dark:border dark:border-white/10">
                     </div>
-                    <div
-                        class="absolute -inset-1 bg-gradient-to-br from-olive/10 to-gold/5 rounded-[32px] blur-2xl opacity-60">
-                    </div>
+                    <div class="absolute -inset-1 bg-olive/10 rounded-[32px] blur-2xl opacity-70"></div>
 
-                    <form id="landingNewsletterForm" class="relative p-8 md:p-10 rounded-[32px] space-y-5">
-                        <!-- Form header -->
+                    <form id="landingNewsletterForm"
+                        class="newsletter-panel relative p-8 md:p-10 rounded-[32px] space-y-5 bg-stone dark:bg-ink text-ink dark:text-gray-300 border border-border dark:border-white/10">
                         <div>
-                            <h3 class="font-display text-2xl font-bold text-charcoal">Subscribe today</h3>
-                            <p class="text-sm text-slate/60 mt-2">Get your first insight in 24 hours</p>
+                            <h3 class="font-display text-2xl font-bold text-ink dark:text-white">Subscribe today</h3>
+                            <p class="text-sm text-slate/60 dark:text-gray-500 mt-2">Get your first insight in 24 hours</p>
                         </div>
 
-                        <!-- Email input with icon -->
                         <div class="relative">
                             <label for="landingNewsletterEmail"
-                                class="block text-xs font-semibold uppercase tracking-wider text-slate/70 mb-3">Email
+                                class="block text-xs font-semibold uppercase tracking-wider text-slate/60 dark:text-gray-500 mb-3">Email
                                 address</label>
                             <div class="relative">
                                 <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-olive/40"
@@ -749,11 +764,10 @@
                                     <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                                 </svg>
                                 <input id="landingNewsletterEmail" type="email" required placeholder="you@example.com"
-                                    class="w-full pl-11 pr-4 py-3.5 rounded-xl border-2 border-slate/15 bg-slate/2 text-charcoal text-base outline-none transition duration-300 focus:border-olive focus:ring-2 focus:ring-olive/15 hover:border-slate/25" />
+                                    class="w-full pl-11 pr-4 py-3.5 rounded-xl border-2 border-slate/15 dark:border-white/10 bg-white dark:bg-ink text-ink dark:text-gray-300 text-base outline-none transition duration-300 focus:border-olive focus:ring-2 focus:ring-olive/15 hover:border-slate/25 dark:hover:border-white/20" />
                             </div>
                         </div>
 
-                        <!-- Submit button with enhanced styling -->
                         <button type="submit"
                             class="group w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-olive to-olive-dark rounded-xl font-semibold text-white shadow-lg shadow-olive/20 hover:shadow-xl hover:shadow-olive/30 hover:-translate-y-0.5 transition-all duration-300 ease-out">
                             <span>Subscribe</span>
@@ -764,11 +778,9 @@
                             </svg>
                         </button>
 
-                        <!-- Status message -->
-                        <p id="landingNewsletterStatus" class="text-sm min-h-[20px] text-slate/70 text-center"></p>
+                        <p id="landingNewsletterStatus" class="text-sm min-h-[20px] text-slate/60 dark:text-gray-500 text-center"></p>
 
-                        <!-- Privacy note -->
-                        <p class="text-xs text-slate/50 text-center">
+                        <p class="text-xs text-slate/50 dark:text-gray-600 text-center">
                             We respect your privacy. <a href="#" class="text-olive hover:underline">See our privacy
                                 policy</a>.
                         </p>
@@ -838,9 +850,9 @@
     <div id="newsletterModal"
         class="fixed inset-0 z-[60] hidden items-center justify-center bg-ink/60 p-4 backdrop-blur-sm">
         <div
-            class="relative w-full max-w-xl rounded-[32px] bg-white p-6 shadow-[0_30px_80px_rgba(21,21,21,0.25)] md:p-8">
+            class="newsletter-modal-panel relative w-full max-w-xl rounded-[32px] bg-white dark:bg-ink/90 dark:text-gray-300 p-6 shadow-[0_30px_80px_rgba(21,21,21,0.25)] dark:shadow-[0_30px_80px_rgba(0,0,0,0.4)] md:p-8">
             <button id="closeNewsletterModal" type="button"
-                class="absolute right-4 top-4 rounded-full border border-border p-2 text-slate transition hover:border-olive hover:text-olive"
+                class="absolute right-4 top-4 rounded-full border border-border dark:border-white/10 p-2 text-slate dark:text-gray-400 transition hover:border-olive hover:text-olive"
                 aria-label="Close modal">
                 <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -850,23 +862,23 @@
                 <span
                     class="inline-block rounded-full bg-olive/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-olive">Stay
                     inspired</span>
-                <h3 class="mt-4 font-display text-4xl font-bold text-ink">Join ETCH’s newsletter.</h3>
-                <p class="mt-3 text-base text-slate">Get updates on new releases, exclusive creator drops, and practical
+                <h3 class="mt-4 font-display text-4xl font-bold text-ink dark:text-white">Join ETCH's newsletter.</h3>
+                <p class="mt-3 text-base text-slate dark:text-gray-300">Get updates on new releases, exclusive creator drops, and practical
                     creative insights once a week.</p>
             </div>
 
             <form id="newsletterModalForm" class="mt-6 space-y-4">
                 <div>
                     <label for="newsletterModalEmail"
-                        class="block text-xs font-semibold uppercase tracking-[0.18em] text-slate/60">Email
+                        class="block text-xs font-semibold uppercase tracking-[0.18em] text-slate/60 dark:text-gray-500">Email
                         address</label>
                     <input id="newsletterModalEmail" type="email" required placeholder="you@example.com"
-                        class="mt-2 w-full rounded-2xl border border-border bg-stone px-4 py-3 text-base text-ink outline-none transition focus:border-olive focus:ring-2 focus:ring-olive/20" />
+                        class="mt-2 w-full rounded-2xl border border-border dark:border-white/10 bg-stone dark:bg-ink/50 px-4 py-3 text-base text-ink dark:text-gray-300 outline-none transition focus:border-olive focus:ring-2 focus:ring-olive/20" />
                 </div>
                 <button type="submit"
                     class="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-olive px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-olive-dark">Subscribe
                     to updates</button>
-                <p id="newsletterModalStatus" class="min-h-[20px] text-sm text-slate/70"></p>
+                <p id="newsletterModalStatus" class="min-h-[20px] text-sm text-slate/60 dark:text-gray-500"></p>
             </form>
         </div>
     </div>
