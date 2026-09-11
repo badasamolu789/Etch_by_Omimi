@@ -2,6 +2,8 @@
 <html lang="en" data-theme="light">
 
 <head>
+    <script src="/script/core.js"></script>
+    <script src="/script/components.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Earnings | ETCH Creator Studio</title>
@@ -118,7 +120,7 @@
                                 <span class="w-1.5 h-1.5 rounded-full bg-olive animate-pulse"></span>
                                 ✦ Revenue Studio
                             </span>
-                            <span class="text-xs text-slate/60 dark:text-gray-500">💰 $40,707 net earnings</span>
+                            <span class="text-xs text-slate/60 dark:text-gray-500">No earnings data yet</span>
                         </div>
                         <h2 class="font-display text-4xl md:text-5xl font-bold text-ink dark:text-white leading-tight">
                             Your <span class="relative inline-block">
@@ -169,7 +171,7 @@
                         <div>
                             <span class="text-sm text-slate/70 dark:text-gray-400 font-medium">Total Revenue</span>
                             <div id="earningsRevenueValue" class="text-3xl font-bold text-ink dark:text-white mt-1">
-                                $45,230</div>
+                                —</div>
                         </div>
                         <div
                             class="w-12 h-12 rounded-2xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-olive group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
@@ -207,7 +209,7 @@
                         <div>
                             <span class="text-sm text-slate/70 dark:text-gray-400 font-medium">Pending Payouts</span>
                             <div id="earningsPendingValue" class="text-3xl font-bold text-ink dark:text-white mt-1">
-                                $8,450</div>
+                                —</div>
                         </div>
                         <div
                             class="w-12 h-12 rounded-2xl bg-gradient-to-br from-peach/20 to-coral/20 flex items-center justify-center text-peach group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300">
@@ -243,8 +245,7 @@
                     <div class="relative flex items-start justify-between">
                         <div>
                             <span class="text-sm text-slate/70 dark:text-gray-400 font-medium">Total Sales</span>
-                            <div id="earningsSalesValue" class="text-3xl font-bold text-ink dark:text-white mt-1">24
-                            </div>
+                            <div id="earningsSalesValue" class="text-3xl font-bold text-ink dark:text-white mt-1">0</div>
                         </div>
                         <div
                             class="w-12 h-12 rounded-2xl bg-gradient-to-br from-mint/20 to-blue-500/20 flex items-center justify-center text-mint group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">
@@ -281,7 +282,7 @@
                     <div class="relative flex items-start justify-between">
                         <div>
                             <span class="text-sm text-slate/70 dark:text-gray-400 font-medium">Net Payout</span>
-                            <div id="earningsNetValue" class="text-3xl font-bold text-ink dark:text-white mt-1">$1,884
+                            <div id="earningsNetValue" class="text-3xl font-bold text-ink dark:text-white mt-1">—
                             </div>
                         </div>
                         <div
@@ -304,7 +305,7 @@
                         <span class="text-xs text-slate/60 dark:text-gray-500">growth</span>
                     </div>
                     <div class="relative flex items-center gap-3 text-xs text-slate/60 dark:text-gray-500 mt-2">
-                        <span>💰 Top: <strong class="text-ink dark:text-white">$15,000</strong></span>
+                        <span>No top earning asset yet</span>
                         <span>·</span>
                         <span>📊 24 transactions</span>
                     </div>
@@ -343,7 +344,7 @@
                                         class="w-3 h-3 rounded-full bg-gradient-to-r from-olive to-emerald-500"></span>
                                     Licensing Revenue
                                 </span>
-                                <span class="font-semibold text-ink dark:text-white">$38,750</span>
+                                <span class="font-semibold text-ink dark:text-white">—</span>
                             </div>
                             <div class="mt-1.5 h-1.5 w-full bg-border/50 dark:bg-white/5 rounded-full overflow-hidden">
                                 <div
@@ -361,7 +362,7 @@
                                     <span class="w-3 h-3 rounded-full bg-gradient-to-r from-mint to-blue-500"></span>
                                     Sync License Revenue
                                 </span>
-                                <span class="font-semibold text-ink dark:text-white">$6,480</span>
+                                <span class="font-semibold text-ink dark:text-white">—</span>
                             </div>
                             <div class="mt-1.5 h-1.5 w-full bg-border/50 dark:bg-white/5 rounded-full overflow-hidden">
                                 <div
@@ -379,7 +380,7 @@
                                     <span class="w-3 h-3 rounded-full bg-coral"></span>
                                     Platform Fee (10%)
                                 </span>
-                                <span class="font-semibold text-coral">-$4,523</span>
+                                <span class="font-semibold text-coral">—</span>
                             </div>
                             <div class="mt-1.5 h-1.5 w-full bg-border/50 dark:bg-white/5 rounded-full overflow-hidden">
                                 <div class="h-full w-[10%] bg-coral rounded-full"></div>
@@ -398,7 +399,7 @@
                                     <span class="w-3 h-3 rounded-full bg-olive"></span>
                                     Net Earnings
                                 </span>
-                                <span class="text-xl font-bold text-olive">$40,707</span>
+                                <span class="text-xl font-bold text-olive">—</span>
                             </div>
                             <span class="text-[10px] text-slate/40 mt-1 block">💰 Available for payout</span>
                         </div>
@@ -440,7 +441,7 @@
                                     style="height: 65px;">
                                     <div
                                         class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/chart:opacity-100 transition-opacity duration-200 bg-ink dark:bg-white text-white dark:text-ink text-[10px] font-medium px-2 py-0.5 rounded whitespace-nowrap">
-                                        $6,200
+                                        —
                                     </div>
                                 </div>
                                 <span class="text-[10px] text-slate/40">Jan</span>
@@ -451,7 +452,7 @@
                                     style="height: 85px;">
                                     <div
                                         class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/chart:opacity-100 transition-opacity duration-200 bg-ink dark:bg-white text-white dark:text-ink text-[10px] font-medium px-2 py-0.5 rounded whitespace-nowrap">
-                                        $7,800
+                                        —
                                     </div>
                                 </div>
                                 <span class="text-[10px] text-slate/40">Feb</span>
@@ -462,7 +463,7 @@
                                     style="height: 110px;">
                                     <div
                                         class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/chart:opacity-100 transition-opacity duration-200 bg-ink dark:bg-white text-white dark:text-ink text-[10px] font-medium px-2 py-0.5 rounded whitespace-nowrap">
-                                        $9,400
+                                        —
                                     </div>
                                 </div>
                                 <span class="text-[10px] text-slate/40">Mar</span>
@@ -473,7 +474,7 @@
                                     style="height: 140px;">
                                     <div
                                         class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/chart:opacity-100 transition-opacity duration-200 bg-ink dark:bg-white text-white dark:text-ink text-[10px] font-medium px-2 py-0.5 rounded whitespace-nowrap">
-                                        $11,200
+                                        —
                                     </div>
                                 </div>
                                 <span class="text-[10px] text-slate/40">Apr</span>
@@ -484,7 +485,7 @@
                                     style="height: 165px;">
                                     <div
                                         class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/chart:opacity-100 transition-opacity duration-200 bg-ink dark:bg-white text-white dark:text-ink text-[10px] font-medium px-2 py-0.5 rounded whitespace-nowrap">
-                                        $13,500
+                                        —
                                     </div>
                                 </div>
                                 <span class="text-[10px] font-medium text-olive">May</span>
@@ -495,7 +496,7 @@
                                     style="height: 195px;">
                                     <div
                                         class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/chart:opacity-100 transition-opacity duration-200 bg-ink dark:bg-white text-white dark:text-ink text-[10px] font-medium px-2 py-0.5 rounded whitespace-nowrap">
-                                        $15,200
+                                        —
                                     </div>
                                 </div>
                                 <span class="text-[10px] font-bold text-emerald-500">Jun</span>
@@ -516,7 +517,7 @@
                         </span>
                         <span class="flex items-center gap-2 text-xs text-slate/60 dark:text-gray-500">
                             <span class="w-3 h-3 rounded border-2 border-dashed border-emerald-500"></span>
-                            Target: $14,000
+                            No target yet
                         </span>
                     </div>
                 </div>
@@ -607,15 +608,14 @@
                                                 MS
                                             </div>
                                             <div>
-                                                <strong class="text-ink dark:text-white font-semibold">Midnight Sun
-                                                    Pilot</strong>
+                                                <strong class="text-ink dark:text-white font-semibold">No listing yet</strong>
                                                 <p class="text-xs text-slate/40">#ETCH-2026-001</p>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="px-6 py-4">
                                         <div>
-                                            <span class="text-ink dark:text-white font-medium">Studio A</span>
+                                            <span class="text-ink dark:text-white font-medium">No buyer yet</span>
                                             <p class="text-xs text-slate/40">Entertainment</p>
                                         </div>
                                     </td>
@@ -626,7 +626,7 @@
                                         </span>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <span class="font-semibold text-emerald-500">+$12,500</span>
+                                        <span class="font-semibold text-emerald-500">—</span>
                                     </td>
                                     <td class="px-6 py-4 text-slate/60 dark:text-gray-500">Mar 15, 2026</td>
                                     <td class="px-6 py-4">
@@ -662,15 +662,14 @@
                                                 RS
                                             </div>
                                             <div>
-                                                <strong class="text-ink dark:text-white font-semibold">Rainline
-                                                    Sessions</strong>
+                                                <strong class="text-ink dark:text-white font-semibold">No listing yet</strong>
                                                 <p class="text-xs text-slate/40">#ETCH-2026-002</p>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="px-6 py-4">
                                         <div>
-                                            <span class="text-ink dark:text-white font-medium">Agency Y</span>
+                                            <span class="text-ink dark:text-white font-medium">No agency yet</span>
                                             <p class="text-xs text-slate/40">Music Agency</p>
                                         </div>
                                     </td>
@@ -681,7 +680,7 @@
                                         </span>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <span class="font-semibold text-amber-500">+$8,000</span>
+                                        <span class="font-semibold text-amber-500">—</span>
                                     </td>
                                     <td class="px-6 py-4 text-slate/60 dark:text-gray-500">Mar 12, 2026</td>
                                     <td class="px-6 py-4">
@@ -722,7 +721,7 @@
                                     </td>
                                     <td class="px-6 py-4">
                                         <div>
-                                            <span class="text-ink dark:text-white font-medium">Brand X</span>
+                                            <span class="text-ink dark:text-white font-medium">No buyer yet</span>
                                             <p class="text-xs text-slate/40">Consumer Goods</p>
                                         </div>
                                     </td>
@@ -733,7 +732,7 @@
                                         </span>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <span class="font-semibold text-emerald-500">+$3,200</span>
+                                        <span class="font-semibold text-emerald-500">—</span>
                                     </td>
                                     <td class="px-6 py-4 text-slate/60 dark:text-gray-500">Mar 8, 2026</td>
                                     <td class="px-6 py-4">
@@ -785,7 +784,7 @@
                                         </span>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <span class="font-semibold text-emerald-500">+$6,750</span>
+                                        <span class="font-semibold text-emerald-500">—</span>
                                     </td>
                                     <td class="px-6 py-4 text-slate/60 dark:text-gray-500">Mar 3, 2026</td>
                                     <td class="px-6 py-4">
@@ -840,7 +839,7 @@
                                         </span>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <span class="font-semibold text-coral line-through">+$15,000</span>
+                                        <span class="font-semibold text-coral line-through">—</span>
                                     </td>
                                     <td class="px-6 py-4 text-slate/60 dark:text-gray-500">Feb 28, 2026</td>
                                     <td class="px-6 py-4">
@@ -921,22 +920,22 @@
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <span class="text-xs text-slate/60 dark:text-gray-500">Next Payout</span>
-                            <p class="text-lg font-bold text-ink dark:text-white">$8,450</p>
-                            <span class="text-[10px] text-slate/40">Est. Mar 25, 2026</span>
+                            <p class="text-lg font-bold text-ink dark:text-white">—</p>
+                            <span class="text-[10px] text-slate/40">No payout scheduled</span>
                         </div>
                         <div>
                             <span class="text-xs text-slate/60 dark:text-gray-500">Last Payout</span>
-                            <p class="text-lg font-bold text-ink dark:text-white">$5,200</p>
-                            <span class="text-[10px] text-slate/40">Feb 25, 2026</span>
+                            <p class="text-lg font-bold text-ink dark:text-white">—</p>
+                            <span class="text-[10px] text-slate/40">No payout recorded</span>
                         </div>
                         <div>
                             <span class="text-xs text-slate/60 dark:text-gray-500">Total Payouts</span>
-                            <p class="text-lg font-bold text-ink dark:text-white">$32,000</p>
-                            <span class="text-[10px] text-slate/40">12 transactions</span>
+                            <p class="text-lg font-bold text-ink dark:text-white">—</p>
+                            <span class="text-[10px] text-slate/40">0 transactions</span>
                         </div>
                         <div>
                             <span class="text-xs text-slate/60 dark:text-gray-500">Avg. Payout</span>
-                            <p class="text-lg font-bold text-ink dark:text-white">$2,667</p>
+                            <p class="text-lg font-bold text-ink dark:text-white">—</p>
                             <span class="text-[10px] text-slate/40">Monthly average</span>
                         </div>
                     </div>
@@ -950,8 +949,7 @@
                             <span class="text-3xl animate-bounce-gentle">⚡</span>
                             <h3 class="text-sm font-semibold text-ink dark:text-white mt-2">Ready for payout</h3>
                             <p class="text-sm text-slate/70 dark:text-gray-400 mt-1 max-w-xs">
-                                You have <strong class="text-ink dark:text-white">$8,450</strong> available for
-                                withdrawal.
+                                No payout is available yet.
                             </p>
                             <button
                                 class="mt-4 inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium bg-gradient-to-r from-olive to-emerald-500 text-white rounded-full hover:shadow-xl hover:shadow-olive/20 hover:-translate-y-0.5 transition-all duration-300">
@@ -974,7 +972,7 @@
     <!-- ============================================ -->
     <!-- SCRIPTS -->
     <!-- ============================================ -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+
 
     <!-- Supabase Client Library -->
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>

@@ -16,6 +16,9 @@
     // ============================================
     // AUTH GUARD
     // ============================================
+    let resolveReady;
+    window.ETCH_AUTH_READY = new Promise(resolve => { resolveReady = resolve; });
+
     async function guard() {
         // Wait for DOM and Supabase to be ready
         if (document.readyState === 'loading') {
@@ -29,6 +32,7 @@
         // Check if EtchSupabase is available
         if (typeof EtchSupabase === 'undefined') {
             console.error('EtchSupabase not loaded. Cannot protect page.');
+            resolveReady({ authenticated: false });
             redirectToLogin();
             return;
         }
@@ -40,11 +44,13 @@
 
         if (!result.authenticated) {
             console.warn('Unauthorized access attempt. Redirecting to login...');
+            resolveReady({ authenticated: false });
             redirectToLogin();
             return;
         }
 
         // User is authenticated - store user data for the page
+        resolveReady(result);
         window.ETCH_USER = result.user;
         window.ETCH_PROFILE = result.profile;
 
@@ -108,6 +114,13 @@
     // ============================================
     // AUTO-INITIALIZE
     // ============================================
+    document.addEventListener('click', async event => {
+        if (!event.target.closest('.sign-out')) return;
+        event.preventDefault();
+        const { error } = await signOut();
+        if (error) alert('Sign out failed. Please try again.');
+    });
+
     guard();
 
 })();

@@ -2,6 +2,8 @@
 <html lang="en" data-theme="light">
 
 <head>
+    <script src="/script/core.js"></script>
+    <script src="/script/components.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Newsletter | ETCH Admin</title>
@@ -224,20 +226,20 @@
     <script>
         /**
          * NEWSLETTER CONFIGURATION
-         * 
+         *
          * Set your email provider endpoint here.
          * See docs/NEWSLETTER_SETUP.md for setup instructions.
-         * 
+         *
          * Example configurations:
-         * 
+         *
          * 1. Supabase Edge Function (recommended):
          *    endpoint: 'https://your-project.supabase.co/functions/v1/send-newsletter'
-         * 
+         *
          * 2. Resend API (easy setup):
          *    endpoint: 'https://api.resend.com/emails/batch',
          *    apiKey: 'your_resend_api_key',
          *    provider: 'resend'
-         * 
+         *
          * 3. Custom backend:
          *    endpoint: 'https://your-backend.com/api/send-newsletter'
          */
@@ -301,8 +303,8 @@
                 const badgeClass = active === 'Active' ? 'bg-emerald-500/10 text-emerald-600' : 'bg-amber-500/10 text-amber-600';
                 return `
                     <tr>
-                        <td class="py-4 pr-4 font-medium text-ink">${name}</td>
-                        <td class="py-4 pr-4 text-slate/70">${subscriber.email}</td>
+                        <td class="py-4 pr-4 font-medium text-ink">${EtchUI.escapeHtml(name)}</td>
+                        <td class="py-4 pr-4 text-slate/70">${EtchUI.escapeHtml(subscriber.email)}</td>
                         <td class="py-4 pr-4"><span class="inline-flex rounded-full px-2.5 py-1 text-[10px] font-semibold ${badgeClass}">${active}</span></td>
                         <td class="py-4 text-slate/60">${formatDate(subscriber.subscribed_at)}</td>
                     </tr>
@@ -312,12 +314,14 @@
             setDeliveryState('Ready', 'success');
         }
 
+        let campaignId = crypto.randomUUID();
         campaignForm?.addEventListener('submit', async function (event) {
             event.preventDefault();
             const subject = document.getElementById('campaignSubject').value.trim();
             const message = document.getElementById('campaignMessage').value.trim();
             const sendBtn = document.getElementById('sendCampaignBtn');
 
+            if (sendBtn.disabled) return;
             if (!subject || !message) {
                 campaignStatus.textContent = 'Please add a subject and message before sending.';
                 campaignStatus.className = 'min-h-[20px] text-sm text-error';
@@ -329,11 +333,12 @@
             campaignStatus.className = 'min-h-[20px] text-sm text-slate/70';
 
             try {
-                const result = await window.EtchSupabase.sendNewsletterCampaign({ subject, message, fromName: 'ETCH' });
+                const result = await window.EtchSupabase.sendNewsletterCampaign({ subject, message, campaignId });
                 if (!result.sent) {
                     throw result.error || new Error('The newsletter could not be sent.');
                 }
 
+                campaignId = crypto.randomUUID();
                 lastSend.textContent = 'Now';
                 campaignStatus.textContent = `Newsletter sent successfully to ${result.count} subscriber${result.count === 1 ? '' : 's'}.`;
                 campaignStatus.className = 'min-h-[20px] text-sm text-success';

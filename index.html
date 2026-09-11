@@ -2,6 +2,8 @@
 <html lang="en" data-theme="light">
 
 <head>
+    <script src="/script/core.js"></script>
+    <script src="/script/components.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ETCH — Premium Creative Marketplace by OMIMI</title>
@@ -209,7 +211,7 @@
                             <div class="absolute inset-0 bg-gradient-to-t from-ink/60 to-transparent"></div>
                             <div class="absolute bottom-3 left-3">
                                 <span
-                                    class="px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Storyboard</span>
+                                    class="px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Script</span>
                             </div>
                         </div>
 
@@ -221,7 +223,7 @@
                             <div class="absolute inset-0 bg-gradient-to-t from-ink/60 to-transparent"></div>
                             <div class="absolute bottom-3 left-3 flex items-center gap-2">
                                 <span
-                                    class="px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Music</span>
+                                    class="px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Script</span>
                                 <span
                                     class="px-3 py-1 bg-olive/90 backdrop-blur-sm text-xs font-medium text-white rounded-full">Featured</span>
                             </div>
@@ -253,30 +255,30 @@
     </section>
 
     <!-- ============================================ -->
-    <!-- SPONSOR MARQUEE -->
+    <!-- FEATURED PARTNERS -->
     <!-- ============================================ -->
-    <section class="sponsor-strip" aria-label="Featured sponsors">
-        <div class="sponsor-marquee">
-            <div class="sponsor-track">
-                <span>Spotify</span>
-                <span>Adobe</span>
-                <span>Airbnb</span>
-                <span>Notion</span>
-                <span>Canon</span>
-                <span>Asana</span>
-                <span>Dropbox</span>
-                <span>Stripe</span>
-                <span>Netflix</span>
-                <span>Spotify</span>
-                <span>Adobe</span>
-                <span>Airbnb</span>
-                <span>Notion</span>
-                <span>Canon</span>
-                <span>Asana</span>
-                <span>Dropbox</span>
-                <span>Stripe</span>
-                <span>Netflix</span>
+    <section class="py-12 bg-stone/60 dark:bg-white/[0.03] border-y border-border/60 dark:border-white/10"
+        aria-labelledby="partnersTitle">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                <div>
+                    <span class="text-xs uppercase tracking-[0.18em] text-olive font-semibold">Partners</span>
+                    <h2 id="partnersTitle"
+                        class="font-display text-2xl md:text-3xl font-bold text-ink dark:text-white mt-1">
+                        Featured partners
+                    </h2>
+                </div>
+                <!-- <p id="partnersIntro" class="text-sm text-slate dark:text-gray-400 max-w-xl">
+                    Partner and press mentions will appear here once they have been verified and published by ETCH.
+                </p> -->
             </div>
+            <div id="homepagePartners" class="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <d
+                    class="sm:col-span-2 lg:col-span-4 rounded-2xl border border-dashed border-border dark:border-white/10 bg-white/70 dark:bg-ink/40 p-8 text-center">
+                    <p class="font-semibold text-ink dark:text-white">No featured partners published yet.</p>
+                    <!-- <p class="text-sm text-slate dark:text-gray-400 mt-2">This space is reserved for real partners, sponsors, or press mentions after admin review.</p> -->
+            </div>
+        </div>
         </div>
     </section>
 
@@ -293,90 +295,14 @@
                 <p class="text-slate dark:text-gray-400 mt-3">Find the perfect creative asset for your next project</p>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
-
-                <!-- Category 1 -->
+            <div id="homeCategoryGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                 <a href="products.html?category=script"
                     class="group relative p-6 bg-stone dark:bg-white/5 rounded-2xl text-center hover:bg-olive/10 dark:hover:bg-olive/10 hover:scale-105 transition-all duration-300">
-                    <div
-                        class="w-14 h-14 mx-auto rounded-xl bg-olive/10 flex items-center justify-center text-olive group-hover:bg-olive group-hover:text-white transition-all duration-300">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                        </svg>
+                    <div class="w-14 h-14 mx-auto rounded-xl bg-olive/10 flex items-center justify-center text-olive group-hover:bg-olive group-hover:text-white transition-all duration-300">
+                        <i data-lucide="book-open" class="w-7 h-7"></i>
                     </div>
                     <h3 class="mt-3 font-semibold text-ink dark:text-white text-sm">Scripts</h3>
-                    <span id="catScript" class="text-xs text-slate dark:text-gray-400">0 assets</span>
-                </a>
-
-                <!-- Category 2 -->
-                <a href="products.html?category=storyboard"
-                    class="group relative p-6 bg-stone dark:bg-white/5 rounded-2xl text-center hover:bg-olive/10 dark:hover:bg-olive/10 hover:scale-105 transition-all duration-300">
-                    <div
-                        class="w-14 h-14 mx-auto rounded-xl bg-olive/10 flex items-center justify-center text-olive group-hover:bg-olive group-hover:text-white transition-all duration-300">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M7 4v16M17 4v16M3 8h18M3 12h18M3 16h18" />
-                        </svg>
-                    </div>
-                    <h3 class="mt-3 font-semibold text-ink dark:text-white text-sm">Storyboards</h3>
-                    <span id="catStoryboard" class="text-xs text-slate dark:text-gray-400">0 assets</span>
-                </a>
-
-                <!-- Category 3 -->
-                <a href="products.html?category=music"
-                    class="group relative p-6 bg-stone dark:bg-white/5 rounded-2xl text-center hover:bg-olive/10 dark:hover:bg-olive/10 hover:scale-105 transition-all duration-300">
-                    <div
-                        class="w-14 h-14 mx-auto rounded-xl bg-olive/10 flex items-center justify-center text-olive group-hover:bg-olive group-hover:text-white transition-all duration-300">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-                        </svg>
-                    </div>
-                    <h3 class="mt-3 font-semibold text-ink dark:text-white text-sm">Music</h3>
-                    <span id="catMusic" class="text-xs text-slate dark:text-gray-400">0 assets</span>
-                </a>
-
-                <!-- Category 4 -->
-                <a href="products.html?category=design"
-                    class="group relative p-6 bg-stone dark:bg-white/5 rounded-2xl text-center hover:bg-olive/10 dark:hover:bg-olive/10 hover:scale-105 transition-all duration-300">
-                    <div
-                        class="w-14 h-14 mx-auto rounded-xl bg-olive/10 flex items-center justify-center text-olive group-hover:bg-olive group-hover:text-white transition-all duration-300">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                    </div>
-                    <h3 class="mt-3 font-semibold text-ink dark:text-white text-sm">Design</h3>
-                    <span id="catDesign" class="text-xs text-slate dark:text-gray-400">0 assets</span>
-                </a>
-
-                <!-- Category 5 -->
-                <a href="products.html?category=motion"
-                    class="group relative p-6 bg-stone dark:bg-white/5 rounded-2xl text-center hover:bg-olive/10 dark:hover:bg-olive/10 hover:scale-105 transition-all duration-300">
-                    <div
-                        class="w-14 h-14 mx-auto rounded-xl bg-olive/10 flex items-center justify-center text-olive group-hover:bg-olive group-hover:text-white transition-all duration-300">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                        </svg>
-                    </div>
-                    <h3 class="mt-3 font-semibold text-ink dark:text-white text-sm">Motion</h3>
-                    <span id="catMotion" class="text-xs text-slate dark:text-gray-400">0 assets</span>
-                </a>
-
-                <!-- Category 6 -->
-                <a href="products.html?category=copy"
-                    class="group relative p-6 bg-stone dark:bg-white/5 rounded-2xl text-center hover:bg-olive/10 dark:hover:bg-olive/10 hover:scale-105 transition-all duration-300">
-                    <div
-                        class="w-14 h-14 mx-auto rounded-xl bg-olive/10 flex items-center justify-center text-olive group-hover:bg-olive group-hover:text-white transition-all duration-300">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                        </svg>
-                    </div>
-                    <h3 class="mt-3 font-semibold text-ink dark:text-white text-sm">Copy</h3>
-                    <span id="catCopy" class="text-xs text-slate dark:text-gray-400">0 assets</span>
+                    <span data-category-count="script" class="text-xs text-slate dark:text-gray-400">0 assets</span>
                 </a>
             </div>
         </div>
@@ -591,102 +517,10 @@
             </div>
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-                <!-- Blog Card 1 -->
-                <article
-                    class="group bg-stone dark:bg-white/5 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
-                    <div class="relative overflow-hidden h-40">
-                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=400&q=80"
-                            alt="Writing Compelling Scripts"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                        <span
-                            class="absolute top-3 left-3 px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Article</span>
-                    </div>
-                    <div class="p-5">
-                        <h3
-                            class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200 line-clamp-2">
-                            Writing Compelling Scripts for Licensing</h3>
-                        <p class="text-sm text-slate dark:text-gray-400 mt-2 line-clamp-2">Master the art of scripting
-                            that sells. Learn what buyers look for and how to structure your work.</p>
-                        <div
-                            class="flex items-center justify-between mt-4 pt-4 border-t border-border dark:border-white/10">
-                            <span class="text-xs text-slate dark:text-gray-400">Alex Chen</span>
-                            <span class="text-xs text-slate dark:text-gray-400">5 min</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Blog Card 2 -->
-                <article
-                    class="group bg-stone dark:bg-white/5 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 delay-75">
-                    <div class="relative overflow-hidden h-40">
-                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=80"
-                            alt="Pricing Your Creative Work"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                        <span
-                            class="absolute top-3 left-3 px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Article</span>
-                    </div>
-                    <div class="p-5">
-                        <h3
-                            class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200 line-clamp-2">
-                            Pricing Your Creative Work: Strategy Guide</h3>
-                        <p class="text-sm text-slate dark:text-gray-400 mt-2 line-clamp-2">Discover pricing strategies
-                            that maximize revenue without undercutting your value.</p>
-                        <div
-                            class="flex items-center justify-between mt-4 pt-4 border-t border-border dark:border-white/10">
-                            <span class="text-xs text-slate dark:text-gray-400">Sarah Rivera</span>
-                            <span class="text-xs text-slate dark:text-gray-400">7 min</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Blog Card 3 -->
-                <article
-                    class="group bg-stone dark:bg-white/5 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 delay-150">
-                    <div class="relative overflow-hidden h-40">
-                        <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=400&q=80"
-                            alt="Building Your Creator Brand"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                        <span
-                            class="absolute top-3 left-3 px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Article</span>
-                    </div>
-                    <div class="p-5">
-                        <h3
-                            class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200 line-clamp-2">
-                            Building Your Creator Brand in 2025</h3>
-                        <p class="text-sm text-slate dark:text-gray-400 mt-2 line-clamp-2">Stand out in a crowded
-                            marketplace. Learn how successful creators build recognizable brands.</p>
-                        <div
-                            class="flex items-center justify-between mt-4 pt-4 border-t border-border dark:border-white/10">
-                            <span class="text-xs text-slate dark:text-gray-400">Marcus Johnson</span>
-                            <span class="text-xs text-slate dark:text-gray-400">6 min</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Blog Card 4 -->
-                <article
-                    class="group bg-stone dark:bg-white/5 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 delay-200">
-                    <div class="relative overflow-hidden h-40">
-                        <img src="https://images.unsplash.com/photo-1522869635100-ce306dc11310?auto=format&fit=crop&w=400&q=80"
-                            alt="Licensing 101"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                        <span
-                            class="absolute top-3 left-3 px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Article</span>
-                    </div>
-                    <div class="p-5">
-                        <h3
-                            class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200 line-clamp-2">
-                            Licensing 101: Types & Contracts</h3>
-                        <p class="text-sm text-slate dark:text-gray-400 mt-2 line-clamp-2">Understand different
-                            licensing models and protect your work with the right agreements.</p>
-                        <div
-                            class="flex items-center justify-between mt-4 pt-4 border-t border-border dark:border-white/10">
-                            <span class="text-xs text-slate dark:text-gray-400">Emma Williams</span>
-                            <span class="text-xs text-slate dark:text-gray-400">8 min</span>
-                        </div>
-                    </div>
-                </article>
+                <div class="sm:col-span-2 lg:col-span-4 rounded-2xl border border-dashed border-border dark:border-white/10 bg-stone dark:bg-white/5 p-10 text-center">
+                    <h3 class="font-display text-2xl font-bold text-ink dark:text-white">No masterclass articles yet</h3>
+                    <p class="text-sm text-slate dark:text-gray-400 mt-2">Published articles will appear here when available.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -715,8 +549,8 @@
                             <span class="text-olive">Stay ahead.</span>
                         </h2>
                         <p class="text-lg text-slate dark:text-gray-400 max-w-lg leading-relaxed">
-                            Join 500+ creators getting exclusive insights on licensing, storytelling, and building a
-                            sustainable creative business—delivered directly to your inbox.
+                            Get weekly insights on licensing, storytelling, and building a sustainable creative
+                            business delivered directly to your inbox.
                         </p>
                     </div>
 
@@ -750,7 +584,8 @@
                         class="newsletter-panel relative p-8 md:p-10 rounded-[32px] space-y-5 bg-stone dark:bg-ink text-ink dark:text-gray-300 border border-border dark:border-white/10">
                         <div>
                             <h3 class="font-display text-2xl font-bold text-ink dark:text-white">Subscribe today</h3>
-                            <p class="text-sm text-slate/60 dark:text-gray-500 mt-2">Get your first insight in 24 hours</p>
+                            <p class="text-sm text-slate/60 dark:text-gray-500 mt-2">Get your first insight in 24 hours
+                            </p>
                         </div>
 
                         <div class="relative">
@@ -778,7 +613,8 @@
                             </svg>
                         </button>
 
-                        <p id="landingNewsletterStatus" class="text-sm min-h-[20px] text-slate/60 dark:text-gray-500 text-center"></p>
+                        <p id="landingNewsletterStatus"
+                            class="text-sm min-h-[20px] text-slate/60 dark:text-gray-500 text-center"></p>
 
                         <p class="text-xs text-slate/50 dark:text-gray-600 text-center">
                             We respect your privacy. <a href="#" class="text-olive hover:underline">See our privacy
@@ -809,8 +645,8 @@
                 Ready to showcase <br />
                 your <span class="underline decoration-white/30">creative work</span>?
             </h2>
-            <p class="text-white/80 text-lg mt-4 max-w-2xl mx-auto">Join 500+ creators already licensing their work on
-                ETCH. Start building your portfolio today.</p>
+            <p class="text-white/80 text-lg mt-4 max-w-2xl mx-auto">Start building a portfolio that helps buyers
+                discover and license your creative work.</p>
             <div class="flex flex-wrap justify-center gap-4 mt-8">
                 <a href="user/auth/signup.html"
                     class="group inline-flex items-center gap-2 px-8 py-4 bg-white text-olive rounded-2xl font-semibold hover:shadow-2xl hover:shadow-white/20 hover:-translate-y-1 transition-all duration-300">
@@ -863,7 +699,8 @@
                     class="inline-block rounded-full bg-olive/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-olive">Stay
                     inspired</span>
                 <h3 class="mt-4 font-display text-4xl font-bold text-ink dark:text-white">Join ETCH's newsletter.</h3>
-                <p class="mt-3 text-base text-slate dark:text-gray-300">Get updates on new releases, exclusive creator drops, and practical
+                <p class="mt-3 text-base text-slate dark:text-gray-300">Get updates on new releases, exclusive creator
+                    drops, and practical
                     creative insights once a week.</p>
             </div>
 
@@ -1066,7 +903,7 @@
                     const delay = index * 75; // Stagger animation
                     const author = article.author?.name || 'Unknown Author';
                     const readTime = Math.ceil((article.content?.split(' ').length || 0) / 200) || 5;
-                    const imageUrl = article.featured_image || 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=400&q=80';
+                    const imageUrl = EtchUI.safeUrl(article.featured_image);
                     const articleTitle = article.title || 'Untitled Article';
                     const articleExcerpt = article.excerpt || article.content?.substring(0, 100) || '';
                     const articleSlug = article.slug || '';
@@ -1077,19 +914,19 @@
 
                     card.innerHTML = `
                         <a href="article.html?slug=${articleSlug}" class="block">
-                            <div class="relative overflow-hidden h-40">
-                                <img src="${imageUrl}"
-                                    alt="${articleTitle}"
-                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                            <div class="relative overflow-hidden h-40 bg-white/60 dark:bg-ink/40 flex items-center justify-center">
+                                ${imageUrl
+                                    ? `<img src="${EtchUI.escapeHtml(imageUrl)}" alt="${EtchUI.escapeHtml(articleTitle)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />`
+                                    : '<span class="text-sm text-slate dark:text-gray-400">No article image</span>'}
                                 <span
                                     class="absolute top-3 left-3 px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">Article</span>
                             </div>
                             <div class="p-5">
-                                <h3 class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200 line-clamp-2">${articleTitle}</h3>
-                                <p class="text-sm text-slate dark:text-gray-400 mt-2 line-clamp-2">${articleExcerpt}</p>
+                                <h3 class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200 line-clamp-2">${EtchUI.escapeHtml(articleTitle)}</h3>
+                                <p class="text-sm text-slate dark:text-gray-400 mt-2 line-clamp-2">${EtchUI.escapeHtml(articleExcerpt)}</p>
                                 <div class="flex items-center justify-between mt-4 pt-4 border-t border-border dark:border-white/10">
-                                    <span class="text-xs text-slate dark:text-gray-400">${author}</span>
-                                    <span class="text-xs text-slate dark:text-gray-400">${readTime} min</span>
+                                    <span class="text-xs text-slate dark:text-gray-400">${EtchUI.escapeHtml(author)}</span>
+                                    <span class="text-xs text-slate dark:text-gray-400">${EtchUI.escapeHtml(readTime)} min</span>
                                 </div>
                             </div>
                         </a>
@@ -1121,6 +958,37 @@
             }
 
             try {
+                const partnersGrid = document.getElementById('homepagePartners');
+                if (partnersGrid && window.EtchSupabase.getHomepagePartners) {
+                    const { data: partners, error: partnersError } = await window.EtchSupabase.getHomepagePartners({
+                        status: 'published',
+                        limit: 8
+                    });
+
+                    if (!partnersError && partners?.length) {
+                        partnersGrid.innerHTML = partners.map(partner => {
+                            const name = EtchUI.escapeHtml(partner.name || 'Partner');
+                            const label = EtchUI.escapeHtml(partner.label || 'Verified mention');
+                            const href = EtchUI.safeUrl(partner.url);
+                            const logo = EtchUI.safeUrl(partner.logo_url);
+                            const content = logo
+                                ? `<img src="${EtchUI.escapeHtml(logo)}" alt="${name}" class="max-h-10 max-w-[160px] object-contain" />`
+                                : `<span class="font-display text-2xl font-bold text-ink dark:text-white">${name}</span>`;
+                            const card = `
+                                <div class="h-full rounded-2xl border border-border dark:border-white/10 bg-white dark:bg-ink/60 px-6 py-5 flex items-center justify-between gap-4">
+                                    <div>
+                                        ${content}
+                                        <p class="text-xs text-slate dark:text-gray-400 mt-2">${label}</p>
+                                    </div>
+                                    ${href ? '<i data-lucide="arrow-up-right" class="w-4 h-4 text-olive flex-shrink-0"></i>' : ''}
+                                </div>
+                            `;
+                            return href ? `<a href="${EtchUI.escapeHtml(href)}" target="_blank" rel="noopener noreferrer" class="block">${card}</a>` : card;
+                        }).join('');
+                        if (window.lucide) lucide.createIcons();
+                    }
+                }
+
                 // 1. Load real stats from backend
                 const { stats, error: statsError } = await window.EtchSupabase.getStats();
                 if (!statsError && stats) {
@@ -1132,45 +1000,44 @@
                     if (assetsEl) assetsEl.textContent = stats.listings.toLocaleString();
                     if (articlesEl) articlesEl.textContent = stats.articles.toLocaleString();
 
-                    // Update newsletter CTA text with real subscriber count
-                    const newsletterText = document.querySelector('.text-lg.text-slate\\/70.max-w-lg');
-                    if (newsletterText && stats.subscribers > 0) {
-                        newsletterText.innerHTML = newsletterText.innerHTML.replace(
-                            /Join \d+[+,]? creators/,
-                            `Join ${stats.subscribers.toLocaleString()} creators`
-                        );
-                    }
-
-                    // Update CTA section text
-                    const ctaText = document.querySelector('.text-white\\/80.text-lg.mt-4');
-                    if (ctaText && stats.creators > 0) {
-                        ctaText.innerHTML = ctaText.innerHTML.replace(
-                            /Join \d+[+,]? creators/,
-                            `Join ${stats.creators.toLocaleString()} creators`
-                        );
-                    }
                 }
 
                 // 2. Load category counts
-                const categories = ['script', 'storyboard', 'music', 'design', 'motion', 'copy'];
-                const categoryIds = {
-                    script: 'catScript',
-                    storyboard: 'catStoryboard',
-                    music: 'catMusic',
-                    design: 'catDesign',
-                    motion: 'catMotion',
-                    copy: 'catCopy'
-                };
+                const categoryGrid = document.getElementById('homeCategoryGrid');
+                const categoryResult = window.EtchSupabase.getMarketplaceCategories
+                    ? await window.EtchSupabase.getMarketplaceCategories({ status: 'published' })
+                    : { data: [{ name: 'Scripts', slug: 'script', icon: 'book-open' }], error: null };
+                const categories = categoryResult.data?.length
+                    ? categoryResult.data
+                    : [{ name: 'Scripts', slug: 'script', icon: 'book-open' }];
+
+                if (categoryGrid) {
+                    categoryGrid.innerHTML = categories.map(category => {
+                        const slug = EtchUI.escapeHtml(category.slug || 'script');
+                        const name = EtchUI.escapeHtml(category.name || 'Scripts');
+                        const icon = EtchUI.escapeHtml(category.icon || 'book-open');
+                        return `
+                            <a href="products.html?category=${slug}" class="group relative p-6 bg-stone dark:bg-white/5 rounded-2xl text-center hover:bg-olive/10 dark:hover:bg-olive/10 hover:scale-105 transition-all duration-300">
+                                <div class="w-14 h-14 mx-auto rounded-xl bg-olive/10 flex items-center justify-center text-olive group-hover:bg-olive group-hover:text-white transition-all duration-300">
+                                    <i data-lucide="${icon}" class="w-7 h-7"></i>
+                                </div>
+                                <h3 class="mt-3 font-semibold text-ink dark:text-white text-sm">${name}</h3>
+                                <span data-category-count="${slug}" class="text-xs text-slate dark:text-gray-400">0 assets</span>
+                            </a>
+                        `;
+                    }).join('');
+                    if (window.lucide) lucide.createIcons();
+                }
 
                 for (const cat of categories) {
                     const { count, error } = await window.EtchSupabase.countRows('listings', {
                         filters: [
                             { field: 'status', value: 'published' },
-                            { field: 'category', value: cat }
+                            { field: 'category', value: cat.slug }
                         ]
                     });
                     if (!error) {
-                        const el = document.getElementById(categoryIds[cat]);
+                        const el = document.querySelector(`[data-category-count="${CSS.escape(cat.slug)}"]`);
                         if (el) el.textContent = count.toLocaleString() + ' assets';
                     }
                 }
@@ -1206,12 +1073,12 @@
                             card.style.animationDelay = `${delay}ms`;
 
                             card.innerHTML = `
-                                <a href="product-detail.html?id=${slug}" class="block">
+                                <a href="${EtchUI.listingUrl(listing)}" class="block">
                                     <div class="relative overflow-hidden">
-                                        <img src="${imageUrl}" alt="${listing.title || 'Creative work'}"
+                                        <img src="${EtchUI.escapeHtml(EtchUI.safeUrl(imageUrl))}" alt="${EtchUI.escapeHtml(listing.title || 'Creative work')}"
                                             class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
                                         <div class="absolute top-3 left-3 flex gap-2">
-                                            <span class="px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">${category}</span>
+                                            <span class="px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">${EtchUI.escapeHtml(category)}</span>
                                             <span class="px-3 py-1 bg-olive/90 backdrop-blur-sm text-xs font-medium text-white rounded-full">Featured</span>
                                         </div>
                                         <button class="absolute top-3 right-3 p-2 bg-white/90 dark:bg-ink/90 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-olive hover:text-white">
@@ -1222,12 +1089,12 @@
                                     </div>
                                     <div class="p-5">
                                         <div class="flex items-center justify-between mb-2">
-                                            <h3 class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200 line-clamp-1">${listing.title || 'Untitled'}</h3>
-                                            <span class="text-lg font-bold text-ink dark:text-white">${price}</span>
+                                            <h3 class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200 line-clamp-1">${EtchUI.escapeHtml(listing.title || 'Untitled')}</h3>
+                                            <span class="text-lg font-bold text-ink dark:text-white">${EtchUI.escapeHtml(price)}</span>
                                         </div>
-                                        <p class="text-sm text-slate dark:text-gray-400 line-clamp-2">${listing.description || ''}</p>
+                                        <p class="text-sm text-slate dark:text-gray-400 line-clamp-2">${EtchUI.escapeHtml(listing.description || '')}</p>
                                         <div class="flex items-center justify-between mt-4 pt-4 border-t border-border dark:border-white/10">
-                                            <span class="text-xs text-slate dark:text-gray-400">by @${creatorName}</span>
+                                            <span class="text-xs text-slate dark:text-gray-400">by @${EtchUI.escapeHtml(creatorName)}</span>
                                             <div class="flex items-center gap-3 text-xs text-slate dark:text-gray-400">
                                                 <span class="flex items-center gap-1">
                                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

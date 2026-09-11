@@ -2,6 +2,8 @@
 <html lang="en" data-theme="light">
 
 <head>
+    <script src="/script/core.js"></script>
+    <script src="/script/components.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Categories | Masterclass | ETCH Admin</title>
@@ -359,14 +361,9 @@
     <!-- ============================================ -->
     <!-- SCRIPTS -->
     <!-- ============================================ -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-    <script>
-        window.__ETCH_SUPABASE__ = window.__ETCH_SUPABASE__ || {
-            url: 'https://cyoddvehzrmhubmislbb.supabase.co',
-            anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5b2RkdmVoenJtaHVibWlzbGJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUxNjI3MTQsImV4cCI6MjEwMDczODcxNH0.YaUyKP9f3tpKDny78_k_ka70zkFZe58GAFOo5oFFaFI',
-        };
-    </script>
+
     <script src="/script/supabase.js"></script>
     <script src="/script/script.js"></script>
     <script src="script/admin.js?v=20260806-components1"></script>
@@ -431,12 +428,12 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <span class="font-medium text-ink dark:text-white group-hover:text-olive transition-colors duration-200">${cat.name}</span>
-                                    <p class="text-xs text-slate/40">${cat.description || ''}</p>
+                                    <span class="font-medium text-ink dark:text-white group-hover:text-olive transition-colors duration-200">${EtchUI.escapeHtml(cat.name)}</span>
+                                    <p class="text-xs text-slate/40">${EtchUI.escapeHtml(cat.description || '')}</p>
                                 </div>
                             </div>
                         </td>
-                        <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">${cat.slug}</td>
+                        <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">${EtchUI.escapeHtml(cat.slug)}</td>
                         <td class="px-6 py-3.5">
                             <span class="inline-flex items-center gap-1 text-sm font-medium text-ink dark:text-white">—</span>
                         </td>
@@ -475,7 +472,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
                                 </svg>
                             </div>
-                            <p class="text-sm font-medium text-ink dark:text-white mb-1">${message}</p>
+                            <p class="text-sm font-medium text-ink dark:text-white mb-1">${EtchUI.escapeHtml(message)}</p>
                             <a href="create_category.html" class="text-sm text-olive hover:text-olive-dark transition-colors duration-200 mt-2">Create your first category →</a>
                         </div>
                     </td>

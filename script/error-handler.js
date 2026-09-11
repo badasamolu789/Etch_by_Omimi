@@ -299,6 +299,7 @@ const EtchErrorHandler = (function () {
     // ERROR MAPPING FUNCTION
     // ============================================
     function mapError(error) {
+        error = error || {};
         // If it's already an Etch error code
         if (ERROR_CODES[error]) {
             return {
@@ -439,7 +440,7 @@ const EtchErrorHandler = (function () {
 
             case 'redirect_login':
                 setTimeout(() => {
-                    window.location.href = '../auth/signin.html';
+                    window.location.href = '/user/auth/signin.html';
                 }, 2000);
                 break;
 

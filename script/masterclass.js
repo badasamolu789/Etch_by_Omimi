@@ -28,12 +28,7 @@
         return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
     }
 
-    function escapeHtml(str) {
-        if (!str) return '';
-        const div = document.createElement('div');
-        div.textContent = str;
-        return div.innerHTML;
-    }
+    function escapeHtml(str) { return EtchUI.escapeHtml(str); }
 
     // ============================================
     // EMPTY STATE
@@ -76,7 +71,7 @@
         const category = article.category?.name || 'Masterclass';
         const author = article.author?.name || 'Etch Editorial';
         const imageMarkup = article.featured_image
-            ? `<img src="${article.featured_image}" alt="${escapeHtml(article.title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />`
+            ? `<img src="${escapeHtml(EtchUI.safeUrl(article.featured_image))}" alt="${escapeHtml(article.title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />`
             : `<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-olive/15 via-stone to-lavender/10 text-olive">
                     <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -99,11 +94,11 @@
                     <p class="text-sm text-slate/60 dark:text-gray-500 mt-2 line-clamp-2">${escapeHtml(article.excerpt || '')}</p>
                     <div class="flex items-center gap-3 mt-4 pt-4 border-t border-border/60 dark:border-white/10">
                         <div class="w-8 h-8 rounded-full bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-xs font-bold text-olive">
-                            ${getInitials(author)}
+                            ${escapeHtml(getInitials(author))}
                         </div>
                         <div class="text-xs">
                             <p class="font-medium text-ink dark:text-white">${escapeHtml(author)}</p>
-                            <p class="text-slate/40 dark:text-gray-500">${formatDate(article.published_at)} · ${article.reading_time || 5} min read</p>
+                            <p class="text-slate/40 dark:text-gray-500">${formatDate(article.published_at)} · ${Number(article.reading_time) || 5} min read</p>
                         </div>
                     </div>
                 </div>
@@ -130,7 +125,7 @@
             const category = article.category?.name || 'Masterclass';
             const author = article.author?.name || 'Etch Editorial';
             const imageMarkup = article.featured_image
-                ? `<img src="${article.featured_image}" alt="${escapeHtml(article.title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />`
+                ? `<img src="${escapeHtml(EtchUI.safeUrl(article.featured_image))}" alt="${escapeHtml(article.title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />`
                 : `<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-olive/15 via-stone to-lavender/10 text-olive">
                         <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -156,7 +151,7 @@
                             <span>·</span>
                             <span>${formatDate(article.published_at)}</span>
                             <span>·</span>
-                            <span>${article.reading_time || 5} min</span>
+                            <span>${Number(article.reading_time) || 5} min</span>
                         </div>
                     </div>
                 </a>
@@ -179,7 +174,7 @@
         }
 
         container.innerHTML = categories.map(cat => `
-            <a href="search.html?q=${encodeURIComponent(cat.name)}"
+            <a href="masterclass.html?category=${encodeURIComponent(cat.id)}"
                 class="px-4 py-2 bg-stone dark:bg-white/5 rounded-full text-sm text-slate dark:text-gray-400 hover:bg-olive/10 hover:text-olive transition-colors duration-200">
                 ${escapeHtml(cat.name)}
             </a>
@@ -199,22 +194,23 @@
         }
 
         try {
-            // Load featured article
-            const featuredResult = await EtchSupabase.getArticles({ status: 'published', featured: true, limit: 1 });
-            const featured = featuredResult.data?.[0] || null;
-            renderFeaturedArticle(featured);
-
-            // Load latest articles
-            const articlesResult = await EtchSupabase.getArticles({ status: 'published', limit: CONFIG.articlesLimit });
+            const categoryId = new URLSearchParams(window.location.search).get('category') || undefined;
+            const [featuredResult, articlesResult, categoriesResult] = await Promise.all([
+                EtchSupabase.getArticles({ status: 'published', featured: true, categoryId, limit: 1, summary: true }),
+                EtchSupabase.getArticles({ status: 'published', categoryId, limit: CONFIG.articlesLimit, summary: true }),
+                EtchSupabase.getCategories({ status: 'active' }),
+            ]);
+            for (const result of [featuredResult, articlesResult, categoriesResult]) {
+                if (result.error) throw result.error;
+            }
+            renderFeaturedArticle(featuredResult.data?.[0] || null);
             renderLatestArticles(articlesResult.data || []);
-
-            // Load categories
-            const categoriesResult = await EtchSupabase.getCategories({ status: 'active' });
             renderCategories(categoriesResult.data || []);
         } catch (error) {
             console.error('Error loading masterclass:', error);
             renderFeaturedArticle(null);
-            renderLatestArticles([]);
+            const grid = document.getElementById('latestGrid');
+            if (grid) grid.innerHTML = getEmptyState('Unable to load articles', 'Please refresh to try again.');
             renderCategories([]);
         }
     }

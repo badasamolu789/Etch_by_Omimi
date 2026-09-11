@@ -2,8 +2,12 @@
    USER.JS - ETCH User Dashboard Scripts
    ============================================ */
 
-(function () {
+(function initialize() {
     'use strict';
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initialize, { once: true });
+        return;
+    }
 
     // ============================================
     // 1. SIDEBAR TOGGLE
@@ -45,7 +49,7 @@
 
         links.forEach(function (link) {
             const href = link.getAttribute('href');
-            if (href && currentPath.includes(href)) {
+            if (href && EtchUI.pageName(new URL(href, window.location.href).pathname) === EtchUI.pageName(currentPath)) {
                 link.classList.add('active');
             } else {
                 link.classList.remove('active');
@@ -246,23 +250,26 @@
     function setAvatarPreview(url, target) {
         if (!target) return;
         if (url) {
-            target.innerHTML = '<img src="' + url + '" alt="Profile" class="w-full h-full object-cover rounded-inherit" />';
+            const img = document.createElement('img');
+            img.src = EtchUI.safeUrl(url);
+            img.alt = 'Profile';
+            img.className = 'w-full h-full object-cover rounded-inherit';
+            target.replaceChildren(img);
             target.style.background = 'transparent';
             target.style.borderRadius = 'inherit';
         } else {
             target.textContent = getInitials(window.ETCH_PROFILE?.full_name || window.ETCH_PROFILE?.username || 'Creator');
             target.style.background = 'linear-gradient(135deg, rgba(153,169,106,0.18), rgba(78,205,196,0.15))';
-            target.innerHTML = target.textContent;
+            target.textContent = target.textContent;
         }
     }
 
     async function loadLiveDashboardData() {
         if (typeof EtchSupabase === 'undefined') return;
 
-        const { user, error: userError } = await EtchSupabase.getCurrentUser();
-        if (userError || !user) return;
-
-        const { profile } = await EtchSupabase.getProfile(user.id);
+        const auth = await (window.ETCH_AUTH_READY || EtchSupabase.requireAuth());
+        if (!auth.authenticated) return;
+        const { user, profile } = auth;
         if (profile) {
             window.ETCH_PROFILE = profile;
             if (profile.full_name) {
@@ -283,35 +290,23 @@
             if (profile.avatar_url) {
                 document.querySelectorAll('.avatar').forEach(function (avatar) {
                     if (!avatar.closest('[data-skip-profile-image]')) {
-                        avatar.innerHTML = '<img src="' + profile.avatar_url + '" alt="Profile" class="w-full h-full object-cover rounded-inherit" />';
+                        setAvatarPreview(profile.avatar_url, avatar);
                         avatar.style.background = 'transparent';
                     }
                 });
             }
         }
 
-        const { data: listings = [] } = await EtchSupabase.getListings({ creatorId: user.id, limit: 50 }).catch(() => ({ data: [] }));
-
-        const totalListings = listings.length;
-        const activeListings = listings.filter(function (item) {
-            const status = String(item.status || '').toLowerCase();
-            return status === 'published' || status === 'active' || status === 'review';
-        }).length;
-        const draftListings = listings.filter(function (item) {
-            const status = String(item.status || '').toLowerCase();
-            return status === 'draft';
-        }).length;
-        const totalRevenue = listings.reduce(function (sum, item) {
-            const value = Number(item.price || item.amount || item.total_value || 0);
-            return sum + (Number.isFinite(value) ? value : 0);
-        }, 0);
-        const totalViews = listings.reduce(function (sum, item) {
-            const value = Number(item.views || item.total_views || item.view_count || 0);
-            return sum + (Number.isFinite(value) ? value : 0);
-        }, 0);
-        const listingViewRate = totalListings ? Math.round((activeListings / totalListings) * 100) : 0;
-
-        const page = window.location.pathname.split('/').pop() || 'dashboard.html';
+        const { data: stats, error: statsError } = await EtchSupabase.getCreatorStats();
+        if (statsError || !stats) {
+            document.querySelectorAll('[id$="Value"]').forEach(el => { el.textContent = '—'; });
+            return;
+        }
+        const totalListings = Number(stats.total || 0);
+        const activeListings = Number(stats.published || 0);
+        const draftListings = Number(stats.draft || 0);
+        const totalViews = Number(stats.views || 0);
+        const page = EtchUI.pageName() + '.html';
 
         const setValue = function (id, value) {
             const el = id ? document.getElementById(id) : null;
@@ -328,7 +323,7 @@
                 values[2].textContent = String(totalListings);
                 values[3].textContent = totalViews.toLocaleString();
             }
-            setValue('dashboardRevenueValue', '$0');
+            setValue('dashboardRevenueValue', '—');
             setValue('dashboardPublishedValue', String(activeListings));
             setValue('dashboardListingsValue', String(totalListings));
             setValue('dashboardViewsValue', totalViews.toLocaleString());
@@ -351,15 +346,15 @@
         if (page === 'earnings.html') {
             const values = document.querySelectorAll('.stat-card .value');
             if (values.length >= 4) {
-                values[0].textContent = formatCurrency(totalRevenue);
+                values[0].textContent = '—';
                 values[1].textContent = '$0';
                 values[2].textContent = '0';
                 values[3].textContent = '$0';
             }
-            setValue('earningsRevenueValue', '$0');
-            setValue('earningsPendingValue', '$0');
-            setValue('earningsSalesValue', '0');
-            setValue('earningsNetValue', '$0');
+            setValue('earningsRevenueValue', '—');
+            setValue('earningsPendingValue', '—');
+            setValue('earningsSalesValue', '—');
+            setValue('earningsNetValue', '—');
         }
 
         if (page === 'analytics.html') {
@@ -371,16 +366,16 @@
                 values[3].textContent = '$0';
             }
             setValue('analyticsViewsValue', totalViews.toLocaleString());
-            setValue('analyticsVisitorsValue', '0');
-            setValue('analyticsEngagementValue', '0%');
-            setValue('analyticsRevenueValue', '$0');
+            setValue('analyticsVisitorsValue', '—');
+            setValue('analyticsEngagementValue', '—');
+            setValue('analyticsRevenueValue', '—');
         }
 
         if (page === 'storefront.html') {
             setValue('storefrontViewsValue', totalViews.toLocaleString());
             setValue('storefrontFeaturedValue', String(Math.min(totalListings, 6)));
-            setValue('storefrontFollowersValue', '0');
-            setValue('storefrontRatingValue', '0');
+            setValue('storefrontFollowersValue', '—');
+            setValue('storefrontRatingValue', '—');
         }
     }
 
@@ -414,11 +409,12 @@
 
             const publicUrl = EtchSupabase.getPublicUrl('avatars', filePath);
             if (publicUrl) {
-                await EtchSupabase.updateProfile(user.id, { avatar_url: publicUrl });
+                const saved = await EtchSupabase.updateProfile(user.id, { avatar_url: publicUrl });
+                if (saved.error) { alert('Your photo could not be saved. Please try again.'); return; }
                 setAvatarPreview(publicUrl, avatarPreview || document.querySelector('.avatar'));
                 document.querySelectorAll('.avatar').forEach(function (avatar) {
                     if (!avatar.closest('[data-skip-profile-image]')) {
-                        avatar.innerHTML = '<img src="' + publicUrl + '" alt="Profile" class="w-full h-full object-cover rounded-inherit" />';
+                        setAvatarPreview(publicUrl, avatar);
                         avatar.style.background = 'transparent';
                     }
                 });
@@ -429,9 +425,10 @@
             removeButton.addEventListener('click', async function () {
                 const { user } = await EtchSupabase.getCurrentUser();
                 if (!user) return;
-                await EtchSupabase.updateProfile(user.id, { avatar_url: null });
+                const saved = await EtchSupabase.updateProfile(user.id, { avatar_url: null });
+                if (saved.error) { alert('Your photo could not be removed. Please try again.'); return; }
                 if (avatarPreview) {
-                    avatarPreview.innerHTML = getInitials(window.ETCH_PROFILE?.full_name || window.ETCH_PROFILE?.username || 'Creator');
+                    avatarPreview.textContent = getInitials(window.ETCH_PROFILE?.full_name || window.ETCH_PROFILE?.username || 'Creator');
                     avatarPreview.style.background = 'linear-gradient(135deg, rgba(153,169,106,0.18), rgba(78,205,196,0.15))';
                 }
                 document.querySelectorAll('.avatar').forEach(function (avatar) {
@@ -445,70 +442,74 @@
     }
 
     async function initLiveUploadForm() {
-        const form = document.querySelector('form[data-handle-submit]');
+        const form = document.querySelector('form[data-listing-form]');
         if (!form || typeof EtchSupabase === 'undefined') return;
-
+        let pending = false;
         form.addEventListener('submit', async function (event) {
             event.preventDefault();
-            const { user } = await EtchSupabase.getCurrentUser();
-            if (!user) return;
-
+            if (pending || !form.reportValidity()) return;
+            // Snapshot before authentication or any other asynchronous operation.
             const formData = new FormData(form);
-            const title = String(formData.get('title') || '').trim();
-            const category = String(formData.get('category') || '').trim();
-            const price = Number(formData.get('price') || 0);
-            const status = String(formData.get('status') || 'draft');
-            const description = String(formData.get('description') || '').trim();
-            const coverUrl = String(formData.get('cover_url') || '').trim();
-            const previewUrl = String(formData.get('preview_url') || '').trim();
-            const rightsSummary = String(formData.get('rights_summary') || '').trim();
-            const files = form.querySelector('input[type="file"]')?.files || [];
-
-            let finalCover = coverUrl;
-            if (files.length > 0) {
-                const file = files[0];
-                const filePath = 'listings/' + user.id + '/' + Date.now() + '-' + file.name.replace(/\s+/g, '-');
-                const uploaded = await EtchSupabase.uploadFile('listing-media', filePath, file, { upsert: true });
-                if (uploaded.error) {
-                    console.error('Listing image upload failed:', uploaded.error);
-                    return;
-                }
-                finalCover = EtchSupabase.getPublicUrl('listing-media', filePath) || coverUrl;
-            }
-
-            const payload = {
-                creator_id: user.id,
-                title,
-                category,
-                price,
-                status,
-                description,
-                cover_url: finalCover,
-                preview_url: previewUrl,
-                rights_summary: rightsSummary,
-                created_at: new Date().toISOString(),
-            };
-
-            const result = await EtchSupabase.createListing(payload);
-            if (result.error) {
-                console.error('Create listing failed:', result.error);
-                return;
-            }
-
+            const file = form.querySelector('input[type="file"]')?.files[0];
+            const buttons = [...form.querySelectorAll('button[type="submit"]')];
+            const errorEl = document.getElementById('formError');
             const successEl = document.getElementById('formSuccess');
-            if (successEl) {
-                successEl.classList.remove('hidden');
-                successEl.classList.add('animate-slide-up');
+            const selection = document.getElementById('uploadSelection');
+            errorEl.classList.add('hidden');
+            successEl?.classList.add('hidden');
+            pending = true;
+            buttons.forEach(button => { button.disabled = true; });
+            let uploadedPath = null;
+            let saved = false;
+            try {
+                const payload = Object.fromEntries(['title', 'category', 'status', 'description', 'rights_summary']
+                    .map(key => [key, String(formData.get(key) || '').trim()]));
+                payload.price = Number(formData.get('price') || 0);
+                if (!payload.title || !payload.category || !Number.isFinite(payload.price) || payload.price < 0) {
+                    throw new Error('Enter a title, category, and valid price.');
+                }
+                for (const key of ['cover_url', 'preview_url']) {
+                    const raw = String(formData.get(key) || '').trim();
+                    payload[key] = EtchUI.safeUrl(raw);
+                    if (raw && !payload[key]) throw new Error('Use an HTTP or HTTPS URL.');
+                }
+                if (file && (!['image/jpeg', 'image/png', 'image/webp', 'image/gif'].includes(file.type) || file.size > 10 * 1024 * 1024)) {
+                    throw new Error('Choose a JPG, PNG, WebP, or GIF cover image under 10 MB.');
+                }
+                const { user, error } = await EtchSupabase.getCurrentUser();
+                if (error || !user) throw new Error('Please sign in again before saving.');
+                payload.creator_id = user.id;
+                if (file) {
+                    selection.textContent = 'Uploading cover image…';
+                    const path = 'listings/' + user.id + '/' + crypto.randomUUID() + '-' + file.name.replace(/[^a-zA-Z0-9._-]/g, '-');
+                    const result = await EtchSupabase.uploadFile('listing-media', path, file);
+                    if (result.error) throw result.error;
+                    uploadedPath = path;
+                    payload.cover_url = EtchSupabase.getPublicUrl('listing-media', path);
+                }
+                selection.textContent = 'Saving listing…';
+                const result = await EtchSupabase.createListing(payload);
+                if (result.error) throw result.error;
+                saved = true;
+                form.reset();
+                selection.textContent = '';
+                successEl?.classList.remove('hidden');
+            } catch (error) {
+                errorEl.textContent = error.message || 'Unable to save. Your inputs have been kept; please try again.';
+                errorEl.classList.remove('hidden');
+                selection.textContent = '';
+            } finally {
+                if (uploadedPath && !saved) {
+                    const cleanup = await EtchSupabase.removeFile('listing-media', uploadedPath);
+                    if (cleanup.error) console.error('Unable to remove unused upload:', cleanup.error);
+                }
+                pending = false;
+                buttons.forEach(button => { button.disabled = false; });
             }
-            form.reset();
         });
     }
 
-    // ============================================
-    // 10. INITIALIZE REAL USER DATA
-    // ============================================
     loadLiveDashboardData();
     initProfileUpload();
     initLiveUploadForm();
-
 })();

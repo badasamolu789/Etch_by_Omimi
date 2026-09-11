@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <script src="/script/core.js"></script>
+    <script src="/script/components.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marketplace Categories | ETCH Admin</title>
+    <meta name="description" content="Manage published ETCH marketplace categories." />
+    <link rel="icon" href="/assets/logo.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="/style/style.css" />
+    <link rel="stylesheet" href="style/admin.css?v=20260806-components1" />
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { colors: { olive: { DEFAULT: '#99A96A', dark: '#73824C', light: '#E8ECD9' }, ink: '#151515', mist: '#FAFAF7', stone: '#F2F3ED', slate: '#6C6C6C', muted: '#9A9A9A', border: '#E5E7E2', success: '#3D6B4F', warning: '#C9A54C', error: '#B25555', info: '#5B8DEF', cream: '#F5F3EE', lavender: '#A78BFA', mint: '#4ECDC4' }, fontFamily: { display: ['"Instrument Serif"', 'serif'], body: ['"Inter"', 'sans-serif'] } } },
+        }
+    </script>
+</head>
+
+<body>
+    <div class="admin-dashboard bg-gradient-to-br from-mist via-white to-cream dark:from-ink dark:via-ink dark:to-ink/95">
+        <div data-component="include" data-src="component/sidebar.html"></div>
+
+        <main class="admin-dashboard-main relative overflow-hidden">
+            <div data-component="include" data-src="component/topbar.html"></div>
+
+            <section class="relative px-6 md:px-8 pt-6 pb-2">
+                <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+                    <div>
+                        <div class="flex items-center gap-3 mb-1">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-gradient-to-r from-olive/20 to-lavender/20 text-olive rounded-full text-xs font-medium tracking-wide">
+                                <span class="w-1.5 h-1.5 rounded-full bg-olive"></span>
+                                Marketplace Scope
+                            </span>
+                            <span id="categoryCount" class="text-xs text-slate/60 dark:text-gray-500">0 categories</span>
+                        </div>
+                        <h2 class="font-display text-3xl md:text-4xl font-bold text-ink dark:text-white leading-tight">Marketplace categories</h2>
+                        <p class="text-slate text-sm mt-1 max-w-2xl leading-relaxed">Publish only marketplace categories ETCH actually supports. Published categories appear on the homepage, filters, and upload form.</p>
+                    </div>
+                    <a href="/products.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-3 border border-border dark:border-white/10 text-ink dark:text-white rounded-2xl text-sm font-medium hover:border-olive/40 transition-colors">
+                        <i data-lucide="external-link" class="w-4 h-4"></i>
+                        View marketplace
+                    </a>
+                </div>
+            </section>
+
+            <section class="grid xl:grid-cols-[420px_1fr] gap-6 px-6 md:px-8 py-6">
+                <form id="marketplaceCategoryForm" class="bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 p-6 space-y-5">
+                    <input type="hidden" id="marketplaceCategoryId" />
+                    <div>
+                        <h3 id="formTitle" class="font-display text-2xl font-bold text-ink dark:text-white">Add category</h3>
+                        <p class="text-sm text-slate dark:text-gray-400 mt-1">Draft categories stay hidden until published.</p>
+                    </div>
+
+                    <div>
+                        <label for="categoryName" class="block text-sm font-medium text-ink dark:text-white mb-1.5">Name <span class="text-error">*</span></label>
+                        <input id="categoryName" type="text" required maxlength="120" placeholder="Scripts" class="w-full px-4 py-3 bg-white/70 dark:bg-ink/70 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive" />
+                    </div>
+
+                    <div>
+                        <label for="categorySlug" class="block text-sm font-medium text-ink dark:text-white mb-1.5">Slug <span class="text-error">*</span></label>
+                        <input id="categorySlug" type="text" required pattern="[a-z0-9]+(?:-[a-z0-9]+)*" placeholder="script" class="w-full px-4 py-3 bg-white/70 dark:bg-ink/70 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive" />
+                        <p class="text-xs text-slate/50 mt-1.5">Lowercase letters, numbers, and hyphens only.</p>
+                    </div>
+
+                    <div>
+                        <label for="categoryDescription" class="block text-sm font-medium text-ink dark:text-white mb-1.5">Description</label>
+                        <textarea id="categoryDescription" rows="3" placeholder="What this marketplace category covers" class="w-full px-4 py-3 bg-white/70 dark:bg-ink/70 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive"></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label for="categoryIcon" class="block text-sm font-medium text-ink dark:text-white mb-1.5">Icon</label>
+                            <input id="categoryIcon" type="text" value="book-open" placeholder="book-open" class="w-full px-4 py-3 bg-white/70 dark:bg-ink/70 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive" />
+                        </div>
+                        <div>
+                            <label for="categoryOrder" class="block text-sm font-medium text-ink dark:text-white mb-1.5">Order</label>
+                            <input id="categoryOrder" type="number" value="0" class="w-full px-4 py-3 bg-white/70 dark:bg-ink/70 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="categoryStatus" class="block text-sm font-medium text-ink dark:text-white mb-1.5">Status</label>
+                        <select id="categoryStatus" class="w-full px-4 py-3 bg-white/70 dark:bg-ink/70 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive">
+                            <option value="draft">Draft</option>
+                            <option value="published">Published</option>
+                        </select>
+                    </div>
+
+                    <p id="categoryMessage" class="hidden text-sm rounded-2xl px-4 py-3"></p>
+
+                    <div class="flex flex-wrap gap-3">
+                        <button type="submit" class="inline-flex items-center gap-2 px-5 py-3 bg-olive text-white rounded-2xl text-sm font-semibold hover:bg-olive-dark transition-colors"><i data-lucide="save" class="w-4 h-4"></i>Save category</button>
+                        <button id="resetCategoryForm" type="button" class="inline-flex items-center gap-2 px-5 py-3 border border-border dark:border-white/10 text-ink dark:text-white rounded-2xl text-sm font-semibold hover:border-olive/40 transition-colors"><i data-lucide="plus" class="w-4 h-4"></i>New category</button>
+                    </div>
+                </form>
+
+                <div class="bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 overflow-hidden">
+                    <div class="px-6 py-5 border-b border-border/60 dark:border-white/10">
+                        <h3 class="font-display text-2xl font-bold text-ink dark:text-white">Published and draft categories</h3>
+                        <p class="text-sm text-slate dark:text-gray-400 mt-1">Published categories appear on public marketplace surfaces.</p>
+                    </div>
+                    <div id="categoryList" class="divide-y divide-border/60 dark:divide-white/10">
+                        <div class="p-8 text-center text-slate dark:text-gray-400">Loading categories...</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="/script/supabase.js"></script>
+    <script src="script/admin.js"></script>
+    <script>
+        let categories = [];
+        const fields = {
+            id: document.getElementById('marketplaceCategoryId'),
+            name: document.getElementById('categoryName'),
+            slug: document.getElementById('categorySlug'),
+            description: document.getElementById('categoryDescription'),
+            icon: document.getElementById('categoryIcon'),
+            order: document.getElementById('categoryOrder'),
+            status: document.getElementById('categoryStatus'),
+            message: document.getElementById('categoryMessage'),
+            formTitle: document.getElementById('formTitle'),
+            list: document.getElementById('categoryList'),
+            count: document.getElementById('categoryCount'),
+        };
+
+        function slugify(value) {
+            return value.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+        }
+
+        function showMessage(text, type = 'success') {
+            fields.message.textContent = text;
+            fields.message.className = 'text-sm rounded-2xl px-4 py-3 ' + (type === 'error' ? 'bg-error/10 text-error' : 'bg-success/10 text-success');
+        }
+
+        function resetForm() {
+            document.getElementById('marketplaceCategoryForm').reset();
+            fields.id.value = '';
+            fields.icon.value = 'book-open';
+            fields.order.value = '0';
+            fields.formTitle.textContent = 'Add category';
+            fields.message.className = 'hidden text-sm rounded-2xl px-4 py-3';
+        }
+
+        function categoryPayload() {
+            return {
+                name: fields.name.value.trim(),
+                slug: slugify(fields.slug.value || fields.name.value),
+                description: fields.description.value.trim() || null,
+                icon: fields.icon.value.trim() || 'book-open',
+                status: fields.status.value,
+                display_order: Number(fields.order.value || 0),
+            };
+        }
+
+        function renderCategories() {
+            fields.count.textContent = `${categories.length} ${categories.length === 1 ? 'category' : 'categories'}`;
+            if (!categories.length) {
+                fields.list.innerHTML = '<div class="p-8 text-center text-slate dark:text-gray-400">No marketplace categories yet.</div>';
+                return;
+            }
+            fields.list.innerHTML = categories.map(category => `
+                <article class="p-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div class="min-w-0">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="font-semibold text-ink dark:text-white">${EtchUI.escapeHtml(category.name)}</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-medium ${category.status === 'published' ? 'bg-success/10 text-success' : 'bg-warning/10 text-warning'}">${EtchUI.escapeHtml(category.status)}</span>
+                        </div>
+                        <p class="text-xs text-slate/60 dark:text-gray-500 mt-1">/${EtchUI.escapeHtml(category.slug)} · icon: ${EtchUI.escapeHtml(category.icon || 'book-open')} · order ${Number(category.display_order || 0)}</p>
+                        ${category.description ? `<p class="text-sm text-slate dark:text-gray-400 mt-2">${EtchUI.escapeHtml(category.description)}</p>` : ''}
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button type="button" data-edit-category="${category.id}" class="px-3 py-2 text-xs font-semibold rounded-xl border border-border dark:border-white/10 text-ink dark:text-white hover:border-olive/40">Edit</button>
+                        <button type="button" data-delete-category="${category.id}" class="px-3 py-2 text-xs font-semibold rounded-xl bg-error/10 text-error hover:bg-error/20">Delete</button>
+                    </div>
+                </article>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        async function loadCategories() {
+            const { data, error } = await EtchSupabase.getMarketplaceCategories();
+            if (error) {
+                fields.list.innerHTML = '<div class="p-8 text-center text-error">Unable to load categories.</div>';
+                return;
+            }
+            categories = data || [];
+            renderCategories();
+        }
+
+        fields.name.addEventListener('input', () => {
+            if (!fields.id.value) fields.slug.value = slugify(fields.name.value);
+        });
+
+        document.getElementById('marketplaceCategoryForm').addEventListener('submit', async event => {
+            event.preventDefault();
+            const payload = categoryPayload();
+            const result = fields.id.value
+                ? await EtchSupabase.updateMarketplaceCategory(fields.id.value, payload)
+                : await EtchSupabase.createMarketplaceCategory(payload);
+            if (result.error) {
+                showMessage(result.error.message || 'Unable to save category.', 'error');
+                return;
+            }
+            showMessage('Category saved.');
+            resetForm();
+            await loadCategories();
+        });
+
+        document.getElementById('resetCategoryForm').addEventListener('click', resetForm);
+
+        fields.list.addEventListener('click', async event => {
+            const editButton = event.target.closest('[data-edit-category]');
+            const deleteButton = event.target.closest('[data-delete-category]');
+            if (editButton) {
+                const category = categories.find(item => item.id === editButton.dataset.editCategory);
+                if (!category) return;
+                fields.id.value = category.id;
+                fields.name.value = category.name || '';
+                fields.slug.value = category.slug || '';
+                fields.description.value = category.description || '';
+                fields.icon.value = category.icon || 'book-open';
+                fields.order.value = category.display_order || 0;
+                fields.status.value = category.status || 'draft';
+                fields.formTitle.textContent = 'Edit category';
+                fields.message.className = 'hidden text-sm rounded-2xl px-4 py-3';
+            }
+            if (deleteButton) {
+                if (!confirm('Delete this marketplace category?')) return;
+                const { error } = await EtchSupabase.deleteMarketplaceCategory(deleteButton.dataset.deleteCategory);
+                if (error) showMessage(error.message || 'Unable to delete category.', 'error');
+                else await loadCategories();
+            }
+        });
+
+        loadCategories().catch(error => {
+            console.error('Marketplace categories failed:', error);
+            fields.list.innerHTML = '<div class="p-8 text-center text-error">Unable to load categories.</div>';
+        });
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

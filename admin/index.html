@@ -2,6 +2,8 @@
 <html lang="en" data-theme="light">
 
 <head>
+    <script src="/script/core.js"></script>
+    <script src="/script/components.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard | ETCH Admin</title>
@@ -370,7 +372,7 @@
                                 <p class="text-xs text-slate/60 dark:text-gray-500">Platform activity overview</p>
                             </div>
                         </div>
-                        <a href="listings.html"
+                        <a href="../products.html"
                             class="text-sm font-medium text-olive hover:text-olive-dark transition-colors duration-200 flex items-center gap-1">
                             Manage
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -410,7 +412,7 @@
                     <div
                         class="mt-4 pt-4 border-t border-border/60 dark:border-white/10 flex items-center justify-between">
                         <span class="text-xs text-slate/60 dark:text-gray-500">Uptime data unavailable</span>
-                        <a href="listings.html"
+                        <a href="../products.html"
                             class="text-xs font-medium text-olive hover:text-olive-dark transition-colors duration-200">View
                             all listings →</a>
                     </div>
@@ -479,7 +481,7 @@
                                     <div>
                                         <span class="font-medium text-ink dark:text-white">New user registered</span>
                                         <p class="text-sm text-slate/60 dark:text-gray-500"><span
-                                                class="text-ink dark:text-white">Sarah Chen</span> joined as a Creator
+                                                class="text-ink dark:text-white">No creator yet</span> joined as a Creator
                                         </p>
                                     </div>
                                     <span class="text-[10px] text-slate/40 whitespace-nowrap ml-3">4h ago</span>
@@ -498,8 +500,8 @@
                                     <div>
                                         <span class="font-medium text-ink dark:text-white">New license request</span>
                                         <p class="text-sm text-slate/60 dark:text-gray-500"><span
-                                                class="text-ink dark:text-white">Studio A</span> requested licensing for
-                                            "Midnight Sun Pilot"</p>
+                                                class="text-ink dark:text-white">No buyer yet</span> requested licensing for
+                                            "No listing yet"</p>
                                     </div>
                                     <span class="text-[10px] text-slate/40 whitespace-nowrap ml-3">6h ago</span>
                                 </div>
@@ -570,7 +572,7 @@
                                 <span class="text-sm font-medium text-ink dark:text-white">Write New Article</span>
                             </a>
 
-                            <a href="users.html"
+                            <a href="author.html"
                                 class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-all duration-200">
                                 <div
                                     class="w-8 h-8 rounded-xl bg-gradient-to-br from-mint/10 to-blue-500/10 flex items-center justify-center text-mint">
@@ -594,7 +596,7 @@
                                 <span class="text-sm font-medium text-ink dark:text-white">Create Category</span>
                             </a>
 
-                            <a href="listings.html"
+                            <a href="../products.html"
                                 class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-all duration-200">
                                 <div
                                     class="w-8 h-8 rounded-xl bg-gradient-to-br from-peach/10 to-coral/10 flex items-center justify-center text-peach">
@@ -608,7 +610,7 @@
                                     class="ml-auto text-[10px] font-medium text-coral bg-coral/10 px-2 py-0.5 rounded-full">24</span>
                             </a>
 
-                            <a href="support.html"
+                            <a href="../contact.html"
                                 class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-all duration-200">
                                 <div
                                     class="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-500/10 to-orange-500/10 flex items-center justify-center text-amber-500">
@@ -738,7 +740,7 @@
                                         </span>
                                     </td>
                                     <td class="px-6 py-3.5 text-slate/60 dark:text-gray-500">Aug 6, 2026</td>
-                                    <td class="px-6 py-3.5 text-right text-slate/60 dark:text-gray-500">2.4k</td>
+                                    <td class="px-6 py-3.5 text-right text-slate/60 dark:text-gray-500">0</td>
                                 </tr>
                                 <tr
                                     class="group hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-150">
@@ -817,14 +819,9 @@
     <!-- ============================================ -->
     <!-- SCRIPTS -->
     <!-- ============================================ -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+
     <script src="/script/script.js"></script>
-    <script>
-        window.__ETCH_SUPABASE__ = window.__ETCH_SUPABASE__ || {
-            url: 'https://cyoddvehzrmhubmislbb.supabase.co',
-            anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5b2RkdmVoenJtaHVibWlzbGJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUxNjI3MTQsImV4cCI6MjEwMDczODcxNH0.YaUyKP9f3tpKDny78_k_ka70zkFZe58GAFOo5oFFaFI',
-        };
-    </script>
+
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script src="/script/supabase.js"></script>
     <script src="script/admin.js?v=20260806-components1"></script>
@@ -923,8 +920,8 @@
                     articleTable.innerHTML = recentArticles.length ? recentArticles.map(article => `
                         <tr class="border-b border-border/60 dark:border-white/10">
                             <td class="px-6 py-3.5 font-medium text-ink dark:text-white">${String(article.title || 'Untitled article').replace(/[&<>]/g, value => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[value]))}</td>
-                            <td class="px-6 py-3.5 text-slate/60">${String(article.category?.name || article.category || 'Uncategorized')}</td>
-                            <td class="px-6 py-3.5 text-slate/60">${String(article.author?.name || article.author || 'Unassigned')}</td>
+                            <td class="px-6 py-3.5 text-slate/60">${EtchUI.escapeHtml(article.category?.name || 'Uncategorized')}</td>
+                            <td class="px-6 py-3.5 text-slate/60">${EtchUI.escapeHtml(article.author?.name || 'Unassigned')}</td>
                             <td class="px-6 py-3.5 text-slate/60">${String(article.status || 'unknown')}</td>
                             <td class="px-6 py-3.5 text-slate/60">${article.created_at ? new Date(article.created_at).toLocaleDateString() : '—'}</td>
                             <td class="px-6 py-3.5 text-right text-slate/60">${formatNumber(article.views || 0)}</td>

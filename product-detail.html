@@ -2,6 +2,8 @@
 <html lang="en" data-theme="light">
 
 <head>
+    <script src="/script/core.js"></script>
+    <script src="/script/components.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Midnight Sun Pilot | ETCH — Premium Creative Marketplace</title>
@@ -257,12 +259,7 @@
         // Initialize Lucide Icons
         lucide.createIcons();
     </script>
-    <script>
-        window.__ETCH_SUPABASE__ = window.__ETCH_SUPABASE__ || {
-            url: 'https://cyoddvehzrmhubmislbb.supabase.co',
-            anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5b2RkdmVoenJtaHVibWlzbGJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUxNjI3MTQsImV4cCI6MjEwMDczODcxNH0.YaUyKP9f3tpKDny78_k_ka70zkFZe58GAFOo5oFFaFI',
-        };
-    </script>
+
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script src="script/supabase.js"></script>
     <script>
@@ -279,8 +276,7 @@
                 const slug = urlParams.get('slug');
 
                 if (!id && !slug) {
-                    console.warn('No listing ID or slug provided');
-                    return;
+                    throw new Error('No listing selected');
                 }
 
                 // Fetch listing
@@ -333,14 +329,14 @@
                 const mainImage = document.querySelector('.gallery-main img');
                 const imageUrl = listing.cover_url || 'https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?auto=format&fit=crop&w=800&q=80';
                 if (mainImage) {
-                    mainImage.src = imageUrl;
+                    mainImage.src = EtchUI.safeUrl(imageUrl);
                     mainImage.alt = listing.title || 'Creative work';
                 }
 
                 // Update thumbnails
                 const thumbnails = document.querySelectorAll('.gallery-thumbnail img');
                 if (thumbnails.length > 0) {
-                    thumbnails[0].src = imageUrl;
+                    thumbnails[0].src = EtchUI.safeUrl(imageUrl);
                 }
 
                 // Update category badges
@@ -399,13 +395,16 @@
                                 <svg class="w-4 h-4 text-olive" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                 </svg>
-                                ${listing.rights_summary}
+                                ${EtchUI.escapeHtml(listing.rights_summary)}
                             </li>
                         `;
                     }
                 }
             } catch (error) {
                 console.error('Failed to load product detail:', error);
+                document.getElementById('productDetailSkeleton')?.classList.add('hidden');
+                const content = document.getElementById('productDetailContent');
+                if (content) { content.classList.remove('hidden'); content.textContent = 'Unable to load this listing. Please return to the marketplace or refresh to try again.'; }
             }
         }
 

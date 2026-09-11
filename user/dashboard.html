@@ -2,6 +2,8 @@
 <html lang="en" data-theme="light">
 
 <head>
+    <script src="/script/core.js"></script>
+    <script src="/script/components.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard | ETCH Creator Studio</title>
@@ -170,7 +172,7 @@
                         <div>
                             <span class="text-sm text-slate/70 dark:text-gray-400 font-medium">Monthly earnings</span>
                             <div id="dashboardRevenueValue" class="text-3xl font-bold text-ink dark:text-white mt-1">
-                                $12,450</div>
+                                —</div>
                         </div>
                         <div
                             class="w-12 h-12 rounded-2xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-olive group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
@@ -212,7 +214,7 @@
                         <div>
                             <span class="text-sm text-slate/70 dark:text-gray-400 font-medium">Active listings</span>
                             <div id="dashboardPublishedValue" class="text-3xl font-bold text-ink dark:text-white mt-1">
-                                12</div>
+                                0</div>
                         </div>
                         <div
                             class="w-12 h-12 rounded-2xl bg-gradient-to-br from-mint/20 to-blue-500/20 flex items-center justify-center text-mint group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300">
@@ -229,23 +231,23 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                             </svg>
-                            3 new
+                            0 new
                         </span>
                         <span class="text-xs text-slate/60 dark:text-gray-500">this week</span>
                     </div>
                     <div class="relative mt-4 flex flex-wrap gap-1.5">
                         <span
                             class="px-2.5 py-0.5 bg-gradient-to-r from-olive/10 to-emerald-500/10 text-olive text-[10px] rounded-full">Scripts
-                            4</span>
+                            0</span>
                         <span
                             class="px-2.5 py-0.5 bg-gradient-to-r from-mint/10 to-blue-500/10 text-mint text-[10px] rounded-full">Storyboards
-                            3</span>
+                            0</span>
                         <span
                             class="px-2.5 py-0.5 bg-gradient-to-r from-peach/10 to-coral/10 text-peach text-[10px] rounded-full">Music
-                            3</span>
+                            0</span>
                         <span
                             class="px-2.5 py-0.5 bg-gradient-to-r from-lavender/10 to-purple-500/10 text-lavender text-[10px] rounded-full">Design
-                            2</span>
+                            0</span>
                     </div>
                 </div>
 
@@ -276,13 +278,13 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                             </svg>
-                            2 need attention
+                            0 need attention
                         </span>
                     </div>
                     <div class="relative flex items-center gap-3 text-xs text-slate/60 dark:text-gray-500 mt-2">
-                        <span>⚡ 3 new today</span>
+                        <span>0 new today</span>
                         <span>·</span>
-                        <span>⏳ 5 in progress</span>
+                        <span>0 in progress</span>
                     </div>
                 </div>
 
@@ -320,7 +322,7 @@
                         <span class="text-xs text-slate/60 dark:text-gray-500">this month</span>
                     </div>
                     <div class="relative flex items-center gap-2 text-xs text-slate/60 dark:text-gray-500 mt-2">
-                        <span>🔥 Trending: <strong class="text-ink dark:text-white">Frames of Lagos</strong></span>
+                        <span>No trending listing yet</span>
                     </div>
                     <div
                         class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -364,90 +366,19 @@
                         </a>
                     </div>
 
-                    <div class="divide-y divide-border/60 dark:divide-white/10">
-                        <!-- Deal 1 -->
-                        <div
-                            class="group/deal flex items-center justify-between px-6 py-4 hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-all duration-200 cursor-pointer">
-                            <div class="flex items-center gap-4">
-                                <div
-                                    class="w-10 h-10 rounded-xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-olive font-bold text-sm">
-                                    MS
-                                </div>
-                                <div>
-                                    <strong
-                                        class="text-ink dark:text-white font-semibold group-hover/deal:text-olive transition-colors duration-200">Midnight
-                                        Sun Pilot</strong>
-                                    <p class="text-sm text-slate/60 dark:text-gray-500">Exclusive option from Studio A
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <span class="font-semibold text-ink dark:text-white">$8.5k</span>
-                                <span
-                                    class="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-full bg-gradient-to-r from-amber-500/10 to-orange-500/10 text-amber-600 border border-amber-500/20">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
-                                    Negotiating
-                                </span>
-                            </div>
+                    <div class="p-10 text-center">
+                        <div class="w-14 h-14 mx-auto rounded-2xl bg-olive/10 flex items-center justify-center text-olive">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 10h8M8 14h5M21 12a8.5 8.5 0 01-12.8 7.3L3 21l1.7-5.2A8.5 8.5 0 1121 12z" />
+                            </svg>
                         </div>
-
-                        <!-- Deal 2 -->
-                        <div
-                            class="group/deal flex items-center justify-between px-6 py-4 hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-all duration-200 cursor-pointer">
-                            <div class="flex items-center gap-4">
-                                <div
-                                    class="w-10 h-10 rounded-xl bg-gradient-to-br from-mint/20 to-blue-500/20 flex items-center justify-center text-mint font-bold text-sm">
-                                    FL
-                                </div>
-                                <div>
-                                    <strong
-                                        class="text-ink dark:text-white font-semibold group-hover/deal:text-olive transition-colors duration-200">Frames
-                                        of Lagos</strong>
-                                    <p class="text-sm text-slate/60 dark:text-gray-500">Storyboard usage for brand
-                                        launch</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <span class="font-semibold text-ink dark:text-white">$3.2k</span>
-                                <span
-                                    class="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-full bg-gradient-to-r from-blue-500/10 to-indigo-500/10 text-blue-600 border border-blue-500/20">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
-                                    In Review
-                                </span>
-                            </div>
-                        </div>
-
-                        <!-- Deal 3 -->
-                        <div
-                            class="group/deal flex items-center justify-between px-6 py-4 hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-all duration-200 cursor-pointer">
-                            <div class="flex items-center gap-4">
-                                <div
-                                    class="w-10 h-10 rounded-xl bg-gradient-to-br from-peach/20 to-coral/20 flex items-center justify-center text-peach font-bold text-sm">
-                                    RS
-                                </div>
-                                <div>
-                                    <strong
-                                        class="text-ink dark:text-white font-semibold group-hover/deal:text-olive transition-colors duration-200">Rainline
-                                        Sessions</strong>
-                                    <p class="text-sm text-slate/60 dark:text-gray-500">Audio sync request from Agency Y
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <span class="font-semibold text-ink dark:text-white">$1.8k</span>
-                                <span
-                                    class="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-full bg-gradient-to-r from-slate-500/10 to-gray-500/10 text-slate-600 border border-slate-500/20">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
-                                    Pending
-                                </span>
-                            </div>
-                        </div>
+                        <h4 class="font-display text-xl font-bold text-ink dark:text-white mt-4">No rights conversations yet</h4>
+                        <p class="text-sm text-slate dark:text-gray-400 mt-2">Buyer conversations will appear here when real license requests exist.</p>
                     </div>
 
                     <div
                         class="px-6 py-3 border-t border-border/60 dark:border-white/10 bg-gradient-to-r from-olive/5 to-transparent">
-                        <span class="text-xs text-slate/60 dark:text-gray-500">✨ 3 active conversations · Last updated
-                            12 min ago</span>
+                        <span class="text-xs text-slate/60 dark:text-gray-500">No active conversations yet</span>
                     </div>
                 </div>
 
@@ -479,90 +410,19 @@
                         </a>
                     </div>
 
-                    <div class="p-4 space-y-3">
-                        <!-- Asset 1 -->
-                        <a href="#"
-                            class="group/asset flex items-center gap-4 p-3 rounded-2xl border border-transparent hover:border-olive/20 hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-all duration-200">
-                            <div
-                                class="w-14 h-14 rounded-xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-2xl font-display text-olive flex-shrink-0">
-                                📜
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <strong
-                                    class="text-ink dark:text-white font-semibold block truncate group-hover/asset:text-olive transition-colors duration-200">Midnight
-                                    Sun Pilot</strong>
-                                <div class="flex items-center gap-2 text-xs">
-                                    <span class="text-slate/60 dark:text-gray-500">Script</span>
-                                    <span class="w-1 h-1 rounded-full bg-border"></span>
-                                    <span class="text-emerald-500 font-medium">● Active</span>
-                                    <span class="w-1 h-1 rounded-full bg-border"></span>
-                                    <span class="text-slate/60 dark:text-gray-500">$2.4k</span>
-                                </div>
-                            </div>
-                            <svg class="w-4 h-4 text-slate/30 group-hover/asset:text-olive group-hover/asset:translate-x-1 transition-all duration-200"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 5l7 7-7 7" />
+                    <div class="p-8 text-center">
+                        <div class="w-14 h-14 mx-auto rounded-2xl bg-olive/10 flex items-center justify-center text-olive">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 13V7a2 2 0 00-2-2h-5l-2-2H6a2 2 0 00-2 2v14a2 2 0 002 2h7" />
                             </svg>
-                        </a>
-
-                        <!-- Asset 2 -->
-                        <a href="#"
-                            class="group/asset flex items-center gap-4 p-3 rounded-2xl border border-transparent hover:border-olive/20 hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-all duration-200">
-                            <div
-                                class="w-14 h-14 rounded-xl bg-gradient-to-br from-mint/20 to-blue-500/20 flex items-center justify-center text-2xl font-display text-mint flex-shrink-0">
-                                🎬
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <strong
-                                    class="text-ink dark:text-white font-semibold block truncate group-hover/asset:text-olive transition-colors duration-200">Frames
-                                    of Lagos</strong>
-                                <div class="flex items-center gap-2 text-xs">
-                                    <span class="text-slate/60 dark:text-gray-500">Storyboard</span>
-                                    <span class="w-1 h-1 rounded-full bg-border"></span>
-                                    <span class="text-amber-500 font-medium">● Pending</span>
-                                    <span class="w-1 h-1 rounded-full bg-border"></span>
-                                    <span class="text-slate/60 dark:text-gray-500">$1.8k</span>
-                                </div>
-                            </div>
-                            <svg class="w-4 h-4 text-slate/30 group-hover/asset:text-olive group-hover/asset:translate-x-1 transition-all duration-200"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 5l7 7-7 7" />
-                            </svg>
-                        </a>
-
-                        <!-- Asset 3 -->
-                        <a href="#"
-                            class="group/asset flex items-center gap-4 p-3 rounded-2xl border border-transparent hover:border-olive/20 hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-all duration-200">
-                            <div
-                                class="w-14 h-14 rounded-xl bg-gradient-to-br from-lavender/20 to-purple-500/20 flex items-center justify-center text-2xl font-display text-lavender flex-shrink-0">
-                                🎵
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <strong
-                                    class="text-ink dark:text-white font-semibold block truncate group-hover/asset:text-olive transition-colors duration-200">Rainline
-                                    Sessions</strong>
-                                <div class="flex items-center gap-2 text-xs">
-                                    <span class="text-slate/60 dark:text-gray-500">Audio</span>
-                                    <span class="w-1 h-1 rounded-full bg-border"></span>
-                                    <span class="text-emerald-500 font-medium">● Active</span>
-                                    <span class="w-1 h-1 rounded-full bg-border"></span>
-                                    <span class="text-slate/60 dark:text-gray-500">$950</span>
-                                </div>
-                            </div>
-                            <svg class="w-4 h-4 text-slate/30 group-hover/asset:text-olive group-hover/asset:translate-x-1 transition-all duration-200"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 5l7 7-7 7" />
-                            </svg>
-                        </a>
+                        </div>
+                        <h4 class="font-display text-xl font-bold text-ink dark:text-white mt-4">No featured assets yet</h4>
+                        <p class="text-sm text-slate dark:text-gray-400 mt-2">Published listings will appear here once real catalog data is available.</p>
                     </div>
 
                     <div
                         class="px-6 py-3 border-t border-border/60 dark:border-white/10 bg-gradient-to-r from-olive/5 to-transparent">
-                        <span class="text-xs text-slate/60 dark:text-gray-500">📦 12 total assets · 8 visible on
-                            storefront</span>
+                        <span class="text-xs text-slate/60 dark:text-gray-500">No storefront assets published yet</span>
                     </div>
                 </div>
             </section>
@@ -588,41 +448,13 @@
                             <h3 class="font-display text-xl font-bold text-ink dark:text-white">Creative Focus</h3>
                         </div>
                     </div>
-                    <div class="p-4 space-y-2">
-                        <label
-                            class="group/task flex items-center gap-3 p-3 rounded-2xl hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-all duration-200 cursor-pointer">
-                            <input type="checkbox" checked
-                                class="w-5 h-5 rounded-lg border-border text-olive focus:ring-olive focus:ring-2 transition-all duration-200" />
-                            <span class="text-ink dark:text-white line-through text-sm text-slate/60">Reply to Studio A
-                                terms note</span>
-                            <span class="ml-auto text-[10px] text-slate/40">Priority</span>
-                        </label>
-                        <label
-                            class="group/task flex items-center gap-3 p-3 rounded-2xl hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-all duration-200 cursor-pointer">
-                            <input type="checkbox"
-                                class="w-5 h-5 rounded-lg border-border text-olive focus:ring-olive focus:ring-2 transition-all duration-200" />
-                            <span class="text-ink dark:text-white text-sm">Add updated preview stills to Frames of
-                                Lagos</span>
-                            <span class="ml-auto text-[10px] text-slate/40">Design</span>
-                        </label>
-                        <label
-                            class="group/task flex items-center gap-3 p-3 rounded-2xl hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-all duration-200 cursor-pointer">
-                            <input type="checkbox"
-                                class="w-5 h-5 rounded-lg border-border text-olive focus:ring-olive focus:ring-2 transition-all duration-200" />
-                            <span class="text-ink dark:text-white text-sm">Review storefront hero order</span>
-                            <span class="ml-auto text-[10px] text-slate/40">Storefront</span>
-                        </label>
-                        <label
-                            class="group/task flex items-center gap-3 p-3 rounded-2xl hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-all duration-200 cursor-pointer">
-                            <input type="checkbox"
-                                class="w-5 h-5 rounded-lg border-border text-olive focus:ring-olive focus:ring-2 transition-all duration-200" />
-                            <span class="text-ink dark:text-white text-sm">Prepare pitch deck for Agency X</span>
-                            <span class="ml-auto text-[10px] text-slate/40">New</span>
-                        </label>
+                    <div class="p-8 text-center">
+                        <h4 class="font-display text-xl font-bold text-ink dark:text-white">No focus tasks yet</h4>
+                        <p class="text-sm text-slate dark:text-gray-400 mt-2">Tasks will appear here once the workflow has real task data.</p>
                     </div>
                     <div
                         class="px-6 py-3 border-t border-border/60 dark:border-white/10 bg-gradient-to-r from-olive/5 to-transparent flex items-center justify-between">
-                        <span class="text-xs text-slate/60 dark:text-gray-500">🎯 1 task completed · 3 remaining</span>
+                        <span class="text-xs text-slate/60 dark:text-gray-500">0 tasks</span>
                         <span
                             class="text-xs text-olive font-medium cursor-pointer hover:text-olive-dark transition-colors">+
                             Add task</span>
@@ -646,70 +478,13 @@
                         </div>
                         <span class="ml-auto text-xs text-slate/60 dark:text-gray-500">Live</span>
                     </div>
-                    <div class="divide-y divide-border/60 dark:divide-white/10">
-                        <!-- Activity 1 -->
-                        <div
-                            class="flex items-start gap-4 px-6 py-4 hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-200">
-                            <div class="w-2.5 h-2.5 rounded-full bg-olive mt-2 flex-shrink-0 animate-pulse"></div>
-                            <div class="flex-1">
-                                <div class="flex items-start justify-between">
-                                    <strong class="text-ink dark:text-white font-semibold text-sm">New request
-                                        received</strong>
-                                    <span class="text-[10px] text-slate/40 whitespace-nowrap ml-3">2h ago</span>
-                                </div>
-                                <p class="text-sm text-slate/60 dark:text-gray-500 mt-0.5">Midnight Sun Pilot from
-                                    Studio A</p>
-                            </div>
-                        </div>
-
-                        <!-- Activity 2 -->
-                        <div
-                            class="flex items-start gap-4 px-6 py-4 hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-200">
-                            <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 mt-2 flex-shrink-0"></div>
-                            <div class="flex-1">
-                                <div class="flex items-start justify-between">
-                                    <strong class="text-ink dark:text-white font-semibold text-sm">Storefront
-                                        milestone</strong>
-                                    <span class="text-[10px] text-slate/40 whitespace-nowrap ml-3">5h ago</span>
-                                </div>
-                                <p class="text-sm text-slate/60 dark:text-gray-500 mt-0.5">Crossed 3k views! Frames of
-                                    Lagos leading traffic</p>
-                            </div>
-                        </div>
-
-                        <!-- Activity 3 -->
-                        <div
-                            class="flex items-start gap-4 px-6 py-4 hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-200">
-                            <div class="w-2.5 h-2.5 rounded-full bg-blue-500 mt-2 flex-shrink-0"></div>
-                            <div class="flex-1">
-                                <div class="flex items-start justify-between">
-                                    <strong class="text-ink dark:text-white font-semibold text-sm">Message
-                                        received</strong>
-                                    <span class="text-[10px] text-slate/40 whitespace-nowrap ml-3">8h ago</span>
-                                </div>
-                                <p class="text-sm text-slate/60 dark:text-gray-500 mt-0.5">Brand X asked about extended
-                                    territory rights</p>
-                            </div>
-                        </div>
-
-                        <!-- Activity 4 -->
-                        <div
-                            class="flex items-start gap-4 px-6 py-4 hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-colors duration-200">
-                            <div class="w-2.5 h-2.5 rounded-full bg-amber-500 mt-2 flex-shrink-0"></div>
-                            <div class="flex-1">
-                                <div class="flex items-start justify-between">
-                                    <strong class="text-ink dark:text-white font-semibold text-sm">Listing
-                                        updated</strong>
-                                    <span class="text-[10px] text-slate/40 whitespace-nowrap ml-3">Yesterday</span>
-                                </div>
-                                <p class="text-sm text-slate/60 dark:text-gray-500 mt-0.5">Rainline Sessions pricing
-                                    adjusted to $950</p>
-                            </div>
-                        </div>
+                    <div class="p-8 text-center">
+                        <h4 class="font-display text-xl font-bold text-ink dark:text-white">No recent activity yet</h4>
+                        <p class="text-sm text-slate dark:text-gray-400 mt-2">Real account activity will appear here as it happens.</p>
                     </div>
                     <div
                         class="px-6 py-3 border-t border-border/60 dark:border-white/10 bg-gradient-to-r from-olive/5 to-transparent flex items-center justify-between">
-                        <span class="text-xs text-slate/60 dark:text-gray-500">🔔 4 new updates</span>
+                        <span class="text-xs text-slate/60 dark:text-gray-500">0 updates</span>
                         <span
                             class="text-xs text-olive font-medium cursor-pointer hover:text-olive-dark transition-colors">View
                             all →</span>
@@ -725,15 +500,13 @@
                     class="bg-gradient-to-r from-olive/10 via-mint/5 to-olive/10 rounded-3xl border border-olive/10 p-5 md:p-6 backdrop-blur-sm">
                     <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
                         <div class="flex items-center gap-4">
-                            <span class="text-3xl animate-bounce-gentle">💡</span>
                             <div>
                                 <p class="text-sm font-medium text-ink dark:text-white">Creative insight</p>
-                                <p class="text-sm text-slate/70 dark:text-gray-400">Your storyboard "Frames of Lagos" is
-                                    getting 2x more views than average.</p>
+                                <p class="text-sm text-slate/70 dark:text-gray-400">Insights will appear here once real performance data is available.</p>
                             </div>
                         </div>
                         <div class="flex items-center gap-3 flex-shrink-0">
-                            <span class="text-xs text-slate/60 dark:text-gray-500">✨ 0% engagement rate</span>
+                            <span class="text-xs text-slate/60 dark:text-gray-500">No engagement data yet</span>
                             <button
                                 class="group px-4 py-2 text-xs font-medium bg-gradient-to-r from-olive to-emerald-500 text-white rounded-full hover:shadow-lg hover:shadow-olive/20 hover:-translate-y-0.5 transition-all duration-300">
                                 Boost listing
@@ -749,7 +522,7 @@
     <!-- ============================================ -->
     <!-- SCRIPTS -->
     <!-- ============================================ -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+
 
     <!-- Supabase Client Library -->
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>

@@ -521,7 +521,7 @@ const EtchSupabase = (function () {
         try {
             let query = client
                 .from('masterclass_articles')
-                .select('*, category:masterclass_categories(*), author:masterclass_authors(*)');
+                .select(options.summary ? 'id,slug,title,excerpt,featured_image,reading_time,status,published_at,is_featured,category:masterclass_categories(id,name),author:masterclass_authors(id,name)' : '*, category:masterclass_categories(*), author:masterclass_authors(*)', { count: 'exact' });
 
             if (options.status) {
                 query = query.eq('status', options.status);
@@ -544,14 +544,15 @@ const EtchSupabase = (function () {
             }
 
             if (options.limit) {
-                query = query.limit(options.limit);
+                const offset = Math.max(0, Number(options.offset) || 0);
+                query = query.range(offset, offset + options.limit - 1);
             }
 
             query = query.order('published_at', { ascending: false, nullsFirst: false });
 
-            const { data, error } = await query;
+            const { data, error, count } = await query;
             if (error) throw error;
-            return { data: data || [], error: null };
+            return { data: data || [], count: count || 0, error: null };
         } catch (error) {
             return { data: [], error };
         }
@@ -637,13 +638,14 @@ const EtchSupabase = (function () {
         if (!client) return { data: [], error: new Error('Supabase not initialized') };
 
         try {
-            let query = client.from('listings').select('*, creator:profiles(*)');
+            let query = client.from('listings').select('*, creator:profiles(id,full_name,username,avatar_url,bio)', { count: 'exact' });
 
             if (options.status) {
                 query = query.eq('status', options.status);
             }
 
-            if (options.category) {
+            if (options.categories?.length) query = query.in('category', options.categories);
+            if (options.category && !options.categories?.length) {
                 query = query.eq('category', options.category);
             }
 
@@ -659,15 +661,23 @@ const EtchSupabase = (function () {
                 query = query.eq('is_featured', true);
             }
 
-            if (options.limit) {
-                query = query.limit(options.limit);
+            for (const [key, operator] of [['minPrice', 'gte'], ['maxPrice', 'lte']]) {
+                if (options[key] !== undefined && options[key] !== null && options[key] !== '') {
+                    query = query[operator]('price', Number(options[key]));
+                }
             }
 
-            query = query.order('created_at', { ascending: false });
+            if (options.limit) {
+                const offset = Math.max(0, Number(options.offset) || 0);
+                query = query.range(offset, offset + options.limit - 1);
+            }
 
-            const { data, error } = await query;
+            const order = { latest: ['created_at', false], price_asc: ['price', true], price_desc: ['price', false], views: ['views', false] }[options.sort] || ['created_at', false];
+            query = query.order(order[0], { ascending: order[1] }).order('id', { ascending: false });
+
+            const { data, error, count } = await query;
             if (error) throw error;
-            return { data: data || [], error: null };
+            return { data: data || [], count: count || 0, error: null };
         } catch (error) {
             return { data: [], error };
         }
@@ -683,7 +693,7 @@ const EtchSupabase = (function () {
         try {
             const { data, error } = await client
                 .from('listings')
-                .select('*, creator:profiles(*)')
+                .select('*, creator:profiles(id,full_name,username,avatar_url,bio)')
                 .eq('slug', slug)
                 .single();
 
@@ -704,7 +714,7 @@ const EtchSupabase = (function () {
         try {
             const { data, error } = await client
                 .from('listings')
-                .select('*, creator:profiles(*)')
+                .select('*, creator:profiles(id,full_name,username,avatar_url,bio)')
                 .eq('id', id)
                 .single();
 
@@ -723,7 +733,7 @@ const EtchSupabase = (function () {
         if (!client) return { data: [], error: new Error('Supabase not initialized') };
 
         try {
-            let q = client.from('listings').select('*, creator:profiles(*)');
+            let q = client.from('listings').select('*, creator:profiles(id,full_name,username,avatar_url,bio)', { count: 'exact' });
 
             if (options.status) {
                 q = q.eq('status', options.status);
@@ -732,30 +742,34 @@ const EtchSupabase = (function () {
             }
 
             if (query) {
-                q = q.or(`title.ilike.%${query}%,description.ilike.%${query}%,category.ilike.%${query}%`);
+                const pattern = JSON.stringify('%' + String(query).replace(/[\\%_]/g, '\\$&') + '%');
+                q = q.or(`title.ilike.${pattern},description.ilike.${pattern},category.ilike.${pattern}`);
             }
 
-            if (options.category) {
+            if (options.categories?.length) q = q.in('category', options.categories);
+            if (options.category && !options.categories?.length) {
                 q = q.eq('category', options.category);
             }
 
-            if (options.minPrice) {
+            if (options.minPrice !== undefined && options.minPrice !== null && options.minPrice !== '') {
                 q = q.gte('price', options.minPrice);
             }
 
-            if (options.maxPrice) {
+            if (options.maxPrice !== undefined && options.maxPrice !== null && options.maxPrice !== '') {
                 q = q.lte('price', options.maxPrice);
             }
 
             if (options.limit) {
-                q = q.limit(options.limit);
+                const offset = Math.max(0, Number(options.offset) || 0);
+                q = q.range(offset, offset + options.limit - 1);
             }
 
-            q = q.order('created_at', { ascending: false });
+            const order = { latest: ['created_at', false], price_asc: ['price', true], price_desc: ['price', false], views: ['views', false] }[options.sort] || ['created_at', false];
+            q = q.order(order[0], { ascending: order[1] }).order('id', { ascending: false });
 
-            const { data, error } = await q;
+            const { data, error, count } = await q;
             if (error) throw error;
-            return { data: data || [], error: null };
+            return { data: data || [], count: count || 0, error: null };
         } catch (error) {
             return { data: [], error };
         }
@@ -825,7 +839,7 @@ const EtchSupabase = (function () {
         try {
             const { data, error } = await client
                 .from('listings')
-                .select('*, creator:profiles(*)')
+                .select('*, creator:profiles(id,full_name,username,avatar_url,bio)')
                 .eq('status', 'published')
                 .eq('is_featured', true)
                 .limit(limit)
@@ -850,16 +864,9 @@ const EtchSupabase = (function () {
         }
 
         try {
-            const { data, error } = await client
-                .from('newsletter_subscribers')
-                .upsert({
-                    email,
-                    name: name || null,
-                    is_active: true,
-                    subscribed_at: new Date().toISOString(),
-                }, { onConflict: 'email' })
-                .select()
-                .single();
+            const { data, error } = await client.rpc('subscribe_to_newsletter', {
+                subscriber_email: email, subscriber_name: name || null,
+            });
 
             if (error) throw error;
             return { data, error: null };
@@ -890,75 +897,47 @@ const EtchSupabase = (function () {
     }
 
     async function sendNewsletterCampaign(campaign = {}) {
-        const config = window.__ETCH_NEWSLETTER__ || {};
-        const endpoint = config.endpoint || '';
-        const apiKey = config.apiKey || '';
-        const provider = config.provider || 'supabase-function';
-
-        if (!endpoint) {
-            return {
-                sent: false,
-                error: new Error(
-                    'Newsletter delivery endpoint is not configured.\n\n' +
-                    'Please set window.__ETCH_NEWSLETTER__.endpoint\n\n' +
-                    'Setup instructions: See /docs/NEWSLETTER_SETUP.md'
-                ),
-                count: 0,
-            };
-        }
-
-        const subscribers = await getNewsletterSubscribers({ activeOnly: true });
-        const recipients = subscribers.data || [];
-
-        if (recipients.length === 0) {
-            return {
-                sent: false,
-                error: new Error('No active subscribers to send newsletter to'),
-                count: 0,
-            };
-        }
-
         try {
-            const headers = {
-                'Content-Type': 'application/json',
-            };
-
-            if (apiKey && provider === 'resend') {
-                headers['Authorization'] = `Bearer ${apiKey}`;
-            }
-
+            const { session, error } = await getSession();
+            if (error || !session) throw error || new Error('Please sign in again.');
+            const endpoint = window.__ETCH_NEWSLETTER__?.endpoint || CONFIG.url + '/functions/v1/send-newsletter';
             const response = await fetch(endpoint, {
                 method: 'POST',
-                headers,
-                body: JSON.stringify({
-                    subject: campaign.subject || 'ETCH Newsletter',
-                    message: campaign.message || '',
-                    fromName: campaign.fromName || 'ETCH Newsletter',
-                    recipients: recipients.map(item => item.email),
-                }),
+                headers: { 'Content-Type': 'application/json', apikey: CONFIG.anonKey,
+                    Authorization: 'Bearer ' + session.access_token },
+                body: JSON.stringify({ subject: campaign.subject, message: campaign.message,
+                    campaignId: campaign.campaignId }),
             });
-
-            if (!response.ok) {
-                const text = await response.text();
-                throw new Error(`Newsletter delivery failed: ${text || response.statusText}`);
+            const result = await response.json();
+            if (!response.ok || !result.success) {
+                return { sent: false, count: result.sent || 0, data: result,
+                    error: new Error(result.error || result.message || 'Newsletter delivery failed.') };
             }
-
-            const result = await response.json().catch(() => ({}));
-            return {
-                sent: true,
-                data: result,
-                error: null,
-                count: recipients.length,
-                message: result.message || `Newsletter sent to ${recipients.length} subscribers`,
-            };
+            return { sent: true, count: result.sent, data: result, error: null };
         } catch (error) {
-            return {
-                sent: false,
-                data: null,
-                error,
-                count: recipients.length,
-            };
+            return { sent: false, count: 0, error };
         }
+    }
+
+    async function submitContact(payload) {
+        const client = getClient();
+        if (!client) return { error: new Error('Supabase not initialized') };
+        return client.from('contacts').insert({
+            name: String(payload.name || '').trim(), email: String(payload.email || '').trim(),
+            subject: String(payload.subject || '').trim(), message: String(payload.message || '').trim(),
+        });
+    }
+
+    async function requireAdmin() {
+        const result = await requireAuth();
+        return { ...result, authenticated: result.authenticated && result.profile?.role === 'admin' };
+    }
+
+    // Fetch aggregates independently of the current listing page.
+    async function getCreatorStats() {
+        const client = getClient();
+        if (!client) return { error: new Error('Supabase not initialized') };
+        return client.rpc('creator_listing_stats');
     }
 
     async function createListing(listingData) {
@@ -1054,6 +1033,164 @@ const EtchSupabase = (function () {
     }
 
     // ============================================
+    // HOMEPAGE PARTNERS: PRESS, SPONSORS, TRUST SIGNALS
+    // ============================================
+    async function getHomepagePartners(options = {}) {
+        const client = getClient();
+        if (!client) return { data: [], error: new Error('Supabase not initialized') };
+
+        try {
+            let query = client
+                .from('homepage_partners')
+                .select('*')
+                .order('display_order', { ascending: true })
+                .order('created_at', { ascending: false });
+
+            if (options.status) query = query.eq('status', options.status);
+            if (options.limit) query = query.limit(Number(options.limit));
+
+            const { data, error } = await query;
+            if (error) throw error;
+            return { data: data || [], error: null };
+        } catch (error) {
+            return { data: [], error };
+        }
+    }
+
+    async function createHomepagePartner(partnerData) {
+        const client = getClient();
+        if (!client) return { data: null, error: new Error('Supabase not initialized') };
+
+        try {
+            const { data, error } = await client
+                .from('homepage_partners')
+                .insert(partnerData)
+                .select()
+                .single();
+
+            if (error) throw error;
+            return { data, error: null };
+        } catch (error) {
+            return { data: null, error };
+        }
+    }
+
+    async function updateHomepagePartner(id, updates) {
+        const client = getClient();
+        if (!client) return { data: null, error: new Error('Supabase not initialized') };
+
+        try {
+            const { data, error } = await client
+                .from('homepage_partners')
+                .update(updates)
+                .eq('id', id)
+                .select()
+                .single();
+
+            if (error) throw error;
+            return { data, error: null };
+        } catch (error) {
+            return { data: null, error };
+        }
+    }
+
+    async function deleteHomepagePartner(id) {
+        const client = getClient();
+        if (!client) return { error: new Error('Supabase not initialized') };
+
+        try {
+            const { error } = await client
+                .from('homepage_partners')
+                .delete()
+                .eq('id', id);
+
+            if (error) throw error;
+            return { error: null };
+        } catch (error) {
+            return { error };
+        }
+    }
+
+    // ============================================
+    // MARKETPLACE CATEGORIES
+    // ============================================
+    async function getMarketplaceCategories(options = {}) {
+        const client = getClient();
+        if (!client) return { data: [], error: new Error('Supabase not initialized') };
+
+        try {
+            let query = client
+                .from('marketplace_categories')
+                .select('*')
+                .order('display_order', { ascending: true })
+                .order('created_at', { ascending: false });
+
+            if (options.status) query = query.eq('status', options.status);
+            if (options.limit) query = query.limit(Number(options.limit));
+
+            const { data, error } = await query;
+            if (error) throw error;
+            return { data: data || [], error: null };
+        } catch (error) {
+            return { data: [], error };
+        }
+    }
+
+    async function createMarketplaceCategory(categoryData) {
+        const client = getClient();
+        if (!client) return { data: null, error: new Error('Supabase not initialized') };
+
+        try {
+            const { data, error } = await client
+                .from('marketplace_categories')
+                .insert(categoryData)
+                .select()
+                .single();
+
+            if (error) throw error;
+            return { data, error: null };
+        } catch (error) {
+            return { data: null, error };
+        }
+    }
+
+    async function updateMarketplaceCategory(id, updates) {
+        const client = getClient();
+        if (!client) return { data: null, error: new Error('Supabase not initialized') };
+
+        try {
+            const { data, error } = await client
+                .from('marketplace_categories')
+                .update(updates)
+                .eq('id', id)
+                .select()
+                .single();
+
+            if (error) throw error;
+            return { data, error: null };
+        } catch (error) {
+            return { data: null, error };
+        }
+    }
+
+    async function deleteMarketplaceCategory(id) {
+        const client = getClient();
+        if (!client) return { error: new Error('Supabase not initialized') };
+
+        try {
+            const { error } = await client
+                .from('marketplace_categories')
+                .delete()
+                .eq('id', id);
+
+            if (error) throw error;
+            return { error: null };
+        } catch (error) {
+            return { error };
+        }
+    }
+
+    // ============================================
     // AUTH GUARD: PROTECT DASHBOARD PAGES
     // ============================================
     async function requireAuth(options = {}) {
@@ -1064,9 +1201,9 @@ const EtchSupabase = (function () {
         }
 
         try {
-            const { session, error } = await client.auth.getSession();
+            const { user, error } = await getCurrentUser();
 
-            if (error || !session) {
+            if (error || !user) {
                 return {
                     authenticated: false,
                     redirect: options.redirectTo || '/user/auth/signin.html',
@@ -1075,11 +1212,11 @@ const EtchSupabase = (function () {
             }
 
             // Get user profile
-            const { profile } = await getProfile(session.user.id);
+            const { profile } = await getProfile(user.id);
 
             return {
                 authenticated: true,
-                user: session.user,
+                user,
                 profile: profile,
                 redirect: null
             };
@@ -1114,6 +1251,9 @@ const EtchSupabase = (function () {
         removeFile,
         getPublicUrl,
         requireAuth,
+        requireAdmin,
+        submitContact,
+        getCreatorStats,
         getListings,
         getListingBySlug,
         getListingById,
@@ -1122,6 +1262,14 @@ const EtchSupabase = (function () {
         getFeaturedListings,
         getSiteSettings,
         updateSiteSettings,
+        getHomepagePartners,
+        createHomepagePartner,
+        updateHomepagePartner,
+        deleteHomepagePartner,
+        getMarketplaceCategories,
+        createMarketplaceCategory,
+        updateMarketplaceCategory,
+        deleteMarketplaceCategory,
         subscribeToNewsletter,
         getNewsletterSubscribers,
         sendNewsletterCampaign,

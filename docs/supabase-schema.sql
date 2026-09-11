@@ -1,3 +1,5 @@
+-- BASE SCHEMA ONLY: after this script, apply supabase/migrations/*.sql in filename order.
+-- Do not expose a new project before those security migrations are applied.
 -- ============================================
 -- ETCH by OMIMI - Supabase Schema
 -- Run this in your Supabase SQL Editor

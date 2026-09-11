@@ -2,6 +2,8 @@
 <html lang="en" data-theme="light">
 
 <head>
+    <script src="/script/core.js"></script>
+    <script src="/script/components.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Upload | ETCH Creator Studio</title>
@@ -250,7 +252,9 @@
                     </div>
 
                     <!-- Form -->
-                    <form class="p-6 space-y-6" data-handle-submit>
+                    <form class="p-6 space-y-6" data-listing-form>
+                        <p id="uploadSelection" role="status"></p>
+                        <p id="formError" class="hidden text-error" role="alert"></p>
 
                         <!-- Grid Fields -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -260,7 +264,7 @@
                                 <label class="block text-sm font-medium text-ink dark:text-white mb-1.5">
                                     Title <span class="text-error">*</span>
                                 </label>
-                                <input type="text" name="title" placeholder="e.g., Midnight Sun Pilot" required
+                                <input type="text" name="title" placeholder="Creative work title" required
                                     class="w-full px-4 py-3 bg-white/60 dark:bg-ink/60 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white placeholder:text-slate/40 focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200" />
                                 <p class="text-[10px] text-slate/40 mt-1.5">Short commercial title for your creative
                                     asset</p>
@@ -275,11 +279,6 @@
                                     class="w-full px-4 py-3 bg-white/60 dark:bg-ink/60 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200 appearance-none">
                                     <option value="">Choose category</option>
                                     <option value="script">📜 Script</option>
-                                    <option value="storyboard">🎬 Storyboard</option>
-                                    <option value="music">🎵 Music</option>
-                                    <option value="concept-art">🎨 Concept Art</option>
-                                    <option value="motion">🎞️ Motion</option>
-                                    <option value="copy">✍️ Copy</option>
                                 </select>
                                 <p class="text-[10px] text-slate/40 mt-1.5">Select the category that best fits your work
                                 </p>
@@ -367,36 +366,22 @@
                                         </svg>
                                     </div>
                                     <div>
-                                        <p class="text-sm font-medium text-ink dark:text-white">Drop your files here</p>
+                                        <p class="text-sm font-medium text-ink dark:text-white">Drop your cover image here</p>
                                         <p class="text-xs text-slate/60 dark:text-gray-500">
                                             or <span
                                                 class="text-olive hover:text-olive-dark cursor-pointer">browse</span> to
                                             upload
                                         </p>
                                     </div>
-                                    <p class="text-[10px] text-slate/40">Supported: JPG, PNG, PDF, MP4, MP3 (max 100MB)
+                                    <p class="text-[10px] text-slate/40">Supported: JPG, PNG, WebP, GIF (max 10 MB)
                                     </p>
                                 </div>
 
                                 <!-- File upload input (hidden) -->
-                                <input type="file" class="absolute inset-0 opacity-0 cursor-pointer" multiple
-                                    accept=".jpg,.jpeg,.png,.pdf,.mp4,.mp3" />
+                                <input type="file" class="absolute inset-0 opacity-0 cursor-pointer"
+                                    accept="image/jpeg,image/png,image/webp,image/gif" />
                             </div>
 
-                            <!-- Upload progress (hidden by default) -->
-                            <div
-                                class="hidden mt-4 p-4 bg-white/60 dark:bg-ink/60 rounded-2xl border border-border/60 dark:border-white/10">
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="text-sm font-medium text-ink dark:text-white">Uploading files...</span>
-                                    <span class="text-sm text-olive font-medium">45%</span>
-                                </div>
-                                <div class="w-full h-2 bg-border/50 dark:bg-white/5 rounded-full overflow-hidden">
-                                    <div
-                                        class="h-full w-[45%] bg-gradient-to-r from-olive to-emerald-500 rounded-full transition-all duration-500">
-                                    </div>
-                                </div>
-                                <p class="text-xs text-slate/60 dark:text-gray-500 mt-2">2 of 4 files uploaded</p>
-                            </div>
                         </div>
 
                         <!-- ========================================== -->
@@ -513,7 +498,7 @@
     <!-- ============================================ -->
     <!-- SCRIPTS -->
     <!-- ============================================ -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+
 
     <!-- Supabase Client Library -->
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
@@ -536,123 +521,38 @@
     <script src="script/user.js"></script>
 
     <script>
-        // Initialize Lucide Icons
         lucide.createIcons();
-
-        // Set page title dynamically
-        document.querySelector('.greeting h1').textContent = 'Upload';
-
-        // File upload handling
-        const dropZone = document.querySelector('.border-dashed');
-        const fileInput = dropZone?.querySelector('input[type="file"]');
-        const uploadProgress = document.querySelector('.upload-progress');
-
-        if (dropZone && fileInput) {
-            // Drag and drop events
-            dropZone.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                dropZone.classList.add('border-olive', 'bg-olive/5');
-            });
-
-            dropZone.addEventListener('dragleave', () => {
-                dropZone.classList.remove('border-olive', 'bg-olive/5');
-            });
-
-            dropZone.addEventListener('drop', (e) => {
-                e.preventDefault();
-                dropZone.classList.remove('border-olive', 'bg-olive/5');
-
-                const files = e.dataTransfer.files;
-                if (files.length > 0) {
-                    handleFiles(files);
-                }
-            });
-
-            fileInput.addEventListener('change', () => {
-                if (fileInput.files.length > 0) {
-                    handleFiles(fileInput.files);
-                }
-            });
-
-            function handleFiles(files) {
-                // Show progress
-                const progress = document.querySelector('.upload-progress');
-                if (progress) {
-                    progress.classList.remove('hidden');
-                }
-
-                // Simulate upload progress
-                let progressValue = 0;
-                const interval = setInterval(() => {
-                    progressValue += Math.random() * 15;
-                    if (progressValue >= 100) {
-                        progressValue = 100;
-                        clearInterval(interval);
-
-                        // Update progress bar
-                        const bar = document.querySelector('.upload-progress .fill');
-                        const label = document.querySelector('.upload-progress .font-medium');
-                        if (bar) bar.style.width = '100%';
-                        if (label) label.textContent = '100%';
-
-                        // Change text to complete
-                        const statusText = document.querySelector('.upload-progress .text-sm');
-                        if (statusText) statusText.textContent = `All ${files.length} files uploaded successfully! ✅`;
-
-                        // Add success styling
-                        const container = document.querySelector('.upload-progress');
-                        if (container) {
-                            container.classList.add('border-success/20', 'bg-success/5');
-                        }
-                    } else {
-                        const bar = document.querySelector('.upload-progress .fill');
-                        const label = document.querySelector('.upload-progress .font-medium');
-                        if (bar) bar.style.width = Math.min(progressValue, 100) + '%';
-                        if (label) label.textContent = Math.min(Math.floor(progressValue), 100) + '%';
-                    }
-                }, 300);
+        const fileInput = document.querySelector('form input[type="file"]');
+        const dropZone = fileInput?.closest('.border-dashed');
+        const selection = document.getElementById('uploadSelection');
+        function showSelection() {
+            selection.textContent = fileInput.files.length ? fileInput.files[0].name + ' selected. Save the listing to upload.' : '';
+        }
+        fileInput?.addEventListener('change', showSelection);
+        dropZone?.addEventListener('dragover', event => event.preventDefault());
+        dropZone?.addEventListener('drop', event => {
+            event.preventDefault();
+            if (event.dataTransfer.files.length !== 1) {
+                selection.textContent = 'Choose one cover image.';
+                return;
             }
+            fileInput.files = event.dataTransfer.files;
+            showSelection();
+        });
+
+        async function loadUploadCategories() {
+            const categorySelect = document.querySelector('select[name="category"]');
+            if (!categorySelect || !window.EtchSupabase?.getMarketplaceCategories) return;
+            const { data, error } = await window.EtchSupabase.getMarketplaceCategories({ status: 'published' });
+            const categories = !error && data?.length ? data : [{ name: 'Script', slug: 'script' }];
+            categorySelect.innerHTML = '<option value="">Choose category</option>' + categories.map(category => {
+                const slug = EtchUI.escapeHtml(category.slug || 'script');
+                const name = EtchUI.escapeHtml(category.name || 'Script');
+                return `<option value="${slug}">${name}</option>`;
+            }).join('');
         }
 
-        // Form submission
-        document.querySelector('form').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const successEl = document.getElementById('formSuccess');
-            if (successEl) {
-                successEl.classList.remove('hidden');
-                successEl.classList.add('animate-slide-up');
-            }
-
-            // Reset form after delay
-            setTimeout(() => {
-                this.reset();
-                // Reset file input
-                const fileInput = this.querySelector('input[type="file"]');
-                if (fileInput) fileInput.value = '';
-                // Hide progress
-                const progress = document.querySelector('.upload-progress');
-                if (progress) {
-                    progress.classList.add('hidden');
-                    progress.classList.remove('border-success/20', 'bg-success/5');
-                    const bar = progress.querySelector('.fill');
-                    const label = progress.querySelector('.font-medium');
-                    if (bar) bar.style.width = '0%';
-                    if (label) label.textContent = '0%';
-                    const statusText = progress.querySelector('.text-sm');
-                    if (statusText) statusText.textContent = '0 of 0 files uploaded';
-                }
-            }, 2000);
-
-            // Hide success after 5 seconds
-            setTimeout(() => {
-                if (successEl) {
-                    successEl.classList.add('hidden');
-                    successEl.classList.remove('animate-slide-up');
-                }
-            }, 6000);
-        });
+        loadUploadCategories().catch(error => console.warn('Marketplace categories unavailable:', error));
     </script>
 </body>
-
 </html>

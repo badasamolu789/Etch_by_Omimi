@@ -23,14 +23,9 @@
         return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
     }
 
-    function escapeHtml(str) {
-        if (!str) return '';
-        const div = document.createElement('div');
-        div.textContent = str;
-        return div.innerHTML;
-    }
+    function escapeHtml(str) { return EtchUI.escapeHtml(str); }
 
-    function renderEmptyState() {
+    function renderEmptyState(message = '') {
         const articleEl = document.getElementById('article');
         if (!articleEl) return;
         articleEl.innerHTML = `
@@ -40,9 +35,9 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                     </svg>
                 </div>
-                <h1 class="font-display text-2xl font-bold text-ink dark:text-white mb-2">Article not found</h1>
+                <h1 class="font-display text-2xl font-bold text-ink dark:text-white mb-2">${message ? 'Unable to load article' : 'Article not found'}</h1>
                 <p class="text-sm text-slate/60 dark:text-gray-500 max-w-sm mb-6">
-                    The article you're looking for doesn't exist or may have been unpublished.
+                    ${escapeHtml(message || 'The article you are looking for does not exist or may have been unpublished.')}
                 </p>
                 <a href="masterclass.html"
                     class="inline-flex items-center gap-2 px-6 py-3 bg-olive text-white rounded-2xl font-medium hover:bg-olive-dark transition-colors duration-200">
@@ -72,8 +67,14 @@
         if (categoryPillEl) { categoryPillEl.textContent = categoryName; }
         if (titleEl) {
             titleEl.textContent = article.title;
-            document.title = `${article.title} | ETCH Masterclass`;
+            document.title = article.seo_title || `${article.title} | ETCH Masterclass`;
         }
+        document.querySelector('meta[name="description"]')?.setAttribute('content', article.seo_description || article.excerpt || 'ETCH Masterclass article');
+        let canonical = document.querySelector('link[rel="canonical"]');
+        if (!canonical) { canonical = document.createElement('link'); canonical.rel = 'canonical'; document.head.appendChild(canonical); }
+        const savedCanonical = EtchUI.safeUrl(article.canonical_url);
+        canonical.href = savedCanonical && !new URL(savedCanonical).pathname.startsWith('/masterclass/article/')
+            ? savedCanonical : new URL(EtchUI.articleUrl(article.slug), window.location.origin).href;
         if (excerptEl) {
             excerptEl.textContent = article.excerpt || 'A practical perspective from the ETCH Masterclass.';
         }
@@ -82,11 +83,11 @@
             metaEl.innerHTML = `
                 <div class="flex items-center gap-3 rounded-full border border-border dark:border-white/10 bg-white dark:bg-ink px-3 py-2 shadow-sm dark:shadow-[0_4px_16px_rgba(0,0,0,0.15)]">
                     <div class="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-olive/20 to-emerald-500/20 text-xs font-bold text-olive">
-                        ${getInitials(author)}
+                        ${escapeHtml(getInitials(author))}
                     </div>
                     <div>
                         <p class="font-semibold text-ink dark:text-white">${escapeHtml(author)}</p>
-                        <p class="text-xs text-slate/60 dark:text-gray-500">${formatDate(article.published_at)} · ${article.reading_time || 5} min read</p>
+                        <p class="text-xs text-slate/60 dark:text-gray-500">${formatDate(article.published_at)} · ${Number(article.reading_time) || 5} min read</p>
                     </div>
                 </div>
                 <span class="rounded-full border border-border dark:border-white/10 bg-white dark:bg-ink px-3 py-2 text-xs font-medium uppercase tracking-[0.12em] text-slate/70 dark:text-gray-500">${escapeHtml(article.status || 'Published')}</span>
@@ -97,22 +98,33 @@
             authorCardEl.innerHTML = `
                 <div class="mt-4 flex items-center gap-3">
                     <div class="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-olive/20 to-emerald-500/20 text-sm font-bold text-olive">
-                        ${getInitials(author)}
+                        ${escapeHtml(getInitials(author))}
                     </div>
                     <div>
                         <p class="font-display text-2xl leading-none text-ink dark:text-white">${escapeHtml(author)}</p>
-                        <p class="mt-1 text-sm text-slate/70 dark:text-gray-500">ETCH editorial contributor</p>
+                        <p class="mt-1 text-sm text-slate/70 dark:text-gray-500">${escapeHtml(article.author?.role || 'ETCH editorial contributor')}</p>
                     </div>
                 </div>
-                <p class="mt-4 text-sm leading-relaxed text-slate/70 dark:text-gray-500">Writing on craft, career strategy, and the business of creating with intention.</p>
+                <p class="mt-4 text-sm leading-relaxed text-slate/70 dark:text-gray-500">${escapeHtml(article.author?.bio || 'Writing on craft, career strategy, and the business of creating with intention.')}</p>
             `;
+        }
+
+        if (authorCardEl && EtchUI.safeUrl(article.author?.avatar_url)) {
+            const avatar = authorCardEl.querySelector('.rounded-full');
+            if (avatar) {
+                const img = document.createElement('img');
+                img.src = EtchUI.safeUrl(article.author.avatar_url);
+                img.alt = author;
+                img.className = 'w-full h-full rounded-full object-cover';
+                avatar.replaceChildren(img);
+            }
         }
 
         if (imageEl) {
             if (article.featured_image) {
                 imageEl.innerHTML = `
                     <div class="overflow-hidden rounded-[24px]">
-                        <img src="${article.featured_image}" alt="${escapeHtml(article.title)}" class="h-[420px] w-full object-cover md:h-[520px]" />
+                        <img src="${escapeHtml(EtchUI.safeUrl(article.featured_image))}" alt="${escapeHtml(article.title)}" class="h-[420px] w-full object-cover md:h-[520px]" />
                     </div>
                 `;
             } else {
@@ -130,11 +142,11 @@
         }
 
         if (contentEl) {
-            let content = article.content || '<p>No content available.</p>';
-            if (typeof DOMPurify !== 'undefined') {
-                content = DOMPurify.sanitize(content);
+            if (typeof DOMPurify === 'undefined') {
+                contentEl.textContent = 'Article content could not be loaded safely. Please refresh to try again.';
+                return;
             }
-            contentEl.innerHTML = content;
+            contentEl.innerHTML = DOMPurify.sanitize(article.content || '<p>No content available.</p>', { USE_PROFILES: { html: true } });
         }
     }
 
@@ -148,16 +160,23 @@
         }
         try {
             const { data, error } = await EtchSupabase.getArticleBySlug(slug);
-            if (error || !data) {
-                console.error('Error loading article:', error);
-                renderEmptyState();
+            if (error) {
+                if (error.code === 'PGRST116') renderEmptyState();
+                else renderEmptyState('Please refresh to try again.');
                 return;
             }
-            if (data.status !== 'published') { renderEmptyState(); return; }
+            if (!data) { renderEmptyState(); return; }
+            if (data.status !== 'published') {
+                const preview = new URLSearchParams(window.location.search).get('preview') === '1';
+                const admin = preview ? await EtchSupabase.requireAdmin() : null;
+                if (!admin?.authenticated) { renderEmptyState(); return; }
+                const robots = document.createElement('meta');
+                robots.name = 'robots'; robots.content = 'noindex, nofollow'; document.head.appendChild(robots);
+            }
             renderArticle(data);
         } catch (error) {
             console.error('Error loading article:', error);
-            renderEmptyState();
+            renderEmptyState('Please refresh to try again.');
         }
     }
 

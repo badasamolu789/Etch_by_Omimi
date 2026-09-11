@@ -2,6 +2,8 @@
 <html lang="en" data-theme="light">
 
 <head>
+    <script src="/script/core.js"></script>
+    <script src="/script/components.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Sign In | ETCH</title>
@@ -161,10 +163,6 @@
 
                     <!-- Remember Me -->
                     <div class="flex items-center gap-2">
-                        <input type="checkbox" id="rememberMe"
-                            class="w-4 h-4 rounded border-border/60 dark:border-white/10 text-olive focus:ring-olive focus:ring-2" />
-                        <label for="rememberMe" class="text-sm text-slate/60 dark:text-gray-500 cursor-pointer">Remember
-                            me</label>
                     </div>
 
                     <!-- Status Message (hidden by default) -->
@@ -228,14 +226,9 @@
     <!-- ============================================ -->
     <!-- SCRIPTS -->
     <!-- ============================================ -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-    <script>
-        window.__ETCH_SUPABASE__ = window.__ETCH_SUPABASE__ || {
-            url: 'https://cyoddvehzrmhubmislbb.supabase.co',
-            anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5b2RkdmVoenJtaHVibWlzbGJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUxNjI3MTQsImV4cCI6MjEwMDczODcxNH0.YaUyKP9f3tpKDny78_k_ka70zkFZe58GAFOo5oFFaFI',
-        };
-    </script>
+
     <script src="/script/supabase.js"></script>
     <script>
         // Initialize Lucide Icons
@@ -289,35 +282,12 @@
         const successText = document.getElementById('successText');
         const emailInput = document.getElementById('emailInput');
         const emailError = document.getElementById('emailError');
-        const ADMIN_EMAIL = 'etchadmin@gmail.com';
-        const ADMIN_SESSION_KEY = 'etch_admin_session';
-
-        function clearAdminSession() {
-            sessionStorage.removeItem(ADMIN_SESSION_KEY);
-            localStorage.removeItem(ADMIN_SESSION_KEY);
-            sessionStorage.removeItem('etch_admin_verified');
-            sessionStorage.removeItem('etch_admin_remember');
-        }
-
-        function saveAdminSession(remember) {
-            const session = JSON.stringify({
-                email: ADMIN_EMAIL,
-                name: 'Super Admin',
-                signedInAt: new Date().toISOString(),
-            });
-
-            clearAdminSession();
-            const storage = remember ? localStorage : sessionStorage;
-            storage.setItem(ADMIN_SESSION_KEY, session);
-        }
-
-        function hasAdminSession() {
-            return !!(sessionStorage.getItem(ADMIN_SESSION_KEY) || localStorage.getItem(ADMIN_SESSION_KEY));
-        }
-
-        if (hasAdminSession()) {
-            window.location.href = '/admin/index.html';
-        }
+        // Legacy browser markers are never accepted as authentication.
+        sessionStorage.removeItem('etch_admin_session');
+        localStorage.removeItem('etch_admin_session');
+        EtchSupabase.requireAdmin().then(result => {
+            if (result.authenticated) window.location.replace('/admin/index.html');
+        });
 
         function showError(message) {
             successMessage.classList.add('hidden');
@@ -371,12 +341,8 @@
             clearStatus();
 
             const password = passwordInput.value;
-            const remember = document.getElementById('rememberMe').checked;
 
             try {
-                if (email.toLowerCase() !== ADMIN_EMAIL) {
-                    throw new Error('Only the ETCH admin account can access this panel.');
-                }
 
                 const result = await EtchSupabase.signIn(email, password);
 
@@ -384,12 +350,11 @@
                     throw result.error || new Error('Invalid email or password');
                 }
 
-                if (result.data.user.email?.toLowerCase() !== ADMIN_EMAIL) {
-                    clearAdminSession();
+                const admin = await EtchSupabase.requireAdmin();
+                if (!admin.authenticated) {
+                    await EtchSupabase.signOut();
                     throw new Error('This account is not authorized for the admin panel.');
                 }
-
-                saveAdminSession(remember);
 
                 showSuccess('Signed in successfully. Redirecting…');
                 loadingState.classList.add('hidden');

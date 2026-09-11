@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <script src="/script/core.js"></script>
+    <script src="/script/components.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homepage Partners | ETCH Admin</title>
+    <meta name="description" content="Manage homepage partner, sponsor, and press mentions on ETCH." />
+    <link rel="icon" href="/assets/logo.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="/style/style.css" />
+    <link rel="stylesheet" href="style/admin.css?v=20260806-components1" />
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        olive: { DEFAULT: '#99A96A', dark: '#73824C', light: '#E8ECD9' },
+                        ink: '#151515', mist: '#FAFAF7', stone: '#F2F3ED',
+                        slate: '#6C6C6C', muted: '#9A9A9A', border: '#E5E7E2',
+                        success: '#3D6B4F', warning: '#C9A54C', error: '#B25555', info: '#5B8DEF',
+                        cream: '#F5F3EE', lavender: '#A78BFA', mint: '#4ECDC4',
+                    },
+                    fontFamily: {
+                        display: ['"Instrument Serif"', 'serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body>
+    <div class="admin-dashboard bg-gradient-to-br from-mist via-white to-cream dark:from-ink dark:via-ink dark:to-ink/95">
+        <div data-component="include" data-src="component/sidebar.html"></div>
+
+        <main class="admin-dashboard-main relative overflow-hidden">
+            <div data-component="include" data-src="component/topbar.html"></div>
+
+            <section class="relative px-6 md:px-8 pt-6 pb-2">
+                <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+                    <div>
+                        <div class="flex items-center gap-3 mb-1">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-gradient-to-r from-olive/20 to-lavender/20 text-olive rounded-full text-xs font-medium tracking-wide">
+                                <span class="w-1.5 h-1.5 rounded-full bg-olive"></span>
+                                Homepage Trust
+                            </span>
+                            <span id="partnersCount" class="text-xs text-slate/60 dark:text-gray-500">0 entries</span>
+                        </div>
+                        <h2 class="font-display text-3xl md:text-4xl font-bold text-ink dark:text-white leading-tight">
+                            Featured partners
+                        </h2>
+                        <p class="text-slate text-sm mt-1 max-w-2xl leading-relaxed">
+                            Publish only real sponsors, partners, or press mentions that ETCH can accurately name on the homepage.
+                        </p>
+                    </div>
+                    <a href="/index.html#partnersTitle" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-3 border border-border dark:border-white/10 text-ink dark:text-white rounded-2xl text-sm font-medium hover:border-olive/40 transition-colors">
+                        <i data-lucide="external-link" class="w-4 h-4"></i>
+                        View homepage
+                    </a>
+                </div>
+            </section>
+
+            <section class="grid xl:grid-cols-[420px_1fr] gap-6 px-6 md:px-8 py-6">
+                <form id="partnerForm" class="bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 p-6 space-y-5">
+                    <input type="hidden" id="partnerId" />
+                    <div>
+                        <h3 id="formTitle" class="font-display text-2xl font-bold text-ink dark:text-white">Add entry</h3>
+                        <p class="text-sm text-slate dark:text-gray-400 mt-1">Drafts stay hidden until you publish them.</p>
+                    </div>
+
+                    <div>
+                        <label for="partnerName" class="block text-sm font-medium text-ink dark:text-white mb-1.5">Name <span class="text-error">*</span></label>
+                        <input id="partnerName" type="text" required maxlength="120" placeholder="Partner or publication name" class="w-full px-4 py-3 bg-white/70 dark:bg-ink/70 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive" />
+                    </div>
+
+                    <div>
+                        <label for="partnerLabel" class="block text-sm font-medium text-ink dark:text-white mb-1.5">Label</label>
+                        <input id="partnerLabel" type="text" maxlength="120" placeholder="Sponsor, Press mention, Partner" class="w-full px-4 py-3 bg-white/70 dark:bg-ink/70 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive" />
+                    </div>
+
+                    <div>
+                        <label for="partnerUrl" class="block text-sm font-medium text-ink dark:text-white mb-1.5">URL</label>
+                        <input id="partnerUrl" type="url" placeholder="https://example.com" class="w-full px-4 py-3 bg-white/70 dark:bg-ink/70 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive" />
+                    </div>
+
+                    <div>
+                        <label for="partnerLogoUrl" class="block text-sm font-medium text-ink dark:text-white mb-1.5">Logo URL</label>
+                        <input id="partnerLogoUrl" type="url" placeholder="https://example.com/logo.png" class="w-full px-4 py-3 bg-white/70 dark:bg-ink/70 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive" />
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label for="partnerStatus" class="block text-sm font-medium text-ink dark:text-white mb-1.5">Status</label>
+                            <select id="partnerStatus" class="w-full px-4 py-3 bg-white/70 dark:bg-ink/70 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive">
+                                <option value="draft">Draft</option>
+                                <option value="published">Published</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="partnerOrder" class="block text-sm font-medium text-ink dark:text-white mb-1.5">Order</label>
+                            <input id="partnerOrder" type="number" value="0" class="w-full px-4 py-3 bg-white/70 dark:bg-ink/70 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive" />
+                        </div>
+                    </div>
+
+                    <p id="partnerMessage" class="hidden text-sm rounded-2xl px-4 py-3"></p>
+
+                    <div class="flex flex-wrap gap-3">
+                        <button type="submit" class="inline-flex items-center gap-2 px-5 py-3 bg-olive text-white rounded-2xl text-sm font-semibold hover:bg-olive-dark transition-colors">
+                            <i data-lucide="save" class="w-4 h-4"></i>
+                            Save entry
+                        </button>
+                        <button id="resetPartnerForm" type="button" class="inline-flex items-center gap-2 px-5 py-3 border border-border dark:border-white/10 text-ink dark:text-white rounded-2xl text-sm font-semibold hover:border-olive/40 transition-colors">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                            New entry
+                        </button>
+                    </div>
+                </form>
+
+                <div class="bg-white/80 dark:bg-ink/80 backdrop-blur-sm rounded-3xl border border-border/60 dark:border-white/10 overflow-hidden">
+                    <div class="px-6 py-5 border-b border-border/60 dark:border-white/10 flex items-center justify-between">
+                        <div>
+                            <h3 class="font-display text-2xl font-bold text-ink dark:text-white">Published and draft entries</h3>
+                            <p class="text-sm text-slate dark:text-gray-400 mt-1">Published entries appear on the homepage.</p>
+                        </div>
+                    </div>
+                    <div id="partnersList" class="divide-y divide-border/60 dark:divide-white/10">
+                        <div class="p-8 text-center text-slate dark:text-gray-400">Loading entries...</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="/script/supabase.js"></script>
+    <script src="script/admin.js"></script>
+    <script>
+        let partners = [];
+
+        const fields = {
+            id: document.getElementById('partnerId'),
+            name: document.getElementById('partnerName'),
+            label: document.getElementById('partnerLabel'),
+            url: document.getElementById('partnerUrl'),
+            logoUrl: document.getElementById('partnerLogoUrl'),
+            status: document.getElementById('partnerStatus'),
+            order: document.getElementById('partnerOrder'),
+            message: document.getElementById('partnerMessage'),
+            formTitle: document.getElementById('formTitle'),
+            list: document.getElementById('partnersList'),
+            count: document.getElementById('partnersCount'),
+        };
+
+        function showMessage(text, type = 'success') {
+            fields.message.textContent = text;
+            fields.message.className = 'text-sm rounded-2xl px-4 py-3 ' + (
+                type === 'error'
+                    ? 'bg-error/10 text-error'
+                    : 'bg-success/10 text-success'
+            );
+        }
+
+        function resetForm() {
+            document.getElementById('partnerForm').reset();
+            fields.id.value = '';
+            fields.order.value = '0';
+            fields.formTitle.textContent = 'Add entry';
+            fields.message.className = 'hidden text-sm rounded-2xl px-4 py-3';
+        }
+
+        function partnerPayload() {
+            const url = fields.url.value.trim();
+            const logoUrl = fields.logoUrl.value.trim();
+            return {
+                name: fields.name.value.trim(),
+                label: fields.label.value.trim() || null,
+                url: url ? EtchUI.safeUrl(url) : null,
+                logo_url: logoUrl ? EtchUI.safeUrl(logoUrl) : null,
+                status: fields.status.value,
+                display_order: Number(fields.order.value) || 0,
+            };
+        }
+
+        function renderPartners() {
+            fields.count.textContent = `${partners.length} entr${partners.length === 1 ? 'y' : 'ies'}`;
+            if (!partners.length) {
+                fields.list.innerHTML = '<div class="p-8 text-center text-slate dark:text-gray-400">No entries yet. Add a verified partner, sponsor, or press mention when one is ready.</div>';
+                return;
+            }
+
+            fields.list.innerHTML = partners.map(partner => {
+                const name = EtchUI.escapeHtml(partner.name);
+                const label = EtchUI.escapeHtml(partner.label || 'No label');
+                const statusClass = partner.status === 'published' ? 'bg-success/10 text-success' : 'bg-slate/10 text-slate';
+                return `
+                    <div class="p-5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                        <div>
+                            <div class="flex flex-wrap items-center gap-3">
+                                <h4 class="font-semibold text-ink dark:text-white">${name}</h4>
+                                <span class="px-2.5 py-1 rounded-full text-xs font-medium ${statusClass}">${EtchUI.escapeHtml(partner.status)}</span>
+                                <span class="text-xs text-slate dark:text-gray-400">Order ${Number(partner.display_order) || 0}</span>
+                            </div>
+                            <p class="text-sm text-slate dark:text-gray-400 mt-1">${label}</p>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <button type="button" data-action="edit" data-id="${partner.id}" class="px-3 py-2 text-sm rounded-xl border border-border dark:border-white/10 text-ink dark:text-white hover:border-olive/40">Edit</button>
+                            <button type="button" data-action="toggle" data-id="${partner.id}" class="px-3 py-2 text-sm rounded-xl border border-border dark:border-white/10 text-ink dark:text-white hover:border-olive/40">${partner.status === 'published' ? 'Unpublish' : 'Publish'}</button>
+                            <button type="button" data-action="delete" data-id="${partner.id}" class="px-3 py-2 text-sm rounded-xl bg-error/10 text-error hover:bg-error/20">Delete</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            if (window.lucide) lucide.createIcons();
+        }
+
+        async function loadPartners() {
+            const { data, error } = await EtchSupabase.getHomepagePartners();
+            if (error) {
+                fields.list.innerHTML = '<div class="p-8 text-center text-error">Could not load homepage entries.</div>';
+                return;
+            }
+            partners = data;
+            renderPartners();
+        }
+
+        document.getElementById('partnerForm').addEventListener('submit', async event => {
+            event.preventDefault();
+            const payload = partnerPayload();
+            if (!payload.name) {
+                showMessage('Name is required.', 'error');
+                return;
+            }
+
+            const result = fields.id.value
+                ? await EtchSupabase.updateHomepagePartner(fields.id.value, payload)
+                : await EtchSupabase.createHomepagePartner(payload);
+
+            if (result.error) {
+                showMessage(result.error.message || 'Could not save entry.', 'error');
+                return;
+            }
+
+            showMessage('Entry saved.');
+            resetForm();
+            await loadPartners();
+        });
+
+        fields.list.addEventListener('click', async event => {
+            const button = event.target.closest('button[data-action]');
+            if (!button) return;
+            const partner = partners.find(item => item.id === button.dataset.id);
+            if (!partner) return;
+
+            if (button.dataset.action === 'edit') {
+                fields.id.value = partner.id;
+                fields.name.value = partner.name || '';
+                fields.label.value = partner.label || '';
+                fields.url.value = partner.url || '';
+                fields.logoUrl.value = partner.logo_url || '';
+                fields.status.value = partner.status || 'draft';
+                fields.order.value = partner.display_order || 0;
+                fields.formTitle.textContent = 'Edit entry';
+                fields.message.className = 'hidden text-sm rounded-2xl px-4 py-3';
+                return;
+            }
+
+            if (button.dataset.action === 'toggle') {
+                const status = partner.status === 'published' ? 'draft' : 'published';
+                const { error } = await EtchSupabase.updateHomepagePartner(partner.id, { status });
+                if (error) showMessage(error.message || 'Could not update status.', 'error');
+                await loadPartners();
+                return;
+            }
+
+            if (button.dataset.action === 'delete') {
+                if (!confirm(`Delete ${partner.name}?`)) return;
+                const { error } = await EtchSupabase.deleteHomepagePartner(partner.id);
+                if (error) showMessage(error.message || 'Could not delete entry.', 'error');
+                resetForm();
+                await loadPartners();
+            }
+        });
+
+        document.getElementById('resetPartnerForm').addEventListener('click', resetForm);
+        loadPartners();
+    </script>
+</body>
+
+</html>

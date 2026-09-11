@@ -2,6 +2,8 @@
 <html lang="en" data-theme="light">
 
 <head>
+    <script src="/script/core.js"></script>
+    <script src="/script/components.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Settings | ETCH Creator Studio</title>
@@ -158,11 +160,11 @@
                         <div class="flex items-center gap-4">
                             <div
                                 class="w-16 h-16 rounded-3xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-2xl font-display text-olive border-2 border-white shadow-lg">
-                                DK
+                                ET
                             </div>
                             <div>
-                                <h3 class="font-semibold text-ink dark:text-white">Daniel K.</h3>
-                                <p class="text-sm text-slate/60 dark:text-gray-500">Screenwriter</p>
+                                <h3 class="font-semibold text-ink dark:text-white">Creator</h3>
+                                <p class="text-sm text-slate/60 dark:text-gray-500">Profile details pending</p>
                                 <span class="inline-flex items-center gap-1 text-xs text-emerald-500">
                                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
                                     Verified Creator
@@ -298,7 +300,7 @@
                             <div class="flex items-center gap-4">
                                 <div data-profile-avatar
                                     class="w-20 h-20 rounded-3xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-3xl font-display text-olive border-2 border-white shadow-lg flex-shrink-0 overflow-hidden">
-                                    DK
+                                    ET
                                 </div>
                                 <div>
                                     <p class="text-sm font-medium text-ink dark:text-white">Profile Photo</p>
@@ -322,25 +324,25 @@
                                 <div>
                                     <label class="block text-sm font-medium text-ink dark:text-white mb-1.5">Display
                                         Name</label>
-                                    <input type="text" value="Daniel K."
+                                    <input type="text" value=""
                                         class="w-full px-4 py-2.5 bg-white/60 dark:bg-ink/60 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200" />
                                 </div>
                                 <div>
                                     <label
                                         class="block text-sm font-medium text-ink dark:text-white mb-1.5">Username</label>
-                                    <input type="text" value="@daniel_k"
+                                    <input type="text" value=""
                                         class="w-full px-4 py-2.5 bg-white/60 dark:bg-ink/60 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200" />
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-ink dark:text-white mb-1.5">Email
                                         Address</label>
-                                    <input type="email" value="daniel@example.com"
+                                    <input type="email" value=""
                                         class="w-full px-4 py-2.5 bg-white/60 dark:bg-ink/60 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200" />
                                 </div>
                                 <div>
                                     <label
                                         class="block text-sm font-medium text-ink dark:text-white mb-1.5">Location</label>
-                                    <input type="text" value="Los Angeles, CA"
+                                    <input type="text" value=""
                                         class="w-full px-4 py-2.5 bg-white/60 dark:bg-ink/60 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200" />
                                 </div>
                             </div>
@@ -348,7 +350,7 @@
                             <div>
                                 <label class="block text-sm font-medium text-ink dark:text-white mb-1.5">Bio</label>
                                 <textarea rows="3"
-                                    class="w-full px-4 py-2.5 bg-white/60 dark:bg-ink/60 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white placeholder:text-slate/40 focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200 resize-y">Screenwriter specializing in drama and prestige content. Passionate about storytelling that challenges and inspires.</textarea>
+                                    class="w-full px-4 py-2.5 bg-white/60 dark:bg-ink/60 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white placeholder:text-slate/40 focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200 resize-y"></textarea>
                             </div>
 
                             <div
@@ -518,7 +520,7 @@
     <!-- ============================================ -->
     <!-- SCRIPTS -->
     <!-- ============================================ -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+
 
     <!-- Supabase Client Library -->
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
@@ -558,22 +560,7 @@
 
         if (settingsThemeToggle) {
             settingsThemeToggle.addEventListener('change', function () {
-                if (this.checked) {
-                    html.classList.add('dark');
-                    html.setAttribute('data-theme', 'dark');
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    html.classList.remove('dark');
-                    html.setAttribute('data-theme', 'light');
-                    localStorage.setItem('theme', 'light');
-                }
-
-                // Also update the main toggle if it exists
-                const mainToggle = document.getElementById('themeToggle');
-                if (mainToggle) {
-                    // Trigger a click on the main toggle to keep them in sync
-                    mainToggle.click();
-                }
+                EtchUI.setTheme(this.checked ? 'dark' : 'light');
             });
         }
 
@@ -584,19 +571,6 @@
             }
         });
 
-        // Override the main theme toggle to dispatch event
-        const originalToggle = document.getElementById('themeToggle');
-        if (originalToggle) {
-            const originalClick = originalToggle.click;
-            originalToggle.addEventListener('click', function () {
-                setTimeout(() => {
-                    const isDark = html.classList.contains('dark');
-                    if (settingsThemeToggle) {
-                        settingsThemeToggle.checked = isDark;
-                    }
-                }, 50);
-            });
-        }
     </script>
 </body>
 

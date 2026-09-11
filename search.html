@@ -2,6 +2,8 @@
 <html lang="en" data-theme="light">
 
 <head>
+    <script src="/script/core.js"></script>
+    <script src="/script/components.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Search Results | ETCH — Premium Creative Marketplace</title>
@@ -154,50 +156,14 @@
                         <!-- Category Filter -->
                         <div>
                             <h3 class="text-sm font-medium text-ink dark:text-white mb-3">Category</h3>
-                            <div class="space-y-2">
+                            <div id="marketplaceCategoryFilters" class="space-y-2">
                                 <label
                                     class="flex items-center gap-3 text-sm text-slate dark:text-gray-400 hover:text-ink dark:hover:text-white cursor-pointer transition-colors duration-200">
-                                    <input type="checkbox"
-                                        class="w-4 h-4 rounded border-border dark:border-white/10 text-olive focus:ring-olive focus:ring-2 focus:ring-offset-0"
-                                        checked />
-                                    All Categories
-                                    <span class="ml-auto text-xs text-slate/40">42</span>
-                                </label>
-                                <label
-                                    class="flex items-center gap-3 text-sm text-slate dark:text-gray-400 hover:text-ink dark:hover:text-white cursor-pointer transition-colors duration-200">
-                                    <input type="checkbox"
+                                    <input type="checkbox" name="category" value="script"
                                         class="w-4 h-4 rounded border-border dark:border-white/10 text-olive focus:ring-olive focus:ring-2 focus:ring-offset-0"
                                         checked />
                                     Scripts
-                                    <span class="ml-auto text-xs text-slate/40">18</span>
-                                </label>
-                                <label
-                                    class="flex items-center gap-3 text-sm text-slate dark:text-gray-400 hover:text-ink dark:hover:text-white cursor-pointer transition-colors duration-200">
-                                    <input type="checkbox"
-                                        class="w-4 h-4 rounded border-border dark:border-white/10 text-olive focus:ring-olive focus:ring-2 focus:ring-offset-0" />
-                                    Storyboards
-                                    <span class="ml-auto text-xs text-slate/40">9</span>
-                                </label>
-                                <label
-                                    class="flex items-center gap-3 text-sm text-slate dark:text-gray-400 hover:text-ink dark:hover:text-white cursor-pointer transition-colors duration-200">
-                                    <input type="checkbox"
-                                        class="w-4 h-4 rounded border-border dark:border-white/10 text-olive focus:ring-olive focus:ring-2 focus:ring-offset-0" />
-                                    Music
-                                    <span class="ml-auto text-xs text-slate/40">7</span>
-                                </label>
-                                <label
-                                    class="flex items-center gap-3 text-sm text-slate dark:text-gray-400 hover:text-ink dark:hover:text-white cursor-pointer transition-colors duration-200">
-                                    <input type="checkbox"
-                                        class="w-4 h-4 rounded border-border dark:border-white/10 text-olive focus:ring-olive focus:ring-2 focus:ring-offset-0" />
-                                    Design
-                                    <span class="ml-auto text-xs text-slate/40">5</span>
-                                </label>
-                                <label
-                                    class="flex items-center gap-3 text-sm text-slate dark:text-gray-400 hover:text-ink dark:hover:text-white cursor-pointer transition-colors duration-200">
-                                    <input type="checkbox"
-                                        class="w-4 h-4 rounded border-border dark:border-white/10 text-olive focus:ring-olive focus:ring-2 focus:ring-offset-0" />
-                                    Motion
-                                    <span class="ml-auto text-xs text-slate/40">3</span>
+
                                 </label>
                             </div>
                         </div>
@@ -206,47 +172,11 @@
                         <div>
                             <h3 class="text-sm font-medium text-ink dark:text-white mb-3">Price Range</h3>
                             <div class="flex items-center gap-3">
-                                <input type="number" placeholder="Min" value="500"
+                                <input type="number" placeholder="Min"
                                     class="w-full px-3 py-2 bg-stone dark:bg-white/5 border border-border/40 dark:border-white/10 rounded-xl text-sm text-ink dark:text-white placeholder:text-slate/40 focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200" />
                                 <span class="text-slate dark:text-gray-400">—</span>
-                                <input type="number" placeholder="Max" value="20000"
+                                <input type="number" placeholder="Max"
                                     class="w-full px-3 py-2 bg-stone dark:bg-white/5 border border-border/40 dark:border-white/10 rounded-xl text-sm text-ink dark:text-white placeholder:text-slate/40 focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200" />
-                            </div>
-                        </div>
-
-                        <!-- License Type -->
-                        <div>
-                            <h3 class="text-sm font-medium text-ink dark:text-white mb-3">License Type</h3>
-                            <div class="space-y-2">
-                                <label
-                                    class="flex items-center gap-3 text-sm text-slate dark:text-gray-400 hover:text-ink dark:hover:text-white cursor-pointer transition-colors duration-200">
-                                    <input type="radio" name="license"
-                                        class="w-4 h-4 border-border dark:border-white/10 text-olive focus:ring-olive focus:ring-2 focus:ring-offset-0"
-                                        checked />
-                                    All Licenses
-                                </label>
-                                <label
-                                    class="flex items-center gap-3 text-sm text-slate dark:text-gray-400 hover:text-ink dark:hover:text-white cursor-pointer transition-colors duration-200">
-                                    <input type="radio" name="license"
-                                        class="w-4 h-4 border-border dark:border-white/10 text-olive focus:ring-olive focus:ring-2 focus:ring-offset-0"
-                                        checked />
-                                    Exclusive Option
-                                    <span class="ml-auto text-xs text-slate/40">12</span>
-                                </label>
-                                <label
-                                    class="flex items-center gap-3 text-sm text-slate dark:text-gray-400 hover:text-ink dark:hover:text-white cursor-pointer transition-colors duration-200">
-                                    <input type="radio" name="license"
-                                        class="w-4 h-4 border-border dark:border-white/10 text-olive focus:ring-olive focus:ring-2 focus:ring-offset-0" />
-                                    Sync License
-                                    <span class="ml-auto text-xs text-slate/40">8</span>
-                                </label>
-                                <label
-                                    class="flex items-center gap-3 text-sm text-slate dark:text-gray-400 hover:text-ink dark:hover:text-white cursor-pointer transition-colors duration-200">
-                                    <input type="radio" name="license"
-                                        class="w-4 h-4 border-border dark:border-white/10 text-olive focus:ring-olive focus:ring-2 focus:ring-offset-0" />
-                                    Custom Deal
-                                    <span class="ml-auto text-xs text-slate/40">22</span>
-                                </label>
                             </div>
                         </div>
 
@@ -291,13 +221,13 @@
                                 class="text-ink dark:text-white">12</strong> of <strong
                                 class="text-ink dark:text-white">42</strong> results</span>
                         <div class="flex items-center gap-3">
-                            <select
+                            <select data-market-sort
                                 class="px-3 py-2 bg-transparent border border-border/40 dark:border-white/10 rounded-xl text-sm text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-olive/20">
-                                <option>Sort by: Relevance</option>
-                                <option>Sort by: Latest</option>
-                                <option>Sort by: Price: Low to High</option>
-                                <option>Sort by: Price: High to Low</option>
-                                <option>Sort by: Most Viewed</option>
+
+                                <option value="latest">Sort by: Latest</option>
+                                <option value="price_asc">Sort by: Price: Low to High</option>
+                                <option value="price_desc">Sort by: Price: High to Low</option>
+                                <option value="views">Sort by: Most Viewed</option>
                             </select>
                         </div>
                     </div>
@@ -368,26 +298,7 @@
                         class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-10 pt-6 border-t border-border/40 dark:border-white/10">
                         <span class="text-sm text-slate dark:text-gray-400">Showing <span id="pageShowing">0</span> of
                             <span id="pageTotal">0</span> results</span>
-                        <div class="flex items-center gap-2">
-                            <button
-                                class="px-4 py-2 rounded-xl border border-border/40 dark:border-white/10 text-slate dark:text-gray-400 hover:bg-stone dark:hover:bg-white/5 hover:text-ink dark:hover:text-white transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
-                                disabled>
-                                Previous
-                            </button>
-                            <button
-                                class="px-4 py-2 rounded-xl bg-olive text-white font-medium hover:bg-olive-dark transition-all duration-200">1</button>
-                            <button
-                                class="px-4 py-2 rounded-xl border border-border/40 dark:border-white/10 text-slate dark:text-gray-400 hover:bg-stone dark:hover:bg-white/5 hover:text-ink dark:hover:text-white transition-all duration-200">2</button>
-                            <button
-                                class="px-4 py-2 rounded-xl border border-border/40 dark:border-white/10 text-slate dark:text-gray-400 hover:bg-stone dark:hover:bg-white/5 hover:text-ink dark:hover:text-white transition-all duration-200">3</button>
-                            <span class="text-slate dark:text-gray-400">...</span>
-                            <button
-                                class="px-4 py-2 rounded-xl border border-border/40 dark:border-white/10 text-slate dark:text-gray-400 hover:bg-stone dark:hover:bg-white/5 hover:text-ink dark:hover:text-white transition-all duration-200">7</button>
-                            <button
-                                class="px-4 py-2 rounded-xl border border-border/40 dark:border-white/10 text-slate dark:text-gray-400 hover:bg-stone dark:hover:bg-white/5 hover:text-ink dark:hover:text-white transition-all duration-200">
-                                Next
-                            </button>
-                        </div>
+                        <nav id="pagination" aria-label="Pagination" class="flex items-center gap-2"></nav>
                     </div>
 
                     <!-- No Results State (hidden by default) -->
@@ -427,12 +338,7 @@
             searchQueryDisplay.textContent = '"' + query + '"';
         }
     </script>
-    <script>
-        window.__ETCH_SUPABASE__ = window.__ETCH_SUPABASE__ || {
-            url: 'https://cyoddvehzrmhubmislbb.supabase.co',
-            anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5b2RkdmVoenJtaHVibWlzbGJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUxNjI3MTQsImV4cCI6MjEwMDczODcxNH0.YaUyKP9f3tpKDny78_k_ka70zkFZe58GAFOo5oFFaFI',
-        };
-    </script>
+
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script src="script/supabase.js"></script>
     <script>
@@ -446,8 +352,10 @@
                 const urlParams = new URLSearchParams(window.location.search);
                 const query = urlParams.get('q') || '';
 
-                const { data: results, error } = await window.EtchSupabase.searchListings(query, {
-                    limit: 24
+                const { data: results, count: total, error } = await window.EtchSupabase.searchListings(query, {
+                    ...EtchUI.marketFilters(),
+                    limit: 24,
+                    offset: (Math.max(1, parseInt(urlParams.get('page'), 10) || 1) - 1) * 24
                 });
 
                 if (error) {
@@ -474,10 +382,11 @@
                 const pageTotal = document.getElementById('pageTotal');
 
                 const count = results?.length || 0;
-                if (resultCount) resultCount.textContent = count.toLocaleString();
-                if (resultSummary) resultSummary.textContent = `Found ${count.toLocaleString()} creative assets matching your search`;
+                EtchUI.pagination(total);
+                if (resultCount) resultCount.textContent = total.toLocaleString();
+                if (resultSummary) resultSummary.textContent = `Found ${total.toLocaleString()} creative assets matching your search`;
                 if (pageShowing) pageShowing.textContent = count.toLocaleString();
-                if (pageTotal) pageTotal.textContent = count.toLocaleString();
+                if (pageTotal) pageTotal.textContent = total.toLocaleString();
 
                 if (!results || results.length === 0) {
                     grid.innerHTML = '';
@@ -506,12 +415,12 @@
                     card.style.animationDelay = `${delay}ms`;
 
                     card.innerHTML = `
-                        <a href="product-detail.html?id=${slug}" class="block">
+                        <a href="${EtchUI.listingUrl(listing)}" class="block">
                             <div class="relative overflow-hidden">
-                                <img src="${imageUrl}" alt="${listing.title || 'Creative work'}"
+                                <img src="${EtchUI.escapeHtml(EtchUI.safeUrl(imageUrl))}" alt="${EtchUI.escapeHtml(listing.title || 'Creative work')}"
                                     class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
                                 <div class="absolute top-3 left-3 flex gap-2">
-                                    <span class="px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">${category}</span>
+                                    <span class="px-3 py-1 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-xs font-medium text-ink dark:text-white rounded-full">${EtchUI.escapeHtml(category)}</span>
                                 </div>
                                 <div class="absolute inset-0 bg-gradient-to-t from-ink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                     <span class="px-4 py-2 bg-white/90 dark:bg-ink/90 backdrop-blur-sm text-sm font-medium text-ink dark:text-white rounded-xl">Quick View</span>
@@ -519,14 +428,14 @@
                             </div>
                             <div class="p-4">
                                 <div class="flex items-center justify-between mb-1">
-                                    <h3 class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200 line-clamp-1">${listing.title || 'Untitled'}</h3>
-                                    <span class="text-lg font-bold text-ink dark:text-white">${price}</span>
+                                    <h3 class="font-semibold text-ink dark:text-white group-hover:text-olive transition-colors duration-200 line-clamp-1">${EtchUI.escapeHtml(listing.title || 'Untitled')}</h3>
+                                    <span class="text-lg font-bold text-ink dark:text-white">${EtchUI.escapeHtml(price)}</span>
                                 </div>
-                                <p class="text-sm text-slate dark:text-gray-400 line-clamp-2">${listing.description || ''}</p>
+                                <p class="text-sm text-slate dark:text-gray-400 line-clamp-2">${EtchUI.escapeHtml(listing.description || '')}</p>
                                 <div class="flex items-center justify-between mt-3 pt-3 border-t border-border dark:border-white/10">
                                     <div class="flex items-center gap-2">
-                                        <div class="w-6 h-6 rounded-full bg-olive/20 flex items-center justify-center text-[10px] font-bold text-olive">${creatorInitials}</div>
-                                        <span class="text-xs text-slate dark:text-gray-400">@${creatorName}</span>
+                                        <div class="w-6 h-6 rounded-full bg-olive/20 flex items-center justify-center text-[10px] font-bold text-olive">${EtchUI.escapeHtml(creatorInitials)}</div>
+                                        <span class="text-xs text-slate dark:text-gray-400">@${EtchUI.escapeHtml(creatorName)}</span>
                                     </div>
                                     <div class="flex items-center gap-3 text-xs text-slate dark:text-gray-400">
                                         <span class="flex items-center gap-1">
@@ -565,6 +474,7 @@
             loadSearchResults();
         }
     </script>
+    <script src="script/marketplace-filters.js"></script>
     <script src="script/script.js"></script>
 </body>
 
