@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <script src="/script/core.js"></script>
+    <script src="/script/components.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Founding Voices | ETCH</title>
+    <meta name="description" content="Apply to ETCH Founding Voices." />
+    <link rel="icon" href="/assets/logo.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="/style/style.css" />
+    <link rel="stylesheet" href="/admin/style/admin.css?v=20260806-components1" />
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        olive: { DEFAULT: '#99A96A', dark: '#73824C', light: '#E8ECD9' },
+                        ink: '#151515', mist: '#FAFAF7', stone: '#F2F3ED',
+                        slate: '#6C6C6C', muted: '#9A9A9A', border: '#E5E7E2',
+                        success: '#3D6B4F', warning: '#C9A54C', error: '#B25555', info: '#5B8DEF',
+                        cream: '#F5F3EE', lavender: '#A78BFA', mint: '#4ECDC4',
+                    },
+                    fontFamily: {
+                        display: ['"Instrument Serif"', 'serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+</head><body><div id="header"></div><main class="max-w-3xl mx-auto p-8"><h1 class="font-display text-4xl my-8">Apply to Founding Voices</h1><p>Tell us about your work. Sign in to submit one application and follow its progress.</p>
+<form id="applicationForm" class="space-y-4 my-8">
+<label class="block">Full name<input name="full_name" maxlength="200" required class="block border p-3 w-full" /></label>
+<label class="block">Portfolio or writing sample URL<input name="portfolio_url" type="url" required class="block border p-3 w-full" /></label>
+<label class="block">Tell us about your work and why you want to join<textarea name="statement" minlength="50" maxlength="10000" required class="block border p-3 w-full" rows="8"></textarea></label>
+<button class="border rounded-xl p-3">Submit application</button></form><p id="applicationStatus" role="status"></p></main><div id="footer"></div>
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script><script src="/script/supabase.js"></script><script src="/script/script.js"></script><script src="/script/founding-application.js"></script></body></html>

@@ -75,6 +75,17 @@
         const savedCanonical = EtchUI.safeUrl(article.canonical_url);
         canonical.href = savedCanonical && !new URL(savedCanonical).pathname.startsWith('/masterclass/article/')
             ? savedCanonical : new URL(EtchUI.articleUrl(article.slug), window.location.origin).href;
+        for (const [name,value,attribute] of [
+            ['keywords',article.seo_keywords || '', 'name'],
+            ['og:title',article.seo_title || article.title,'property'],
+            ['og:description',article.seo_description || article.excerpt || '', 'property'],
+            ['og:image',EtchUI.safeUrl(article.featured_image),'property'],
+            ['og:url',canonical.href,'property']
+        ]) {
+            let meta=document.querySelector(`meta[${attribute}="${name}"]`);
+            if(!meta){meta=document.createElement('meta');meta.setAttribute(attribute,name);document.head.append(meta);}
+            meta.content=value;
+        }
         if (excerptEl) {
             excerptEl.textContent = article.excerpt || 'A practical perspective from the ETCH Masterclass.';
         }
@@ -151,15 +162,21 @@
     }
 
     async function loadArticle() {
+        const token = new URLSearchParams(location.hash.slice(1)).get('token');
         const slug = getSlugFromUrl();
-        if (!slug) { renderEmptyState(); return; }
+        if (!slug && !token) { renderEmptyState(); return; }
         if (typeof EtchSupabase === 'undefined') {
             console.error('EtchSupabase not loaded');
             renderEmptyState();
             return;
         }
         try {
-            const { data, error } = await EtchSupabase.getArticleBySlug(slug);
+            let result;
+            if (token) {
+                const response = await EtchSupabase.getClient().functions.invoke('article-preview',{body:{action:'read',token}});
+                result = {data:response.data?.article,error:response.error || (response.data?.error ? new Error(response.data.error) : null)};
+            } else result = await EtchSupabase.getArticleBySlug(slug);
+            const { data, error } = result;
             if (error) {
                 if (error.code === 'PGRST116') renderEmptyState();
                 else renderEmptyState('Please refresh to try again.');
@@ -169,11 +186,12 @@
             if (data.status !== 'published') {
                 const preview = new URLSearchParams(window.location.search).get('preview') === '1';
                 const admin = preview ? await EtchSupabase.requireAdmin() : null;
-                if (!admin?.authenticated) { renderEmptyState(); return; }
+                if (!token && !admin?.authenticated) { renderEmptyState(); return; }
                 const robots = document.createElement('meta');
                 robots.name = 'robots'; robots.content = 'noindex, nofollow'; document.head.appendChild(robots);
             }
             renderArticle(data);
+            if (!token && data.status === 'published') window.EtchReport?.attach('article',data.id,document.getElementById('article'));
         } catch (error) {
             console.error('Error loading article:', error);
             renderEmptyState('Please refresh to try again.');

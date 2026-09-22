@@ -118,6 +118,7 @@
             window.location.replace('/admin/auth/signin.html');
             return false;
         }
+        window.ETCH_ADMIN = result;
         adminSession = { email: result.user.email, name: result.profile.full_name || 'Admin' };
         return true;
     }
@@ -222,8 +223,26 @@
     async function initAdminApp() {
         if (!await protectAdminRoutes()) return;
 
+        const permissions = { editor:['editorial'], reviewer:['moderation','applications','verification'], admin:['editorial','moderation','applications','verification','users','audit','analytics'], super_admin:['editorial','moderation','applications','verification','users','audit','analytics','roles'] };
+        window.ETCH_PERMISSIONS = permissions[window.ETCH_ADMIN.profile.role] || [];
+        const page = EtchUI.pageName();
+        if(page==='index' && ['editor','reviewer'].includes(window.ETCH_ADMIN.profile.role)){
+            location.replace(window.ETCH_ADMIN.profile.role==='editor'?'/admin/admin_masterclass.html':'/admin/applications.html');return;
+        }
+        const requiredPages = {media_library:'editorial',newsletter:'users',partners:'users',marketplace_categories:'users',create_article:'editorial',admin_masterclass:'editorial',author:'editorial',category:'editorial',create_author:'editorial',create_category:'editorial',users:'users',verification:'verification',listings:'moderation',reports:'moderation',applications:'applications',audit:'audit',analytics:'analytics'};
+        const required = requiredPages[page];
+        if (required && !window.ETCH_PERMISSIONS.includes(required)) {
+            document.body.replaceChildren(Object.assign(document.createElement('p'),{textContent:'Your staff role does not have access to this page.'}));
+            return;
+        }
         // Load UI components after auth cleared
         await loadAdminComponents();
+        for(const link of document.querySelectorAll('.admin-sidebar-nav a')) {
+            const required = requiredPages[EtchUI.pageName(new URL(link.href).pathname)];
+            if(required && !window.ETCH_PERMISSIONS.includes(required)) link.hidden=true;
+        }
+        document.querySelector('.admin-sidebar-profile strong')?.replaceChildren(window.ETCH_ADMIN.profile.full_name || 'Staff');
+        document.querySelector('.admin-sidebar-profile .info span')?.replaceChildren(window.ETCH_ADMIN.profile.role.replaceAll('_',' '));
         initializeSidebarInteractions();
         initializeComponentControls();
         setActiveNavLink();

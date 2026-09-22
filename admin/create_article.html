@@ -380,18 +380,7 @@
                             </label>
                             <div id="editorContainer"
                                 class="rounded-2xl overflow-hidden border border-border/60 dark:border-white/10">
-                                <textarea id="articleContent" name="content" required>
-                                    <h2>Start writing your article here...</h2>
-                                    <p>Use the editor to format your content, add images, and create a compelling article.</p>
-                                    <blockquote>Great content changes the way people think about creative work.</blockquote>
-                                    <p>You can add headings, lists, links, and more.</p>
-                                    <ul>
-                                        <li>Format with bold and italic</li>
-                                        <li>Add images and media</li>
-                                        <li>Create tables</li>
-                                        <li>Embed video</li>
-                                    </ul>
-                                </textarea>
+                                <textarea id="articleContent" name="content" aria-required="true"></textarea>
                             </div>
                             <p class="text-xs text-slate/40 mt-1.5">Write and format your article content here</p>
                         </div>
@@ -541,7 +530,7 @@
                                 <div>
                                     <label class="block text-sm font-medium text-ink dark:text-white mb-1.5">Publish
                                         Date</label>
-                                    <input type="datetime-local" id="publishDate" value="2026-08-10T09:00"
+                                    <input type="datetime-local" id="publishDate"
                                         class="w-full px-4 py-3 bg-white/60 dark:bg-ink/60 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200" />
                                     <p class="text-xs text-slate/40 mt-1.5">Set the date and time for publishing</p>
                                 </div>
@@ -613,14 +602,18 @@
         lucide.createIcons();
 
         // Set page title dynamically
-        document.addEventListener('admin:components-ready', function () { const title = document.querySelector('.greeting h1'); if (title) title.textContent = 'Create Article'; });
+        document.addEventListener('admin:components-ready', function () { const title = document.querySelector('.greeting h1'); if (title) title.textContent = new URLSearchParams(location.search).has('id') ? 'Edit Article' : 'Create Article'; });
 
         // ==========================================
         // CKEDITOR INITIALIZATION
         // ==========================================
         let editor;
+        const editingId = new URLSearchParams(location.search).get('id');
+        let existingArticle = null;
+        let removedFeaturedImage = false;
+        let formReady = !editingId;
 
-        ClassicEditor
+        const editorReady = typeof ClassicEditor === 'undefined' ? Promise.resolve() : ClassicEditor
             .create(document.querySelector('#articleContent'), {
                 toolbar: {
                     items: [
@@ -790,7 +783,7 @@
 
         async function uploadFeaturedImageIfNeeded() {
             if (!featuredFileInput || !featuredFileInput.files || !featuredFileInput.files[0]) {
-                return null;
+                return removedFeaturedImage ? null : existingArticle?.featured_image || null;
             }
 
             const file = featuredFileInput.files[0];
@@ -839,6 +832,7 @@
 
         // Remove image preview
         document.querySelector('#imagePreview button')?.addEventListener('click', function () {
+            removedFeaturedImage = true;
             imagePreview.classList.add('hidden');
             previewImg.src = '#';
             if (featuredFileInput) featuredFileInput.value = '';
@@ -856,7 +850,8 @@
             const statusMap = {
                 'draft': { text: 'Draft', color: 'amber-500', bg: 'amber-500/10' },
                 'scheduled': { text: 'Scheduled', color: 'blue-500', bg: 'blue-500/10' },
-                'published': { text: 'Published', color: 'emerald-500', bg: 'emerald-500/10' }
+                'published': { text: 'Published', color: 'emerald-500', bg: 'emerald-500/10' },
+                'archived': { text: 'Archived', color: 'slate-500', bg: 'slate-500/10' }
             };
             const info = statusMap[status] || statusMap['draft'];
             statusBadge.innerHTML = `
@@ -877,6 +872,7 @@
             try {
                 // Load categories
                 const catResult = await EtchSupabase.getCategories({ status: 'active' });
+                if (catResult.error) throw catResult.error;
                 if (catResult.data?.length) {
                     categorySelect.innerHTML = '<option value="">Select Category</option>' +
                         catResult.data.map(c => `<option value="${c.id}">${EtchUI.escapeHtml(c.name)}</option>`).join('');
@@ -887,6 +883,7 @@
 
                 // Load authors
                 const authResult = await EtchSupabase.getAuthors({ status: 'active' });
+                if (authResult.error) throw authResult.error;
                 if (authResult.data?.length) {
                     authorSelect.innerHTML = '<option value="">Select Author</option>' +
                         authResult.data.map(a => `<option value="${a.id}">${EtchUI.escapeHtml(a.name)}</option>`).join('');
@@ -898,6 +895,7 @@
                 console.error('Error loading form options:', error);
                 categorySelect.innerHTML = '<option value="">Error loading categories</option>';
                 authorSelect.innerHTML = '<option value="">Error loading authors</option>';
+                throw error;
             }
         }
 
@@ -910,7 +908,7 @@
 
         form.addEventListener('submit', async function (e) {
             e.preventDefault();
-            if (saveBtn.disabled) return;
+            if (saveBtn.disabled || !formReady) return;
 
             // Validate that category and author are selected
             const categoryId = document.getElementById('articleCategory').value;
@@ -934,6 +932,7 @@
                 content = document.querySelector('#articleContent').value;
             }
 
+            if (!content.trim()) { alert('Enter article content before saving.'); return; }
             const scheduled = document.getElementById('articleStatus').value === 'scheduled';
             const publishDate = document.getElementById('publishDate').value;
             if (scheduled && (!publishDate || new Date(publishDate).getTime() <= Date.now())) {
@@ -974,8 +973,8 @@
                 canonical_url: document.getElementById('canonicalUrl').value,
                 status: document.getElementById('articleStatus').value,
                 published_at: document.getElementById('articleStatus').value === 'published'
-                    ? new Date().toISOString()
-                    : (document.getElementById('publishDate').value
+                    ? (existingArticle?.status === 'published' ? existingArticle.published_at : new Date().toISOString())
+                    : (scheduled && document.getElementById('publishDate').value
                         ? new Date(document.getElementById('publishDate').value).toISOString()
                         : null)
             };
@@ -990,7 +989,9 @@
             saveBtn.disabled = true;
 
             try {
-                const { data, error } = await EtchSupabase.createArticle(formData);
+                const { data, error } = editingId
+                    ? await EtchSupabase.updateArticle(editingId, formData, existingArticle?.updated_at)
+                    : await EtchSupabase.createArticle(formData);
 
                 if (error) {
                     throw error;
@@ -1014,12 +1015,11 @@
                     successMessage.classList.add('hidden');
                 }, 5000);
 
-                // Reset form
-                form.reset();
+                // Stay on the saved record so another save cannot create a duplicate.
+                if (!editingId) { location.replace('create_article.html?id=' + encodeURIComponent(data.id)); return; }
+                existingArticle = data;
+                removedFeaturedImage = false;
                 if (featuredFileInput) featuredFileInput.value = '';
-                if (imagePreview) imagePreview.classList.add('hidden');
-                if (previewImg) previewImg.src = '#';
-                if (editor) editor.setData('');
             } catch (error) {
                 console.error('Error saving article:', error);
                 saveBtn.innerHTML = `
@@ -1034,7 +1034,73 @@
         });
 
         // Load dropdown options on page load
-        loadFormOptions();
+        async function initializeArticleForm() {
+            saveBtn.disabled = true;
+            try {
+                await Promise.all([loadFormOptions(), editorReady]);
+                if (editingId) {
+                    const { data, error } = await EtchSupabase.getClient().from('masterclass_articles')
+                        .select('*,category:masterclass_categories(id,name),author:masterclass_authors(id,name)').eq('id', editingId).single();
+                    if (error || !data) throw error || new Error('Article not found');
+                    existingArticle = data;
+                    const fields = {articleTitle:'title',articleSlug:'slug',articleExcerpt:'excerpt',articleCategory:'category_id',articleAuthor:'author_id',readingTime:'reading_time',seoTitle:'seo_title',seoDescription:'seo_description',seoKeywords:'seo_keywords',canonicalUrl:'canonical_url',articleStatus:'status'};
+                    for (const [id,key] of Object.entries(fields)) {
+                        const el = document.getElementById(id);
+                        if (el.tagName === 'SELECT' && data[key] && ![...el.options].some(o => o.value === data[key])) {
+                            const relation = key === 'author_id' ? data.author : data.category;
+                            el.add(new Option((relation?.name || 'Existing selection') + ' (inactive)', data[key]));
+                        }
+                        el.value = data[key] ?? '';
+                    }
+                    document.getElementById('isFeatured').checked = data.is_featured;
+                    document.getElementById('articleContent').value = data.content;
+                    if (editor) editor.setData(data.content);
+                    if (data.published_at) {
+                        const date = new Date(data.published_at);
+                        document.getElementById('publishDate').value = new Date(date.getTime()-date.getTimezoneOffset()*60000).toISOString().slice(0,16);
+                    }
+                    if (data.featured_image) { previewImg.src = EtchUI.safeUrl(data.featured_image); imagePreview.classList.remove('hidden'); }
+                    document.title = 'Edit Article | ETCH Admin';
+                    document.querySelector('.greeting h1')?.replaceChildren('Edit Article');
+                    statusSelect.dispatchEvent(new Event('change'));
+                }
+                formReady = true;
+                if (editingId) await loadPreviewLinks();
+                saveBtn.disabled = false;
+                renderSeoPreview();
+            } catch (error) {
+                const message = document.createElement('p'); message.setAttribute('role','alert');
+                message.textContent = 'Unable to load article: ' + error.message + '. Reload to retry.';
+                form.prepend(message);
+            }
+        }
+        async function loadPreviewLinks() {
+            let section = document.getElementById('previewLinks');
+            if (!section) { section = document.createElement('section'); section.id='previewLinks'; section.className='border rounded p-4 my-4'; form.append(section); }
+            section.replaceChildren(Object.assign(document.createElement('h2'),{textContent:'Shared preview links'}));
+            const {data,error}=await EtchSupabase.getClient().from('article_preview_links').select('id,expires_at,revoked,created_at').eq('article_id',editingId).order('created_at',{ascending:false});
+            if(error){section.append(Object.assign(document.createElement('p'),{textContent:'Preview links unavailable: '+error.message}));return;}
+            for(const link of data){
+                const row=document.createElement('p');row.textContent=new Date(link.expires_at).toLocaleString()+' — '+(link.revoked?'Revoked':new Date(link.expires_at)<new Date()?'Expired':'Active');
+                if(!link.revoked){const button=document.createElement('button');button.type='button';button.className='border p-2 m-2';button.textContent='Revoke';button.onclick=async()=>{button.disabled=true;const result=await EtchSupabase.getClient().functions.invoke('article-preview',{body:{action:'revoke',id:link.id}});if(result.error||result.data?.error){alert(result.data?.error||result.error.message);button.disabled=false;}else await loadPreviewLinks();};row.append(button);}
+                section.append(row);
+            }
+        }
+        const seoPreview = document.createElement('section');
+        seoPreview.className = 'p-5 rounded-2xl border border-border my-4';
+        seoPreview.setAttribute('aria-label', 'Search engine preview');
+        document.getElementById('seoDescription').parentElement.append(seoPreview);
+        function renderSeoPreview() {
+            const title = document.getElementById('seoTitle').value || titleInput.value || 'Article title';
+            const description = document.getElementById('seoDescription').value || document.getElementById('articleExcerpt').value;
+            const url = document.getElementById('canonicalUrl').value || new URL(EtchUI.articleUrl(slugInput.value), location.origin).href;
+            seoPreview.replaceChildren();
+            for (const [tag,text] of [['small','Search preview — actual results may vary'],['p',url],['h3',title],['p',description],['small',`${title.length} title characters · ${description.length} description characters`]]) {
+                const el = document.createElement(tag); el.textContent = text; seoPreview.append(el);
+            }
+        }
+        form.addEventListener('input', renderSeoPreview);
+        initializeArticleForm();
 
         // ==========================================
         // SAVE DRAFT BUTTON

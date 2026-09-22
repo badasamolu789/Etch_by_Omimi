@@ -17,11 +17,11 @@ function query(result) {
 }
 
 test('creator guard accepts a verified user and admin guard checks the profile role', async () => {
-    for (const role of ['creator', 'admin']) {
+    for (const role of ['creator','editor','reviewer','admin','super_admin']) {
         const client = { auth: { getUser: async () => ({ data: { user: { id: 'user-1' } }, error: null }) }, from: () => query({ data: { role }, error: null }) };
         const helper = api(client);
         assert.equal((await helper.requireAuth()).authenticated, true);
-        assert.equal((await helper.requireAdmin()).authenticated, role === 'admin');
+        assert.equal((await helper.requireAdmin()).authenticated, role !== 'creator');
     }
 });
 
@@ -99,3 +99,9 @@ test('routing and escaping work on extensionless URLs and attribute payloads', (
     assert.equal(ui.safeUrl('javascript:alert(1)'), '');
     assert.equal(ui.escapeHtml('" onerror="x'), '&quot; onerror=&quot;x');
 });
+
+ test('article edits use an optimistic timestamp guard',async()=>{
+ const q=query({data:{id:'article'},error:null});const helper=api({from:()=>q});
+ await helper.updateArticle('article',{title:'New title'},'2026-09-22T00:00:00Z');
+ assert.ok(q.calls.some(([method,field,value])=>method==='eq' && field==='updated_at' && value==='2026-09-22T00:00:00Z'));
+ });

@@ -9,3 +9,14 @@ entrypoint = "./functions/send-newsletter/index.ts"
 # Specifies static files to be bundled with the function. Supports glob patterns.
 # For example, if you want to serve static HTML pages in your function:
 # static_files = [ "./functions/send-newsletter/*.html" ]
+
+[functions.article-preview]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/article-preview/index.ts"
+# Public read verifies its HMAC capability; create/revoke validate user and role.
+
+[functions.send-acceptance]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/send-acceptance/index.ts"

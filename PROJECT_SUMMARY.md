@@ -20,3 +20,5 @@ Auth, listing queries/creation, profile photos, editorial creation, contact savi
 See [consistency fixes and deployment order](docs/CONSISTENCY_FIXES.md) before deploying. The [original source review](docs/PLATFORM_REVIEW.md) records the findings that led to this repair.
 
 Install development tools with `npm ci`. Run `npm run check`, `npm test`, `npm run test:database`, and `npm run test:browser` for the available verification.
+
+The current admin upgrade, role matrix, deployment steps, and checklist are documented in [ADMIN_UPGRADE_CHECKLIST.md](docs/ADMIN_UPGRADE_CHECKLIST.md). Paystack is excluded from this upgrade.

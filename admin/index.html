@@ -877,31 +877,28 @@
 
                 const listings = listingsDataResult.data || [];
                 const allArticles = recentArticlesResult.data || [];
-                const totalRevenue = listings.reduce((sum, item) => sum + (Number(item.price || item.amount || 0) || 0), 0);
-                const publishedListings = listings.filter((item) => ['published', 'active', 'review'].includes(String(item.status || '').toLowerCase())).length;
                 const reviewListings = listings.filter((item) => String(item.status || '').toLowerCase() === 'review').length;
-                const satisfaction = listings.length ? Math.round((publishedListings / listings.length) * 100) : 0;
-                const totalMasterclassArticles = allArticles.length;
-                const publishedMasterclassArticles = allArticles.filter((item) => String(item.status || '').toLowerCase() === 'published').length;
+                const totalMasterclassArticles = recentArticlesResult.count ?? allArticles.length;
+                const publishedMasterclassArticles = publishedArticlesResult.count;
                 const draftMasterclassArticles = allArticles.filter((item) => String(item.status || '').toLowerCase() === 'draft').length;
                 const totalMasterclassViews = allArticles.reduce((sum, item) => sum + (Number(item.views || 0) || 0), 0);
 
                 const statMap = {
                     dashboardUsersCount: formatNumber(usersResult.count || 0),
                     dashboardListingsCount: formatNumber(listingsCountResult.count || 0),
-                    dashboardRevenueCount: formatCurrency(totalRevenue),
-                    dashboardLicensesCount: formatNumber(activeSubscribersResult.count || 0),
+                    dashboardRevenueCount: '—',
+                    dashboardLicensesCount: '—',
                     masterclassTotalArticles: formatNumber(totalMasterclassArticles || 0),
                     masterclassPublishedArticles: formatNumber(publishedMasterclassArticles || 0),
                     masterclassDraftArticles: formatNumber(draftMasterclassArticles || 0),
                     masterclassCategoriesCount: formatNumber((categoriesResult.data || []).length || 0),
                     masterclassAuthorsCount: formatNumber((authorsResult.data || []).length || 0),
                     masterclassTotalViews: formatNumber(totalMasterclassViews || 0),
-                    marketplaceListingsCount: formatNumber(listings.length || 0),
-                    marketplaceLicensesCount: formatNumber(publishedListings || 0),
+                    marketplaceListingsCount: listingsCountResult.error ? '—' : formatNumber(listingsCountResult.count || 0),
+                    marketplaceLicensesCount: '—',
                     marketplaceUsersCount: formatNumber(usersResult.count || 0),
-                    marketplaceRevenueCount: formatCurrency(totalRevenue),
-                    marketplaceSatisfaction: (satisfaction || 0) + '%',
+                    marketplaceRevenueCount: '—',
+                    marketplaceSatisfaction: '—',
                     marketplacePendingReviews: formatNumber(reviewListings || 0),
                 };
 

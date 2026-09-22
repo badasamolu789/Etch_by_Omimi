@@ -85,5 +85,90 @@ const scheduledMigration=readFileSync(new URL('../supabase/migrations/2026091100
 await db.exec(scheduledMigration.split('$job$')[1]);
 assert.equal((await rows("SELECT status FROM masterclass_articles WHERE slug='due'"))[0].status, 'published');
 assert.equal((await rows("SELECT status FROM masterclass_articles WHERE slug='future'"))[0].status, 'scheduled');
+for (const file of ['202609220001_admin_workflows.sql','202609220002_review_actions.sql','202609220003_previews_analytics.sql','202609220004_operations_status.sql']) {
+ try { await db.exec(readFileSync(new URL('../supabase/migrations/'+file,import.meta.url),'utf8')); }
+ catch(error) { console.error(file, error.message); process.exit(1); }
+}
+try {
+await db.exec("SELECT set_config('request.jwt.claim.role','',false),set_config('request.jwt.claim.sub','',false)");
+const editor='44444444-4444-4444-8444-444444444444', reviewer='55555555-5555-4555-8555-555555555555', superAdmin='66666666-6666-4666-8666-666666666666';
+await db.exec(`INSERT INTO auth.users(id) VALUES('${editor}'),('${reviewer}'),('${superAdmin}'); UPDATE profiles SET role='editor' WHERE id='${editor}'; UPDATE profiles SET role='reviewer' WHERE id='${reviewer}'; UPDATE profiles SET role='super_admin' WHERE id='${superAdmin}';`);
+await as('authenticated',owner,async()=>{
+ await assert.rejects(db.exec("UPDATE profiles SET role='super_admin' WHERE id=auth.uid()"));
+ await assert.rejects(db.exec(`SELECT set_staff_role('${other}','admin')`));
+ await assert.rejects(db.exec("INSERT INTO listings(creator_id,title,status) VALUES(auth.uid(),'Bypass','published')"));
+ await assert.rejects(db.exec("UPDATE listings SET is_featured=true WHERE creator_id=auth.uid()"));
+ await assert.rejects(db.exec("INSERT INTO admin_audit_log(action,entity) VALUES('fake','profiles')"));
+ assert.equal((await rows('SELECT * FROM admin_audit_log')).length,0);
+ await db.exec("INSERT INTO verification_requests(user_id,evidence) VALUES(auth.uid(),'https://portfolio.example/writing')");
+ await assert.rejects(db.exec("UPDATE verification_requests SET status='approved' WHERE user_id=auth.uid()"));
+ await db.exec("INSERT INTO founding_applications(user_id,full_name,email,portfolio_url,statement) VALUES(auth.uid(),'Writer','writer@example.test','https://portfolio.example',repeat('Writing experience. ',10))");
+ await assert.rejects(db.exec("UPDATE founding_applications SET status='accepted' WHERE user_id=auth.uid()"));
+});
+const application=(await rows('SELECT id FROM founding_applications'))[0].id;
+const verification=(await rows('SELECT id FROM verification_requests'))[0].id;
+await as('authenticated',editor,async()=>{
+ await db.exec("INSERT INTO masterclass_articles(title,slug,content,status) VALUES('Editable','editable','Original','draft')");
+ await db.exec("UPDATE masterclass_articles SET content='Updated', status='scheduled',published_at=now()+interval '1 day' WHERE slug='editable'");
+ await assert.rejects(db.exec("UPDATE masterclass_articles SET published_at=now()-interval '1 day' WHERE slug='editable'"));
+ await db.exec("UPDATE masterclass_articles SET status='draft' WHERE slug='editable'");
+ assert.equal((await rows("SELECT published_at FROM masterclass_articles WHERE slug='editable'"))[0].published_at,null);
+ assert.equal((await rows('SELECT * FROM founding_applications')).length,0);
+ await assert.rejects(db.exec(`SELECT decide_verification('${verification}','approved','Checked portfolio')`));
+});
+await as('authenticated',reviewer,async()=>{
+ await assert.rejects(db.exec("INSERT INTO masterclass_articles(title,slug,content) VALUES('Forbidden','forbidden','x')"));
+ await db.exec(`SELECT decide_verification('${verification}','approved','Checked portfolio')`);
+ await assert.rejects(db.exec(`SELECT decide_verification('${verification}','declined','Stale review')`));
+ await assert.rejects(db.exec(`SELECT decide_founding_application('${application}','accepted','Looks good')`));
+});
+await as('authenticated',admin,async()=>{
+ await assert.rejects(db.exec(`SELECT set_staff_role('${other}','reviewer')`));
+ await db.exec(`SELECT configure_founding_rubric('[{"key":"writing","name":"Writing","weight":70},{"key":"fit","name":"Fit","weight":30}]')`);
+ await assert.rejects(db.exec(`SELECT configure_founding_rubric('[{"key":"writing","name":"Writing","weight":80}]')`));
+});
+const rubric=(await rows('SELECT id FROM founding_rubrics WHERE active'))[0].id;
+await as('authenticated',reviewer,async()=>{
+ await assert.rejects(db.exec(`SELECT score_founding_application('${application}','${rubric}','{"writing":101,"fit":100}','Checked')`));
+ await db.exec(`SELECT score_founding_application('${application}','${rubric}','{"writing":80,"fit":60}','Strong writing sample')`);
+ assert.equal(Number((await rows(`SELECT score FROM founding_applications WHERE id='${application}'`))[0].score),74);
+ await db.exec(`SELECT decide_founding_application('${application}','accepted','Meets criteria')`);
+ await assert.rejects(db.exec(`SELECT decide_founding_application('${application}','declined','Stale decision')`));
+});
+await as('authenticated',superAdmin,async()=>{
+ await db.exec(`SELECT set_staff_role('${other}','editor')`);
+ await assert.rejects(db.exec(`SELECT set_staff_role('${superAdmin}','creator')`));
+ await assert.rejects(db.exec("UPDATE profiles SET role='creator' WHERE id=auth.uid()"));
+});
+const listing=(await rows("SELECT id FROM listings WHERE title='Draft'"))[0].id;
+await as('authenticated',reviewer,async()=>{await db.exec(`SELECT moderate_listing('${listing}','published','Reviewed script')`);});
+await as('authenticated',owner,async()=>{
+ await db.exec(`UPDATE listings SET description='Changed content' WHERE id='${listing}'`);
+ assert.equal((await rows(`SELECT status FROM listings WHERE id='${listing}'`))[0].status,'review');
+});
+await as('authenticated',reviewer,async()=>{await db.exec(`SELECT moderate_listing('${listing}','published','Reviewed revision')`);});
+await as('authenticated',owner,async()=>{
+ await db.exec(`INSERT INTO content_reports(reporter_id,content_type,content_id,reason) VALUES(auth.uid(),'listing','${listing}','This content violates the policy')`);
+});
+const report=(await rows('SELECT id FROM content_reports'))[0].id;
+await as('authenticated',reviewer,async()=>{await db.exec(`SELECT resolve_content_report('${report}','removed','Confirmed policy violation')`);});
+await as('anon',null,async()=>{assert.equal((await rows(`SELECT id FROM listings WHERE id='${listing}'`)).length,0);
+ await db.exec("SELECT record_page_view('77777777-7777-4777-8777-777777777777','88888888-8888-4888-8888-888888888888','/about','campaign','email','launch',12)");
+ await db.exec("SELECT record_page_view('77777777-7777-4777-8777-777777777777','88888888-8888-4888-8888-888888888888','/about','campaign','email','launch',20)");
+ await assert.rejects(db.exec('SELECT analytics_summary()'));
+ await assert.rejects(db.exec("SELECT record_page_view(gen_random_uuid(),gen_random_uuid(),'/admin/index')"));
+ await assert.rejects(db.exec('SELECT * FROM article_preview_links'));
+});
+await as('authenticated',admin,async()=>{
+ const scheduler=(await rows('SELECT article_scheduler_status() AS value'))[0].value;assert.equal(scheduler.configured,false);
+ const stats=(await rows('SELECT analytics_summary() AS value'))[0].value;
+ assert.equal(stats.page_views,1);assert.equal(stats.average_active_session_seconds,20);
+ const audit=await rows("SELECT * FROM admin_audit_log WHERE entity='content_reports' AND action='UPDATE'");
+ assert.equal(audit[0].actor_id,reviewer);assert.equal(audit[0].after_data.status,'removed');
+ await assert.rejects(db.exec('DELETE FROM admin_audit_log'));
+});
+console.log('New staff roles, article scheduling, weighted reviews, moderation, verification, analytics, and audit checks passed.');
+
+} catch(error) {console.error('Workflow test failure:',error.message,error.detail || '');process.exit(1);}
 await db.close();
 console.log('Database migration and anonymous/creator/admin policy checks passed.');

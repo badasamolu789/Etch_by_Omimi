@@ -594,19 +594,20 @@ const EtchSupabase = (function () {
         }
     }
 
-    async function updateArticle(id, updates) {
+    async function updateArticle(id, updates, expectedUpdatedAt) {
         const client = getClient();
         if (!client) return { data: null, error: new Error('Supabase not initialized') };
 
         try {
-            const { data, error } = await client
+            let query = client
                 .from('masterclass_articles')
                 .update(updates)
-                .eq('id', id)
-                .select()
+                .eq('id', id);
+            if (expectedUpdatedAt) query = query.eq('updated_at', expectedUpdatedAt);
+            const { data, error } = await query.select()
                 .single();
 
-            if (error) throw error;
+            if (error) throw error.code === 'PGRST116' ? new Error('This article changed or is no longer available. Reload before saving again.') : error;
             return { data, error: null };
         } catch (error) {
             return { data: null, error };
@@ -930,7 +931,7 @@ const EtchSupabase = (function () {
 
     async function requireAdmin() {
         const result = await requireAuth();
-        return { ...result, authenticated: result.authenticated && result.profile?.role === 'admin' };
+        return { ...result, authenticated: result.authenticated && ['editor','reviewer','admin','super_admin'].includes(result.profile?.role) };
     }
 
     // Fetch aggregates independently of the current listing page.

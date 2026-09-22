@@ -310,6 +310,7 @@
                     return;
                 }
 
+                if (listing.status === 'published') window.EtchReport?.attach('listing',listing.id,document.querySelector('main'));
                 // Hide skeleton, show content
                 const skeleton = document.getElementById('productDetailSkeleton');
                 const content = document.getElementById('productDetailContent');
@@ -415,6 +416,7 @@
         }
     </script>
     <script src="script/script.js"></script>
+    <script src="/script/community.js"></script>
 </body>
 
 </html>

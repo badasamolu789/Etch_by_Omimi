@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <script src="/script/core.js"></script>
+    <script src="/script/components.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verification Queue | ETCH Admin</title>
+    <meta name="description" content="Manage and review ETCH platform activity." />
+    <link rel="icon" href="/assets/logo.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="/style/style.css" />
+    <link rel="stylesheet" href="style/admin.css?v=20260806-components1" />
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        olive: { DEFAULT: '#99A96A', dark: '#73824C', light: '#E8ECD9' },
+                        ink: '#151515', mist: '#FAFAF7', stone: '#F2F3ED',
+                        slate: '#6C6C6C', muted: '#9A9A9A', border: '#E5E7E2',
+                        success: '#3D6B4F', warning: '#C9A54C', error: '#B25555', info: '#5B8DEF',
+                        cream: '#F5F3EE', lavender: '#A78BFA', mint: '#4ECDC4',
+                    },
+                    fontFamily: {
+                        display: ['"Instrument Serif"', 'serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body data-workspace="verification"><div class="admin-dashboard"><div data-component="include" data-src="component/sidebar.html"></div>
+<main class="admin-dashboard-main"><div data-component="include" data-src="component/topbar.html"></div>
+<section class="p-6 md:p-8"><h1 class="text-3xl font-display mb-4">Verification Queue</h1>
+<form id="queueFilters" class="flex flex-wrap gap-3 mb-4"><label>Search <input id="queueSearch" type="search" class="border rounded p-2" /></label>
+<label>Status <select id="queueStatus" class="border rounded p-2"><option value="">All</option></select></label><button class="border rounded p-2">Apply</button></form>
+<p id="queueMessage" role="status" class="my-4"></p><div id="queueExtras"></div><div id="queueContent" class="overflow-auto"></div>
+<div class="flex gap-4 my-4"><button id="queuePrevious" class="border rounded p-2">Previous</button><span id="queueCount"></span><button id="queueNext" class="border rounded p-2">Next</button></div>
+</section></main></div>
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script><script src="/script/supabase.js"></script><script src="/script/script.js"></script><script src="/admin/script/workspace.js"></script><script src="/admin/script/admin.js"></script></body></html>

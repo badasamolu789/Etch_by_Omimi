@@ -31,7 +31,7 @@ export function createNewsletterHandler({ env, fetchImpl = fetch, sleep = ms => 
             const profileResponse = await db('profiles?select=role&id=eq.' + encodeURIComponent(user.id));
             if (!profileResponse.ok) throw new Error('Cannot verify administrator');
             const profiles = await profileResponse.json();
-            if (profiles[0]?.role !== 'admin') return reply(403, { success: false, error: 'Administrator access required' });
+            if (!['admin','super_admin'].includes(profiles[0]?.role)) return reply(403, { success: false, error: 'Administrator access required' });
             const raw = await request.text();
             if (raw.length > 110000) return reply(413, { success: false, error: 'Newsletter is too large' });
             let body;

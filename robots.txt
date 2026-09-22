@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /user/
+Disallow: /article-preview
+Disallow: /*?preview=
+Disallow: /*&preview=
+
+Sitemap: https://etchbyomimi.com/sitemap.xml
