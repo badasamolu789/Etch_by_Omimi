@@ -85,3 +85,15 @@ The live server redirected `/article.html?slug=…&preview=1` to `/article`, dro
 ## Public links, admin dialogs, and social sharing — 23 September 2026
 
 Homepage and masterclass article links now use the clean-URL helper; admin edit identifiers also avoid the dropping redirect. Native admin alert/confirm/prompt calls were replaced by styled promise-based modals. A VPS metadata service now generates public article/product Open Graph and Twitter tags in the initial response. See [VPS_SHARING_DEPLOYMENT.md](VPS_SHARING_DEPLOYMENT.md) for the required Node/systemd/Nginx activation steps. No database migration is needed for this update. Local verification: 28 unit/API tests, browser modal/workflow checks, and source validation passed.
+
+## UI corrections — 23 September 2026
+
+- [x] Center native admin dialogs explicitly, including when Tailwind resets browser margins; constrain height for scrolling on small screens.
+- [x] Restore Media Library navigation by loading its missing Supabase dependencies before admin initialization.
+- [x] Use consistent absolute, versioned admin asset URLs; preserve the sidebar on permission-denied screens and hide inaccessible links.
+- [x] Give Founding Voices its own responsive layout, clear spacing below the fixed navigation, styled form fields, and visible submit/sign-in buttons.
+- [x] Style workflow decisions, record/portfolio actions, article edit/share/revoke actions, pagination, and CSV export as buttons with focus and disabled states.
+
+Deploy the updated `admin/` HTML, scripts and styles together with `script/components.js`, `script/founding-application.js`, `script/newsletter-export.js`, `founding-voices.html`, and the new `style/founding-voices.css`. No Supabase SQL or new server configuration is needed for these UI corrections. Files are changed locally; production deployment remains pending.
+
+Validation: all 18 admin routes render one sidebar and top bar; desktop/mobile dialog geometry and Founding Voices spacing/button checks pass in the mocked-service browser suite. Existing unit/API checks pass (28 tests).

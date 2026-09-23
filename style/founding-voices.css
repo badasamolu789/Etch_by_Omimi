@@ -1,0 +1,13 @@
+.founding-voices-page { box-sizing: border-box; max-width: 800px; margin: 0 auto; padding: 128px 24px 72px; }
+.founding-voices-page h1 { margin: 0 0 20px; font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(36px, 5vw, 48px); line-height: 1.15; }
+.founding-voices-page > p { line-height: 1.7; color: var(--color-text-secondary, #6c6c6c); }
+.founding-voices-page form { margin: 32px 0; padding: 28px; background: var(--color-surface-elevated, #fff); border: 1px solid var(--color-border, #e5e7e2); border-radius: 20px; }
+.founding-voices-page form[hidden] { display: none; }
+.founding-voices-page label { display: block; margin-bottom: 24px; font-size: 14px; font-weight: 600; line-height: 1.6; }
+.founding-voices-page input, .founding-voices-page textarea { box-sizing: border-box; display: block; width: 100%; margin-top: 8px; padding: 13px 16px; border: 1px solid var(--color-border, #e5e7e2); border-radius: 12px; background: var(--color-background, #fafaf7); color: inherit; font: inherit; font-weight: 400; }
+.founding-voices-page textarea { resize: vertical; min-height: 180px; }
+.founding-action { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 12px 24px; border: 1px solid #73824c; border-radius: 12px; background: #73824c; color: #fff; font: inherit; font-weight: 600; text-decoration: none; cursor: pointer; }
+.founding-action:hover { background: #63713f; }
+.founding-action:disabled { opacity: .55; cursor: wait; }
+.founding-action:focus-visible, .founding-voices-page input:focus-visible, .founding-voices-page textarea:focus-visible { outline: 2px solid #99a96a; outline-offset: 3px; }
+@media (max-width: 640px) { .founding-voices-page { padding: 100px 16px 48px; } .founding-voices-page form { padding: 20px; } .founding-action { width: 100%; } }

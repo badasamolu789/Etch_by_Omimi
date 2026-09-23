@@ -3,7 +3,7 @@
 // Quote every cell and neutralize formula prefixes before opening in spreadsheets.
 const csvCell=value=>'"'+String(value??'').replace(/^[=+@\-\t\r]/,"'$&").replaceAll('"','""')+'"';
 window.EtchCSV={csvCell};
-const button=document.createElement('button');button.type='button';button.textContent='Export active subscribers for Mailchimp';button.className='border rounded-xl px-4 py-3 my-4';
+const button=document.createElement('button');button.type='button';button.textContent='Export active subscribers for Mailchimp';button.className='admin-action admin-action-primary';
 const status=document.createElement('p');status.setAttribute('role','status');
 const host=document.getElementById('newsletterSubscribersTable')?.closest('section') || document.querySelector('main');
 if(!host)return;host.prepend(button,status);

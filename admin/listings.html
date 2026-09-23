@@ -2,10 +2,10 @@
 <html lang="en" data-theme="light">
 
 <head>
-    <link rel="stylesheet" href="/admin/style/dialogs.css" />
-    <script src="/admin/script/dialogs.js"></script>
+    <link rel="stylesheet" href="/admin/style/dialogs.css?v=20260923-ui2" />
+    <script src="/admin/script/dialogs.js?v=20260923-ui2"></script>
     <script src="/script/core.js"></script>
-    <script src="/script/components.js"></script>
+    <script src="/script/components.js?v=20260923-ui2"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Listing Moderation | ETCH Admin</title>
@@ -17,7 +17,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="/style/style.css" />
-    <link rel="stylesheet" href="style/admin.css?v=20260806-components1" />
+    <link rel="stylesheet" href="/admin/style/admin.css?v=20260923-ui2" />
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -43,8 +43,8 @@
 <main class="admin-dashboard-main"><div data-component="include" data-src="component/topbar.html"></div>
 <section class="p-6 md:p-8"><h1 class="text-3xl font-display mb-4">Listing Moderation</h1>
 <form id="queueFilters" class="flex flex-wrap gap-3 mb-4"><label>Search <input id="queueSearch" type="search" class="border rounded p-2" /></label>
-<label>Status <select id="queueStatus" class="border rounded p-2"><option value="">All</option></select></label><button class="border rounded p-2">Apply</button></form>
+<label>Status <select id="queueStatus" class="border rounded p-2"><option value="">All</option></select></label><button class="admin-action admin-action-primary">Apply</button></form>
 <p id="queueMessage" role="status" class="my-4"></p><div id="queueExtras"></div><div id="queueContent" class="overflow-auto"></div>
-<div class="flex gap-4 my-4"><button id="queuePrevious" class="border rounded p-2">Previous</button><span id="queueCount"></span><button id="queueNext" class="border rounded p-2">Next</button></div>
+<div class="flex gap-4 my-4"><button id="queuePrevious" class="admin-action">Previous</button><span id="queueCount"></span><button id="queueNext" class="admin-action">Next</button></div>
 </section></main></div>
-<script src="https://unpkg.com/@supabase/supabase-js@2"></script><script src="/script/supabase.js"></script><script src="/script/script.js"></script><script src="/admin/script/workspace.js"></script><script src="/admin/script/admin.js"></script></body></html>
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script><script src="/script/supabase.js"></script><script src="/script/script.js"></script><script src="/admin/script/workspace.js?v=20260923-ui2"></script><script src="/admin/script/admin.js?v=20260923-ui2"></script></body></html>

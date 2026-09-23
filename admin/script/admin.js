@@ -231,10 +231,6 @@
         }
         const requiredPages = {media_library:'editorial',newsletter:'users',partners:'users',marketplace_categories:'users',create_article:'editorial',admin_masterclass:'editorial',author:'editorial',category:'editorial',create_author:'editorial',create_category:'editorial',users:'users',verification:'verification',listings:'moderation',reports:'moderation',applications:'applications',audit:'audit',analytics:'analytics'};
         const required = requiredPages[page];
-        if (required && !window.ETCH_PERMISSIONS.includes(required)) {
-            document.body.replaceChildren(Object.assign(document.createElement('p'),{textContent:'Your staff role does not have access to this page.'}));
-            return;
-        }
         // Load UI components after auth cleared
         await loadAdminComponents();
         for(const link of document.querySelectorAll('.admin-sidebar-nav a')) {
@@ -248,6 +244,19 @@
         setActiveNavLink();
         addActiveNavClickHandlers();
         bindSignOut();
+
+        if (required && !window.ETCH_PERMISSIONS.includes(required)) {
+            const main = document.querySelector('.admin-dashboard-main');
+            for (const child of Array.from(main.children)) {
+                if (!child.matches('.admin-topbar')) child.remove();
+            }
+            const notice = document.createElement('p');
+            notice.className = 'admin-access-notice';
+            notice.textContent = 'Your staff role does not have access to this page. Choose an available page from the navigation.';
+            main.append(notice);
+            await updateTopbarUserInfo();
+            return;
+        }
 
         // Update topbar after the initial guard has accepted the page.
         await updateTopbarUserInfo();

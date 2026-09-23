@@ -133,10 +133,40 @@ try {
       if(location.pathname.includes('founding-voices'))tables.founding_applications=[];
       function query(table){let one=false;const q=new Proxy({then:resolve=>Promise.resolve({data:one?(tables[table]||[])[0]||null:tables[table]||[],count:(tables[table]||[]).length,error:null}).then(resolve)},{get:(target,key)=>key in target?target[key]:(...args)=>{if(['single','maybeSingle'].includes(key))one=true;window.__queries.push({table,method:key,args});return q;}});return q;}
       const client={from:query,rpc:async(name,args)=>{window.__rpcs.push({name,args});return {data:name==='analytics_summary'?{page_views:10,sessions:4,average_active_session_seconds:30,pages:[{path:'/about',views:10}],utm_breakdown:[{utm_source:'newsletter',utm_medium:'email',utm_campaign:'launch',views:10,sessions:4}]}:null,error:null};},functions:{invoke:async()=>({data:{sent:true},error:null})}};
-      window.EtchSupabase={getClient:()=>client,requireAdmin:async()=>({authenticated:true,user:{id:'staff',email:'staff@example.test'},profile:{full_name:'Staff',role:'super_admin'}}),getCurrentUser:async()=>({user:{id:'staff',email:'applicant@example.test'}}),getProfile:async()=>({profile:{full_name:'Staff'}}),getSiteSettings:async()=>({data:{}}),getCategories:async()=>({data:[{id:'category-id',name:'Category'}]}),getAuthors:async()=>({data:tables.masterclass_authors}),getArticles:async options=>{window.__articleOptions=options;return {data:[article],count:1};},updateArticle:async(id,payload)=>{window.__updates.push({id,payload});if(window.__failUpdate)return {error:new Error('Update failed')};Object.assign(article,payload);return {data:article};},createArticle:async()=>{throw new Error('Edit must not create')},getNewsletterSubscribers:async()=>({data:tables.newsletter_subscribers})};
+      window.EtchSupabase={getClient:()=>client,requireAdmin:async()=>({authenticated:true,user:{id:'staff',email:'staff@example.test'},profile:{full_name:'Staff',role:new URLSearchParams(location.search).get('testRole')||'super_admin'}}),getCurrentUser:async()=>({user:{id:'staff',email:'applicant@example.test'}}),getProfile:async()=>({profile:{full_name:'Staff'}}),getSiteSettings:async()=>({data:{}}),getHomepagePartners:async()=>({data:[]}),getMarketplaceCategories:async()=>({data:[]}),getCategories:async()=>({data:[{id:'category-id',name:'Category'}]}),getAuthors:async()=>({data:tables.masterclass_authors}),getArticles:async options=>{window.__articleOptions=options;return {data:[article],count:1};},updateArticle:async(id,payload)=>{window.__updates.push({id,payload});if(window.__failUpdate)return {error:new Error('Update failed')};Object.assign(article,payload);return {data:article};},createArticle:async()=>{throw new Error('Edit must not create')},getNewsletterSubscribers:async()=>({data:tables.newsletter_subscribers})};
     `}));
+    // Every admin route must render the shared navigation, including clean URLs.
+    for (const route of ['index','applications','users','verification','listings','reports','audit','analytics','author','category','partners','marketplace_categories','newsletter','media_library','admin_masterclass','create_article','create_author','create_category']) {
+        await page.goto(base+'/admin/'+route);
+        await page.waitForSelector('.admin-sidebar').catch(error=>{throw new Error(route+': '+error.message+'; browser errors: '+errors.join('; '));});
+        assert.equal(await page.locator('.admin-sidebar').count(),1,route+' has one sidebar');
+        assert.equal(await page.locator('.admin-topbar').count(),1,route+' has one topbar');
+    }
+    await page.goto(base+'/admin/users?testRole=reviewer');
+    await page.waitForSelector('.admin-access-notice');
+    assert.equal(await page.locator('.admin-sidebar').count(),1,'denied pages preserve navigation');
+    assert.equal(await page.locator('.admin-sidebar-nav a[href="/admin/users.html"]').isVisible(),false);
+    assert.equal(await page.locator('#queueContent').count(),0,'denied page removes protected content');
     await page.goto(base+'/admin/applications');
     await page.waitForSelector('#queueContent table');
+    // Reproduce the CSS reset used by Tailwind, which clears native dialog margins.
+    await page.addStyleTag({content:'* { margin: 0; }'});
+    for (const viewport of [{width:1440,height:900},{width:390,height:844}]) {
+        await page.setViewportSize(viewport);
+        await page.evaluate(()=>{EtchDialog.alert('Centered dialog');});
+        await page.locator('dialog[open]').waitFor();
+        await page.waitForTimeout(200);
+        const box=await page.locator('dialog[open]').boundingBox();
+        assert.ok(Math.abs(box.x+box.width/2-viewport.width/2)<2,'dialog horizontally centered');
+        assert.ok(Math.abs(box.y+box.height/2-viewport.height/2)<2,'dialog vertically centered');
+        await page.keyboard.press('Escape');
+    }
+    await page.locator('[data-sidebar-toggle]').click();
+    await page.waitForTimeout(350);
+    assert.ok((await page.locator('.admin-sidebar').boundingBox()).x>=0,'mobile navigation opens');
+    await page.locator('#adminSidebarOverlay').click({position:{x:350,y:500}});
+    await page.setViewportSize({width:1280,height:720});
+
     await page.evaluate(()=>{window.__confirmation='waiting';EtchDialog.confirm('Delete this test record?').then(value=>window.__confirmation=value);});
     await page.getByRole('dialog').waitFor();
     await page.getByRole('button',{name:'Cancel',exact:true}).click();
@@ -187,6 +217,15 @@ try {
     await page.getByRole('button',{name:'Save weighted review',exact:true}).click();
     await page.waitForFunction(()=>window.__rpcs.some(call=>call.name==='score_founding_application'));
     await page.goto(base+'/founding-voices');
+    for (const viewport of [{width:1440,height:900},{width:390,height:844}]) {
+        await page.setViewportSize(viewport);
+        const title=await page.locator('.founding-voices-page h1').boundingBox();
+        assert.ok(title.y >= (viewport.width>640?112:96),'title clears fixed navigation');
+        const button=await page.getByRole('button',{name:'Submit application'}).evaluate(el=>({height:el.getBoundingClientRect().height,background:getComputedStyle(el).backgroundColor}));
+        assert.ok(button.height>=44);
+        assert.equal(button.background,'rgb(115, 130, 76)');
+    }
+    await page.setViewportSize({width:1280,height:720});
     await page.locator('[name="full_name"]').fill('Applicant');
     await page.locator('[name="portfolio_url"]').fill('https://example.test/writing');
     await page.locator('[name="statement"]').fill('I have written feature scripts and would like to contribute to this creative community.');

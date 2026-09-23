@@ -15,7 +15,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="/style/style.css" />
-    <link rel="stylesheet" href="/admin/style/admin.css?v=20260806-components1" />
+    <link rel="stylesheet" href="/style/founding-voices.css?v=20260923-ui2" />
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -36,10 +36,10 @@
             },
         }
     </script>
-</head><body><div id="header"></div><main class="max-w-3xl mx-auto p-8"><h1 class="font-display text-4xl my-8">Apply to Founding Voices</h1><p>Tell us about your work. Sign in to submit one application and follow its progress.</p>
+</head><body><div id="header"></div><main class="founding-voices-page"><h1 class="font-display text-4xl my-8">Apply to Founding Voices</h1><p>Tell us about your work. Sign in to submit one application and follow its progress.</p>
 <form id="applicationForm" class="space-y-4 my-8">
 <label class="block">Full name<input name="full_name" maxlength="200" required class="block border p-3 w-full" /></label>
 <label class="block">Portfolio or writing sample URL<input name="portfolio_url" type="url" required class="block border p-3 w-full" /></label>
 <label class="block">Tell us about your work and why you want to join<textarea name="statement" minlength="50" maxlength="10000" required class="block border p-3 w-full" rows="8"></textarea></label>
-<button class="border rounded-xl p-3">Submit application</button></form><p id="applicationStatus" role="status"></p></main><div id="footer"></div>
-<script src="https://unpkg.com/@supabase/supabase-js@2"></script><script src="/script/supabase.js"></script><script src="/script/script.js"></script><script src="/script/founding-application.js"></script></body></html>
+<button type="submit" class="founding-action">Submit application</button></form><p id="applicationStatus" role="status"></p></main><div id="footer"></div>
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script><script src="/script/supabase.js"></script><script src="/script/script.js"></script><script src="/script/founding-application.js?v=20260923-ui2"></script></body></html>

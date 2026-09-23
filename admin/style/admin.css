@@ -820,3 +820,28 @@ html.dark .admin-topbar {
         font-size: 1.25rem;
     }
 }
+/* Shared action controls for workflow queues and article tools. */
+.admin-action,
+body[data-workspace] #queueExtras button,
+body[data-workspace] #queueContent button {
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: .5rem; min-height: 42px; padding: .65rem 1rem; margin: .25rem;
+    border: 1px solid var(--color-border, #dfe3d7); border-radius: 10px;
+    background: var(--color-surface-elevated, #fff); color: var(--color-text, #151515);
+    font: inherit; font-size: .875rem; font-weight: 600; line-height: 1.4;
+    text-decoration: none; cursor: pointer; vertical-align: middle;
+}
+.admin-action.admin-action-primary,
+body[data-workspace] button.admin-action-primary {
+    background: #73824c; border-color: #73824c; color: white;
+}
+.admin-action.admin-action-danger,
+body[data-workspace] button.admin-action-danger {
+    background: #b25555; border-color: #b25555; color: white;
+}
+.admin-action:hover { filter: brightness(.95); }
+.admin-action:focus-visible { outline: 2px solid #73824c; outline-offset: 3px; }
+.admin-action:disabled { opacity: .5; cursor: not-allowed; }
+.admin-access-notice { margin: 2rem; padding: 1.5rem; border: 1px solid var(--color-border); border-radius: 16px; }
+.admin-sidebar-nav a[hidden] { display: none; }
+body[data-workspace] #queueFilters { align-items: end; }

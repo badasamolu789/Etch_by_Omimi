@@ -17,14 +17,14 @@ async function save(operation){
  try { const {error}=await operation; if(error) throw error; message('Saved.'); await load(); }
  catch(error){message(error.message || 'Unable to save. Please retry.');}
 }
-function button(label,action){const el=document.createElement('button');el.className='border rounded px-3 py-2 m-1';el.textContent=label;el.onclick=async()=>{el.disabled=true;try{await action();}finally{el.disabled=false;}};return el;}
+function button(label,action){const el=document.createElement('button');el.type='button';el.className='admin-action'+(/reject|remove|declin/i.test(label)?' admin-action-danger':/save|approve|accept|review application/i.test(label)?' admin-action-primary':'');el.textContent=label;el.onclick=async()=>{el.disabled=true;try{await action();}finally{el.disabled=false;}};return el;}
 function askReason(){return EtchDialog.open({title:'Record your decision',message:'Add a reason for this decision. It will be saved with the review.',input:true,multiline:true,label:'Decision reason',minLength:3,maxLength:2000,confirmText:'Confirm decision'});}
-function details(row){const el=document.createElement('details');const summary=document.createElement('summary');summary.textContent='View record';const pre=document.createElement('pre');pre.style.whiteSpace='pre-wrap';pre.textContent=JSON.stringify(row,null,2);el.append(summary,pre);return el;}
+function details(row){const el=document.createElement('details');const summary=document.createElement('summary');summary.textContent='View record';summary.className='admin-action';const pre=document.createElement('pre');pre.style.whiteSpace='pre-wrap';pre.textContent=JSON.stringify(row,null,2);el.append(summary,pre);return el;}
 function actions(row){
  const el=document.createElement('div'),db=EtchSupabase.getClient();
  el.append(details(row));
- if(page==='listings' && row.preview_url){const link=document.createElement('a');link.href=EtchUI.safeUrl(row.preview_url);link.target='_blank';link.rel='noopener noreferrer';link.textContent='Open writing sample';link.className='block text-olive underline';el.append(link);}
- if(page==='applications' && row.portfolio_url){const link=document.createElement('a');link.href=EtchUI.safeUrl(row.portfolio_url);link.target='_blank';link.rel='noopener noreferrer';link.textContent='Open portfolio';link.className='block text-olive underline';el.append(link);}
+ if(page==='listings' && row.preview_url){const link=document.createElement('a');link.href=EtchUI.safeUrl(row.preview_url);link.target='_blank';link.rel='noopener noreferrer';link.textContent='Open writing sample';link.className='admin-action';el.append(link);}
+ if(page==='applications' && row.portfolio_url){const link=document.createElement('a');link.href=EtchUI.safeUrl(row.portfolio_url);link.target='_blank';link.rel='noopener noreferrer';link.textContent='Open portfolio';link.className='admin-action';el.append(link);}
  const reason=()=>askReason();
  if(page==='users') {
   const select=document.createElement('select');select.setAttribute('aria-label','Account type');for(const type of ['writer','producer'])select.add(new Option(type,type));select.value=row.account_type||'writer';
@@ -73,7 +73,7 @@ async function reviewApplication(row){
  const inputs={};
  for(const criterion of rubric.criteria){const label=document.createElement('label');label.className='block my-2';label.textContent=`${criterion.name} (${criterion.weight}%) — score 0–100 `;const input=document.createElement('input');input.type='number';input.min=0;input.max=100;input.required=true;input.className='border p-2';inputs[criterion.key]=input;label.append(input);form.append(label);}
  const notes=document.createElement('textarea');notes.placeholder='Reviewer notes';notes.required=true;notes.className='block border p-2 w-full';form.append(notes);
- const submit=document.createElement('button');submit.textContent='Save weighted review';submit.className='border p-2';form.append(submit);
+ const submit=document.createElement('button');submit.textContent='Save weighted review';submit.className='admin-action admin-action-primary';form.append(submit);
  form.onsubmit=async event=>{event.preventDefault();submit.disabled=true;const scores=Object.fromEntries(Object.entries(inputs).map(([key,input])=>[key,Number(input.value)]));await save(db.rpc('score_founding_application',{application_id:row.id,rubric_id:rubric.id,scores,notes:notes.value}));submit.disabled=false;};panel.append(form);
 
  const {data:deliveries}=await db.from('acceptance_deliveries').select('status,provider_id,created_at,sent_at').eq('application_id',row.id);
