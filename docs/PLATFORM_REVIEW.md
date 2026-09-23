@@ -93,7 +93,7 @@ Evidence: `admin/admin_masterclass.html:530`, `script/masterclass.js:181`, `admi
 - Admin preview resolves to `/admin/article.html`, which does not exist; the public page is `/article.html`.
 - The public detail script intentionally rejects unpublished articles, so fixing the preview link alone will not provide authenticated draft preview.
 - Editorial category pills navigate to marketplace search, which searches listings rather than articles.
-- The editor generates `https://etch.omimi.com/masterclass/article/<slug>` canonical URLs, while the implemented article route uses a query parameter. The checked-in Apache rules do not map those nested paths.
+- The editor generates `https://etchbyomimi.com/masterclass/article/<slug>` canonical URLs, while the implemented article route uses a query parameter. The checked-in Apache rules do not map those nested paths.
 - Saved SEO title, description, keywords, and canonical fields are not applied by the article detail script. Author bio, role, and photo are also replaced with generic presentation.
 - Scheduled status and dates are saved, but no scheduling worker or publishing job is present in this repository.
 
