@@ -2,6 +2,8 @@
 <html lang="en" data-theme="light">
 
 <head>
+    <link rel="stylesheet" href="/admin/style/dialogs.css" />
+    <script src="/admin/script/dialogs.js"></script>
     <script src="/script/core.js"></script>
     <script src="/script/components.js"></script>
     <meta charset="UTF-8" />
@@ -236,7 +238,7 @@
                 fields.message.className = 'hidden text-sm rounded-2xl px-4 py-3';
             }
             if (deleteButton) {
-                if (!confirm('Delete this marketplace category?')) return;
+                if (!await EtchDialog.confirm('Delete this marketplace category?')) return;
                 const { error } = await EtchSupabase.deleteMarketplaceCategory(deleteButton.dataset.deleteCategory);
                 if (error) showMessage(error.message || 'Unable to delete category.', 'error');
                 else await loadCategories();

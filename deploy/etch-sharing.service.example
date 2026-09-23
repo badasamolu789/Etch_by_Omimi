@@ -1,0 +1,19 @@
+[Unit]
+Description=ETCH article and product sharing metadata
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/var/www/etchbyomimi
+EnvironmentFile=/etc/etch-sharing.env
+ExecStart=/usr/bin/node /var/www/etchbyomimi/server/share-pages.mjs
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target

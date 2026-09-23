@@ -2,6 +2,8 @@
 <html lang="en" data-theme="light">
 
 <head>
+    <link rel="stylesheet" href="/admin/style/dialogs.css" />
+    <script src="/admin/script/dialogs.js"></script>
     <script src="/script/core.js"></script>
     <script src="/script/components.js"></script>
     <meta charset="UTF-8" />
@@ -693,7 +695,7 @@
                             copySlugBtn.classList.add('bg-olive/10', 'text-olive');
                         }, 2000);
                     }).catch(() => {
-                        alert('Failed to copy slug');
+                        EtchDialog.alert('Failed to copy slug');
                     });
                 }
             });
@@ -915,12 +917,12 @@
             const authorId = document.getElementById('articleAuthor').value;
 
             if (!categoryId) {
-                alert('Please select a category');
+                EtchDialog.alert('Please select a category');
                 return;
             }
 
             if (!authorId) {
-                alert('Please select an author');
+                EtchDialog.alert('Please select an author');
                 return;
             }
 
@@ -932,11 +934,11 @@
                 content = document.querySelector('#articleContent').value;
             }
 
-            if (!content.trim()) { alert('Enter article content before saving.'); return; }
+            if (!content.trim()) { EtchDialog.alert('Enter article content before saving.'); return; }
             const scheduled = document.getElementById('articleStatus').value === 'scheduled';
             const publishDate = document.getElementById('publishDate').value;
             if (scheduled && (!publishDate || new Date(publishDate).getTime() <= Date.now())) {
-                alert('Choose a future date for scheduled publishing.');
+                EtchDialog.alert('Choose a future date for scheduled publishing.');
                 return;
             }
             saveBtn.disabled = true;
@@ -945,7 +947,7 @@
                 featuredImageUrl = await uploadFeaturedImageIfNeeded();
             } catch (error) {
                 console.error('Featured image upload failed:', error);
-                alert('Featured image upload failed: ' + (error.message || 'Unknown error'));
+                EtchDialog.alert('Featured image upload failed: ' + (error.message || 'Unknown error'));
                 saveBtn.innerHTML = `
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
@@ -1016,7 +1018,7 @@
                 }, 5000);
 
                 // Stay on the saved record so another save cannot create a duplicate.
-                if (!editingId) { location.replace('create_article.html?id=' + encodeURIComponent(data.id)); return; }
+                if (!editingId) { location.replace('create_article?id=' + encodeURIComponent(data.id)); return; }
                 existingArticle = data;
                 removedFeaturedImage = false;
                 if (featuredFileInput) featuredFileInput.value = '';
@@ -1029,7 +1031,7 @@
                     Save Article
                 `;
                 saveBtn.disabled = false;
-                alert('Failed to save article: ' + (error.message || 'Unknown error'));
+                EtchDialog.alert('Failed to save article: ' + (error.message || 'Unknown error'));
             }
         });
 
@@ -1082,7 +1084,7 @@
             if(error){section.append(Object.assign(document.createElement('p'),{textContent:'Preview links unavailable: '+error.message}));return;}
             for(const link of data){
                 const row=document.createElement('p');row.textContent=new Date(link.expires_at).toLocaleString()+' — '+(link.revoked?'Revoked':new Date(link.expires_at)<new Date()?'Expired':'Active');
-                if(!link.revoked){const button=document.createElement('button');button.type='button';button.className='border p-2 m-2';button.textContent='Revoke';button.onclick=async()=>{button.disabled=true;const result=await EtchSupabase.getClient().functions.invoke('article-preview',{body:{action:'revoke',id:link.id}});if(result.error||result.data?.error){alert(result.data?.error||result.error.message);button.disabled=false;}else await loadPreviewLinks();};row.append(button);}
+                if(!link.revoked){const button=document.createElement('button');button.type='button';button.className='border p-2 m-2';button.textContent='Revoke';button.onclick=async()=>{button.disabled=true;const result=await EtchSupabase.getClient().functions.invoke('article-preview',{body:{action:'revoke',id:link.id}});if(result.error||result.data?.error){EtchDialog.alert(result.data?.error||result.error.message);button.disabled=false;}else await loadPreviewLinks();};row.append(button);}
                 section.append(row);
             }
         }

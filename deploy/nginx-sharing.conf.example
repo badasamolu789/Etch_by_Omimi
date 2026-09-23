@@ -1,0 +1,21 @@
+# Merge these locations into the existing HTTPS server block for etchbyomimi.com.
+# Do not replace the entire server configuration. Existing TLS/static settings stay.
+location = /article {
+    proxy_pass http://127.0.0.1:3100;
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+location = /product-detail {
+    proxy_pass http://127.0.0.1:3100;
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+# Preserve identifiers in old links.
+location = /article.html { return 302 /article$is_args$args; }
+location = /product-detail.html { return 302 /product-detail$is_args$args; }
+# IMPORTANT: a server-level .html redirect executes before these locations.
+# Replace/remove any conflicting server-level rule that drops query parameters.
+# Likewise preserve $is_args$args in redirects for admin edit pages and search.
+# Server source/configuration is not a public website asset.
+location ^~ /server/ { return 404; }
+location ^~ /deploy/ { return 404; }

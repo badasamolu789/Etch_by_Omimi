@@ -77,3 +77,11 @@ PGlite executes the publisher UPDATE but does not run pg_cron itself. Browser ch
 - `git diff --check`: passed.
 
 For Mailchimp import, match the exported Email Address, Full Name, and Subscription Date columns to the intended audience fields; see [Mailchimp's import formatting guide](https://mailchimp.com/help/format-guidelines-for-your-import-file/). The delivery handler uses the provider's [idempotency mechanism](https://resend.com/changelog/idempotency-keys) in addition to the database claim.
+
+## Production preview routing fix — 23 September 2026
+
+The live server redirected `/article.html?slug=…&preview=1` to `/article`, dropping the query string. Shared article and listing links now target `/article?...` and `/product-detail?...` directly. Upload `script/core.js` and clear its browser/CDN cache. Existing `.html` bookmarks still need the hosting redirect configured to retain query parameters; `.htaccess` changes alone will not fix a redirect handled by Nginx.
+
+## Public links, admin dialogs, and social sharing — 23 September 2026
+
+Homepage and masterclass article links now use the clean-URL helper; admin edit identifiers also avoid the dropping redirect. Native admin alert/confirm/prompt calls were replaced by styled promise-based modals. A VPS metadata service now generates public article/product Open Graph and Twitter tags in the initial response. See [VPS_SHARING_DEPLOYMENT.md](VPS_SHARING_DEPLOYMENT.md) for the required Node/systemd/Nginx activation steps. No database migration is needed for this update. Local verification: 28 unit/API tests, browser modal/workflow checks, and source validation passed.

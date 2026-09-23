@@ -906,14 +906,13 @@
                     const imageUrl = EtchUI.safeUrl(article.featured_image);
                     const articleTitle = article.title || 'Untitled Article';
                     const articleExcerpt = article.excerpt || article.content?.substring(0, 100) || '';
-                    const articleSlug = article.slug || '';
 
                     const card = document.createElement('article');
                     card.className = `group bg-stone dark:bg-white/5 rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/30 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 ${delay > 0 ? `delay-${delay}` : ''}`;
                     card.style.animationDelay = `${delay}ms`;
 
                     card.innerHTML = `
-                        <a href="article.html?slug=${articleSlug}" class="block">
+                        <a href="${EtchUI.escapeHtml(EtchUI.articleUrl(article.slug))}" class="block">
                             <div class="relative overflow-hidden h-40 bg-white/60 dark:bg-ink/40 flex items-center justify-center">
                                 ${imageUrl
                                     ? `<img src="${EtchUI.escapeHtml(imageUrl)}" alt="${EtchUI.escapeHtml(articleTitle)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />`

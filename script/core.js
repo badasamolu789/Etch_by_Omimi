@@ -16,12 +16,12 @@
     }
     function listingUrl(listing) {
         const key = listing.slug ? 'slug' : 'id';
-        return '/product-detail.html?' + new URLSearchParams({ [key]: listing[key] }).toString();
+        return '/product-detail?' + new URLSearchParams({ [key]: listing[key] }).toString();
     }
     function articleUrl(slug, preview = false) {
         const params = new URLSearchParams({ slug });
         if (preview) params.set('preview', '1');
-        return '/article.html?' + params.toString();
+        return '/article?' + params.toString();
     }
     function setTheme(theme) {
         theme = theme === 'dark' ? 'dark' : 'light';

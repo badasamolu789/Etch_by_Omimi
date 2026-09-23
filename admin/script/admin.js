@@ -130,7 +130,7 @@
         signOutLink.addEventListener('click', async function (event) {
             event.preventDefault();
             const { error } = await EtchSupabase.signOut();
-            if (error) { alert('Sign out failed. Please try again.'); return; }
+            if (error) { EtchDialog.alert('Sign out failed. Please try again.'); return; }
             clearAdminSession();
             window.location.href = '/admin/auth/signin.html';
         });

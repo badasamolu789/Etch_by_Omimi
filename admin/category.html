@@ -2,6 +2,8 @@
 <html lang="en" data-theme="light">
 
 <head>
+    <link rel="stylesheet" href="/admin/style/dialogs.css" />
+    <script src="/admin/script/dialogs.js"></script>
     <script src="/script/core.js"></script>
     <script src="/script/components.js"></script>
     <meta charset="UTF-8" />
@@ -481,10 +483,10 @@
         }
 
         async function deleteCategory(id) {
-            if (!confirm('Are you sure you want to delete this category?')) return;
+            if (!await EtchDialog.confirm('Are you sure you want to delete this category?')) return;
             const { error } = await EtchSupabase.deleteCategory(id);
             if (error) {
-                alert('Failed to delete category: ' + error.message);
+                EtchDialog.alert('Failed to delete category: ' + error.message);
                 return;
             }
             loadCategories();

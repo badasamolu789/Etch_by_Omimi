@@ -2,6 +2,8 @@
 <html lang="en" data-theme="light">
 
 <head>
+    <link rel="stylesheet" href="/admin/style/dialogs.css" />
+    <script src="/admin/script/dialogs.js"></script>
     <script src="/script/core.js"></script>
     <script src="/script/components.js"></script>
     <meta charset="UTF-8" />
@@ -786,22 +788,6 @@
         // ==========================================
         // DELETE CONFIRMATION
         // ==========================================
-        document.querySelectorAll('[title="Delete"]').forEach(btn => {
-            btn.addEventListener('click', function (e) {
-                e.stopPropagation();
-                if (confirm('Are you sure you want to delete this media file?')) {
-                    const item = this.closest('.group');
-                    if (item) {
-                        item.style.opacity = '0.5';
-                        item.style.transform = 'scale(0.95)';
-                        setTimeout(() => {
-                            item.style.display = 'none';
-                        }, 300);
-                    }
-                }
-            });
-        });
-
         const mediaBucket = 'masterclass-media';
         const mediaGrid = document.getElementById('mediaGrid');
         const mediaTotal = document.getElementById('mediaTotal');
@@ -890,7 +876,7 @@
         mediaGrid.addEventListener('click', async event => {
             const deleteButton = event.target.closest('.media-delete');
             if (deleteButton) {
-                if (!confirm('Are you sure you want to delete this media file?')) return;
+                if (!await EtchDialog.confirm('Are you sure you want to delete this media file?')) return;
                 const result = await EtchSupabase.removeFile(mediaBucket, deleteButton.dataset.path);
                 if (result.error) return;
                 await loadMedia();

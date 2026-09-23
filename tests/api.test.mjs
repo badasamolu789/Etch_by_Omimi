@@ -94,8 +94,10 @@ test('routing and escaping work on extensionless URLs and attribute payloads', (
     const ui = context.window.EtchUI;
     assert.equal(ui.pageName(), 'dashboard');
     assert.equal(ui.pageName('/user/dashboard.html'), 'dashboard');
-    assert.equal(ui.listingUrl({ id: 'uuid', slug: 'my story' }), '/product-detail.html?slug=my+story');
-    assert.equal(ui.listingUrl({ id: 'uuid' }), '/product-detail.html?id=uuid');
+    assert.equal(ui.listingUrl({ id: 'uuid', slug: 'my story' }), '/product-detail?slug=my+story');
+    assert.equal(ui.listingUrl({ id: 'uuid' }), '/product-detail?id=uuid');
+    assert.equal(ui.articleUrl('my story', true), '/article?slug=my+story&preview=1');
+    assert.equal(ui.articleUrl('a&b'), '/article?slug=a%26b');
     assert.equal(ui.safeUrl('javascript:alert(1)'), '');
     assert.equal(ui.escapeHtml('" onerror="x'), '&quot; onerror=&quot;x');
 });

@@ -79,7 +79,7 @@
                 </div>`;
 
         container.innerHTML = `
-            <a href="article.html?slug=${encodeURIComponent(article.slug)}"
+            <a href="${EtchUI.escapeHtml(EtchUI.articleUrl(article.slug))}"
                 class="group block bg-white dark:bg-ink rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/40 hover:shadow-2xl transition-all duration-500">
                 <div class="relative h-56 overflow-hidden">
                     ${imageMarkup}
@@ -133,7 +133,7 @@
                     </div>`;
 
             return `
-                <a href="article.html?slug=${encodeURIComponent(article.slug)}"
+                <a href="${EtchUI.escapeHtml(EtchUI.articleUrl(article.slug))}"
                     class="group bg-white dark:bg-ink rounded-2xl border border-border dark:border-white/10 overflow-hidden hover:border-olive/40 hover:shadow-2xl hover:-translate-y-1 transition-all duration-500">
                     <div class="relative h-48 overflow-hidden">
                         ${imageMarkup}

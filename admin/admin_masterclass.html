@@ -2,6 +2,8 @@
 <html lang="en" data-theme="light">
 
 <head>
+    <link rel="stylesheet" href="/admin/style/dialogs.css" />
+    <script src="/admin/script/dialogs.js"></script>
     <script src="/script/core.js"></script>
     <script src="/script/components.js"></script>
     <meta charset="UTF-8" />
@@ -545,7 +547,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                         </svg>
                                     </a>
-                                    <a class="p-2 text-olive" href="create_article.html?id=${encodeURIComponent(article.id)}">Edit</a>
+                                    <a class="p-2 text-olive" href="create_article?id=${encodeURIComponent(article.id)}">Edit</a>
                                     <button class="p-2 text-olive" onclick="shareArticle('${article.id}')">Share preview</button>
                                     <button onclick="deleteArticle('${article.id}')"
                                         class="p-1.5 text-slate/40 hover:text-coral transition-colors duration-200 rounded-lg hover:bg-coral/10" title="Delete">
@@ -583,18 +585,18 @@
         }
 
         async function shareArticle(articleId) {
-            const hours = prompt('Preview expiry in hours (1–168):', '48');
+            const hours = await EtchDialog.prompt('Choose how long this private link stays active.', '48', {label:'Expiry in hours',type:'number',min:1,max:168});
             if (hours === null) return;
             const {data,error} = await EtchSupabase.getClient().functions.invoke('article-preview',{body:{action:'create',articleId,hours:Number(hours)}});
-            if(error || data?.error) { alert(data?.error || error.message); return; }
+            if(error || data?.error) { EtchDialog.alert(data?.error || error.message); return; }
             const url = new URL('/article-preview.html',location.origin); url.hash = 'token=' + data.token;
-            prompt('Copy this private review link. Expires ' + new Date(data.expires_at).toLocaleString(),url.href);
+            await EtchDialog.share('Copy this private review link. Expires ' + new Date(data.expires_at).toLocaleString(),url.href);
         }
         async function deleteArticle(id) {
-            if (!confirm('Are you sure you want to delete this article?')) return;
+            if (!await EtchDialog.confirm('Are you sure you want to delete this article?')) return;
             const { error } = await EtchSupabase.deleteArticle(id);
             if (error) {
-                alert('Failed to delete article: ' + error.message);
+                EtchDialog.alert('Failed to delete article: ' + error.message);
                 return;
             }
             loadArticles();

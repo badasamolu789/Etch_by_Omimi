@@ -18,13 +18,7 @@ async function save(operation){
  catch(error){message(error.message || 'Unable to save. Please retry.');}
 }
 function button(label,action){const el=document.createElement('button');el.className='border rounded px-3 py-2 m-1';el.textContent=label;el.onclick=async()=>{el.disabled=true;try{await action();}finally{el.disabled=false;}};return el;}
-function askReason(){return new Promise(resolve=>{
- const dialog=document.createElement('dialog');dialog.className='rounded-2xl p-6 max-w-lg w-full';
- dialog.innerHTML='<form><h2 class="text-xl mb-3">Record your decision</h2><label>Reason<textarea required minlength="3" maxlength="2000" class="block w-full border rounded p-3 my-3" rows="4"></textarea></label><button type="submit" class="border rounded p-2">Confirm decision</button><button type="button" class="border rounded p-2 ml-3">Cancel</button></form>';
- const finish=value=>{dialog.close();dialog.remove();resolve(value);};
- dialog.querySelector('form').onsubmit=event=>{event.preventDefault();finish(dialog.querySelector('textarea').value.trim());};
- dialog.querySelector('[type="button"]').onclick=()=>finish(null);dialog.oncancel=event=>{event.preventDefault();finish(null);};document.body.append(dialog);dialog.showModal();
-});}
+function askReason(){return EtchDialog.open({title:'Record your decision',message:'Add a reason for this decision. It will be saved with the review.',input:true,multiline:true,label:'Decision reason',minLength:3,maxLength:2000,confirmText:'Confirm decision'});}
 function details(row){const el=document.createElement('details');const summary=document.createElement('summary');summary.textContent='View record';const pre=document.createElement('pre');pre.style.whiteSpace='pre-wrap';pre.textContent=JSON.stringify(row,null,2);el.append(summary,pre);return el;}
 function actions(row){
  const el=document.createElement('div'),db=EtchSupabase.getClient();
@@ -101,7 +95,7 @@ async function initialize(){
  await load();
 }
 async function configureRubric(){
- const dialog=document.createElement('dialog');dialog.className='p-6 rounded-2xl max-w-2xl w-full';
+ const dialog=document.createElement('dialog');dialog.className='etch-dialog';
  dialog.innerHTML='<form><h2 class="text-2xl mb-3">Scoring criteria</h2><p>Weights must total 100%. Saving creates a new rubric. Existing reviews retain their original rubric; acceptance requires a review under the active rubric.</p><div id="rubricRows"></div><button type="button" id="addCriterion" class="border p-2 my-3">Add criterion</button><p id="rubricError" role="alert"></p><button class="border p-2">Save rubric</button><button type="button" id="cancelRubric" class="border p-2 ml-3">Cancel</button></form>';
  const rows=dialog.querySelector('#rubricRows');
  const add=(criterion={})=>{
