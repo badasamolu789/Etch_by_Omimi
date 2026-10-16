@@ -15,10 +15,12 @@ ETCH is a static, multi-page creative marketplace with public discovery pages, a
 
 Serve the project from an HTTP server; do not open pages with `file://`. Apache deployment uses `.htaccess` to map extensionless paths. The site expects to be served at the domain root.
 
-Auth, listing queries/creation, profile photos, editorial creation, contact saving, and newsletter subscriptions/delivery have backend integrations. Messaging, commerce transactions, licensing, and portions of workspace presentation remain incomplete features.
+Auth, listing queries/creation, profile photos, editorial creation, contact saving, and newsletter subscriptions/delivery have backend integrations. Private creator conversations and non-binding licensing enquiries now have persistent workflows. Commerce transactions, payouts, executed license agreements, message attachments, and real-time notifications remain future work.
+
+See [creator/user journey changes and deployment order](docs/CREATOR_WORKSPACE_FIXES.md) for signup, profiles, listing editing, storefronts, conversations, licensing enquiries, analytics, and admin-published legal pages.
 
 See [consistency fixes and deployment order](docs/CONSISTENCY_FIXES.md) before deploying. The [original source review](docs/PLATFORM_REVIEW.md) records the findings that led to this repair.
 
-Install development tools with `npm ci`. Run `npm run check`, `npm test`, `npm run test:database`, and `npm run test:browser` for the available verification.
+Install development tools with `npm ci`. Run `npm run check`, `npm test`, `npm run test:database`, `npm run test:browser`, and `npm run test:creator` for the available verification.
 
 The current admin upgrade, role matrix, deployment steps, and checklist are documented in [ADMIN_UPGRADE_CHECKLIST.md](docs/ADMIN_UPGRADE_CHECKLIST.md). Paystack is excluded from this upgrade.

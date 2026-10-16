@@ -126,17 +126,28 @@ try {
     console.log('Browser checks passed: homepage partner empty state, upload success/failure, clean routes, pagination, safe rendering, article metadata/fail-closed content, theme, contact persistence.');
     // Admin UI fixtures exercise real page scripts while keeping all service calls local.
     await page.route('https://cdn.ckeditor.com/**',route=>route.fulfill({contentType:'application/javascript',body:`window.ClassicEditor={create:async el=>({getData:()=>el.value,setData:value=>{el.value=value;}})};`}));
-    await page.route('**/script/supabase.js',route=>route.fulfill({contentType:'application/javascript',body:`
+    await page.route('**/script/supabase.js*',route=>route.fulfill({contentType:'application/javascript',body:`
       window.__updates=[];window.__queries=[];window.__rpcs=[];
       const article={id:'article-id',slug:'existing',title:'Existing title',content:'Existing body',status:'draft',published_at:null,featured_image:'/assets/logo.png',category_id:'category-id',author_id:'author-id',reading_time:5,seo_title:'Search title',seo_description:'Search description',author:{id:'author-id',name:'Author'},category:{id:'category-id',name:'Category'}};
       const tables={masterclass_articles:[article],article_preview_links:[],masterclass_authors:[{id:'author-id',name:'Author',slug:'author',status:null}],profiles:[{id:'creator-id',full_name:'Writer',username:'writer',role:'creator',account_type:'writer'}],verification_requests:[{id:'verification-id',user_id:'creator-id',evidence:'https://portfolio.example',status:'pending'}],listings:[{id:'listing-id',title:'Review script',status:'review'}],content_reports:[{id:'report-id',content_type:'listing',content_id:'listing-id',reason:'Policy violation',status:'pending'}],founding_applications:[{id:'application-id',full_name:'Applicant',email:'applicant@example.test',portfolio_url:'https://example.test',statement:'Application statement',status:'submitted'}],founding_rubrics:[{id:'rubric-id',active:true,criteria:[{key:'writing',name:'Writing',weight:100}]}],founding_reviews:[],acceptance_deliveries:[],admin_audit_log:[{id:1,action:'UPDATE',entity:'listings',actor_role:'reviewer'}],newsletter_subscribers:[{id:'subscriber-id',email:'subscriber@example.test',name:'Name',subscribed_at:'2026-09-01'}]};
       if(location.pathname.includes('founding-voices'))tables.founding_applications=[];
       function query(table){let one=false;const q=new Proxy({then:resolve=>Promise.resolve({data:one?(tables[table]||[])[0]||null:tables[table]||[],count:(tables[table]||[]).length,error:null}).then(resolve)},{get:(target,key)=>key in target?target[key]:(...args)=>{if(['single','maybeSingle'].includes(key))one=true;window.__queries.push({table,method:key,args});return q;}});return q;}
-      const client={from:query,rpc:async(name,args)=>{window.__rpcs.push({name,args});return {data:name==='analytics_summary'?{page_views:10,sessions:4,average_active_session_seconds:30,pages:[{path:'/about',views:10}],utm_breakdown:[{utm_source:'newsletter',utm_medium:'email',utm_campaign:'launch',views:10,sessions:4}]}:null,error:null};},functions:{invoke:async()=>({data:{sent:true},error:null})}};
-      window.EtchSupabase={getClient:()=>client,requireAdmin:async()=>({authenticated:true,user:{id:'staff',email:'staff@example.test'},profile:{full_name:'Staff',role:new URLSearchParams(location.search).get('testRole')||'super_admin'}}),getCurrentUser:async()=>({user:{id:'staff',email:'applicant@example.test'}}),getProfile:async()=>({profile:{full_name:'Staff'}}),getSiteSettings:async()=>({data:{}}),getHomepagePartners:async()=>({data:[]}),getMarketplaceCategories:async()=>({data:[]}),getCategories:async()=>({data:[{id:'category-id',name:'Category'}]}),getAuthors:async()=>({data:tables.masterclass_authors}),getArticles:async options=>{window.__articleOptions=options;return {data:[article],count:1};},updateArticle:async(id,payload)=>{window.__updates.push({id,payload});if(window.__failUpdate)return {error:new Error('Update failed')};Object.assign(article,payload);return {data:article};},createArticle:async()=>{throw new Error('Edit must not create')},getNewsletterSubscribers:async()=>({data:tables.newsletter_subscribers})};
+      const client={from:query,rpc:async(name,args)=>{window.__rpcs.push({name,args});return {data:name==='create_founding_invitation'?{id:'invite-id',email:args.invited_email,token:'a'.repeat(64),expires_at:'2026-12-01T00:00:00Z'}:['can_submit_founding_application','redeem_founding_invitation'].includes(name)?new URLSearchParams(location.search).get('testInvitation')!=='denied':name==='analytics_summary'?{page_views:10,sessions:4,average_active_session_seconds:30,pages:[{path:'/about',views:10}],utm_breakdown:[{utm_source:'newsletter',utm_medium:'email',utm_campaign:'launch',views:10,sessions:4}]}:null,error:null};},functions:{invoke:async()=>({data:{sent:true},error:null})}};
+      window.EtchSupabase={getClient:()=>client,requireAdmin:async()=>({authenticated:true,user:{id:'staff',email:'staff@example.test'},profile:{full_name:'Staff',role:new URLSearchParams(location.search).get('testRole')||'super_admin'}}),signIn:async()=>({data:{session:{}}}),getCurrentUser:async()=>({user:{id:'staff',email:'applicant@example.test'}}),getProfile:async()=>({profile:{full_name:'Staff'}}),getSiteSettings:async()=>({data:{}}),getHomepagePartners:async()=>({data:[]}),getMarketplaceCategories:async()=>({data:[]}),getCategories:async()=>{if(window.__failCategories)return {data:[],error:new Error('Category request failed')};return {data:[{id:'category-id',name:window.__categoryName||'Category'}]};},countRows:async(table,options)=>({count:table==='masterclass_articles'?3:1,error:window.__failCounts?new Error('Count unavailable'):null}),getAuthors:async()=>window.__failAuthors?({data:[],error:new Error('Author request failed')}):({data:tables.masterclass_authors}),getArticles:async options=>{window.__articleOptions=options;return {data:[article],count:1};},updateArticle:async(id,payload)=>{window.__updates.push({id,payload});if(window.__failUpdate)return {error:new Error('Update failed')};Object.assign(article,payload);return {data:article};},createArticle:async()=>{throw new Error('Edit must not create')},getNewsletterSubscribers:async()=>({data:tables.newsletter_subscribers})};
     `}));
+    await page.goto(base+'/admin/index');
+    await page.waitForFunction(()=>document.getElementById('masterclassPublishedArticles').textContent==='3');
+    assert.equal(await page.locator('#masterclassTotalArticles').textContent(),'3');
+    assert.equal(await page.getByText('Support Tickets',{exact:true}).count(),0);
+    await page.evaluate(()=>window.__failCounts=true);
+    await page.getByRole('button',{name:'Refresh dashboard',exact:true}).click();
+    await page.waitForFunction(()=>document.getElementById('masterclassPublishedArticles').textContent==='—');
+    assert.match(await page.locator('#dashboardLoadStatus').textContent(),/unavailable/);
+    await page.evaluate(()=>window.__failCounts=false);
+    await page.getByRole('button',{name:'Refresh dashboard',exact:true}).click();
+    await page.waitForFunction(()=>document.getElementById('masterclassPublishedArticles').textContent==='3');
     // Every admin route must render the shared navigation, including clean URLs.
-    for (const route of ['index','applications','users','verification','listings','reports','audit','analytics','author','category','partners','marketplace_categories','newsletter','media_library','admin_masterclass','create_article','create_author','create_category']) {
+    for (const route of ['index','contacts','applications','users','verification','listings','reports','audit','analytics','author','category','partners','marketplace_categories','newsletter','media_library','admin_masterclass','create_article','create_author','create_category']) {
         await page.goto(base+'/admin/'+route);
         await page.waitForSelector('.admin-sidebar').catch(error=>{throw new Error(route+': '+error.message+'; browser errors: '+errors.join('; '));});
         assert.equal(await page.locator('.admin-sidebar').count(),1,route+' has one sidebar');
@@ -180,7 +191,7 @@ try {
     await page.getByRole('button',{name:'Continue',exact:true}).click();
     await page.waitForFunction(()=>window.__answer==='72');
     await page.goto(base+'/admin/create_article?id=article-id');
-    await page.waitForFunction(()=>document.getElementById('articleTitle').value==='Existing title'&&!document.getElementById('saveBtn').disabled);
+    await page.waitForFunction(()=>document.getElementById('articleTitle').value==='Existing title'&&!document.getElementById('saveBtn').disabled).catch(async error=>{throw new Error(error.message+'; '+await page.locator('#articleForm').innerText()+'; '+errors.join('; '));});
     assert.equal(await page.locator('#articleContent').inputValue(),'Existing body');
     await page.locator('#articleTitle').fill('Updated title');
     await page.locator('#seoTitle').fill('Updated SEO title');
@@ -205,6 +216,24 @@ try {
     await page.goto(base+'/admin/author');
     await page.waitForFunction(()=>document.getElementById('authorsTotalStat').textContent==='1');
     assert.match(await page.locator('#authorsTableBody').textContent(),/Author/);
+    await page.evaluate(()=>window.__failAuthors=true);
+    await page.getByRole('button',{name:'Refresh authors',exact:true}).click();
+    await page.waitForFunction(()=>document.getElementById('authorsHeaderLabel').textContent==='Authors unavailable');
+    assert.equal(await page.locator('#authorsTotalStat').textContent(),'—');
+    await page.evaluate(()=>window.__failAuthors=false);
+    await page.getByRole('button',{name:'Refresh authors',exact:true}).click();
+    await page.waitForFunction(()=>document.getElementById('authorsHeaderLabel').textContent.includes('1 total author'));
+    await page.goto(base+'/admin/create_article?id=article-id');
+    await page.waitForFunction(()=>!document.getElementById('saveBtn').disabled);
+    await page.evaluate(()=>window.__categoryName='Fresh category');
+    await page.getByRole('button',{name:'Refresh categories and authors',exact:true}).click();
+    await page.waitForFunction(()=>document.querySelector('#articleCategory option[value="category-id"]').textContent==='Fresh category');
+    assert.equal(await page.locator('#articleCategory').inputValue(),'category-id');
+    await page.evaluate(()=>window.__failCategories=true);
+    await page.getByRole('button',{name:'Refresh categories and authors',exact:true}).click();
+    await page.waitForFunction(()=>document.body.textContent.includes('Unable to refresh options: Category request failed'));
+    assert.equal(await page.locator('#articleCategory').inputValue(),'category-id');
+    assert.equal(await page.locator('#articleTitle').inputValue(),'Existing title');
     await page.goto(base+'/admin/listings');
     await page.getByRole('button',{name:'Approve',exact:true}).click();
     await page.locator('dialog textarea').fill('Reviewed and approved');
@@ -212,6 +241,12 @@ try {
     await page.waitForFunction(()=>window.__rpcs.some(call=>call.name==='moderate_listing'));
     await page.goto(base+'/admin/applications');
     await page.getByRole('button',{name:'Review application',exact:true}).click();
+    await page.getByRole('button',{name:'Manage invitations',exact:true}).click();
+    await page.getByRole('textbox',{name:'Invited email',exact:true}).fill('invited@example.test');
+    await page.getByRole('button',{name:'Generate invitation link',exact:true}).click();
+    await page.waitForFunction(()=>document.querySelector('[aria-label="Personal invitation link"]')?.value.includes('#invite='));
+    assert.match(await page.getByRole('textbox',{name:'Personal invitation link',exact:true}).inputValue(),/#invite=a{64}$/);
+    await page.getByRole('button',{name:'Manage invitations',exact:true}).click();
     await page.locator('#queueExtras input[type="number"]').fill('85');
     await page.locator('#queueExtras textarea').fill('Strong writing');
     await page.getByRole('button',{name:'Save weighted review',exact:true}).click();
@@ -231,6 +266,18 @@ try {
     await page.locator('[name="statement"]').fill('I have written feature scripts and would like to contribute to this creative community.');
     await page.getByRole('button',{name:'Submit application'}).click();
     await page.waitForFunction(()=>window.__queries.some(call=>call.table==='founding_applications'&&call.method==='insert'));
+    await page.goto(base+'/founding-voices?testInvitation=denied');
+    await page.waitForFunction(()=>document.getElementById('applicationStatus').textContent.includes('by invitation'));
+    assert.equal(await page.locator('#applicationForm').isVisible(),false);
+    await page.evaluate(()=>sessionStorage.setItem('etch_redirect_after_login','/founding-voices#invite='+'a'.repeat(64)));
+    await page.goto(base+'/user/auth/signin');
+    await page.locator('input[name="email"]').fill('invited@example.test');
+    await page.locator('input[name="password"]').fill('test-password');
+    await page.locator('form button[type="submit"]').click();
+    await page.waitForURL(base+'/founding-voices');
+    await page.locator('#applicationForm').waitFor({state:'visible'});
+    assert.equal(await page.evaluate(()=>sessionStorage.getItem('etch_redirect_after_login')),null);
+    assert.ok(await page.evaluate(()=>window.__rpcs.some(call=>call.name==='redeem_founding_invitation'&&call.args.invitation_token==='a'.repeat(64))));
     await page.goto(base+'/admin/users');
     await page.getByRole('button',{name:'Save role',exact:true}).click();
     await page.waitForFunction(()=>window.__rpcs.some(call=>call.name==='set_staff_role'));

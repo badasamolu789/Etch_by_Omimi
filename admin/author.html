@@ -4,8 +4,8 @@
 <head>
     <link rel="stylesheet" href="/admin/style/dialogs.css?v=20260923-ui2" />
     <script src="/admin/script/dialogs.js?v=20260923-ui2"></script>
-    <script src="/script/core.js"></script>
-    <script src="/script/components.js?v=20260923-ui2"></script>
+    <script src="/script/core.js?v=20261015-user1"></script>
+    <script src="/script/components.js?v=20261015-user1"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Authors | Masterclass | ETCH Admin</title>
@@ -134,8 +134,7 @@
                                 <span class="w-1.5 h-1.5 rounded-full bg-olive animate-pulse"></span>
                                 ✦ Contributor Management
                             </span>
-                            <span id="authorsHeaderLabel" class="text-xs text-slate/60 dark:text-gray-500">✍️ 0 total
-                                authors</span>
+                            <span id="authorsHeaderLabel" class="text-xs text-slate/60 dark:text-gray-500">Loading authors…</span>
                         </div>
                         <h2 class="font-display text-3xl md:text-4xl font-bold text-ink dark:text-white leading-tight">
                             <span class="relative inline-block">
@@ -374,11 +373,11 @@
 
     <script src="/script/supabase.js"></script>
     <script src="/script/script.js"></script>
-    <script src="/admin/script/admin.js?v=20260923-ui2"></script>
+    <script src="/admin/script/admin.js?v=20261015-user1"></script>
 
     <script>
         // Initialize Lucide Icons
-        lucide.createIcons();
+        window.lucide?.createIcons?.();
 
         // Set page title dynamically
         document.addEventListener('admin:components-ready', function () { const title = document.querySelector('.greeting h1'); if (title) title.textContent = 'Authors'; });
@@ -386,11 +385,18 @@
         // ==========================================
         // LOAD AUTHORS FROM SUPABASE
         // ==========================================
+        let authorsRequest = 0;
+        function authorsUnavailable() {
+            for (const id of ['authorsTotalStat','authorsActiveStat','authorsInactiveStat','authorsArticlesStat']) document.getElementById(id).textContent = '—';
+            for (const id of ['authorsHeaderLabel','authorsTotalLabel','authorsShowingLabel','authorsFooterLabel']) document.getElementById(id).textContent = 'Authors unavailable';
+        }
         async function loadAuthors() {
+            const request = ++authorsRequest;
             const tbody = document.querySelector('#authorsTableBody');
             if (!tbody) return;
 
             if (typeof EtchSupabase === 'undefined') {
+                authorsUnavailable();
                 tbody.innerHTML = getEmptyRow('Supabase not configured');
                 return;
             }
@@ -400,12 +406,13 @@
                     EtchSupabase.getAuthors(),
                     EtchSupabase.getArticles(),
                 ]);
+                if (request !== authorsRequest) return;
                 const { data, error } = authorResult;
 
                 if (error) {
                     console.error('Error loading authors:', error);
-                    document.getElementById('authorsTotalStat').textContent = '—';
-                    tbody.innerHTML = getEmptyRow('Failed to load authors. Refresh to retry.');
+                    authorsUnavailable();
+                tbody.innerHTML = getEmptyRow('Failed to load authors. Refresh to retry.');
                     return;
                 }
 
@@ -470,9 +477,10 @@
                     `;
                 }).join('');
             } catch (error) {
+                if (request !== authorsRequest) return;
                 console.error('Error loading authors:', error);
-                document.getElementById('authorsTotalStat').textContent = '—';
-                    tbody.innerHTML = getEmptyRow('Failed to load authors. Refresh to retry.');
+                authorsUnavailable();
+                tbody.innerHTML = getEmptyRow('Failed to load authors. Refresh to retry.');
             }
         }
 
@@ -505,8 +513,12 @@
         }
 
         // Load authors when components are ready
-        document.addEventListener('admin:components-ready', loadAuthors);
-        setTimeout(loadAuthors, 500);
+        if (window.ETCH_ADMIN_COMPONENTS_READY) queueMicrotask(loadAuthors);
+        else document.addEventListener('admin:components-ready', loadAuthors, {once:true});
+        const retryAuthors = document.createElement('button');
+        retryAuthors.type = 'button'; retryAuthors.className = 'admin-action'; retryAuthors.textContent = 'Refresh authors';
+        retryAuthors.onclick = loadAuthors;
+        document.getElementById('authorsHeaderLabel').after(retryAuthors);
     </script>
 </body>
 

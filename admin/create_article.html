@@ -4,8 +4,8 @@
 <head>
     <link rel="stylesheet" href="/admin/style/dialogs.css?v=20260923-ui2" />
     <script src="/admin/script/dialogs.js?v=20260923-ui2"></script>
-    <script src="/script/core.js"></script>
-    <script src="/script/components.js?v=20260923-ui2"></script>
+    <script src="/script/core.js?v=20261015-user1"></script>
+    <script src="/script/components.js?v=20261015-user1"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create Article | Masterclass | ETCH Admin</title>
@@ -597,11 +597,11 @@
 
     <script src="/script/supabase.js"></script>
     <script src="/script/script.js"></script>
-    <script src="/admin/script/admin.js?v=20260923-ui2"></script>
+    <script src="/admin/script/admin.js?v=20261015-user1"></script>
 
     <script>
         // Initialize Lucide Icons
-        lucide.createIcons();
+        window.lucide?.createIcons?.();
 
         // Set page title dynamically
         document.addEventListener('admin:components-ready', function () { const title = document.querySelector('.greeting h1'); if (title) title.textContent = new URLSearchParams(location.search).has('id') ? 'Edit Article' : 'Create Article'; });
@@ -867,38 +867,24 @@
         // ==========================================
         // LOAD CATEGORIES & AUTHORS FOR DROPDOWNS
         // ==========================================
-        async function loadFormOptions() {
-            const categorySelect = document.getElementById('articleCategory');
-            const authorSelect = document.getElementById('articleAuthor');
-
-            try {
-                // Load categories
-                const catResult = await EtchSupabase.getCategories({ status: 'active' });
-                if (catResult.error) throw catResult.error;
-                if (catResult.data?.length) {
-                    categorySelect.innerHTML = '<option value="">Select Category</option>' +
-                        catResult.data.map(c => `<option value="${c.id}">${EtchUI.escapeHtml(c.name)}</option>`).join('');
-                } else {
-                    categorySelect.innerHTML = '<option value="">No categories available</option>';
-                    console.warn('No active categories found');
+        let optionsRequest = 0;
+        async function loadFormOptions(preserve = false) {
+            const request = ++optionsRequest;
+            const selects = [document.getElementById('articleCategory'), document.getElementById('articleAuthor')];
+            const selections = selects.map(select => ({value:select.value, text:select.selectedOptions[0]?.textContent}));
+            const results = await Promise.all([EtchSupabase.getCategories({status:'active'}), EtchSupabase.getAuthors({status:'active'})]);
+            if (request !== optionsRequest) return;
+            const failure = results.find(result => result.error);
+            if (failure) throw failure.error;
+            results.forEach((result, index) => {
+                const select = selects[index];
+                select.replaceChildren(new Option(index === 0 ? 'Select Category' : 'Select Author', ''));
+                for (const record of result.data || []) select.add(new Option(record.name, record.id));
+                if (preserve && selections[index].value) {
+                    if (![...select.options].some(option => option.value === selections[index].value)) select.add(new Option(selections[index].text, selections[index].value));
+                    select.value = selections[index].value;
                 }
-
-                // Load authors
-                const authResult = await EtchSupabase.getAuthors({ status: 'active' });
-                if (authResult.error) throw authResult.error;
-                if (authResult.data?.length) {
-                    authorSelect.innerHTML = '<option value="">Select Author</option>' +
-                        authResult.data.map(a => `<option value="${a.id}">${EtchUI.escapeHtml(a.name)}</option>`).join('');
-                } else {
-                    authorSelect.innerHTML = '<option value="">No authors available</option>';
-                    console.warn('No active authors found');
-                }
-            } catch (error) {
-                console.error('Error loading form options:', error);
-                categorySelect.innerHTML = '<option value="">Error loading categories</option>';
-                authorSelect.innerHTML = '<option value="">Error loading authors</option>';
-                throw error;
-            }
+            });
         }
 
         // ==========================================
@@ -1102,7 +1088,20 @@
             }
         }
         form.addEventListener('input', renderSeoPreview);
-        initializeArticleForm();
+        if (window.ETCH_ADMIN_COMPONENTS_READY) queueMicrotask(initializeArticleForm);
+        else document.addEventListener('admin:components-ready', initializeArticleForm, {once:true});
+        const refreshOptions = document.createElement('button'); refreshOptions.type = 'button'; refreshOptions.className = 'admin-action'; refreshOptions.textContent = 'Refresh categories and authors';
+        const optionsStatus = document.createElement('p'); optionsStatus.setAttribute('role','status');
+        document.getElementById('articleCategory').after(refreshOptions, optionsStatus);
+        async function refreshFormOptions() {
+            if (!formReady || refreshOptions.disabled) return;
+            refreshOptions.disabled = true;
+            try { await loadFormOptions(true); optionsStatus.textContent = 'Categories and authors updated.'; }
+            catch (error) { optionsStatus.textContent = 'Unable to refresh options: ' + error.message + '. Current selections have been kept.'; }
+            finally { refreshOptions.disabled = false; }
+        }
+        refreshOptions.onclick = refreshFormOptions;
+        window.addEventListener('focus', refreshFormOptions);
 
         // ==========================================
         // SAVE DRAFT BUTTON

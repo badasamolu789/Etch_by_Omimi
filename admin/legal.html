@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <link rel="stylesheet" href="/admin/style/dialogs.css?v=20260923-ui2" />
+    <script src="/admin/script/dialogs.js?v=20260923-ui2"></script>
+    <script src="/script/core.js?v=20261015-user1"></script>
+    <script src="/script/components.js?v=20261015-user1"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Legal pages | ETCH Admin</title>
+    <meta name="description" content="Manage and review ETCH platform activity." />
+    <link rel="icon" href="/assets/logo.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="/style/style.css" />
+    <link rel="stylesheet" href="/admin/style/admin.css?v=20260923-ui2" />
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        olive: { DEFAULT: '#99A96A', dark: '#73824C', light: '#E8ECD9' },
+                        ink: '#151515', mist: '#FAFAF7', stone: '#F2F3ED',
+                        slate: '#6C6C6C', muted: '#9A9A9A', border: '#E5E7E2',
+                        success: '#3D6B4F', warning: '#C9A54C', error: '#B25555', info: '#5B8DEF',
+                        cream: '#F5F3EE', lavender: '#A78BFA', mint: '#4ECDC4',
+                    },
+                    fontFamily: {
+                        display: ['"Instrument Serif"', 'serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+<link rel="stylesheet" href="/style/legal-content.css?v=20261016-legal1"><link rel="stylesheet" href="/admin/style/legal.css?v=20261016-legal1">
+</head>
+<body><div class="admin-dashboard"><div data-component="include" data-src="component/sidebar.html"></div><main class="admin-dashboard-main"><div data-component="include" data-src="component/topbar.html"></div><section class="legal-admin-page">
+<h1>Legal pages</h1><p class="legal-intro">Create your Terms of Service and Privacy Policy with Markdown or HTML. Preview the finished page before publishing. Each save keeps a separate version.</p>
+<form id="legalEditor" class="legal-editor">
+<div class="legal-fields"><label for="legalKey">Document<select id="legalKey"><option value="terms">Terms of Service</option><option value="privacy">Privacy Policy</option></select></label><label for="legalTitle">Page title<input id="legalTitle" required minlength="3" maxlength="200"></label></div>
+<p id="legalEditorStatus" class="legal-editor-status" role="status"></p><button id="legalRetry" class="admin-action legal-retry" type="button" hidden>Reload latest version</button>
+<div class="legal-editor-toolbar"><div class="legal-editor-tabs" aria-label="Editor view"><button id="legalEditTab" type="button" aria-pressed="true" aria-controls="legalSource">Write</button><button id="legalPreviewTab" type="button" aria-pressed="false" aria-controls="legalPreview">Preview</button></div><p>Supports headings, lists, links, tables, and HTML formatting.</p></div>
+<div id="legalSource"><label for="legalText">Page content<textarea id="legalText" required minlength="20" maxlength="100000" rows="18" spellcheck="true" placeholder="## Your first section&#10;&#10;Add your approved policy text here. You can also paste HTML."></textarea></label></div>
+<article id="legalPreview" class="legal-preview legal-content" aria-label="Formatted document preview" hidden></article>
+<div class="legal-editor-footer"><label class="legal-publish" for="legalPublish"><input id="legalPublish" type="checkbox">Publish this version now</label><div class="legal-editor-actions"><a href="/terms" target="_blank" rel="noopener">View Terms</a><a href="/privacy" target="_blank" rel="noopener">View Privacy</a><button id="legalSave" type="submit" class="admin-action admin-action-primary" disabled>Save draft</button></div></div>
+</form></section></main></div><script src="https://unpkg.com/@supabase/supabase-js@2"></script><script src="/script/supabase.js?v=20261015-user1"></script><script src="/script/script.js"></script><script src="/admin/script/admin.js?v=20261015-user1"></script><script src="/script/vendor/marked.umd.js"></script><script src="/script/vendor/purify.min.js"></script><script src="/script/legal-content.js?v=20261016-legal1"></script><script src="/admin/script/legal.js?v=20261016-legal1"></script></body></html>

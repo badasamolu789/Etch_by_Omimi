@@ -2,8 +2,8 @@
 <html lang="en" data-theme="light">
 
 <head>
-    <script src="/script/core.js"></script>
-    <script src="/script/components.js"></script>
+    <script src="/script/core.js?v=20261015-user1"></script>
+    <script src="/script/components.js?v=20261015-user1"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Upload | ETCH Creator Studio</title>
@@ -133,7 +133,7 @@
                         </p>
                     </div>
                     <div class="flex flex-wrap items-center gap-3 flex-shrink-0 animate-slide-up-delay">
-                        <button
+                        <button type="button" data-listing-action="draft"
                             class="inline-flex items-center gap-2 px-6 py-3 border-2 border-dashed border-border dark:border-white/10 text-ink dark:text-white rounded-2xl font-medium hover:bg-white/60 hover:border-olive/30 hover:-translate-y-0.5 transition-all duration-300">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -141,9 +141,9 @@
                             </svg>
                             Save as Draft
                         </button>
-                        <button
+                        <button type="button" data-listing-action="review"
                             class="group inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-olive to-emerald-500 text-white rounded-2xl font-medium hover:shadow-xl hover:shadow-olive/20 hover:-translate-y-0.5 transition-all duration-300">
-                            <span>Publish Listing</span>
+                            <span>Submit for review</span>
                             <svg class="w-4 h-4 group-hover:rotate-90 transition-transform duration-300" fill="none"
                                 stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -291,7 +291,7 @@
                                 <div class="relative">
                                     <span
                                         class="absolute left-4 top-1/2 -translate-y-1/2 text-slate/40 font-medium">$</span>
-                                    <input type="number" name="price" min="0" step="50" placeholder="2500"
+                                    <input type="number" name="price" min="0" step="0.01" placeholder="2500"
                                         class="w-full pl-8 pr-4 py-3 bg-white/60 dark:bg-ink/60 border border-border/60 dark:border-white/10 rounded-2xl text-sm text-ink dark:text-white placeholder:text-slate/40 focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all duration-200" />
                                 </div>
                                 <p class="text-[10px] text-slate/40 mt-1.5">Set a commercial price for your asset</p>
@@ -378,7 +378,7 @@
                                 </div>
 
                                 <!-- File upload input (hidden) -->
-                                <input type="file" class="absolute inset-0 opacity-0 cursor-pointer"
+                                <input type="file" aria-label="Listing cover image" class="absolute inset-0 opacity-0 cursor-pointer"
                                     accept="image/jpeg,image/png,image/webp,image/gif" />
                             </div>
 
@@ -390,8 +390,7 @@
                         <div
                             class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-6 border-t border-border/60 dark:border-white/10">
                             <div class="flex items-center gap-3">
-                                <span class="text-xs text-slate/60 dark:text-gray-500">All changes are saved
-                                    locally</span>
+                                <span class="text-xs text-slate/60 dark:text-gray-500">Changes are saved only after a successful submission</span>
                                 <span
                                     class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-medium bg-gradient-to-r from-amber-500/10 to-orange-500/10 text-amber-600 border border-amber-500/20">
                                     <span class="w-1 h-1 rounded-full bg-amber-500 animate-pulse"></span>
@@ -399,7 +398,7 @@
                                 </span>
                             </div>
                             <div class="flex items-center gap-3">
-                                <button type="button"
+                                <button type="button" data-listing-action="draft"
                                     class="px-5 py-2.5 border-2 border-dashed border-border dark:border-white/10 text-ink dark:text-white rounded-2xl font-medium hover:bg-white/60 hover:border-olive/30 transition-all duration-300 text-sm">
                                     Save Draft
                                 </button>
@@ -474,10 +473,9 @@
                             <span class="text-3xl">🚀</span>
                             <h3 class="text-sm font-semibold text-ink dark:text-white mt-2">Ready to publish?</h3>
                             <p class="text-sm text-slate/70 dark:text-gray-400 mt-1 max-w-xs">
-                                Complete your listing details and submit for review. Our team will get back to you
-                                within 24-48 hours.
+                                Complete your listing details and submit for review. The ETCH team will review it before publication.
                             </p>
-                            <button
+                            <button type="button" data-listing-action="review"
                                 class="mt-4 inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium bg-gradient-to-r from-olive to-emerald-500 text-white rounded-full hover:shadow-xl hover:shadow-olive/20 hover:-translate-y-0.5 transition-all duration-300">
                                 Submit for review
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -512,16 +510,16 @@
     </script>
 
     <!-- ETCH Supabase Helper -->
-    <script src="../script/supabase.js"></script>
+    <script src="../script/supabase.js?v=20261015-user1"></script>
 
     <!-- Auth Guard - Must load before other scripts -->
-    <script src="../script/user-auth-guard.js"></script>
+    <script src="../script/user-auth-guard.js?v=20261015-user1"></script>
 
     <script src="../script/script.js"></script>
-    <script src="script/user.js"></script>
+    <script src="/user/script/user.js?v=20261015-user1"></script>
 
     <script>
-        lucide.createIcons();
+        window.lucide?.createIcons?.();
         const fileInput = document.querySelector('form input[type="file"]');
         const dropZone = fileInput?.closest('.border-dashed');
         const selection = document.getElementById('uploadSelection');
@@ -544,7 +542,8 @@
             const categorySelect = document.querySelector('select[name="category"]');
             if (!categorySelect || !window.EtchSupabase?.getMarketplaceCategories) return;
             const { data, error } = await window.EtchSupabase.getMarketplaceCategories({ status: 'published' });
-            const categories = !error && data?.length ? data : [{ name: 'Script', slug: 'script' }];
+            if(error)throw error;
+            const categories = data || [];
             categorySelect.innerHTML = '<option value="">Choose category</option>' + categories.map(category => {
                 const slug = EtchUI.escapeHtml(category.slug || 'script');
                 const name = EtchUI.escapeHtml(category.name || 'Script');
@@ -552,7 +551,7 @@
             }).join('');
         }
 
-        loadUploadCategories().catch(error => console.warn('Marketplace categories unavailable:', error));
+        window.ETCH_CATEGORIES_READY = loadUploadCategories().then(()=>true).catch(error=>{const message=document.getElementById('formError');message.textContent='Unable to load categories. Reload to retry.';message.classList.remove('hidden');document.querySelectorAll('form button[type="submit"],[data-listing-action]').forEach(button=>button.disabled=true);return false;});
     </script>
 </body>
 </html>

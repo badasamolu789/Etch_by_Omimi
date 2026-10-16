@@ -23,6 +23,17 @@
         if (preview) params.set('preview', '1');
         return '/article?' + params.toString();
     }
+    function consumeAuthRedirect() {
+        try {
+            const saved = sessionStorage.getItem('etch_redirect_after_login');
+            sessionStorage.removeItem('etch_redirect_after_login');
+            if (saved && saved.startsWith('/') && !saved.startsWith('//')) {
+                const url = new URL(saved, window.location.origin);
+                if (url.origin === window.location.origin && !url.pathname.startsWith('/user/auth/')) return url.pathname + url.search + url.hash;
+            }
+        } catch { /* A storage-disabled browser can still sign in. */ }
+        return '/user/dashboard.html';
+    }
     function setTheme(theme) {
         theme = theme === 'dark' ? 'dark' : 'light';
         document.documentElement.classList.toggle('dark', theme === 'dark');
@@ -55,5 +66,5 @@
         const params = new URLSearchParams(window.location.search);
         return { categories: params.getAll('category'), minPrice: params.get('minPrice'), maxPrice: params.get('maxPrice'), sort: params.get('sort') || 'latest' };
     }
-    window.EtchUI = { escapeHtml, safeUrl, pageName, listingUrl, articleUrl, setTheme, pagination, marketFilters };
+    window.EtchUI = { escapeHtml, safeUrl, pageName, listingUrl, articleUrl, setTheme, pagination, marketFilters, consumeAuthRedirect };
 })();

@@ -4,8 +4,8 @@
 <head>
     <link rel="stylesheet" href="/admin/style/dialogs.css?v=20260923-ui2" />
     <script src="/admin/script/dialogs.js?v=20260923-ui2"></script>
-    <script src="/script/core.js"></script>
-    <script src="/script/components.js?v=20260923-ui2"></script>
+    <script src="/script/core.js?v=20261015-user1"></script>
+    <script src="/script/components.js?v=20261015-user1"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard | ETCH Admin</title>
@@ -136,8 +136,7 @@
                     <div class="flex flex-wrap items-center gap-3 flex-shrink-0 animate-slide-up-delay">
                         <span class="text-xs text-slate/60 dark:text-gray-500">Status pending live checks</span>
                         <span class="w-px h-6 bg-border/60 dark:bg-white/10"></span>
-                        <span class="text-xs text-slate/60 dark:text-gray-500">Last updated: <span id="lastUpdated">Just
-                                now</span></span>
+                        <span class="text-xs text-slate/60 dark:text-gray-500">Last updated: <span id="lastUpdated">Not refreshed</span></span>
                     </div>
                 </div>
             </section>
@@ -153,8 +152,7 @@
                     <div class="flex items-start justify-between">
                         <div>
                             <span class="text-sm text-slate/60 dark:text-gray-500 font-medium">Total Users</span>
-                            <p id="dashboardUsersCount" class="text-3xl font-bold text-ink dark:text-white mt-1">0
-                            </p>
+                            <p id="dashboardUsersCount" class="text-3xl font-bold text-ink dark:text-white mt-1">—</p>
                         </div>
                         <div
                             class="w-12 h-12 rounded-xl bg-gradient-to-br from-olive/20 to-emerald-500/20 flex items-center justify-center text-olive group-hover:scale-110 transition-transform duration-300">
@@ -164,22 +162,8 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="flex items-center gap-2 mt-3">
-                        <span
-                            class="inline-flex items-center gap-1 text-xs font-medium text-emerald-500 bg-emerald-500/10 px-2.5 py-1 rounded-full">
-                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                            </svg>
-                            0%
-                        </span>
-                        <span class="text-xs text-slate/60 dark:text-gray-500">this month</span>
-                    </div>
-                    <div class="mt-3 h-1 w-full bg-border/50 dark:bg-white/5 rounded-full overflow-hidden">
-                        <div
-                            class="h-full w-3/4 bg-gradient-to-r from-olive to-emerald-500 rounded-full group-hover:w-full transition-all duration-1000">
-                        </div>
-                    </div>
+                    <p class="text-xs text-slate/60 mt-3">Trend data unavailable</p>
+
                 </div>
 
                 <!-- Stat 2 - Total Listings -->
@@ -188,8 +172,7 @@
                     <div class="flex items-start justify-between">
                         <div>
                             <span class="text-sm text-slate/60 dark:text-gray-500 font-medium">Total Listings</span>
-                            <p id="dashboardListingsCount" class="text-3xl font-bold text-ink dark:text-white mt-1">
-                                0</p>
+                            <p id="dashboardListingsCount" class="text-3xl font-bold text-ink dark:text-white mt-1">—</p>
                         </div>
                         <div
                             class="w-12 h-12 rounded-xl bg-gradient-to-br from-mint/20 to-blue-500/20 flex items-center justify-center text-mint group-hover:scale-110 transition-transform duration-300">
@@ -199,22 +182,8 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="flex items-center gap-2 mt-3">
-                        <span
-                            class="inline-flex items-center gap-1 text-xs font-medium text-emerald-500 bg-emerald-500/10 px-2.5 py-1 rounded-full">
-                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                            </svg>
-                            0%
-                        </span>
-                        <span class="text-xs text-slate/60 dark:text-gray-500">this month</span>
-                    </div>
-                    <div class="mt-3 h-1 w-full bg-border/50 dark:bg-white/5 rounded-full overflow-hidden">
-                        <div
-                            class="h-full w-2/3 bg-gradient-to-r from-mint to-blue-500 rounded-full group-hover:w-full transition-all duration-1000">
-                        </div>
-                    </div>
+                    <p class="text-xs text-slate/60 mt-3">Trend data unavailable</p>
+
                 </div>
 
                 <!-- Stat 3 - Total Revenue -->
@@ -223,8 +192,7 @@
                     <div class="flex items-start justify-between">
                         <div>
                             <span class="text-sm text-slate/60 dark:text-gray-500 font-medium">Total Revenue</span>
-                            <p id="dashboardRevenueCount" class="text-3xl font-bold text-ink dark:text-white mt-1">
-                                $0</p>
+                            <p id="dashboardRevenueCount" class="text-3xl font-bold text-ink dark:text-white mt-1">—</p>
                         </div>
                         <div
                             class="w-12 h-12 rounded-xl bg-gradient-to-br from-lavender/20 to-purple-500/20 flex items-center justify-center text-lavender group-hover:scale-110 transition-transform duration-300">
@@ -234,22 +202,8 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="flex items-center gap-2 mt-3">
-                        <span
-                            class="inline-flex items-center gap-1 text-xs font-medium text-emerald-500 bg-emerald-500/10 px-2.5 py-1 rounded-full">
-                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                            </svg>
-                            0%
-                        </span>
-                        <span class="text-xs text-slate/60 dark:text-gray-500">this quarter</span>
-                    </div>
-                    <div class="mt-3 h-1 w-full bg-border/50 dark:bg-white/5 rounded-full overflow-hidden">
-                        <div
-                            class="h-full w-4/5 bg-gradient-to-r from-lavender to-purple-500 rounded-full group-hover:w-full transition-all duration-1000">
-                        </div>
-                    </div>
+                    <p class="text-xs text-slate/60 mt-3">Trend data unavailable</p>
+
                 </div>
 
                 <!-- Stat 4 - Active Licenses -->
@@ -258,8 +212,7 @@
                     <div class="flex items-start justify-between">
                         <div>
                             <span class="text-sm text-slate/60 dark:text-gray-500 font-medium">Active Licenses</span>
-                            <p id="dashboardLicensesCount" class="text-3xl font-bold text-ink dark:text-white mt-1">0
-                            </p>
+                            <p id="dashboardLicensesCount" class="text-3xl font-bold text-ink dark:text-white mt-1">—</p>
                         </div>
                         <div
                             class="w-12 h-12 rounded-xl bg-gradient-to-br from-peach/20 to-coral/20 flex items-center justify-center text-peach group-hover:scale-110 transition-transform duration-300">
@@ -269,22 +222,8 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="flex items-center gap-2 mt-3">
-                        <span
-                            class="inline-flex items-center gap-1 text-xs font-medium text-emerald-500 bg-emerald-500/10 px-2.5 py-1 rounded-full">
-                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                            </svg>
-                            +5.3%
-                        </span>
-                        <span class="text-xs text-slate/60 dark:text-gray-500">this month</span>
-                    </div>
-                    <div class="mt-3 h-1 w-full bg-border/50 dark:bg-white/5 rounded-full overflow-hidden">
-                        <div
-                            class="h-full w-1/2 bg-gradient-to-r from-peach to-coral rounded-full group-hover:w-full transition-all duration-1000">
-                        </div>
-                    </div>
+                    <p class="text-xs text-slate/60 mt-3">Trend data unavailable</p>
+
                 </div>
             </section>
 
@@ -322,27 +261,27 @@
 
                     <div class="grid grid-cols-3 gap-4">
                         <div class="text-center p-3 rounded-xl bg-gradient-to-br from-olive/5 to-emerald-500/5">
-                            <p id="masterclassTotalArticles" class="text-2xl font-bold text-ink dark:text-white">0</p>
+                            <p id="masterclassTotalArticles" class="text-2xl font-bold text-ink dark:text-white">—</p>
                             <p class="text-xs text-slate/60 dark:text-gray-500">Total Articles</p>
                         </div>
                         <div class="text-center p-3 rounded-xl bg-gradient-to-br from-emerald-500/5 to-mint/5">
-                            <p id="masterclassPublishedArticles" class="text-2xl font-bold text-emerald-500">0</p>
+                            <p id="masterclassPublishedArticles" class="text-2xl font-bold text-emerald-500">—</p>
                             <p class="text-xs text-slate/60 dark:text-gray-500">Published</p>
                         </div>
                         <div class="text-center p-3 rounded-xl bg-gradient-to-br from-amber-500/5 to-orange-500/5">
-                            <p id="masterclassDraftArticles" class="text-2xl font-bold text-amber-500">0</p>
+                            <p id="masterclassDraftArticles" class="text-2xl font-bold text-amber-500">—</p>
                             <p class="text-xs text-slate/60 dark:text-gray-500">Drafts</p>
                         </div>
                         <div class="text-center p-3 rounded-xl bg-gradient-to-br from-blue-500/5 to-indigo-500/5">
-                            <p id="masterclassCategoriesCount" class="text-2xl font-bold text-blue-500">0</p>
+                            <p id="masterclassCategoriesCount" class="text-2xl font-bold text-blue-500">—</p>
                             <p class="text-xs text-slate/60 dark:text-gray-500">Categories</p>
                         </div>
                         <div class="text-center p-3 rounded-xl bg-gradient-to-br from-lavender/5 to-purple-500/5">
-                            <p id="masterclassAuthorsCount" class="text-2xl font-bold text-lavender">0</p>
+                            <p id="masterclassAuthorsCount" class="text-2xl font-bold text-lavender">—</p>
                             <p class="text-xs text-slate/60 dark:text-gray-500">Authors</p>
                         </div>
                         <div class="text-center p-3 rounded-xl bg-gradient-to-br from-peach/5 to-coral/5">
-                            <p id="masterclassTotalViews" class="text-2xl font-bold text-peach">0</p>
+                            <p id="masterclassTotalViews" class="text-2xl font-bold text-peach">—</p>
                             <p class="text-xs text-slate/60 dark:text-gray-500">Total Views</p>
                         </div>
                     </div>
@@ -374,7 +313,7 @@
                                 <p class="text-xs text-slate/60 dark:text-gray-500">Platform activity overview</p>
                             </div>
                         </div>
-                        <a href="../products.html"
+                        <a href="/admin/listings.html"
                             class="text-sm font-medium text-olive hover:text-olive-dark transition-colors duration-200 flex items-center gap-1">
                             Manage
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -386,27 +325,27 @@
 
                     <div class="grid grid-cols-3 gap-4">
                         <div class="text-center p-3 rounded-xl bg-gradient-to-br from-mint/5 to-blue-500/5">
-                            <p id="marketplaceListingsCount" class="text-2xl font-bold text-ink dark:text-white">0</p>
+                            <p id="marketplaceListingsCount" class="text-2xl font-bold text-ink dark:text-white">—</p>
                             <p class="text-xs text-slate/60 dark:text-gray-500">Listings</p>
                         </div>
                         <div class="text-center p-3 rounded-xl bg-gradient-to-br from-olive/5 to-emerald-500/5">
-                            <p id="marketplaceLicensesCount" class="text-2xl font-bold text-ink dark:text-white">0</p>
+                            <p id="marketplaceLicensesCount" class="text-2xl font-bold text-ink dark:text-white">—</p>
                             <p class="text-xs text-slate/60 dark:text-gray-500">Licenses</p>
                         </div>
                         <div class="text-center p-3 rounded-xl bg-gradient-to-br from-lavender/5 to-purple-500/5">
-                            <p id="marketplaceUsersCount" class="text-2xl font-bold text-ink dark:text-white">0</p>
+                            <p id="marketplaceUsersCount" class="text-2xl font-bold text-ink dark:text-white">—</p>
                             <p class="text-xs text-slate/60 dark:text-gray-500">Users</p>
                         </div>
                         <div class="text-center p-3 rounded-xl bg-gradient-to-br from-peach/5 to-coral/5">
-                            <p id="marketplaceRevenueCount" class="text-2xl font-bold text-peach">$0</p>
+                            <p id="marketplaceRevenueCount" class="text-2xl font-bold text-peach">—</p>
                             <p class="text-xs text-slate/60 dark:text-gray-500">Revenue</p>
                         </div>
                         <div class="text-center p-3 rounded-xl bg-gradient-to-br from-emerald-500/5 to-mint/5">
-                            <p id="marketplaceSatisfaction" class="text-2xl font-bold text-emerald-500">0%</p>
+                            <p id="marketplaceSatisfaction" class="text-2xl font-bold text-emerald-500">—</p>
                             <p class="text-xs text-slate/60 dark:text-gray-500">Satisfaction</p>
                         </div>
                         <div class="text-center p-3 rounded-xl bg-gradient-to-br from-amber-500/5 to-orange-500/5">
-                            <p id="marketplacePendingReviews" class="text-2xl font-bold text-amber-500">0</p>
+                            <p id="marketplacePendingReviews" class="text-2xl font-bold text-amber-500">—</p>
                             <p class="text-xs text-slate/60 dark:text-gray-500">Pending Reviews</p>
                         </div>
                     </div>
@@ -414,7 +353,7 @@
                     <div
                         class="mt-4 pt-4 border-t border-border/60 dark:border-white/10 flex items-center justify-between">
                         <span class="text-xs text-slate/60 dark:text-gray-500">Uptime data unavailable</span>
-                        <a href="../products.html"
+                        <a href="/admin/listings.html"
                             class="text-xs font-medium text-olive hover:text-olive-dark transition-colors duration-200">View
                             all listings →</a>
                     </div>
@@ -598,7 +537,7 @@
                                 <span class="text-sm font-medium text-ink dark:text-white">Create Category</span>
                             </a>
 
-                            <a href="../products.html"
+                            <a href="/admin/listings.html"
                                 class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-all duration-200">
                                 <div
                                     class="w-8 h-8 rounded-xl bg-gradient-to-br from-peach/10 to-coral/10 flex items-center justify-center text-peach">
@@ -608,11 +547,10 @@
                                     </svg>
                                 </div>
                                 <span class="text-sm font-medium text-ink dark:text-white">Review Listings</span>
-                                <span
-                                    class="ml-auto text-[10px] font-medium text-coral bg-coral/10 px-2 py-0.5 rounded-full">24</span>
+
                             </a>
 
-                            <a href="../contact.html"
+                            <a href="/admin/reports.html"
                                 class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-gradient-to-r hover:from-olive/5 hover:to-transparent transition-all duration-200">
                                 <div
                                     class="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-500/10 to-orange-500/10 flex items-center justify-center text-amber-500">
@@ -621,9 +559,8 @@
                                             d="M18.364 5.636a9 9 0 010 12.728m0 0l-2.829-2.829m2.829 2.829L21 21M15.536 8.464a5 5 0 010 7.072m0 0l-2.829-2.829m-4.243 2.829a5 5 0 01-7.072 0m0 0a5 5 0 010-7.072m0 0l2.829 2.829m-2.829-2.829L3 3" />
                                     </svg>
                                 </div>
-                                <span class="text-sm font-medium text-ink dark:text-white">Support Tickets</span>
-                                <span
-                                    class="ml-auto text-[10px] font-medium text-amber-500 bg-amber-500/10 px-2 py-0.5 rounded-full">12</span>
+                                <span class="text-sm font-medium text-ink dark:text-white">Content Reports</span>
+
                             </a>
                         </div>
                     </div>
@@ -634,21 +571,20 @@
                         <div class="flex items-start gap-3">
                             <span class="text-2xl flex-shrink-0">🟢</span>
                             <div>
-                                <h4 class="text-sm font-semibold text-ink dark:text-white">All Systems Operational</h4>
-                                <p class="text-xs text-slate/60 dark:text-gray-500 mt-0.5">Platform is running smoothly
-                                    when monitoring data is available.</p>
+                                <h4 class="text-sm font-semibold text-ink dark:text-white">Service status</h4>
+                                <p class="text-xs text-slate/60 dark:text-gray-500 mt-0.5">Live service monitoring is not configured.</p>
                                 <div class="flex items-center gap-4 mt-2 text-xs text-slate/60 dark:text-gray-500">
                                     <span class="flex items-center gap-1">
                                         <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                                        API: 99.9%
+                                        API: Not monitored
                                     </span>
                                     <span class="flex items-center gap-1">
                                         <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                                        DB: 99.8%
+                                        DB: Not monitored
                                     </span>
                                     <span class="flex items-center gap-1">
                                         <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                                        Storage: 100%
+                                        Storage: Not monitored
                                     </span>
                                 </div>
                             </div>
@@ -826,10 +762,10 @@
 
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script src="/script/supabase.js"></script>
-    <script src="/admin/script/admin.js?v=20260923-ui2"></script>
+    <script src="/admin/script/admin.js?v=20261015-user1"></script>
 
     <script>
-        lucide.createIcons();
+        window.lucide?.createIcons?.();
 
         function formatNumber(value) {
             const num = Number(value) || 0;
@@ -838,21 +774,36 @@
             return num.toLocaleString();
         }
 
-        function formatCurrency(value) {
-            const amount = Number(value) || 0;
-            if (amount >= 1000000) return '$' + (amount / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
-            if (amount >= 1000) return '$' + (amount / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
-            return '$' + amount.toLocaleString();
+        async function articleViews() {
+            try {
+                let total = 0, offset = 0;
+                while (true) {
+                    const {data,error,count} = await EtchSupabase.getClient().from('masterclass_articles').select('views',{count:'exact'}).order('id').range(offset,offset+999);
+                    if (error) throw error;
+                    if (!Array.isArray(data) || count == null) throw new Error('Article views unavailable');
+                    total += data.reduce((sum,row)=>sum+(Number(row.views)||0),0);
+                    offset += data.length;
+                    if (offset >= count) return {total};
+                    if (!data.length) throw new Error('Incomplete article views response');
+                }
+            } catch (error) { return {error}; }
         }
-
+        let dashboardRequest = 0;
         async function loadDashboardStats() {
+            const request = ++dashboardRequest;
+            const metricIds = ['dashboardUsersCount','dashboardListingsCount','dashboardRevenueCount','dashboardLicensesCount','masterclassTotalArticles','masterclassPublishedArticles','masterclassDraftArticles','masterclassCategoriesCount','masterclassAuthorsCount','masterclassTotalViews','marketplaceListingsCount','marketplaceLicensesCount','marketplaceUsersCount','marketplaceRevenueCount','marketplaceSatisfaction','marketplacePendingReviews'];
+            for (const id of metricIds) document.getElementById(id)?.replaceChildren('Loading…');
             document.getElementById('recentArticlesTable')?.replaceChildren();
             document.getElementById('recentActivityList')?.replaceChildren();
+            const recentSummary = document.getElementById('recentArticlesSummary');
+            if (recentSummary) recentSummary.textContent = 'Loading recent articles…';
             if (!window.EtchSupabase || typeof window.EtchSupabase.countRows !== 'function') {
+                for (const id of metricIds) document.getElementById(id)?.replaceChildren('—');
+                console.warn('Dashboard service unavailable.');
                 const articleTable = document.getElementById('recentArticlesTable');
                 const activityList = document.getElementById('recentActivityList');
-                if (articleTable) articleTable.innerHTML = '<tr><td colspan="6" class="px-6 py-16 text-center text-sm text-slate/60">No articles available yet.</td></tr>';
-                if (activityList) activityList.innerHTML = '<div class="px-6 py-12 text-center text-sm text-slate/60">No recent activity yet.</div>';
+                if (articleTable) articleTable.innerHTML = '<tr><td colspan="6" class="px-6 py-16 text-center text-sm text-slate/60">Recent articles are unavailable.</td></tr>';
+                if (activityList) activityList.innerHTML = '<div class="px-6 py-12 text-center text-sm text-slate/60">Recent activity is not connected.</div>';
                 return;
             }
 
@@ -861,48 +812,44 @@
                     usersResult,
                     listingsCountResult,
                     publishedArticlesResult,
-                    activeSubscribersResult,
                     categoriesResult,
                     authorsResult,
-                    listingsDataResult,
-                    recentArticlesResult,
+                    recentArticlesResult, totalArticlesResult, draftArticlesResult, reviewListingsResult, viewsResult,
                 ] = await Promise.all([
                     window.EtchSupabase.countRows('profiles'),
                     window.EtchSupabase.countRows('listings'),
                     window.EtchSupabase.countRows('masterclass_articles', { filters: [{ field: 'status', value: 'published' }] }),
-                    window.EtchSupabase.countRows('newsletter_subscribers', { filters: [{ field: 'is_active', value: true }] }),
                     window.EtchSupabase.getCategories ? window.EtchSupabase.getCategories({ status: 'active' }) : { data: [] },
                     window.EtchSupabase.getAuthors ? window.EtchSupabase.getAuthors() : { data: [] },
-                    window.EtchSupabase.getListings ? window.EtchSupabase.getListings({ limit: 1000 }) : { data: [] },
-                    window.EtchSupabase.getArticles ? window.EtchSupabase.getArticles({ limit: 1000 }) : { data: [] },
+                    window.EtchSupabase.getArticles({ limit: 5 }),
+                    window.EtchSupabase.countRows('masterclass_articles'),
+                    window.EtchSupabase.countRows('masterclass_articles', { filters: [{ field: 'status', value: 'draft' }] }),
+                    window.EtchSupabase.countRows('listings', { filters: [{ field: 'status', value: 'review' }] }),
+                    articleViews(),
                 ]);
 
-                const listings = listingsDataResult.data || [];
+                if (request !== dashboardRequest) return;
                 const allArticles = recentArticlesResult.data || [];
-                const reviewListings = listings.filter((item) => String(item.status || '').toLowerCase() === 'review').length;
-                const totalMasterclassArticles = recentArticlesResult.count ?? allArticles.length;
-                const publishedMasterclassArticles = publishedArticlesResult.count;
-                const draftMasterclassArticles = allArticles.filter((item) => String(item.status || '').toLowerCase() === 'draft').length;
-                const totalMasterclassViews = allArticles.reduce((sum, item) => sum + (Number(item.views || 0) || 0), 0);
-
+                const countValue = result => result.error || result.count == null ? '—' : formatNumber(result.count);
+                const listValue = result => result.error ? '—' : formatNumber((result.data || []).length);
                 const statMap = {
-                    dashboardUsersCount: formatNumber(usersResult.count || 0),
-                    dashboardListingsCount: formatNumber(listingsCountResult.count || 0),
-                    dashboardRevenueCount: '—',
-                    dashboardLicensesCount: '—',
-                    masterclassTotalArticles: formatNumber(totalMasterclassArticles || 0),
-                    masterclassPublishedArticles: formatNumber(publishedMasterclassArticles || 0),
-                    masterclassDraftArticles: formatNumber(draftMasterclassArticles || 0),
-                    masterclassCategoriesCount: formatNumber((categoriesResult.data || []).length || 0),
-                    masterclassAuthorsCount: formatNumber((authorsResult.data || []).length || 0),
-                    masterclassTotalViews: formatNumber(totalMasterclassViews || 0),
-                    marketplaceListingsCount: listingsCountResult.error ? '—' : formatNumber(listingsCountResult.count || 0),
-                    marketplaceLicensesCount: '—',
-                    marketplaceUsersCount: formatNumber(usersResult.count || 0),
-                    marketplaceRevenueCount: '—',
-                    marketplaceSatisfaction: '—',
-                    marketplacePendingReviews: formatNumber(reviewListings || 0),
+                    dashboardUsersCount: countValue(usersResult),
+                    dashboardListingsCount: countValue(listingsCountResult),
+                    dashboardRevenueCount: '—', dashboardLicensesCount: '—',
+                    masterclassTotalArticles: countValue(totalArticlesResult),
+                    masterclassPublishedArticles: countValue(publishedArticlesResult),
+                    masterclassDraftArticles: countValue(draftArticlesResult),
+                    masterclassCategoriesCount: listValue(categoriesResult),
+                    masterclassAuthorsCount: listValue(authorsResult),
+                    masterclassTotalViews: viewsResult.error ? '—' : formatNumber(viewsResult.total),
+                    marketplaceListingsCount: countValue(listingsCountResult),
+                    marketplaceLicensesCount: '—', marketplaceUsersCount: countValue(usersResult),
+                    marketplaceRevenueCount: '—', marketplaceSatisfaction: '—',
+                    marketplacePendingReviews: countValue(reviewListingsResult),
                 };
+                const failures = [usersResult,listingsCountResult,publishedArticlesResult,categoriesResult,authorsResult,recentArticlesResult,totalArticlesResult,draftArticlesResult,reviewListingsResult,viewsResult].filter(result => result.error);
+                if (!failures.length) updateTime();
+                if (failures.length) console.warn('Some dashboard counts could not load. Unavailable counts are shown as —.');
 
                 Object.entries(statMap).forEach(([id, value]) => {
                     const el = document.getElementById(id);
@@ -916,7 +863,7 @@
                 const activityList = document.getElementById('recentActivityList');
                 if (articleTable) {
                     const recentArticles = allArticles.slice(0, 5);
-                    articleTable.innerHTML = recentArticles.length ? recentArticles.map(article => `
+                    articleTable.innerHTML = recentArticlesResult.error ? '<tr><td colspan="6" class="p-6">Unable to load recent articles. Refresh to retry.</td></tr>' : recentArticles.length ? recentArticles.map(article => `
                         <tr class="border-b border-border/60 dark:border-white/10">
                             <td class="px-6 py-3.5 font-medium text-ink dark:text-white">${String(article.title || 'Untitled article').replace(/[&<>]/g, value => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[value]))}</td>
                             <td class="px-6 py-3.5 text-slate/60">${EtchUI.escapeHtml(article.category?.name || 'Uncategorized')}</td>
@@ -925,12 +872,17 @@
                             <td class="px-6 py-3.5 text-slate/60">${article.created_at ? new Date(article.created_at).toLocaleDateString() : '—'}</td>
                             <td class="px-6 py-3.5 text-right text-slate/60">${formatNumber(article.views || 0)}</td>
                         </tr>`).join('') : '<tr><td colspan="6" class="px-6 py-16 text-center text-sm text-slate/60">No articles yet.</td></tr>';
-                    if (articleSummary) articleSummary.textContent = recentArticles.length ? `Showing ${recentArticles.length} of ${allArticles.length} articles` : 'No articles yet';
+                    if (articleSummary) articleSummary.textContent = recentArticlesResult.error ? 'Recent articles unavailable' : recentArticles.length ? `Showing ${recentArticles.length} of ${totalArticlesResult.error ? "unknown" : totalArticlesResult.count} articles` : 'No articles yet';
                 }
                 if (activityList) {
-                    activityList.innerHTML = '<div class="px-6 py-12 text-center text-sm text-slate/60">No recent activity yet.</div>';
+                    activityList.innerHTML = '<div class="px-6 py-12 text-center text-sm text-slate/60">Recent activity is not connected.</div>';
                 }
             } catch (error) {
+                if (request !== dashboardRequest) return;
+                for (const id of metricIds) document.getElementById(id)?.replaceChildren('—');
+                console.warn('Unable to load dashboard.');
+                if (recentSummary) recentSummary.textContent = 'Recent articles unavailable';
+                document.getElementById('recentArticlesTable').innerHTML = '<tr><td colspan="6" class="p-6">Recent articles unavailable. Refresh to retry.</td></tr>';
                 console.error('Failed to load live dashboard stats:', error);
             }
         }
@@ -948,9 +900,9 @@
             }
         }
 
-        updateTime();
-        setInterval(updateTime, 60000);
-        loadDashboardStats();
+
+        if (window.ETCH_ADMIN_COMPONENTS_READY) queueMicrotask(loadDashboardStats);
+        else document.addEventListener('admin:components-ready', loadDashboardStats, {once:true});
     </script>
 </body>
 

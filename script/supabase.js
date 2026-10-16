@@ -65,7 +65,7 @@ const EtchSupabase = (function () {
     // ============================================
     // AUTH: SIGN UP
     // ============================================
-    async function signUp(email, password, fullName) {
+    async function signUp(email, password, fullName, accountType = 'writer', legalVersions = []) {
         const client = getClient();
         if (!client) return { error: new Error('Supabase not initialized') };
 
@@ -74,9 +74,11 @@ const EtchSupabase = (function () {
                 email,
                 password,
                 options: {
+                    emailRedirectTo: window.location.origin + '/user/auth/callback',
                     data: {
                         full_name: fullName,
-                        username: 'creator_' + Math.random().toString(36).substring(2, 8),
+                        account_type: accountType === 'producer' ? 'producer' : 'writer',
+                        legal_versions: legalVersions,
                     },
                 },
             });
@@ -138,7 +140,7 @@ const EtchSupabase = (function () {
 
         try {
             const { data, error } = await client.auth.resetPasswordForEmail(email, {
-                redirectTo: window.location.origin + '/user/auth/reset-password.html',
+                redirectTo: window.location.origin + '/user/auth/reset-password',
             });
 
             if (error) throw error;

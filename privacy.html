@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <script src="/script/core.js?v=20261015-user1"></script>
+    <script src="/script/components.js?v=20261015-user1"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Legal information | ETCH</title>
+    <meta name="description"
+        content="Learn about ETCH, the premium creative marketplace connecting talented creators with visionary buyers." />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/assets/logo.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/assets/logo.png" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style/style.css" />
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        olive: {
+                            DEFAULT: '#99A96A',
+                            dark: '#73824C',
+                            light: '#E8ECD9',
+                        },
+                        ink: '#151515',
+                        mist: '#FAFAF7',
+                        stone: '#F2F3ED',
+                        slate: '#6C6C6C',
+                        muted: '#9A9A9A',
+                        border: '#E5E7E2',
+                        success: '#3D6B4F',
+                        warning: '#C9A54C',
+                        error: '#B25555',
+                        info: '#5B8DEF',
+                    },
+                    fontFamily: {
+                        display: ['"Instrument Serif"', 'serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delay': 'float 6s ease-in-out 2s infinite',
+                        'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
+                        'gradient': 'gradient 8s ease-in-out infinite',
+                        'slide-up': 'slide-up 0.6s ease-out',
+                        'slide-up-delay': 'slide-up 0.6s ease-out 0.2s both',
+                        'slide-up-delay-2': 'slide-up 0.6s ease-out 0.4s both',
+                        'bounce-gentle': 'bounce-gentle 2s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        },
+                        'pulse-soft': {
+                            '0%, 100%': { opacity: 1 },
+                            '50%': { opacity: 0.6 },
+                        },
+                        gradient: {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                        },
+                        'slide-up': {
+                            '0%': { transform: 'translateY(30px)', opacity: 0 },
+                            '100%': { transform: 'translateY(0)', opacity: 1 },
+                        },
+                        'bounce-gentle': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-6px)' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+<link rel="stylesheet" href="/style/legal-content.css?v=20261016-legal1">
+</head>
+
+<body data-document="privacy"><div id="header"></div><main style="max-width:850px;margin:auto;padding:130px 24px 60px;min-height:70vh"><h1 id="legalTitle" class="font-display text-4xl">Privacy Policy</h1><p id="legalStatus" role="status">Loading published document…</p><article id="legalBody" class="legal-content"></article><p><a href="/contact">Contact ETCH about this document</a></p></main><div id="footer"></div><script src="https://unpkg.com/@supabase/supabase-js@2"></script><script src="/script/supabase.js?v=20261015-user1"></script><script src="/script/script.js"></script><script src="/script/vendor/marked.umd.js"></script><script src="/script/vendor/purify.min.js"></script><script src="/script/legal-content.js?v=20261016-legal1"></script><script src="/script/legal.js?v=20261016-legal1"></script></body></html>

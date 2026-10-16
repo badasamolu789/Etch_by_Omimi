@@ -170,5 +170,136 @@ await as('authenticated',admin,async()=>{
 console.log('New staff roles, article scheduling, weighted reviews, moderation, verification, analytics, and audit checks passed.');
 
 } catch(error) {console.error('Workflow test failure:',error.message,error.detail || '');process.exit(1);}
-await db.close();
 console.log('Database migration and anonymous/creator/admin policy checks passed.');
+
+// Invitations require both an approved email and a personal token; direct inserts cannot bypass them.
+await db.exec('ALTER TABLE auth.users ADD COLUMN email text');
+await db.exec(readFileSync(new URL('../supabase/migrations/202610150001_founding_invitations.sql',import.meta.url),'utf8'));
+const invitationReviewer='55555555-5555-4555-8555-555555555555';
+const legacyApplication=(await rows('SELECT id FROM founding_applications LIMIT 1'))[0].id;
+const invitedUser='88888888-8888-4888-8888-888888888888';
+const wrongUser='99999999-9999-4999-8999-999999999999';
+await db.exec(`INSERT INTO auth.users(id,email) VALUES('${invitedUser}','invited@example.test'),('${wrongUser}','other@example.test')`);
+let invitation;
+await as('authenticated',invitationReviewer,async()=>{
+ invitation=(await rows("SELECT create_founding_invitation(' Invited@Example.Test ',14) AS value"))[0].value;
+ assert.equal(invitation.email,'invited@example.test');
+ assert.equal(invitation.token.length,64);
+});
+await as('authenticated',wrongUser,async()=>{
+ assert.equal((await rows(`SELECT redeem_founding_invitation('${invitation.token}') AS allowed`))[0].allowed,false);
+ assert.equal((await rows('SELECT * FROM founding_invitations')).length,0);
+ await assert.rejects(db.exec("SELECT create_founding_invitation('other@example.test',14)"));
+});
+const submission=`INSERT INTO founding_applications(user_id,full_name,email,portfolio_url,statement) VALUES('${invitedUser}','Invited writer','invited@example.test','https://example.test','This is a sufficiently long writing statement for the founding cohort.')`;
+await as('authenticated',invitedUser,async()=>{
+ assert.equal((await rows('SELECT can_submit_founding_application() AS allowed'))[0].allowed,false);
+ await assert.rejects(db.exec(submission));
+ assert.equal((await rows("SELECT redeem_founding_invitation('invalid') AS allowed"))[0].allowed,false);
+ assert.equal((await rows(`SELECT redeem_founding_invitation('${invitation.token}') AS allowed`))[0].allowed,true);
+ assert.equal((await rows("SELECT can_submit_founding_application('spoofed@example.test') AS allowed"))[0].allowed,false);
+ assert.equal((await rows('SELECT can_submit_founding_application() AS allowed'))[0].allowed,true);
+});
+await as('authenticated',invitationReviewer,async()=>{await db.query('SELECT revoke_founding_invitation($1)',[invitation.id]);});
+await as('authenticated',invitedUser,async()=>{await assert.rejects(db.exec(submission));});
+let replacement;
+await as('authenticated',invitationReviewer,async()=>{replacement=(await rows("SELECT create_founding_invitation('invited@example.test',14) AS value"))[0].value;});
+await as('authenticated',invitedUser,async()=>{
+ assert.equal((await rows(`SELECT redeem_founding_invitation('${invitation.token}') AS allowed`))[0].allowed,false);
+ assert.equal((await rows(`SELECT redeem_founding_invitation('${replacement.token}') AS allowed`))[0].allowed,true);
+});
+await db.query("UPDATE founding_invitations SET expires_at=now()-interval '1 second' WHERE id=$1",[replacement.id]);
+await as('authenticated',invitedUser,async()=>{await assert.rejects(db.exec(submission));});
+await as('authenticated',invitationReviewer,async()=>{replacement=(await rows("SELECT create_founding_invitation('invited@example.test',14) AS value"))[0].value;});
+await as('authenticated',invitedUser,async()=>{
+ await db.query('SELECT redeem_founding_invitation($1)',[replacement.token]);
+ await db.exec(submission);
+ await assert.rejects(db.exec(submission));
+});
+assert.equal((await rows(`SELECT count(*)::int AS count FROM founding_applications WHERE user_id='${invitedUser}'`))[0].count,1);
+assert.equal((await rows(`SELECT count(*)::int AS count FROM founding_applications WHERE id='${legacyApplication}'`))[0].count,1,'existing applications retained');
+await as('anon',null,async()=>{await assert.rejects(db.exec('SELECT can_submit_founding_application()'));});
+console.log('Invitation email matching, token rotation, expiry, revocation, permissions, and submission enforcement passed.');
+
+
+
+// Creator workspace migrations: profile saving, private communications and published legal documents.
+for(const file of ['202610150002_creator_workspace.sql','202610150003_creator_communications.sql','202610150004_legal_documents.sql']) {
+ try{await db.exec(readFileSync(new URL('../supabase/migrations/'+file,import.meta.url),'utf8'));}
+ catch(error){console.error(file,error.message);throw error;}
+}
+await db.exec("SELECT set_config('request.jwt.claim.role','',false),set_config('request.jwt.claim.sub','',false)");
+const producer='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',writer='bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb',stranger='cccccccc-cccc-4ccc-8ccc-cccccccccccc';
+await db.exec(`INSERT INTO auth.users(id,email,raw_user_meta_data) VALUES('${producer}','producer@example.test','{"full_name":"Producer","account_type":"producer","role":"super_admin"}'),('${writer}','writer@example.test','{"full_name":"Writer"}'),('${stranger}','stranger@example.test','{}')`);
+assert.equal((await rows(`SELECT role FROM profiles WHERE id='${producer}'`))[0].role,'creator');
+assert.equal((await rows(`SELECT account_type FROM profiles WHERE id='${producer}'`))[0].account_type,'producer');
+const creatorListing='dddddddd-dddd-4ddd-8ddd-dddddddddddd',privateListing='eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee';
+await db.exec(`INSERT INTO listings(id,creator_id,title,status) VALUES('${creatorListing}','${writer}','Public script','published'),('${privateListing}','${writer}','Private script','draft')`);
+await as('authenticated',writer,async()=>{
+ await db.exec(`UPDATE profiles SET full_name='Updated Writer',bio='Biography',website='https://example.test',location='Lagos',storefront_ready=true WHERE id='${writer}'`);
+ await assert.rejects(db.exec(`UPDATE profiles SET website='javascript:alert(1)' WHERE id='${writer}'`));
+ await assert.rejects(db.exec(`UPDATE listings SET views=10000 WHERE id='${creatorListing}'`));
+});
+const viewSession='ffffffff-ffff-4fff-8fff-ffffffffffff';
+await as('anon',null,async()=>{
+ await db.query('SELECT record_listing_view($1,$2)',[creatorListing,viewSession]);
+ await db.query('SELECT record_listing_view($1,$2)',[creatorListing,viewSession]);
+ await db.query('SELECT record_listing_view($1,$2)',[privateListing,viewSession]);
+ await assert.rejects(db.exec('SELECT * FROM listing_view_events'));
+});
+assert.equal((await rows(`SELECT status FROM listings WHERE id='${creatorListing}'`))[0].status,'published','view tracking must not trigger moderation');
+await as('authenticated',writer,async()=>{
+ await db.query('SELECT record_listing_view($1,$2)',[creatorListing,crypto.randomUUID()]);
+ const stats=(await rows('SELECT creator_listing_stats() AS data'))[0].data;assert.equal(Number(stats.views),1);assert.equal(Number(stats.total),2);
+ assert.equal(Number((await rows(`SELECT views FROM creator_listing_metrics() WHERE id='${creatorListing}'`))[0].views),1);
+});
+await as('authenticated',stranger,async()=>{assert.equal((await rows('SELECT * FROM creator_listing_metrics()')).length,0);});
+let conversation;
+const openingId='11111111-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
+await as('authenticated',producer,async()=>{
+ conversation=(await db.query('SELECT start_creator_conversation($1,$2,$3) AS id',[creatorListing,'Hello, can we discuss this script?',openingId])).rows[0].id;
+ assert.equal((await db.query('SELECT start_creator_conversation($1,$2,$3) AS id',[creatorListing,'Hello, can we discuss this script?',openingId])).rows[0].id,conversation);
+ assert.equal((await rows('SELECT * FROM creator_messages')).length,1);
+ await assert.rejects(db.query('SELECT start_creator_conversation($1,$2,$3)',[privateListing,'Hidden script',crypto.randomUUID()]));
+});
+await as('authenticated',stranger,async()=>{
+ assert.equal((await rows('SELECT * FROM creator_messages')).length,0);assert.equal((await rows('SELECT * FROM creator_conversations')).length,0);
+ await assert.rejects(db.exec(`INSERT INTO creator_messages(id,conversation_id,sender_id,body) VALUES(gen_random_uuid(),'${conversation}','${stranger}','Intrusion')`));
+});
+await as('authenticated',writer,async()=>{
+ await db.exec(`INSERT INTO creator_messages(id,conversation_id,sender_id,body) VALUES(gen_random_uuid(),'${conversation}','${writer}','Thanks, happy to discuss')`);
+ await assert.rejects(db.exec(`INSERT INTO creator_messages(id,conversation_id,sender_id,body) VALUES(gen_random_uuid(),'${conversation}','${producer}','Impersonation')`));
+ await assert.rejects(db.exec("UPDATE creator_messages SET body='Changed'"));
+});
+let enquiry;const enquiryId='22222222-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
+await as('authenticated',producer,async()=>{
+ await db.query('SELECT request_listing_license($1,$2,$3)',[creatorListing,'Feature film rights in Nigeria for two years.',enquiryId]);
+ await db.query('SELECT request_listing_license($1,$2,$3)',[creatorListing,'Feature film rights in Nigeria for two years.',enquiryId]);
+ enquiry=(await rows(`SELECT * FROM licensing_enquiries WHERE id='${enquiryId}'`))[0];
+ await assert.rejects(db.query('SELECT update_licensing_enquiry($1,$2,$3,$4)',[enquiryId,'closed','Approved',enquiry.updated_at]));
+});
+await as('authenticated',stranger,async()=>{assert.equal((await rows('SELECT * FROM licensing_enquiries')).length,0);await assert.rejects(db.query('SELECT update_licensing_enquiry($1,$2,$3,$4)',[enquiryId,'declined','Intrusion',enquiry.updated_at]));});
+await as('authenticated',writer,async()=>{await db.query('SELECT update_licensing_enquiry($1,$2,$3,$4)',[enquiryId,'reviewing','Let us discuss the proposed use.',enquiry.updated_at]);await assert.rejects(db.query('SELECT update_licensing_enquiry($1,$2,$3,$4)',[enquiryId,'closed','Stale update',enquiry.updated_at]));});
+// Withdraw a published listing without destroying its existing conversation or enquiries.
+await as('authenticated',writer,async()=>{await db.exec(`UPDATE listings SET status='draft' WHERE id='${creatorListing}'`);});
+assert.equal((await rows(`SELECT status FROM listings WHERE id='${creatorListing}'`))[0].status,'draft');
+let terms,privacy;
+const saveDoc=async(key,body,publish,expected=null)=>(await db.query('SELECT save_legal_document($1,$2,$3,$4,$5) AS id',[key,key==='terms'?'Terms of Service':'Privacy Policy',body,publish,expected])).rows[0].id;
+await as('authenticated',admin,async()=>{
+ const draft=await saveDoc('terms','Draft legal text supplied by the platform administrator.',false);
+ const richBody='## Terms of Service\n\n**Approved** policy body.\n\n- A responsibility\n- Another responsibility\n\n<h3>HTML section</h3><p>Approved legal content.</p>';
+ terms=await saveDoc('terms',richBody,true,draft);
+ assert.equal((await rows(`SELECT body FROM legal_documents WHERE id='${terms}'`))[0].body,richBody);
+ assert.equal((await rows(`SELECT status FROM legal_documents WHERE id='${draft}'`))[0].status,'draft');
+ privacy=await saveDoc('privacy','Published privacy text supplied by the platform administrator.',true);
+ await assert.rejects(saveDoc('terms','Stale copy of legal text with a missing version guard.',true,draft));
+});
+await as('anon',null,async()=>{assert.equal((await rows('SELECT * FROM legal_documents')).length,2);await assert.rejects(db.exec("SELECT save_legal_document('terms','Terms','Unauthorised legal replacement text',true,NULL)"));});
+await as('authenticated',producer,async()=>{
+ await db.query('SELECT accept_legal_documents($1)',[[terms,privacy]]);await db.query('SELECT accept_legal_documents($1)',[[terms,privacy]]);
+ assert.equal((await rows('SELECT * FROM legal_acceptances')).length,2);
+ await assert.rejects(db.query('SELECT accept_legal_documents($1)',[[terms,terms]]));
+});
+await as('authenticated',stranger,async()=>{assert.equal((await rows('SELECT * FROM legal_acceptances')).length,0);});
+console.log('Creator profiles, view metrics, conversation privacy/idempotency, licensing roles, legal publication/version guards and consent checks passed.');
+await db.close();

@@ -16,6 +16,7 @@
     // ============================================
     // AUTH GUARD
     // ============================================
+    let intentionalSignOut = false;
     let resolveReady;
     window.ETCH_AUTH_READY = new Promise(resolve => { resolveReady = resolve; });
 
@@ -62,6 +63,15 @@
             }
         }));
 
+        // Clear private content when another tab signs this session out.
+        EtchSupabase.getClient()?.auth?.onAuthStateChange?.((event) => {
+            if (event !== 'SIGNED_OUT' || intentionalSignOut) return;
+            window.ETCH_USER = null;
+            window.ETCH_PROFILE = null;
+            document.querySelector('main')?.replaceChildren();
+            redirectToLogin();
+        });
+
         console.log('%c✅ Authorized access', 'color: #99A96A; font-weight: bold;', result.user.email);
     }
 
@@ -71,7 +81,7 @@
     function redirectToLogin() {
         // Store the current URL to redirect back after login
         const currentUrl = window.location.pathname + window.location.search;
-        sessionStorage.setItem('etch_redirect_after_login', currentUrl);
+        try { sessionStorage.setItem('etch_redirect_after_login', currentUrl); } catch { /* Continue to sign-in when storage is unavailable. */ }
 
         // Redirect to login
         window.location.href = CONFIG.loginUrl;
@@ -86,8 +96,10 @@
             return { error: new Error('Auth system not initialized') };
         }
 
+        intentionalSignOut = true;
         const { error } = await EtchSupabase.signOut();
         if (error) {
+            intentionalSignOut = false;
             console.error('Sign out error:', error);
             return { error };
         }

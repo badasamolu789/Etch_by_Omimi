@@ -24,9 +24,12 @@ errors=[]; checked=0
 for path in ROOT.rglob('*.html'):
     parser=Parser(); parser.feed(path.read_text())
     for value in parser.refs:
+        # Supabase resolves this documented email-template link at send time.
+        if path.parent == ROOT/'emails'/'auth' and value.strip() == '{{ .ConfirmationURL }}': continue
         url=urlsplit(value)
         if url.scheme or url.netloc or not url.path or '${' in value: continue
         target=ROOT/url.path.lstrip('/') if url.path.startswith('/') else path.parent/unquote(url.path)
+        if not target.exists() and not target.suffix and target.with_suffix('.html').exists(): target=target.with_suffix('.html')
         if not target.exists(): errors.append(f'{path.relative_to(ROOT)}: missing {value}')
     for id_, count in Counter(parser.ids).items():
         if count>1: errors.append(f'{path.relative_to(ROOT)}: duplicate ID {id_}')

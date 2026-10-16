@@ -1,0 +1,80 @@
+[
+  {
+    "id": "confirm-signup",
+    "dashboard": "Confirm sign up",
+    "subject": "Welcome to ETCH — confirm your email",
+    "file": "auth/confirm-signup.html"
+  },
+  {
+    "id": "invite-user",
+    "dashboard": "Invite user",
+    "subject": "You’re invited to ETCH",
+    "file": "auth/invite-user.html"
+  },
+  {
+    "id": "magic-link",
+    "dashboard": "Magic link",
+    "subject": "Your ETCH sign-in link",
+    "file": "auth/magic-link.html"
+  },
+  {
+    "id": "change-email",
+    "dashboard": "Change email address",
+    "subject": "Confirm your ETCH email change",
+    "file": "auth/change-email.html"
+  },
+  {
+    "id": "reset-password",
+    "dashboard": "Reset password",
+    "subject": "Reset your ETCH password",
+    "file": "auth/reset-password.html"
+  },
+  {
+    "id": "reauthentication",
+    "dashboard": "Reauthentication",
+    "subject": "Your ETCH security code",
+    "file": "auth/reauthentication.html"
+  },
+  {
+    "id": "password-changed",
+    "dashboard": "Password changed",
+    "subject": "Security alert: your ETCH password changed",
+    "file": "auth/password-changed.html"
+  },
+  {
+    "id": "email-changed",
+    "dashboard": "Email address changed",
+    "subject": "Security alert: your ETCH email changed",
+    "file": "auth/email-changed.html"
+  },
+  {
+    "id": "phone-changed",
+    "dashboard": "Phone number changed",
+    "subject": "Security alert: your ETCH phone number changed",
+    "file": "auth/phone-changed.html"
+  },
+  {
+    "id": "identity-linked",
+    "dashboard": "Sign-in method linked",
+    "subject": "Security alert: a sign-in method was linked to ETCH",
+    "file": "auth/identity-linked.html"
+  },
+  {
+    "id": "identity-unlinked",
+    "dashboard": "Sign-in method removed",
+    "subject": "Security alert: a sign-in method was removed from ETCH",
+    "file": "auth/identity-unlinked.html"
+  },
+  {
+    "id": "mfa-added",
+    "dashboard": "Verification method added",
+    "subject": "Security alert: a verification method was added to ETCH",
+    "file": "auth/mfa-added.html"
+  },
+  {
+    "id": "mfa-removed",
+    "dashboard": "Verification method removed",
+    "subject": "Security alert: a verification method was removed from ETCH",
+    "file": "auth/mfa-removed.html"
+  }
+]

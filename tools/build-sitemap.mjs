@@ -3,7 +3,7 @@ import {pathToFileURL} from 'node:url';
 const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
 export function sitemap({origin,articles=[],listings=[]}){
  const base=new URL(origin);if(!['https:','http:'].includes(base.protocol))throw new Error('Invalid site URL');
- const entries=['/','/about','/contact','/explore','/products','/masterclass','/founding-voices'].map(path=>({loc:new URL(path,base).href}));
+ const entries=['/','/about','/contact','/explore','/products','/masterclass','/founding-voices','/terms','/privacy'].map(path=>({loc:new URL(path,base).href}));
  for(const row of articles.filter(row=>row.status==='published'))entries.push({loc:new URL('/article?'+new URLSearchParams({slug:row.slug}),base).href,modified:row.updated_at});
  for(const row of listings.filter(row=>row.status==='published'))entries.push({loc:new URL('/product-detail?'+new URLSearchParams(row.slug?{slug:row.slug}:{id:row.id}),base).href,modified:row.updated_at});
  return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+entries.map(row=>'  <url><loc>'+escape(row.loc)+'</loc>'+(row.modified?'<lastmod>'+escape(new Date(row.modified).toISOString())+'</lastmod>':'')+'</url>').join('\n')+'\n</urlset>\n';

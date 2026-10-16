@@ -1,3 +1,5 @@
+import { acceptanceEmail } from '../_shared/email-layout.mjs';
+
 export function createHandler({env,fetchImpl=fetch}){
  return async request=>{
   const headers={'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'authorization,apikey,content-type,x-client-info','Content-Type':'application/json'};
@@ -27,7 +29,7 @@ export function createHandler({env,fetchImpl=fetch}){
    if(claim.status===409)return reply(409,{error:'An acceptance email was already submitted. Check the delivery record before resending.'});
    if(!claim.ok)throw new Error('Cannot record delivery');
    claimed=true;
-   const delivery=await fetchImpl('https://api.resend.com/emails',{method:'POST',headers:{Authorization:'Bearer '+provider,'Content-Type':'application/json','Idempotency-Key':'founding-acceptance/'+applicationId},body:JSON.stringify({from:sender,to:[application.email],subject:'Welcome to ETCH Founding Voices',text:`Hello ${application.full_name},\n\nYour application to ETCH Founding Voices has been accepted. We are pleased to welcome you. Our team will follow up with the next steps.\n\nThe ETCH team`})});
+   const delivery=await fetchImpl('https://api.resend.com/emails',{method:'POST',headers:{Authorization:'Bearer '+provider,'Content-Type':'application/json','Idempotency-Key':'founding-acceptance/'+applicationId},body:JSON.stringify({from:sender,to:[application.email],subject:'Welcome to ETCH Founding Voices',html:acceptanceEmail(application.full_name),text:`Hello ${application.full_name},\n\nYour application to ETCH Founding Voices has been accepted. We are pleased to welcome you. Our team will follow up with the next steps.\n\nThe ETCH team`})});
    const sent=await delivery.json();if(!delivery.ok||!sent.id)throw new Error('Email provider did not confirm delivery');
    const saved=await db('acceptance_deliveries?application_id=eq.'+applicationId,{method:'PATCH',body:JSON.stringify({status:'sent',provider_id:sent.id,sent_at:new Date().toISOString()})});
    if(!saved.ok)throw new Error('Email sent but delivery record could not be updated');

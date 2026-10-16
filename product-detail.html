@@ -2,8 +2,8 @@
 <html lang="en" data-theme="light">
 
 <head>
-    <script src="/script/core.js"></script>
-    <script src="/script/components.js"></script>
+    <script src="/script/core.js?v=20261015-user1"></script>
+    <script src="/script/components.js?v=20261015-user1"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Midnight Sun Pilot | ETCH — Premium Creative Marketplace</title>
@@ -228,20 +228,7 @@
                         </ul>
                     </div>
 
-                    <div class="flex items-center gap-4 pt-4">
-                        <button
-                            class="px-8 py-3 bg-olive text-white rounded-xl font-semibold hover:bg-olive-dark hover:shadow-lg hover:shadow-olive/20 transition-all duration-300">
-                            Request License
-                        </button>
-                        <button
-                            class="px-6 py-3 border border-border dark:border-white/10 text-ink dark:text-white rounded-xl font-medium hover:bg-stone dark:hover:bg-white/5 transition-all duration-300 flex items-center gap-2">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                            </svg>
-                            Save
-                        </button>
-                    </div>
+                    <div class="flex items-center gap-4 pt-4"><a id="requestLicenseLink" href="/user/licensing" class="px-8 py-3 bg-olive text-white rounded-xl font-semibold">Enquire about licensing</a></div>
                 </div>
             </div>
         </div>
@@ -387,7 +374,21 @@
                     avatarEl.textContent = creatorInitials;
                 }
 
-                // Update rights summary if available
+                const licenseLink=document.getElementById('requestLicenseLink');if(licenseLink){licenseLink.href='/user/licensing?'+new URLSearchParams({listing:listing.id});licenseLink.hidden=listing.status!=='published';}
+                if(listing.status==='published'){
+                    const actions=document.createElement('div');actions.className='flex gap-4 my-4';
+                    for(const [label,page] of [['Message creator','messages']]){const link=document.createElement('a');link.href='/user/'+page+'?'+new URLSearchParams({listing:listing.id});link.textContent=label;link.className='text-olive underline';actions.append(link);}
+                    document.getElementById('productDetailContent')?.append(actions);
+                }
+                if(listing.creator_id){
+                    const storefront=document.createElement('a');storefront.href='/creator?'+new URLSearchParams({id:listing.creator_id});storefront.textContent='View creator storefront';storefront.className='text-olive underline block my-3';
+                    document.getElementById('productDetailContent')?.append(storefront);
+                }
+                if(listing.status==='published'&&navigator.doNotTrack!=='1'){
+                    try{let session=sessionStorage.getItem('etch_listing_view_session');if(!session){session=crypto.randomUUID();sessionStorage.setItem('etch_listing_view_session',session);}EtchSupabase.getClient().rpc('record_listing_view',{target_listing:listing.id,view_session:session}).catch(()=>{});}catch{}
+                }
+                // Show only the rights summary actually saved for this listing.
+                if (!listing.rights_summary) {const list=document.querySelector('.space-y-3 ul');if(list)list.textContent='No rights summary provided. Discuss the proposed terms with the creator.';}
                 if (listing.rights_summary) {
                     const deliverablesList = document.querySelector('.space-y-3 ul');
                     if (deliverablesList) {

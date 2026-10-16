@@ -174,6 +174,7 @@
             window.lucide.createIcons();
         }
 
+        window.ETCH_ADMIN_COMPONENTS_READY = true;
         document.dispatchEvent(new CustomEvent('admin:components-ready'));
     }
 
@@ -229,7 +230,7 @@
         if(page==='index' && ['editor','reviewer'].includes(window.ETCH_ADMIN.profile.role)){
             location.replace(window.ETCH_ADMIN.profile.role==='editor'?'/admin/admin_masterclass.html':'/admin/applications.html');return;
         }
-        const requiredPages = {media_library:'editorial',newsletter:'users',partners:'users',marketplace_categories:'users',create_article:'editorial',admin_masterclass:'editorial',author:'editorial',category:'editorial',create_author:'editorial',create_category:'editorial',users:'users',verification:'verification',listings:'moderation',reports:'moderation',applications:'applications',audit:'audit',analytics:'analytics'};
+        const requiredPages = {contacts:'users',legal:'users',media_library:'editorial',newsletter:'users',partners:'users',marketplace_categories:'users',create_article:'editorial',admin_masterclass:'editorial',author:'editorial',category:'editorial',create_author:'editorial',create_category:'editorial',users:'users',verification:'verification',listings:'moderation',reports:'moderation',applications:'applications',audit:'audit',analytics:'analytics'};
         const required = requiredPages[page];
         // Load UI components after auth cleared
         await loadAdminComponents();
